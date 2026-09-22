@@ -1,0 +1,43 @@
+{
+  "0": {
+    "method": "shrink",
+    "candidate": "shrink",
+    "candidate_delta_ci95": [
+      -1.5165585587427366,
+      -1.4229268035513254
+    ]
+  },
+  "9": {
+    "method": "shrink",
+    "candidate": "shrink",
+    "candidate_delta_ci95": [
+      -1.1766508563726181,
+      -1.0881722445493656
+    ]
+  },
+  "parameters_sha256": "ce21d84dfa5637fcca8ce063514cee58ce01910aa09fd74adba40ac37402cd08",
+  "samples_sha256": "e25ac578fb14ec3af3176f97c8cbf3311fdaf5add4a1a1f3289b1544d326a2da",
+  "model": "jev-1.13.0",
+  "request_configs_sha256": {
+    "cache/zho_finance/dev_s9.jsonl.meta.json": "ea5a9c15d4a6009ba9578d9a27ab578b7a19602f117b9b4769153340e097b746",
+    "cache/zho_finance/dev_s0.jsonl.meta.json": "2a120fbdebdfa40255331ef3fdcf01d1d3833307cde10722ad661f2a66c5668f",
+    "cache/zho_laptop/dev_s9.jsonl.meta.json": "c68698cf566bda945cbd0ed03d71a85a3d539b30a173a17630f203721f16cd1f",
+    "cache/zho_laptop/dev_s0.jsonl.meta.json": "2a120fbdebdfa40255331ef3fdcf01d1d3833307cde10722ad661f2a66c5668f",
+    "cache/tat_restaurant/dev_s9.jsonl.meta.json": "efebc3db355756011b27299ec4b9156727ead4859f2844577c5fd16b547da710",
+    "cache/tat_restaurant/dev_s0.jsonl.meta.json": "2a120fbdebdfa40255331ef3fdcf01d1d3833307cde10722ad661f2a66c5668f",
+    "cache/eng_laptop/dev_s9.jsonl.meta.json": "3545b5f68407ff3fa0442c907b71791cf8b0ad1a57a500c18c5d1e4c060c6a7e",
+    "cache/eng_laptop/dev_s0.jsonl.meta.json": "2a120fbdebdfa40255331ef3fdcf01d1d3833307cde10722ad661f2a66c5668f",
+    "cache/eng_restaurant/dev_s9.jsonl.meta.json": "38afd9647a842a918e4a85e0460a15bcde774a0712c7d1ba5667ae018934651c",
+    "cache/eng_restaurant/dev_s0.jsonl.meta.json": "2a120fbdebdfa40255331ef3fdcf01d1d3833307cde10722ad661f2a66c5668f",
+    "cache/jpn_finance/dev_s9.jsonl.meta.json": "434a8b9f3460c8883eabe72a0d7d9208fa845abcb8e38b2a0dfccf3f11838b4b",
+    "cache/jpn_finance/dev_s0.jsonl.meta.json": "2a120fbdebdfa40255331ef3fdcf01d1d3833307cde10722ad661f2a66c5668f",
+    "cache/ukr_restaurant/dev_s9.jsonl.meta.json": "2c6028fd3efbf43817289dd8bffb1b7698156950932f778352d4b5a71c235888",
+    "cache/ukr_restaurant/dev_s0.jsonl.meta.json": "2a120fbdebdfa40255331ef3fdcf01d1d3833307cde10722ad661f2a66c5668f",
+    "cache/zho_restaurant/dev_s9.jsonl.meta.json": "7dd6f4199dfefc866133674804531edcda45669cb5fa1c2f6b32e3fe7ebae243",
+    "cache/zho_restaurant/dev_s0.jsonl.meta.json": "2a120fbdebdfa40255331ef3fdcf01d1d3833307cde10722ad661f2a66c5668f",
+    "cache/jpn_hotel/dev_s9.jsonl.meta.json": "1e14582e81b4da3ca9592230ebe285fd89410900d8662a03ea30163328afd3a3",
+    "cache/jpn_hotel/dev_s0.jsonl.meta.json": "2a120fbdebdfa40255331ef3fdcf01d1d3833307cde10722ad661f2a66c5668f",
+    "cache/rus_restaurant/dev_s9.jsonl.meta.json": "228be77ba85a9a36ee205e84b553b149a02ff33ace94c10639ed1fca24d32b44",
+    "cache/rus_restaurant/dev_s0.jsonl.meta.json": "2a120fbdebdfa40255331ef3fdcf01d1d3833307cde10722ad661f2a66c5668f"
+  }
+}

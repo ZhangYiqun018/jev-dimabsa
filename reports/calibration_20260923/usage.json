@@ -1,0 +1,9 @@
+{
+  "input_tokens": 46637485,
+  "completed_records": 27978,
+  "models": [
+    "jev-1.13.0"
+  ],
+  "estimated_usd": 1.95877437,
+  "note": "Known response tokens only; unreported failed-request charges are unknown."
+}

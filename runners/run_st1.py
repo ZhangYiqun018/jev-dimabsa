@@ -24,9 +24,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from jev.client import JevClient, format_va, score_to_va  # noqa: E402
+from jev.client import DEFAULT_MODEL, JevClient, format_va, score_to_va  # noqa: E402
 from jev.data import aspects_for_inference, load_jsonl  # noqa: E402
-from jev.fewshot import ExampleSet, build_state, load_examples  # noqa: E402
+from jev.fewshot import Example, ExampleSet, build_state, load_examples  # noqa: E402
 from jev.rubrics import arousal_question, valence_question  # noqa: E402
 
 RUBRICS_PATH = Path(__file__).resolve().parent.parent / "jev" / "rubrics.py"
@@ -99,6 +99,11 @@ def predict(client: JevClient, record: dict, examples: ExampleSet) -> dict:
         build_questions(aspects, n_examples),
     )
     entry["_response"] = response
+    entry["_jev"] = {
+        "model": response.model, "usage": response.usage,
+        "attempts": response.attempts,
+        "answers": {name: answer.raw for name, answer in response.answers.items()},
+    }
     for index, aspect in enumerate(aspects):
         entry["Aspect_VA"].append(
             {
@@ -127,6 +132,8 @@ def main() -> int:
                         choices=["first-k", "stratified"],
                         help="first-k = official protocol; stratified = one example "
                              "per equal-width band of the 1-9 scale")
+    parser.add_argument("--model", default=DEFAULT_MODEL)
+    parser.add_argument("--examples", type=Path, help="frozen Example dataclasses as JSON")
     args = parser.parse_args()
 
     records = load_jsonl(args.data)
@@ -137,49 +144,40 @@ def main() -> int:
     examples = load_examples(language, domain, args.shots,
                              strategy=args.example_selection)
 
+    if args.examples:
+        examples = ExampleSet(
+            corpus=f"{language}_{domain}", n_requested=args.shots, strategy="frozen",
+            examples=[Example(**item) for item in json.loads(args.examples.read_text())]
+            if args.shots else [],
+        )
+
     out = Path(args.out)
     meta_path = Path(str(out) + ".meta.json")
     previous_meta: dict = {}
 
-    if args.restart and out.exists():
-        out.unlink()
+    # Store only what determines the request; do this before issuing any calls.
+    config = {
+        "model": args.model, "shots": args.shots, "examples": examples.payload(),
+        "questions": build_questions(["__aspect__"], len(examples.examples)),
+    }
+    if args.restart:
+        out.unlink(missing_ok=True)
         meta_path.unlink(missing_ok=True)
-    elif out.exists():
-        # Resuming across a rubric change or a different shot count would
-        # silently mix two instruments in one prediction file, so refuse rather
-        # than guess.
-        if meta_path.exists():
-            previous_meta = json.loads(meta_path.read_text())
-            previous = previous_meta.get("rubric_sha256_12")
-            if previous and previous != rubric_fingerprint():
-                print(
-                    f"refusing to resume: {out} was produced with rubric {previous}, "
-                    f"current rubric is {rubric_fingerprint()}. Re-run with --restart.",
-                    file=sys.stderr,
-                )
-                return 2
-            previous_shots = previous_meta.get("shots")
-            if previous_shots is not None and previous_shots != args.shots:
-                print(
-                    f"refusing to resume: {out} was produced with shots={previous_shots}, "
-                    f"this run uses shots={args.shots}. Re-run with --restart.",
-                    file=sys.stderr,
-                )
-                return 2
-            previous_strategy = previous_meta.get("example_set", {}).get("strategy")
-            if previous_strategy is not None and previous_strategy != args.example_selection:
-                print(
-                    f"refusing to resume: {out} used example strategy {previous_strategy}, "
-                    f"this run uses {args.example_selection}. Re-run with --restart.",
-                    file=sys.stderr,
-                )
-                return 2
+    elif out.exists() or meta_path.exists():
+        previous_meta = json.loads(meta_path.read_text()) if meta_path.exists() else {}
+        if previous_meta.get("config") != config:
+            print("refusing to resume: missing or different request configuration; "
+                  "use a new output path or explicit --restart", file=sys.stderr)
+            return 2
+    out.parent.mkdir(parents=True, exist_ok=True)
+    previous_meta["config"] = config
+    meta_path.write_text(json.dumps(previous_meta, indent=2) + "\n")
     done = completed_ids(out)
     todo = [r for r in records if r["ID"] not in done]
     if done:
         print(f"resuming: {len(done)} already done, {len(todo)} to go")
 
-    client = JevClient()
+    client = JevClient(model=args.model)
     collector = Collector()
     started = time.time()
     finished = 0
@@ -207,16 +205,15 @@ def main() -> int:
                 rate = finished / max(time.time() - started, 1e-6)
                 print(f"  {finished}/{len(todo)}  ({rate:.1f}/s)", flush=True)
 
-    # Usage accumulates across runs. A resumed run only performs the records that
-    # are missing, so overwriting would make the file's token total describe the
-    # last fragment rather than everything that was actually spent producing it.
-    # Retries inside a request are invisible here -- the API only reports usage on
-    # a successful response -- so totals are a lower bound on real spend.
-    previous_usage = previous_meta.get("usage_total", {})
-    usage_total = {
-        key: previous_usage.get(key, 0) + collector.usage.get(key, 0)
-        for key in set(previous_usage) | set(collector.usage)
-    }
+    # Each completed row carries its own usage, so interrupted runs need no journal.
+    usage_total: dict[str, int] = {}
+    models: set[str] = set()
+    for entry in load_jsonl(out):
+        raw = entry.get("_jev", {})
+        if raw.get("model"):
+            models.add(raw["model"])
+        for key, value in raw.get("usage", {}).items():
+            usage_total[key] = usage_total.get(key, 0) + value
     run = {
         "finished_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "records_completed": finished,
@@ -228,13 +225,13 @@ def main() -> int:
     runs = previous_meta.get("runs", []) + [run]
 
     meta = {
+        "config": config,
         "data": str(args.data),
         "predictions": str(out),
         "records": len(records),
         "records_in_file": len(done) + finished,
         "model_requested": client.model,
-        "model_returned": sorted(set(previous_meta.get("model_returned", []))
-                                 | collector.models),
+        "model_returned": sorted(models),
         "rubric_sha256_12": rubric_fingerprint(),
         "shots": args.shots,
         "corpus": f"{language}_{domain}",
@@ -243,6 +240,7 @@ def main() -> int:
         "example_set": examples.ids_for_meta,
         "usage_total": usage_total,
         "usage_this_run": collector.usage,
+        "usage_note": "Returned usage only; unreported failed-request charges are unknown.",
         "runs": runs,
     }
     Path(str(out) + ".meta.json").write_text(json.dumps(meta, indent=2) + "\n")

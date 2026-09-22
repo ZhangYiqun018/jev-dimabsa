@@ -17,9 +17,9 @@ from pathlib import Path
 from typing import Any
 
 ENDPOINT = "https://api.typesafe.ai/v1/systemone"
-DEFAULT_MODEL = "jev-latest"
+DEFAULT_MODEL = "jev-1.13.0"
 
-RETRYABLE_STATUS = frozenset({408, 425, 429, 500, 502, 503, 504})
+RETRYABLE_STATUS = frozenset({408, 425, 429, 500, 502, 503, 504, 529})
 
 
 def _retry_after(exc: urllib.error.HTTPError) -> float | None:
@@ -102,6 +102,7 @@ class Response:
     model: str
     answers: dict[str, Answer]
     usage: dict[str, int]
+    attempts: int = 1
 
 
 class JevClient:
@@ -146,10 +147,11 @@ class JevClient:
                 if exc.code not in RETRYABLE_STATUS or attempt == attempts - 1:
                     raise JevError(f"System One {last_error}") from None
                 delay = _retry_after(exc) or backoff * (2**attempt)
-            except urllib.error.URLError as exc:
-                last_error = f"connection error: {exc.reason}"
+            except (urllib.error.URLError, TimeoutError) as exc:
+                reason = getattr(exc, "reason", str(exc))
+                last_error = f"connection error: {reason}"
                 if attempt == attempts - 1:
-                    raise JevError(f"Could not reach System One: {exc.reason}") from None
+                    raise JevError(f"Could not reach System One: {reason}") from None
                 delay = backoff * (2**attempt)
             time.sleep(min(delay, 60.0))
         else:  # pragma: no cover - loop always breaks or raises
@@ -163,6 +165,7 @@ class JevClient:
             model=body.get("model", "?"),
             answers=answers,
             usage=body.get("usage", {}),
+            attempts=attempt + 1,
         )
 
 

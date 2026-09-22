@@ -8,8 +8,8 @@ cost, and any observed fact that affects how the numbers should be read. Nothing
 **What does not:** hypotheses, plans, interpretations, or anything not directly observed.
 Those belong in the conversation or the next experiment, not here.
 
-Every entry states the model version returned by the API and the rubric fingerprint, because
-both change results and neither is recoverable from the prediction files.
+Every entry states the model version returned by the API and the rubric fingerprint. New
+prediction files also retain model and raw response metadata; older runs rely on sidecars.
 
 ## Template
 
@@ -42,3 +42,4 @@ facts only — anything a reader needs to not misread the table
 | [0002](0002-st1-few-shot-n3.md) | Subtask 1, 3-shot calibration | 2.1721 | $0.6700 |
 | [0003](0003-st1-few-shot-n3-stratified.md) | Subtask 1, 3-shot, valence-stratified examples | 2.1628 | $0.6752 |
 | [0004](0004-st1-example-count-sweep.md) | Subtask 1, example-count sweep n = 3, 5, 9 | 2.1309 / 2.0736 | $0.7445 / $0.8936 |
+| [0005](0005-st1-supervised-calibration.md) | Supervised shrink calibration, zero / 9-shot | 1.1395 / 1.1199 | $1.9588 |

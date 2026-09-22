@@ -19,6 +19,7 @@ import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))
 DATA = ROOT / "vendor" / "DimABSA2026" / "task-dataset"
 REPORTS = ROOT / "reports"
 PY = str(ROOT / ".venv" / "bin" / "python")
@@ -65,25 +66,26 @@ def run_one(language: str, domain: str, split: str, concurrency: int,
     corpus = f"{language}_{domain}"
     pred = REPORTS / f"pred_st1_{corpus}_{split}_{tag_for(shots, strategy)}.jsonl"
 
-    # Exit 1 means some records failed after the client's own retries; every other
-    # record is written and scoring them is valid, so this is not a failed corpus.
-    # Resume (without --restart, which would delete what succeeded) to fill the
-    # gap, then score whatever is on disk. Exit 2 is the runner refusing to resume
-    # across an instrument change, which no retry can fix.
+    # Retry incomplete inference by resuming successful records. Score only when
+    # complete; configuration mismatches cannot be fixed by retrying.
     base = [PY, str(ROOT / "runners" / "run_st1.py"),
             "--data", str(source), "--out", str(pred), "--quiet",
             "--concurrency", str(concurrency), "--shots", str(shots),
             "--example-selection", strategy]
     started = time.time()
     for attempt in range(3):
-        run = subprocess.run(base + (["--restart"] if attempt == 0 else []),
+        run = subprocess.run(base,
                              capture_output=True, text=True)
         if run.returncode == 0:
             break
         if run.returncode != 1 or attempt == 2:
             # The runner prints its per-record errors to stdout, not stderr.
             detail = (run.stderr.strip() or run.stdout.strip())[-300:]
-            return {"corpus": corpus, "error": f"exit {run.returncode}: {detail}"}
+            from jev.data import load_jsonl
+            tokens = sum(r.get("_jev", {}).get("usage", {}).get("input_tokens", 0)
+                         for r in load_jsonl(pred)) if pred.exists() else 0
+            return {"corpus": corpus, "error": f"exit {run.returncode}: {detail}",
+                    "input_tokens": tokens}
     elapsed = time.time() - started
 
     score = subprocess.run(
@@ -91,15 +93,16 @@ def run_one(language: str, domain: str, split: str, concurrency: int,
          "--task", "1", "--gold", str(source), "--pred", str(pred)],
         capture_output=True, text=True,
     )
+    meta = json.loads(Path(str(pred) + ".meta.json").read_text())
     match = RESULTS_RE.search(score.stdout)
-    if not match:
-        return {"corpus": corpus, "error": (score.stdout + score.stderr).strip()[-300:]}
+    if score.returncode or not match:
+        return {"corpus": corpus, "error": (score.stdout + score.stderr).strip()[-300:],
+                "input_tokens": meta.get("usage_total", {}).get("input_tokens", 0)}
 
     # The official script prints a Python dict repr, not JSON: single quotes and
     # np.float64(...) wrappers. Strip the wrappers and literal_eval it.
     literal = re.sub(r"np\.float64\(([^)]*)\)", r"\1", match.group(1))
     metrics = ast.literal_eval(literal)
-    meta = json.loads(Path(str(pred) + ".meta.json").read_text())
 
     n_gold = 0
     for line in open(source, encoding="utf-8"):
@@ -160,10 +163,10 @@ def main() -> int:
 
     tot_tok = 0
     for row in rows:
+        tot_tok += row.get("input_tokens") or 0
         if "error" in row:
             print(f"{row['corpus']:<18} ERROR {row['error'][:50]}")
             continue
-        tot_tok += row.get("input_tokens") or 0
         if show_official:
             kimi, qwen = OFFICIAL_TEST[row["corpus"]]
             print(f"{row['corpus']:<18}{row['n_gold']:>6}{row['RMSE_VA']:>10.4f}"
@@ -177,7 +180,7 @@ def main() -> int:
     if tot_tok:
         print(f"total input tokens: {tot_tok:,}  ->  ${tot_tok / 1e6 * 0.042:.4f} "
               f"(at $0.042/Mtok, input only)")
-    return 0
+    return 1 if any("error" in row for row in rows) else 0
 
 
 if __name__ == "__main__":

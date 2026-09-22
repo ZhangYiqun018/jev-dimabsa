@@ -14,3 +14,10 @@ __pycache__/
 
 # local session config
 .claude/
+
+# Calibration experiment inputs and raw responses contain dataset text.
+reports/**/cache/
+
+# Console output from the local calibration runs.
+reports/calibration_*execution.log
+reports/calibration_*/run.log

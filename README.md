@@ -81,6 +81,7 @@ scoring/
 tools/
   leakage_audit.py  train/dev/test overlap report
   probe_fewshot.py  how calibration examples are delivered to the API
+  calibrate_st1.py  train calibration, dev selection, frozen test evaluation
 logs/               one file per experiment
 ```
 
@@ -105,7 +106,11 @@ at `https://api.typesafe.ai/v1/systemone`. Primitive and request-shape docs:
 
 `scipy` is needed only by the official scorer, for its Pearson correlation. Predictions are
 appended as each sentence completes, so an interrupted run resumes by ID; the client retries
-rate limits and 5xx with backoff.
+rate limits, 529 and timeouts with backoff. Each prediction also stores raw scores,
+probabilities, confidence, returned model and usage in `_jev`. The default model is
+`jev-1.13.0`. Resume checks the saved request configuration; historical files without
+that configuration remain readable but require a new output path for new runs.
+`--restart` explicitly discards an existing run. Incomplete batch runs exit nonzero.
 
 ## Few-shot examples
 
@@ -133,8 +138,43 @@ drops nothing; at larger `k` it matters.
 ## Known limits
 
 - **Jev is not deterministic.** Repeated calls on identical input differ by roughly 0.04 per
-  dimension. Differences below that are not evidence of anything.
-- Arousal stays under-predicted even with examples. `PCC_A` ≈ 0.49 against `PCC_V` ≈ 0.89
+  dimension. This single-call variation is not a significance threshold for aggregate RMSE.
+- In the uncalibrated baseline, arousal stays under-predicted even with examples. `PCC_A` ≈ 0.49 against `PCC_V` ≈ 0.89
   (Pearson correlation per dimension; higher is better, 1 is perfect) — Jev orders valence well
   and arousal badly. Per-corpus values are in the logs.
 - Only Subtask 1 is implemented.
+
+## Supervised calibration experiment
+
+Frozen test results (official scorer, N = 16,186):
+
+| Arm | Raw RMSE_VA | With supervised shrink calibration |
+|---|---:|---:|
+| 0-shot | 2.4720 | **1.1395** |
+| 9-shot | 2.0731 | **1.1199** |
+
+Both methods were selected on dev and frozen before test. Configuration, per-corpus
+results, confidence intervals and costs: [experiment 0005](logs/0005-st1-supervised-calibration.md).
+
+```bash
+.venv/bin/python tools/calibrate_st1.py dev
+.venv/bin/python tools/calibrate_st1.py test
+.venv/bin/python -m unittest discover -s tests -v
+```
+
+This compares zero-shot and frozen stratified 9-shot requests. Each corpus uses 256
+training text groups (seed 20260923), excluding examples and dev/test overlaps.
+Russian, Tatar and Ukrainian translations share sample groups and CV folds.
+Per-corpus, per-dimension candidates are raw, train mean, offset, shrinkage and
+nonnegative affine calibration; shrinkage uses five-fold train CV. Dev chooses one
+method type per arm, preferring simpler methods within 0.02 RMSE. Calibration is
+retained only with at least 0.02 improvement and a paired cluster bootstrap 95%
+interval below zero (2,000 draws). Parameters are frozen before test; test exports
+are checked with the unchanged official scorer.
+
+Artifacts live in `reports/calibration_20260923/`. Dataset-bearing inputs, responses
+and exports stay in ignored `cache/`; sample IDs, parameters, selection and summaries
+are separate JSON files. Rerunning resumes completed requests. Use `--out` with a new
+directory for another experiment. This uses additional **supervised training labels**;
+it is a separate setting from the few-shot baseline table. Test had already been
+examined in earlier experiments, so it is not a previously untouched holdout.
