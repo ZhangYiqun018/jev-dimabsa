@@ -1,0 +1,29 @@
+{
+  "machine": "arm64",
+  "platform": "macOS-27.0-arm64-arm-64bit",
+  "numpy": "2.5.3",
+  "scope": "9-shot, ten corpora; arrays preloaded; no API, JSON I/O, model training, or official scorer subprocess",
+  "train_annotations": 4664,
+  "dev_annotations": 3267,
+  "test_annotations": 16186,
+  "fit_all_candidates_5fold": {
+    "median_seconds": 0.007644124999842461,
+    "runs": 20
+  },
+  "linear_only_reference": {
+    "median_seconds": 0.00022027100021659862,
+    "runs": 20
+  },
+  "evaluate_five_candidates_dev": {
+    "median_seconds": 0.0007124374997147243,
+    "runs": 20
+  },
+  "apply_frozen_shrink_test": {
+    "median_seconds": 0.00012264550059626345,
+    "runs": 20
+  },
+  "bootstrap_2000_dev": {
+    "median_seconds": 0.08760404199983896,
+    "runs": 3
+  }
+}
