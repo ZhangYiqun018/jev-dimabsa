@@ -89,9 +89,14 @@ logs/               one file per experiment
 uv venv .venv && uv pip install --python .venv/bin/python numpy scipy
 export TYPESAFE_API_KEY=...          # the client also reads ~/.zshrc
 
-# latest experiment: fit on train, select on dev, then evaluate frozen test
+# fit calibration on train, select on dev, and save parameters
 .venv/bin/python tools/calibrate_st1.py dev --out reports/calibration_reproduction
+
+# apply the saved calibration to test predictions, export and score both arms
 .venv/bin/python tools/calibrate_st1.py test --out reports/calibration_reproduction
+
+# view raw and calibrated test scores (zero-shot and 9-shot)
+cat reports/calibration_reproduction/test_summary.json
 
 # raw baseline: one corpus
 .venv/bin/python runners/run_st1.py \
