@@ -23,8 +23,8 @@ perfect.** It is not a per-dimension error — both dimensions are pooled under 
 | System | RMSE_VA |
 |---|---|
 | Kimi-K2, one-shot | 1.8873 |
+| **Jev, 9-shot, valence-stratified** | **2.0736** |
 | GPT-5 mini, one-shot | 2.1552 |
-| **Jev, 3-shot, valence-stratified** | **2.1628** |
 | **Jev, 3-shot** | **2.1721** |
 | Qwen3-14B, QLoRA fine-tuned | 2.1841 |
 | Kimi-K2, zero-shot | 2.3849 |
@@ -33,14 +33,17 @@ perfect.** It is not a per-dimension error — both dimensions are pooled under 
 
 Baseline figures are from the dataset paper, [arXiv:2601.23022](https://arxiv.org/abs/2601.23022),
 Table 3. Three in-context examples move Jev **−0.2987** and take it from 3/10 to 7/10 corpora
-ahead of Kimi-K2 zero-shot. It remains **+0.2847** behind Kimi-K2 one-shot.
+ahead of Kimi-K2 zero-shot.
 
-The stratified Jev row picks the examples to span the 1–9 scale rather than taking the first 3
-train records. It is worth **−0.0093**, 3% of what adding examples is worth, and is not
-distinguishable from zero: the micro-level noise floor of this metric was not measured. Which
-examples are used barely matters; having any does.
+The two Jev rows shown are the official protocol — the first 3 records of the training set — and
+the best arm found, which picks examples to span the 1–9 scale and uses 9 of them. The remaining
+gain is in the example count: **−0.0319** from 3 to 5, of which one corpus accounts for all but
+0.0027, then a further **−0.0573** from 5 to 9, which is spread across the corpora. At 9 examples
+Jev passes GPT-5 mini one-shot and sits 0.1863 behind Kimi-K2 one-shot. How the examples are
+chosen barely matters; how many there are does.
 
-Per-corpus numbers, correlation metrics, and run configuration: [`logs/`](logs/).
+Per-corpus numbers, correlation metrics, the full sweep, and run configuration:
+[`logs/`](logs/).
 
 ## Dataset
 

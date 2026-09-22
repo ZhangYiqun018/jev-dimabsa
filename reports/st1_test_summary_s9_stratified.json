@@ -1,0 +1,122 @@
+[
+  {
+    "corpus": "eng_restaurant",
+    "n_gold": 1504,
+    "RMSE_VA": 2.4196,
+    "PCC_V": 0.9161,
+    "PCC_A": 0.517,
+    "seconds": 75.9,
+    "failed": 0,
+    "input_tokens": 1771390,
+    "model": "jev-1.13.0",
+    "rubric": "3a2a9aee82a9"
+  },
+  {
+    "corpus": "eng_laptop",
+    "n_gold": 1421,
+    "RMSE_VA": 2.6957,
+    "PCC_V": 0.8877,
+    "PCC_A": 0.3849,
+    "seconds": 75.9,
+    "failed": 0,
+    "input_tokens": 1666904,
+    "model": "jev-1.13.0",
+    "rubric": "3a2a9aee82a9"
+  },
+  {
+    "corpus": "zho_restaurant",
+    "n_gold": 1929,
+    "RMSE_VA": 2.0327,
+    "PCC_V": 0.8498,
+    "PCC_A": 0.3909,
+    "seconds": 77.4,
+    "failed": 0,
+    "input_tokens": 2025440,
+    "model": "jev-1.13.0",
+    "rubric": "3a2a9aee82a9"
+  },
+  {
+    "corpus": "zho_laptop",
+    "n_gold": 1673,
+    "RMSE_VA": 1.9673,
+    "PCC_V": 0.892,
+    "PCC_A": 0.521,
+    "seconds": 81.0,
+    "failed": 0,
+    "input_tokens": 2491538,
+    "model": "jev-1.13.0",
+    "rubric": "3a2a9aee82a9"
+  },
+  {
+    "corpus": "zho_finance",
+    "n_gold": 2354,
+    "RMSE_VA": 1.9676,
+    "PCC_V": 0.8226,
+    "PCC_A": 0.4466,
+    "seconds": 73.5,
+    "failed": 0,
+    "input_tokens": 2843484,
+    "model": "jev-1.13.0",
+    "rubric": "3a2a9aee82a9"
+  },
+  {
+    "corpus": "jpn_hotel",
+    "n_gold": 1092,
+    "RMSE_VA": 2.0253,
+    "PCC_V": 0.9393,
+    "PCC_A": 0.6267,
+    "seconds": 62.8,
+    "failed": 0,
+    "input_tokens": 1459773,
+    "model": "jev-1.13.0",
+    "rubric": "3a2a9aee82a9"
+  },
+  {
+    "corpus": "jpn_finance",
+    "n_gold": 1302,
+    "RMSE_VA": 2.2125,
+    "PCC_V": 0.9171,
+    "PCC_A": 0.3917,
+    "seconds": 65.5,
+    "failed": 0,
+    "input_tokens": 2240326,
+    "model": "jev-1.13.0",
+    "rubric": "3a2a9aee82a9"
+  },
+  {
+    "corpus": "rus_restaurant",
+    "n_gold": 1637,
+    "RMSE_VA": 1.7473,
+    "PCC_V": 0.9291,
+    "PCC_A": 0.5643,
+    "seconds": 85.1,
+    "failed": 0,
+    "input_tokens": 2181550,
+    "model": "jev-1.13.0",
+    "rubric": "3a2a9aee82a9"
+  },
+  {
+    "corpus": "tat_restaurant",
+    "n_gold": 1637,
+    "RMSE_VA": 1.8997,
+    "PCC_V": 0.8821,
+    "PCC_A": 0.5178,
+    "seconds": 80.4,
+    "failed": 0,
+    "input_tokens": 2341150,
+    "model": "jev-1.13.0",
+    "rubric": "3a2a9aee82a9"
+  },
+  {
+    "corpus": "ukr_restaurant",
+    "n_gold": 1637,
+    "RMSE_VA": 1.7733,
+    "PCC_V": 0.9242,
+    "PCC_A": 0.5613,
+    "seconds": 80.6,
+    "failed": 0,
+    "input_tokens": 2254309,
+    "model": "jev-1.13.0",
+    "rubric": "3a2a9aee82a9"
+  }
+]
