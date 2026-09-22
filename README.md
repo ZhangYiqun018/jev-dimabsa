@@ -1,6 +1,6 @@
-# Jev on DimABSA — Subtask 1 experiments
+# Jev on DimABSA — Subtask 1 baseline
 
-**[TypeSafe Jev](https://typesafe.ai)** (System One) baselines and supervised score calibration for
+A **[TypeSafe Jev](https://typesafe.ai)** (System One) baseline for
 [DimABSA](https://github.com/DimABSA/DimABSA2026), the dimensional aspect-based sentiment
 analysis task from SemEval-2026 Task 3.
 
@@ -9,44 +9,21 @@ DimABSA replaces categorical polarity with continuous **valence–arousal (VA) s
 a continuous probability-weighted position on a described scale, so the task maps onto it
 without any text generation or output parsing.
 
-No GPU and no model fine-tuning. The latest experiment fits a small local calibration
-function using training labels, then applies it to Jev predictions.
+No GPU and no fine-tuning. One API key and about an hour.
 
-## Latest result — supervised calibration
+## Result — Subtask 1 (DimASR), official test split
 
-On the official ST1 test split, **9-shot + shrink calibration reaches 1.1199 RMSE_VA**;
-**zero-shot + shrink calibration reaches 1.1395**. Both improve on their matched raw
-outputs in all ten corpora.
+Official scorer, `--do_norm` **off**. Micro average, weighted by gold entry count (N = 16,186),
+best first.
 
-Official scorer, `--do_norm` **off**, micro average over **16,186 gold annotations**.
-`RMSE_VA = √mean(Δvalence² + Δarousal²)` on the 1–9 scale; **lower is better**.
-
-| Arm | Raw RMSE_VA | After shrink calibration | Test inference cost |
-|---|---:|---:|---:|
-| Zero-shot | 2.4720 | **1.1395** | $0.4588 |
-| 9-shot, valence-stratified | 2.0731 | **1.1199** | $0.8936 |
-
-Most of the improvement comes from calibration. After calibration, 9-shot leads by
-**0.0196 RMSE** at about **1.95×** the test inference cost. The complete calibration,
-dev and test experiment cost approximately **$1.9588**, based on returned input usage.
-
-These results use **additional supervised training labels**: 256 text groups per corpus,
-2,563 training records and 4,664 VA annotations per arm. Coefficients are fitted on train;
-dev selects the method; parameters are frozen before test. Few-shot examples retain their
-original gold scores—only model outputs are calibrated. Test had already been examined
-in earlier experiments, so it is not a previously untouched holdout.
-
-See [experiment 0005](logs/0005-st1-supervised-calibration.md) for per-corpus results,
-confidence intervals, parameters and costs, and [the calibration protocol](#calibration-protocol)
-for the selection procedure.
-
-## Historical baselines — without local score calibration
-
-The Jev rows below are earlier runs. Published systems use different supervision settings;
-the new supervised calibration results above are reported separately.
+`RMSE_VA` is the root mean squared error of the predicted valence–arousal pair against gold,
+`√(mean(Δvalence² + Δarousal²))`, in the same units as the 1–9 scale. **Lower is better; 0 is
+perfect.** It is not a per-dimension error — both dimensions are pooled under one root.
 
 | System | RMSE_VA |
 |---|---|
+| **Jev, 9-shot + shrink calibration\*** | **1.1199** |
+| **Jev, zero-shot + shrink calibration\*** | **1.1395** |
 | Kimi-K2, one-shot | 1.8873 |
 | **Jev, 9-shot, valence-stratified** | **2.0736** |
 | GPT-5 mini, one-shot | 2.1552 |
@@ -56,11 +33,15 @@ the new supervised calibration results above are reported separately.
 | **Jev, zero-shot** | **2.4708** |
 | GPT-5 mini, zero-shot | 2.7439 |
 
-Published figures are from the dataset paper, [arXiv:2601.23022](https://arxiv.org/abs/2601.23022),
-Table 3. The Jev 3-shot run uses the first three eligible training records; stratified
-9-shot uses examples spanning the valence scale. In that sweep, stratified 3-, 5- and
-9-shot achieved 2.1628, 2.1309 and 2.0736 respectively. Full configurations and results
-are in [experiments 0001–0004](logs/).
+\* Supervised calibration using 256 training text groups per corpus; fitted on train,
+selected on dev, and frozen before test. Few-shot example scores stay unchanged.
+Test was used in earlier experiments. Full protocol and results: [0005](logs/0005-st1-supervised-calibration.md).
+
+Calibration brings matched zero-shot / 9-shot runs from 2.4720 / 2.0731 to
+**1.1395 / 1.1199**; the remaining 9-shot advantage is **0.0196** RMSE.
+
+Published baselines: [arXiv:2601.23022](https://arxiv.org/abs/2601.23022), Table 3.
+Earlier experiments, per-corpus scores and costs: [`logs/`](logs/).
 
 ## Dataset
 
@@ -164,29 +145,3 @@ drops nothing; at larger `k` it matters.
   (Pearson correlation per dimension; higher is better, 1 is perfect) — Jev orders valence well
   and arousal badly. Per-corpus values are in the logs.
 - Only Subtask 1 is implemented.
-
-## Calibration protocol
-
-This compares zero-shot and frozen stratified 9-shot requests. Each corpus uses 256
-training text groups (seed 20260923), excluding examples and dev/test overlaps.
-Russian, Tatar and Ukrainian translations share sample groups and CV folds.
-Per-corpus, per-dimension candidates are raw, train mean, offset, shrinkage and
-nonnegative affine calibration; shrinkage uses five-fold train CV. Dev chooses one
-method type per arm, preferring simpler methods within 0.02 RMSE. Calibration is
-retained only with at least 0.02 improvement and a paired cluster bootstrap 95%
-interval below zero (2,000 draws). Parameters are frozen before test; test exports
-are checked with the unchanged official scorer.
-
-Archived results live in `reports/calibration_20260923/`. The commands above write a fresh
-run to `reports/calibration_reproduction/`, since raw caches are not distributed.
-Dataset-bearing inputs, responses
-and exports stay in ignored `cache/`; sample IDs, parameters, selection and summaries
-are separate JSON files. Rerunning resumes completed requests. Use `--out` with a new
-directory for another experiment.
-
-The three focused unit tests cover transient retries, resume/accounting and calibration
-math/group isolation:
-
-```bash
-.venv/bin/python -m unittest discover -s tests -v
-```
