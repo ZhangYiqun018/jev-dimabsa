@@ -1,6 +1,6 @@
-# Jev on DimABSA — Subtask 1 baseline
+# Jev on DimABSA — Subtask 1 experiments
 
-A **[TypeSafe Jev](https://typesafe.ai)** (System One) baseline for
+**[TypeSafe Jev](https://typesafe.ai)** (System One) baselines and supervised score calibration for
 [DimABSA](https://github.com/DimABSA/DimABSA2026), the dimensional aspect-based sentiment
 analysis task from SemEval-2026 Task 3.
 
@@ -9,16 +9,41 @@ DimABSA replaces categorical polarity with continuous **valence–arousal (VA) s
 a continuous probability-weighted position on a described scale, so the task maps onto it
 without any text generation or output parsing.
 
-No GPU and no fine-tuning. One API key and about an hour.
+No GPU and no model fine-tuning. The latest experiment fits a small local calibration
+function using training labels, then applies it to Jev predictions.
 
-## Result — Subtask 1 (DimASR), official test split
+## Latest result — supervised calibration
 
-Official scorer, `--do_norm` **off**. Micro average, weighted by gold entry count (N = 16,186),
-best first.
+On the official ST1 test split, **9-shot + shrink calibration reaches 1.1199 RMSE_VA**;
+**zero-shot + shrink calibration reaches 1.1395**. Both improve on their matched raw
+outputs in all ten corpora.
 
-`RMSE_VA` is the root mean squared error of the predicted valence–arousal pair against gold,
-`√(mean(Δvalence² + Δarousal²))`, in the same units as the 1–9 scale. **Lower is better; 0 is
-perfect.** It is not a per-dimension error — both dimensions are pooled under one root.
+Official scorer, `--do_norm` **off**, micro average over **16,186 gold annotations**.
+`RMSE_VA = √mean(Δvalence² + Δarousal²)` on the 1–9 scale; **lower is better**.
+
+| Arm | Raw RMSE_VA | After shrink calibration | Test inference cost |
+|---|---:|---:|---:|
+| Zero-shot | 2.4720 | **1.1395** | $0.4588 |
+| 9-shot, valence-stratified | 2.0731 | **1.1199** | $0.8936 |
+
+Most of the improvement comes from calibration. After calibration, 9-shot leads by
+**0.0196 RMSE** at about **1.95×** the test inference cost. The complete calibration,
+dev and test experiment cost approximately **$1.9588**, based on returned input usage.
+
+These results use **additional supervised training labels**: 256 text groups per corpus,
+2,563 training records and 4,664 VA annotations per arm. Coefficients are fitted on train;
+dev selects the method; parameters are frozen before test. Few-shot examples retain their
+original gold scores—only model outputs are calibrated. Test had already been examined
+in earlier experiments, so it is not a previously untouched holdout.
+
+See [experiment 0005](logs/0005-st1-supervised-calibration.md) for per-corpus results,
+confidence intervals, parameters and costs, and [the calibration protocol](#calibration-protocol)
+for the selection procedure.
+
+## Historical baselines — without local score calibration
+
+The Jev rows below are earlier runs. Published systems use different supervision settings;
+the new supervised calibration results above are reported separately.
 
 | System | RMSE_VA |
 |---|---|
@@ -31,19 +56,11 @@ perfect.** It is not a per-dimension error — both dimensions are pooled under 
 | **Jev, zero-shot** | **2.4708** |
 | GPT-5 mini, zero-shot | 2.7439 |
 
-Baseline figures are from the dataset paper, [arXiv:2601.23022](https://arxiv.org/abs/2601.23022),
-Table 3. Three in-context examples move Jev **−0.2987** and take it from 3/10 to 7/10 corpora
-ahead of Kimi-K2 zero-shot.
-
-The two Jev rows shown are the official protocol — the first 3 records of the training set — and
-the best arm found, which picks examples to span the 1–9 scale and uses 9 of them. The remaining
-gain is in the example count: **−0.0319** from 3 to 5, of which one corpus accounts for all but
-0.0027, then a further **−0.0573** from 5 to 9, which is spread across the corpora. At 9 examples
-Jev passes GPT-5 mini one-shot and sits 0.1863 behind Kimi-K2 one-shot. How the examples are
-chosen barely matters; how many there are does.
-
-Per-corpus numbers, correlation metrics, the full sweep, and run configuration:
-[`logs/`](logs/).
+Published figures are from the dataset paper, [arXiv:2601.23022](https://arxiv.org/abs/2601.23022),
+Table 3. The Jev 3-shot run uses the first three eligible training records; stratified
+9-shot uses examples spanning the valence scale. In that sweep, stratified 3-, 5- and
+9-shot achieved 2.1628, 2.1309 and 2.0736 respectively. Full configurations and results
+are in [experiments 0001–0004](logs/).
 
 ## Dataset
 
@@ -88,15 +105,19 @@ logs/               one file per experiment
 ## Running it
 
 ```bash
-uv venv .venv && uv pip install --python .venv/bin/python scipy
+uv venv .venv && uv pip install --python .venv/bin/python numpy scipy
 export TYPESAFE_API_KEY=...          # the client also reads ~/.zshrc
 
-# one corpus
+# latest experiment: fit on train, select on dev, then evaluate frozen test
+.venv/bin/python tools/calibrate_st1.py dev --out reports/calibration_reproduction
+.venv/bin/python tools/calibrate_st1.py test --out reports/calibration_reproduction
+
+# raw baseline: one corpus
 .venv/bin/python runners/run_st1.py \
   --data vendor/DimABSA2026/task-dataset/track_a/subtask_1/eng/eng_restaurant_test_task1.jsonl \
   --out reports/pred.jsonl --shots 3 --concurrency 10
 
-# every corpus, scored against the official script
+# raw baseline: every corpus, scored against the official script
 .venv/bin/python runners/run_all_st1.py --split test --shots 3 --concurrency 10
 ```
 
@@ -104,7 +125,7 @@ An API key comes from the [TypeSafe console](https://console.typesafe.ai/); the 
 at `https://api.typesafe.ai/v1/systemone`. Primitive and request-shape docs:
 <https://docs.typesafe.ai/introduction>.
 
-`scipy` is needed only by the official scorer, for its Pearson correlation. Predictions are
+`numpy` supports local calibration; `scipy` is used by the official scorer. Predictions are
 appended as each sentence completes, so an interrupted run resumes by ID; the client retries
 rate limits, 529 and timeouts with backoff. Each prediction also stores raw scores,
 probabilities, confidence, returned model and usage in `_jev`. The default model is
@@ -144,23 +165,7 @@ drops nothing; at larger `k` it matters.
   and arousal badly. Per-corpus values are in the logs.
 - Only Subtask 1 is implemented.
 
-## Supervised calibration experiment
-
-Frozen test results (official scorer, N = 16,186):
-
-| Arm | Raw RMSE_VA | With supervised shrink calibration |
-|---|---:|---:|
-| 0-shot | 2.4720 | **1.1395** |
-| 9-shot | 2.0731 | **1.1199** |
-
-Both methods were selected on dev and frozen before test. Configuration, per-corpus
-results, confidence intervals and costs: [experiment 0005](logs/0005-st1-supervised-calibration.md).
-
-```bash
-.venv/bin/python tools/calibrate_st1.py dev
-.venv/bin/python tools/calibrate_st1.py test
-.venv/bin/python -m unittest discover -s tests -v
-```
+## Calibration protocol
 
 This compares zero-shot and frozen stratified 9-shot requests. Each corpus uses 256
 training text groups (seed 20260923), excluding examples and dev/test overlaps.
@@ -172,9 +177,16 @@ retained only with at least 0.02 improvement and a paired cluster bootstrap 95%
 interval below zero (2,000 draws). Parameters are frozen before test; test exports
 are checked with the unchanged official scorer.
 
-Artifacts live in `reports/calibration_20260923/`. Dataset-bearing inputs, responses
+Archived results live in `reports/calibration_20260923/`. The commands above write a fresh
+run to `reports/calibration_reproduction/`, since raw caches are not distributed.
+Dataset-bearing inputs, responses
 and exports stay in ignored `cache/`; sample IDs, parameters, selection and summaries
 are separate JSON files. Rerunning resumes completed requests. Use `--out` with a new
-directory for another experiment. This uses additional **supervised training labels**;
-it is a separate setting from the few-shot baseline table. Test had already been
-examined in earlier experiments, so it is not a previously untouched holdout.
+directory for another experiment.
+
+The three focused unit tests cover transient retries, resume/accounting and calibration
+math/group isolation:
+
+```bash
+.venv/bin/python -m unittest discover -s tests -v
+```
