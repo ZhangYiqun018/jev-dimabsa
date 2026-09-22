@@ -22,8 +22,11 @@ perfect.** It is not a per-dimension error — both dimensions are pooled under 
 
 | System | RMSE_VA |
 |---|---|
+| [PAI](https://aclanthology.org/2026.semeval-1.193/), Qwen3-32B LoRA + Sinkhorn adaptation† | ≈1.0663 |
+| [TeleAI](https://aclanthology.org/2026.semeval-1.233/), Qwen2.5-7B LoRA regression + calibration† | ≈1.0737 |
 | **Jev, 9-shot + shrink calibration\*** | **1.1199** |
 | **Jev, zero-shot + shrink calibration\*** | **1.1395** |
+| [ICT-NLP](https://aclanthology.org/2026.semeval-1.131/), multilingual XLM-R large ensemble† | ≈1.1592 |
 | Kimi-K2, one-shot | 1.8873 |
 | **Jev, 9-shot, valence-stratified** | **2.0736** |
 | GPT-5 mini, one-shot | 2.1552 |
@@ -37,8 +40,13 @@ perfect.** It is not a per-dimension error — both dimensions are pooled under 
 selected on dev, and frozen before test. Few-shot example scores stay unchanged.
 Test was used in earlier experiments. Full protocol and results: [0005](logs/0005-st1-supervised-calibration.md).
 
-Calibration brings matched zero-shot / 9-shot runs from 2.4720 / 2.0731 to
-**1.1395 / 1.1199**; the remaining 9-shot advantage is **0.0196** RMSE.
+† Official ST1 dataset winners: PAI (Russian, Tatar, Ukrainian), TeleAI (both Japanese
+corpora, Chinese laptop), ICT-NLP (Chinese restaurant). Scores are approximate micro
+aggregates reconstructed from the [official overview](https://aclanthology.org/2026.semeval-1.452/),
+Table 6: `√(Σ N_c × RMSE_c² / Σ N_c)`. The competition ranks each corpus, not this aggregate.
+
+Our best run is **0.0536 RMSE** behind PAI on this aggregate; matching it requires a further
+**4.8%** reduction. Methods, per-corpus results and next steps: [SOTA comparison](docs/sota-comparison-2026-09-23.md).
 
 Published baselines: [arXiv:2601.23022](https://arxiv.org/abs/2601.23022), Table 3.
 Earlier experiments, per-corpus scores and costs: [`logs/`](logs/).
