@@ -65,10 +65,14 @@ partly cancel.
   slightly better" from "stratified selection is slightly worse" from "the two are the same".
   What the run does show is that the *choice* of examples contributes at most a few thousandths,
   while their *presence* contributes 0.30.
-- `zho_finance` lost one record and exited 1 on the first pass; it was resumed and re-scored
-  individually. The runner's summary row for that corpus is an `error` row, and its token total
-  is absent from the in-run tally — so the `$0.5797` printed by the runner understates the arm.
-  The table above and the $0.6752 come from re-scoring and re-summing after the resume.
+- `zho_finance` lost one record to a retryable error and `run_st1.py` exited 1. The driver
+  treated any nonzero exit as a dead corpus, so it recorded an `error` row with an empty message
+  (the runner prints per-record errors to stdout, and the driver read stderr) and dropped the
+  corpus's 2,274,292 tokens from the printed tally, which read `$0.5797`. The record was resumed
+  and every number above comes from re-scoring and re-summing afterwards. The driver was then
+  fixed to treat exit 1 as a partial result, resume once, and score what is on disk; its row in
+  `reports/st1_test_summary_s3_stratified.json` was recomputed from the same artifacts and now
+  carries the true token count. The table and `$0.6752` were already correct and are unchanged.
 - `rus_restaurant`, `tat_restaurant` and `ukr_restaurant` are parallel translations with
   identical gold, and they select identical examples under both strategies — three sites that
   vary together, not three independent observations.

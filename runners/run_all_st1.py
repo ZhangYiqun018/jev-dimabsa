@@ -65,16 +65,25 @@ def run_one(language: str, domain: str, split: str, concurrency: int,
     corpus = f"{language}_{domain}"
     pred = REPORTS / f"pred_st1_{corpus}_{split}_{tag_for(shots, strategy)}.jsonl"
 
+    # Exit 1 means some records failed after the client's own retries; every other
+    # record is written and scoring them is valid, so this is not a failed corpus.
+    # Resume (without --restart, which would delete what succeeded) to fill the
+    # gap, then score whatever is on disk. Exit 2 is the runner refusing to resume
+    # across an instrument change, which no retry can fix.
+    base = [PY, str(ROOT / "runners" / "run_st1.py"),
+            "--data", str(source), "--out", str(pred), "--quiet",
+            "--concurrency", str(concurrency), "--shots", str(shots),
+            "--example-selection", strategy]
     started = time.time()
-    run = subprocess.run(
-        [PY, str(ROOT / "runners" / "run_st1.py"),
-         "--data", str(source), "--out", str(pred), "--quiet", "--restart",
-         "--concurrency", str(concurrency), "--shots", str(shots),
-         "--example-selection", strategy],
-        capture_output=True, text=True,
-    )
-    if run.returncode != 0:
-        return {"corpus": corpus, "error": run.stderr.strip()[-300:]}
+    for attempt in range(3):
+        run = subprocess.run(base + (["--restart"] if attempt == 0 else []),
+                             capture_output=True, text=True)
+        if run.returncode == 0:
+            break
+        if run.returncode != 1 or attempt == 2:
+            # The runner prints its per-record errors to stdout, not stderr.
+            detail = (run.stderr.strip() or run.stdout.strip())[-300:]
+            return {"corpus": corpus, "error": f"exit {run.returncode}: {detail}"}
     elapsed = time.time() - started
 
     score = subprocess.run(
@@ -105,7 +114,9 @@ def run_one(language: str, domain: str, split: str, concurrency: int,
         "PCC_V": round(float(metrics["PCC_V"]), 4),
         "PCC_A": round(float(metrics["PCC_A"]), 4),
         "seconds": round(elapsed, 1),
-        "failed": sum(len(r.get("failed", [])) for r in meta.get("runs", [])),
+        # Records still absent after the retries. Summing each run's failures would
+        # double-count a record that failed and then succeeded on a resume.
+        "failed": meta.get("records", 0) - meta.get("records_in_file", 0),
         # usage_total accumulates across resumed runs; never read the last run's
         # fragment, which describes only the records that run happened to add.
         "input_tokens": meta.get("usage_total", {}).get("input_tokens"),
