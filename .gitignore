@@ -1,0 +1,16 @@
+# The DimABSA dataset terms forbid redistribution:
+#   "Datasets must not be redistributed or shared with third parties."
+# So neither the data nor anything embedding its text is committed.
+vendor/
+reports/*.jsonl
+reports/*.jsonl.meta.json
+reports/_gold_*
+reports/social/
+
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+
+# local session config
+.claude/

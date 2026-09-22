@@ -1,0 +1,72 @@
+[
+  {
+    "corpus": "eng_restaurant",
+    "n_gold": 340,
+    "RMSE_VA": 2.252,
+    "PCC_V": 0.9241,
+    "PCC_A": 0.4854
+  },
+  {
+    "corpus": "eng_laptop",
+    "n_gold": 275,
+    "RMSE_VA": 2.6979,
+    "PCC_V": 0.92,
+    "PCC_A": 0.4711
+  },
+  {
+    "corpus": "zho_restaurant",
+    "n_gold": 685,
+    "RMSE_VA": 1.9738,
+    "PCC_V": 0.8699,
+    "PCC_A": 0.5488
+  },
+  {
+    "corpus": "zho_laptop",
+    "n_gold": 558,
+    "RMSE_VA": 1.9984,
+    "PCC_V": 0.8698,
+    "PCC_A": 0.4782
+  },
+  {
+    "corpus": "zho_finance",
+    "n_gold": 563,
+    "RMSE_VA": 2.4753,
+    "PCC_V": 0.8085,
+    "PCC_A": 0.3132
+  },
+  {
+    "corpus": "jpn_hotel",
+    "n_gold": 284,
+    "RMSE_VA": 2.5132,
+    "PCC_V": 0.9375,
+    "PCC_A": 0.4837
+  },
+  {
+    "corpus": "jpn_finance",
+    "n_gold": 319,
+    "RMSE_VA": 3.3416,
+    "PCC_V": 0.8788,
+    "PCC_A": 0.2732
+  },
+  {
+    "corpus": "rus_restaurant",
+    "n_gold": 81,
+    "RMSE_VA": 2.0265,
+    "PCC_V": 0.9054,
+    "PCC_A": 0.4953
+  },
+  {
+    "corpus": "tat_restaurant",
+    "n_gold": 81,
+    "RMSE_VA": 2.2054,
+    "PCC_V": 0.8549,
+    "PCC_A": 0.3258
+  },
+  {
+    "corpus": "ukr_restaurant",
+    "n_gold": 81,
+    "RMSE_VA": 2.0315,
+    "PCC_V": 0.9072,
+    "PCC_A": 0.4924
+  }
+]

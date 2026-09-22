@@ -1,0 +1,246 @@
+{
+  "corpora": [
+    {
+      "corpus": "eng_restaurant",
+      "sizes": {
+        "train": 2284,
+        "dev": 200,
+        "test": 1000
+      },
+      "train_dev_id": 0,
+      "train_test_id": 0,
+      "dev_test_id": 0,
+      "train_dev_text": 1,
+      "train_test_text": 0,
+      "train_test_text_examples": [],
+      "train_dev_text_examples": [
+        {
+          "text": "<redacted>",
+          "train_id": "rest16_quad_dev_120",
+          "dev_id": "rest26_aspect_va_dev_143"
+        }
+      ]
+    },
+    {
+      "corpus": "eng_laptop",
+      "sizes": {
+        "train": 4076,
+        "dev": 200,
+        "test": 1000
+      },
+      "train_dev_id": 0,
+      "train_test_id": 0,
+      "dev_test_id": 0,
+      "train_dev_text": 0,
+      "train_test_text": 0,
+      "train_test_text_examples": [],
+      "train_dev_text_examples": []
+    },
+    {
+      "corpus": "zho_restaurant",
+      "sizes": {
+        "train": 6050,
+        "dev": 300,
+        "test": 1000
+      },
+      "train_dev_id": 0,
+      "train_test_id": 0,
+      "dev_test_id": 0,
+      "train_dev_text": 0,
+      "train_test_text": 0,
+      "train_test_text_examples": [],
+      "train_dev_text_examples": []
+    },
+    {
+      "corpus": "zho_laptop",
+      "sizes": {
+        "train": 3490,
+        "dev": 300,
+        "test": 1000
+      },
+      "train_dev_id": 0,
+      "train_test_id": 0,
+      "dev_test_id": 0,
+      "train_dev_text": 0,
+      "train_test_text": 0,
+      "train_test_text_examples": [],
+      "train_dev_text_examples": []
+    },
+    {
+      "corpus": "zho_finance",
+      "sizes": {
+        "train": 1000,
+        "dev": 200,
+        "test": 842
+      },
+      "train_dev_id": 0,
+      "train_test_id": 0,
+      "dev_test_id": 0,
+      "train_dev_text": 0,
+      "train_test_text": 0,
+      "train_test_text_examples": [],
+      "train_dev_text_examples": []
+    },
+    {
+      "corpus": "jpn_hotel",
+      "sizes": {
+        "train": 1600,
+        "dev": 200,
+        "test": 800
+      },
+      "train_dev_id": 0,
+      "train_test_id": 0,
+      "dev_test_id": 0,
+      "train_dev_text": 2,
+      "train_test_text": 23,
+      "train_test_text_examples": [
+        {
+          "text": "<redacted>",
+          "train_id": "hotel_quad_train_365",
+          "test_id": "hotel26_aspect_va_test_229"
+        },
+        {
+          "text": "<redacted>",
+          "train_id": "hotel_quad_train_881",
+          "test_id": "hotel26_aspect_va_test_27"
+        },
+        {
+          "text": "<redacted>",
+          "train_id": "hotel_quad_train_1024",
+          "test_id": "hotel26_aspect_va_test_292"
+        }
+      ],
+      "train_dev_text_examples": [
+        {
+          "text": "<redacted>",
+          "train_id": "hotel_quad_train_86",
+          "dev_id": "hotel26_aspect_va_dev_27"
+        },
+        {
+          "text": "<redacted>",
+          "train_id": "hotel_quad_train_1285",
+          "dev_id": "hotel26_aspect_va_dev_9"
+        }
+      ]
+    },
+    {
+      "corpus": "jpn_finance",
+      "sizes": {
+        "train": 1024,
+        "dev": 200,
+        "test": 800
+      },
+      "train_dev_id": 0,
+      "train_test_id": 0,
+      "dev_test_id": 0,
+      "train_dev_text": 0,
+      "train_test_text": 0,
+      "train_test_text_examples": [],
+      "train_dev_text_examples": []
+    },
+    {
+      "corpus": "rus_restaurant",
+      "sizes": {
+        "train": 1240,
+        "dev": 56,
+        "test": 1072
+      },
+      "train_dev_id": 0,
+      "train_test_id": 0,
+      "dev_test_id": 0,
+      "train_dev_text": 0,
+      "train_test_text": 0,
+      "train_test_text_examples": [],
+      "train_dev_text_examples": []
+    },
+    {
+      "corpus": "tat_restaurant",
+      "sizes": {
+        "train": 1240,
+        "dev": 56,
+        "test": 1072
+      },
+      "train_dev_id": 0,
+      "train_test_id": 0,
+      "dev_test_id": 0,
+      "train_dev_text": 0,
+      "train_test_text": 2,
+      "train_test_text_examples": [
+        {
+          "text": "<redacted>",
+          "train_id": "16151:19_639",
+          "test_id": "14209:10_485"
+        },
+        {
+          "text": "<redacted>",
+          "train_id": "20417:24_872",
+          "test_id": "10833:3_216"
+        }
+      ],
+      "train_dev_text_examples": []
+    },
+    {
+      "corpus": "ukr_restaurant",
+      "sizes": {
+        "train": 1240,
+        "dev": 56,
+        "test": 1072
+      },
+      "train_dev_id": 0,
+      "train_test_id": 0,
+      "dev_test_id": 0,
+      "train_dev_text": 0,
+      "train_test_text": 0,
+      "train_test_text_examples": [],
+      "train_dev_text_examples": []
+    }
+  ],
+  "trial": [
+    {
+      "file": "eng_restaurant_trial_alltasks.jsonl",
+      "n": 20,
+      "appears_in": [
+        {
+          "corpus": "eng_restaurant",
+          "split": "train",
+          "id_hits": 20,
+          "text_hits": 20
+        }
+      ]
+    },
+    {
+      "file": "ger_stance_trial_task1task2.jsonl",
+      "n": 44,
+      "appears_in": []
+    },
+    {
+      "file": "rus_restaurant_trial_alltasks.jsonl",
+      "n": 38,
+      "appears_in": []
+    },
+    {
+      "file": "zho_laptop_trial_alltasks.jsonl",
+      "n": 20,
+      "appears_in": [
+        {
+          "corpus": "zho_laptop",
+          "split": "train",
+          "id_hits": 20,
+          "text_hits": 20
+        }
+      ]
+    },
+    {
+      "file": "zho_restaurant_trial_alltasks.jsonl",
+      "n": 20,
+      "appears_in": [
+        {
+          "corpus": "zho_restaurant",
+          "split": "train",
+          "id_hits": 20,
+          "text_hits": 20
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+[
+  {
+    "corpus": "eng_restaurant",
+    "error": ""
+  },
+  {
+    "corpus": "eng_laptop",
+    "n_gold": 1421,
+    "RMSE_VA": 2.7153,
+    "PCC_V": 0.8886,
+    "PCC_A": 0.4219,
+    "seconds": 67.6,
+    "failed": 0,
+    "input_tokens": 1375904,
+    "model": "jev-1.13.0",
+    "rubric": "bcf1bcac3b09"
+  },
+  {
+    "corpus": "zho_restaurant",
+    "n_gold": 1929,
+    "RMSE_VA": 2.0736,
+    "PCC_V": 0.8498,
+    "PCC_A": 0.406,
+    "seconds": 66.9,
+    "failed": 0,
+    "input_tokens": 1703440,
+    "model": "jev-1.13.0",
+    "rubric": "bcf1bcac3b09"
+  },
+  {
+    "corpus": "zho_laptop",
+    "n_gold": 1673,
+    "RMSE_VA": 1.8503,
+    "PCC_V": 0.8894,
+    "PCC_A": 0.5357,
+    "seconds": 66.6,
+    "failed": 0,
+    "input_tokens": 1579538,
+    "model": "jev-1.13.0",
+    "rubric": "bcf1bcac3b09"
+  },
+  {
+    "corpus": "zho_finance",
+    "n_gold": 2354,
+    "RMSE_VA": 2.2657,
+    "PCC_V": 0.8136,
+    "PCC_A": 0.4444,
+    "seconds": 59.1,
+    "failed": 0,
+    "input_tokens": 2233876,
+    "model": "jev-1.13.0",
+    "rubric": "bcf1bcac3b09"
+  },
+  {
+    "corpus": "jpn_hotel",
+    "n_gold": 1092,
+    "RMSE_VA": 2.1906,
+    "PCC_V": 0.9437,
+    "PCC_A": 0.6292,
+    "seconds": 52.8,
+    "failed": 0,
+    "input_tokens": 1122173,
+    "model": "jev-1.13.0",
+    "rubric": "bcf1bcac3b09"
+  },
+  {
+    "corpus": "jpn_finance",
+    "n_gold": 1302,
+    "RMSE_VA": 2.5357,
+    "PCC_V": 0.9155,
+    "PCC_A": 0.3323,
+    "seconds": 55.9,
+    "failed": 0,
+    "input_tokens": 1452326,
+    "model": "jev-1.13.0",
+    "rubric": "bcf1bcac3b09"
+  },
+  {
+    "corpus": "rus_restaurant",
+    "n_gold": 1637,
+    "RMSE_VA": 1.8165,
+    "PCC_V": 0.9255,
+    "PCC_A": 0.5493,
+    "seconds": 70.4,
+    "failed": 0,
+    "input_tokens": 1647694,
+    "model": "jev-1.13.0",
+    "rubric": "bcf1bcac3b09"
+  },
+  {
+    "corpus": "tat_restaurant",
+    "n_gold": 1637,
+    "RMSE_VA": 1.9505,
+    "PCC_V": 0.8809,
+    "PCC_A": 0.4962,
+    "seconds": 70.6,
+    "failed": 0,
+    "input_tokens": 1726894,
+    "model": "jev-1.13.0",
+    "rubric": "bcf1bcac3b09"
+  },
+  {
+    "corpus": "ukr_restaurant",
+    "error": ""
+  }
+]
