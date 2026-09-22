@@ -32,7 +32,7 @@ against gold; the text block moved it by 0.165 and increased error. Structured s
 | rus_restaurant | 1637 | 1.8165 | 2.1613 | −0.3448 | 0.9255 | 0.5493 |
 | tat_restaurant | 1637 | 1.9505 | 2.3989 | −0.4484 | 0.8809 | 0.4962 |
 | ukr_restaurant | 1637 | 1.8441 | 2.1665 | −0.3224 | 0.9192 | 0.5394 |
-| **micro (N=16,186)** | 9658 | **2.1721** | 2.4708 | **−0.2987** | | |
+| **micro (N=16,186)** | 9658 | **2.1721** | 2.4708 | **−0.2987** | 0.8943 | 0.4895 |
 
 All 10 corpora improved. Against published baselines on the same split: 7/10 corpora now beat
 Kimi-K2 zero-shot (2.3849), one more than at zero-shot; still 0/10 against Kimi-K2 one-shot
@@ -51,6 +51,12 @@ one-shot (2.1552).
 ## Observed
 
 - `eng_restaurant` and `ukr_restaurant` each lost one record to HTTP 529 and were resumed.
+  Because `run_st1.py` exits 1 when any record failed, the driver recorded both as `error` rows
+  with empty messages and dropped their tokens from the tally it printed — it printed `$0.5394`
+  for a run that cost `$0.6700`. The numbers in this entry were computed from the prediction
+  files and their metadata, not from that tally, so they were unaffected; the two rows in
+  `reports/st1_test_summary_s3.json` were wrong and have been recomputed from the same
+  artifacts. The driver was fixed afterwards, in the entry for [0003](0003-st1-few-shot-n3-stratified.md).
 - The example set is frozen per corpus; `n=3` selects the first 3 train records and, for every
   corpus, the leak filter excluded nothing at that depth.
 - `PCC_A` rose on 9/10 corpora (mean 0.4531 → 0.4895) but remains far below `PCC_V`

@@ -43,11 +43,27 @@ Everything from [0002](0002-st1-few-shot-n3.md) except how the 3 examples are pi
 | rus_restaurant | 1637 | 1.7618 | 1.8165 | −0.0547 | 0.9240 | 0.5538 |
 | tat_restaurant | 1637 | 1.9126 | 1.9505 | −0.0380 | 0.8703 | 0.4992 |
 | ukr_restaurant | 1637 | 1.7837 | 1.8441 | −0.0604 | 0.9215 | 0.5460 |
-| **micro (N=16,186)** | 16186 | **2.1628** | 2.1721 | **−0.0093** | | |
+| **micro (N=16,186)** | 16186 | **2.1628** | 2.1721 | **−0.0093** | 0.8937 | 0.4801 |
+
+RMSE is micro, weighted by gold entry count. The `PCC` columns are per corpus in each row and
+the mean of those ten values in the micro row.
 
 6/10 corpora better, 4/10 worse. The micro delta is −0.0093, which is 3% of the −0.2987 that
 adding examples at all is worth (0001 → 0002); per-corpus deltas range −0.0894 to +0.0914 and
 partly cancel.
+
+The same three arms on both correlation metrics, macro-averaged over the 10 corpora:
+
+| arm | RMSE_VA | PCC_V | PCC_A |
+|---|---:|---:|---:|
+| zero-shot (0001) | 2.4708 | 0.8888 | 0.4531 |
+| 3-shot (0002) | 2.1721 | 0.8943 | 0.4895 |
+| 3-shot stratified (this run) | 2.1628 | 0.8937 | 0.4801 |
+
+`PCC_V` is already 0.89 at zero-shot and moves 0.0055 across all three arms; `PCC_A` is 0.45 at
+zero-shot, gains 0.0364 from examples, and trails `PCC_V` by 0.41 at 3-shot. The two metrics
+measure different things — `PCC` is order agreement, `RMSE_VA` is the size of the value error —
+so these columns do not attribute the `RMSE_VA` change to either dimension.
 
 ## Cost
 

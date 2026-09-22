@@ -13,30 +13,34 @@ No GPU and no fine-tuning. One API key and about an hour.
 
 ## Result — Subtask 1 (DimASR), official test split
 
-RMSE_VA, lower is better, official scorer with `--do_norm` **off**. Micro average is weighted
-by gold entry count (N = 16,186).
+Official scorer, `--do_norm` **off**. Micro average, weighted by gold entry count (N = 16,186),
+best first.
+
+`RMSE_VA` is the root mean squared error of the predicted valence–arousal pair against gold,
+`√(mean(Δvalence² + Δarousal²))`, in the same units as the 1–9 scale. **Lower is better; 0 is
+perfect.** It is not a per-dimension error — both dimensions are pooled under one root.
 
 | System | RMSE_VA |
 |---|---|
-| GPT-5 mini, zero-shot | 2.7439 |
-| **Jev, zero-shot** | **2.4708** |
-| Kimi-K2, zero-shot | 2.3849 |
-| **Jev, 3-shot** | **2.1721** |
-| **Jev, 3-shot, valence-stratified** | **2.1628** |
-| Qwen3-14B, QLoRA fine-tuned | 2.1841 |
-| GPT-5 mini, one-shot | 2.1552 |
 | Kimi-K2, one-shot | 1.8873 |
+| GPT-5 mini, one-shot | 2.1552 |
+| **Jev, 3-shot, valence-stratified** | **2.1628** |
+| **Jev, 3-shot** | **2.1721** |
+| Qwen3-14B, QLoRA fine-tuned | 2.1841 |
+| Kimi-K2, zero-shot | 2.3849 |
+| **Jev, zero-shot** | **2.4708** |
+| GPT-5 mini, zero-shot | 2.7439 |
 
 Baseline figures are from the dataset paper, [arXiv:2601.23022](https://arxiv.org/abs/2601.23022),
 Table 3. Three in-context examples move Jev **−0.2987** and take it from 3/10 to 7/10 corpora
 ahead of Kimi-K2 zero-shot. It remains **+0.2847** behind Kimi-K2 one-shot.
 
-The last Jev row picks the examples to span the 1–9 scale rather than taking the first 3 train
-records. It is worth **−0.0093**, 3% of what adding examples is worth, and is not distinguishable
-from zero: the micro-level noise floor of this metric was not measured. Which examples are used
-barely matters; having any does.
+The stratified Jev row picks the examples to span the 1–9 scale rather than taking the first 3
+train records. It is worth **−0.0093**, 3% of what adding examples is worth, and is not
+distinguishable from zero: the micro-level noise floor of this metric was not measured. Which
+examples are used barely matters; having any does.
 
-Per-corpus numbers and run configuration: [`logs/`](logs/).
+Per-corpus numbers, correlation metrics, and run configuration: [`logs/`](logs/).
 
 ## Dataset
 
@@ -127,5 +131,7 @@ drops nothing; at larger `k` it matters.
 
 - **Jev is not deterministic.** Repeated calls on identical input differ by roughly 0.04 per
   dimension. Differences below that are not evidence of anything.
-- Arousal stays under-predicted even with examples (`PCC_A` ≈ 0.49 against `PCC_V` ≈ 0.89).
+- Arousal stays under-predicted even with examples. `PCC_A` ≈ 0.49 against `PCC_V` ≈ 0.89
+  (Pearson correlation per dimension; higher is better, 1 is perfect) — Jev orders valence well
+  and arousal badly. Per-corpus values are in the logs.
 - Only Subtask 1 is implemented.

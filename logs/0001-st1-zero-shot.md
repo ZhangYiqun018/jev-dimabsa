@@ -25,9 +25,12 @@
 | rus_restaurant | 1637 | 2.1613 | 0.9149 | 0.4918 |
 | tat_restaurant | 1637 | 2.3989 | 0.8350 | 0.4173 |
 | ukr_restaurant | 1637 | 2.1665 | 0.9076 | 0.4874 |
-| **micro (N=16,186)** | 9658 | **2.4708** | | |
+| **micro (N=16,186)** | 9658 | **2.4708** | 0.8888 | 0.4531 |
 
-Weighted by gold entry count. Against published baselines on the same split: Kimi-K2
+RMSE is micro, weighted by gold entry count. The `PCC` columns are per corpus in each row and
+the mean of those ten values in the micro row — Pearson does not pool the way RMSE does.
+
+Against published baselines on the same split: Kimi-K2
 zero-shot 2.3849 (ahead on 3/10 corpora), GPT-5 mini zero-shot 2.7439 (ahead on 9/10),
 Kimi-K2 one-shot 1.8873, Qwen3-14B QLoRA 2.1841.
 

@@ -1,7 +1,15 @@
 [
   {
     "corpus": "eng_restaurant",
-    "error": ""
+    "n_gold": 1504,
+    "RMSE_VA": 2.4426,
+    "PCC_V": 0.9168,
+    "PCC_A": 0.5409,
+    "seconds": 74.7,
+    "failed": 0,
+    "input_tokens": 1431390,
+    "model": "jev-1.13.0",
+    "rubric": "bcf1bcac3b09"
   },
   {
     "corpus": "eng_laptop",
@@ -101,6 +109,14 @@
   },
   {
     "corpus": "ukr_restaurant",
-    "error": ""
+    "n_gold": 1637,
+    "RMSE_VA": 1.8441,
+    "PCC_V": 0.9192,
+    "PCC_A": 0.5394,
+    "seconds": 71.7,
+    "failed": 0,
+    "input_tokens": 1678645,
+    "model": "jev-1.13.0",
+    "rubric": "bcf1bcac3b09"
   }
 ]
