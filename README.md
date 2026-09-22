@@ -1,11 +1,13 @@
 # Jev on DimABSA — Subtask 1 baseline
 
-A **TypeSafe Jev** (System One) baseline for [DimABSA](https://github.com/DimABSA/DimABSA2026),
-the dimensional aspect-based sentiment analysis task from SemEval-2026 Task 3.
+A **[TypeSafe Jev](https://typesafe.ai)** (System One) baseline for
+[DimABSA](https://github.com/DimABSA/DimABSA2026), the dimensional aspect-based sentiment
+analysis task from SemEval-2026 Task 3.
 
 DimABSA replaces categorical polarity with continuous **valence–arousal (VA) scores on a
-1.00–9.00 scale**. Jev's `Score` primitive returns a continuous probability-weighted position
-on a described scale, so the task maps onto it without any text generation or output parsing.
+1.00–9.00 scale**. Jev's [`Score`](https://docs.typesafe.ai/primitives/score) primitive returns
+a continuous probability-weighted position on a described scale, so the task maps onto it
+without any text generation or output parsing.
 
 No GPU and no fine-tuning. One API key and about an hour.
 
@@ -20,6 +22,7 @@ by gold entry count (N = 16,186).
 | **Jev, zero-shot** | **2.4708** |
 | Kimi-K2, zero-shot | 2.3849 |
 | **Jev, 3-shot** | **2.1721** |
+| **Jev, 3-shot, valence-stratified** | **2.1628** |
 | Qwen3-14B, QLoRA fine-tuned | 2.1841 |
 | GPT-5 mini, one-shot | 2.1552 |
 | Kimi-K2, one-shot | 1.8873 |
@@ -27,6 +30,11 @@ by gold entry count (N = 16,186).
 Baseline figures are from the dataset paper, [arXiv:2601.23022](https://arxiv.org/abs/2601.23022),
 Table 3. Three in-context examples move Jev **−0.2987** and take it from 3/10 to 7/10 corpora
 ahead of Kimi-K2 zero-shot. It remains **+0.2847** behind Kimi-K2 one-shot.
+
+The last Jev row picks the examples to span the 1–9 scale rather than taking the first 3 train
+records. It is worth **−0.0093**, 3% of what adding examples is worth, and is not distinguishable
+from zero: the micro-level noise floor of this metric was not measured. Which examples are used
+barely matters; having any does.
 
 Per-corpus numbers and run configuration: [`logs/`](logs/).
 
@@ -84,16 +92,30 @@ export TYPESAFE_API_KEY=...          # the client also reads ~/.zshrc
 .venv/bin/python runners/run_all_st1.py --split test --shots 3 --concurrency 10
 ```
 
+An API key comes from the [TypeSafe console](https://console.typesafe.ai/); the model is served
+at `https://api.typesafe.ai/v1/systemone`. Primitive and request-shape docs:
+<https://docs.typesafe.ai/introduction>.
+
 `scipy` is needed only by the official scorer, for its Pearson correlation. Predictions are
 appended as each sentence completes, so an interrupted run resumes by ID; the client retries
 rate limits and 5xx with backoff.
 
 ## Few-shot examples
 
-Examples come only from the **train** split of the same corpus — the official rule is *"the
-first k samples in the training set"*. They are frozen per corpus: the same records are used
-for every request in a run, recorded by ID in the run metadata, and never re-picked because a
-prediction came out badly.
+Examples come only from the **train** split of the same corpus. They are frozen per corpus: the
+same records are used for every request in a run, recorded by ID in the run metadata, and never
+re-picked because a prediction came out badly. `--shots N` sets how many (default 3; `0` is the
+zero-shot control).
+
+`--example-selection` picks which:
+
+- `first-k` (default) — the first N train records, matching the official rule *"the first k
+  samples in the training set"*. This is the arm to compare against the published baselines.
+- `stratified` — the earliest non-leaking record in each equal-width band of the 1–9 scale, so
+  the examples span the scale instead of clustering wherever the file happens to start.
+
+Both take at most one example per record. The two arms differ by 0.0093 micro RMSE — see
+[0003](logs/0003-st1-few-shot-n3-stratified.md).
 
 `tools/leakage_audit.py` found that ID sets are disjoint across splits but **sentence text is
 not** — `jpn_hotel` reuses 23 sentences between train and test, `tat_restaurant` 2, and

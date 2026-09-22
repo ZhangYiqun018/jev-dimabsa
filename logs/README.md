@@ -40,3 +40,4 @@ facts only — anything a reader needs to not misread the table
 |---|---|---|---|
 | [0001](0001-st1-zero-shot.md) | Subtask 1, zero-shot | 2.4708 | $0.4588 |
 | [0002](0002-st1-few-shot-n3.md) | Subtask 1, 3-shot calibration | 2.1721 | $0.6700 |
+| [0003](0003-st1-few-shot-n3-stratified.md) | Subtask 1, 3-shot, valence-stratified examples | 2.1628 | $0.6752 |

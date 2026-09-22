@@ -123,6 +123,10 @@ def main() -> int:
     parser.add_argument("--restart", action="store_true", help="ignore existing output")
     parser.add_argument("--shots", type=int, default=3,
                         help="in-context calibration examples per request (0 = zero-shot)")
+    parser.add_argument("--example-selection", default="first-k",
+                        choices=["first-k", "stratified"],
+                        help="first-k = official protocol; stratified = one example "
+                             "per equal-width band of the 1-9 scale")
     args = parser.parse_args()
 
     records = load_jsonl(args.data)
@@ -130,7 +134,8 @@ def main() -> int:
         records = records[: args.limit]
 
     language, domain = corpus_of(args.data)
-    examples = load_examples(language, domain, args.shots)
+    examples = load_examples(language, domain, args.shots,
+                             strategy=args.example_selection)
 
     out = Path(args.out)
     meta_path = Path(str(out) + ".meta.json")
@@ -158,6 +163,14 @@ def main() -> int:
                 print(
                     f"refusing to resume: {out} was produced with shots={previous_shots}, "
                     f"this run uses shots={args.shots}. Re-run with --restart.",
+                    file=sys.stderr,
+                )
+                return 2
+            previous_strategy = previous_meta.get("example_set", {}).get("strategy")
+            if previous_strategy is not None and previous_strategy != args.example_selection:
+                print(
+                    f"refusing to resume: {out} used example strategy {previous_strategy}, "
+                    f"this run uses {args.example_selection}. Re-run with --restart.",
                     file=sys.stderr,
                 )
                 return 2

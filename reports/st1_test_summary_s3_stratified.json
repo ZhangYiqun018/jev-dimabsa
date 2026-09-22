@@ -1,0 +1,114 @@
+[
+  {
+    "corpus": "eng_restaurant",
+    "n_gold": 1504,
+    "RMSE_VA": 2.4893,
+    "PCC_V": 0.919,
+    "PCC_A": 0.5226,
+    "seconds": 67.8,
+    "failed": 0,
+    "input_tokens": 1423390,
+    "model": "jev-1.13.0",
+    "rubric": "7822495a335f"
+  },
+  {
+    "corpus": "eng_laptop",
+    "n_gold": 1421,
+    "RMSE_VA": 2.7383,
+    "PCC_V": 0.8902,
+    "PCC_A": 0.383,
+    "seconds": 65.3,
+    "failed": 0,
+    "input_tokens": 1383904,
+    "model": "jev-1.13.0",
+    "rubric": "7822495a335f"
+  },
+  {
+    "corpus": "zho_restaurant",
+    "n_gold": 1929,
+    "RMSE_VA": 2.0436,
+    "PCC_V": 0.8504,
+    "PCC_A": 0.4063,
+    "seconds": 66.7,
+    "failed": 0,
+    "input_tokens": 1712440,
+    "model": "jev-1.13.0",
+    "rubric": "7822495a335f"
+  },
+  {
+    "corpus": "zho_laptop",
+    "n_gold": 1673,
+    "RMSE_VA": 1.9417,
+    "PCC_V": 0.8891,
+    "PCC_A": 0.5291,
+    "seconds": 67.3,
+    "failed": 0,
+    "input_tokens": 1774538,
+    "model": "jev-1.13.0",
+    "rubric": "7822495a335f"
+  },
+  {
+    "corpus": "zho_finance",
+    "error": ""
+  },
+  {
+    "corpus": "jpn_hotel",
+    "n_gold": 1092,
+    "RMSE_VA": 2.1916,
+    "PCC_V": 0.9434,
+    "PCC_A": 0.6273,
+    "seconds": 53.4,
+    "failed": 0,
+    "input_tokens": 1122173,
+    "model": "jev-1.13.0",
+    "rubric": "7822495a335f"
+  },
+  {
+    "corpus": "jpn_finance",
+    "n_gold": 1302,
+    "RMSE_VA": 2.4463,
+    "PCC_V": 0.9147,
+    "PCC_A": 0.2942,
+    "seconds": 54.2,
+    "failed": 0,
+    "input_tokens": 1409926,
+    "model": "jev-1.13.0",
+    "rubric": "7822495a335f"
+  },
+  {
+    "corpus": "rus_restaurant",
+    "n_gold": 1637,
+    "RMSE_VA": 1.7618,
+    "PCC_V": 0.924,
+    "PCC_A": 0.5538,
+    "seconds": 70.1,
+    "failed": 0,
+    "input_tokens": 1629470,
+    "model": "jev-1.13.0",
+    "rubric": "7822495a335f"
+  },
+  {
+    "corpus": "tat_restaurant",
+    "n_gold": 1637,
+    "RMSE_VA": 1.9126,
+    "PCC_V": 0.8703,
+    "PCC_A": 0.4992,
+    "seconds": 70.9,
+    "failed": 0,
+    "input_tokens": 1689374,
+    "model": "jev-1.13.0",
+    "rubric": "7822495a335f"
+  },
+  {
+    "corpus": "ukr_restaurant",
+    "n_gold": 1637,
+    "RMSE_VA": 1.7837,
+    "PCC_V": 0.9215,
+    "PCC_A": 0.546,
+    "seconds": 73.5,
+    "failed": 0,
+    "input_tokens": 1657205,
+    "model": "jev-1.13.0",
+    "rubric": "7822495a335f"
+  }
+]

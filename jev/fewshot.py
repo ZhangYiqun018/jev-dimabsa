@@ -13,8 +13,11 @@ but **Text is not**: `jpn_hotel` reuses 23 sentences between train and test,
 prompt. Every candidate is therefore dropped if its normalised Text (or its ID)
 also occurs in the dev or test split being evaluated.
 
-The official protocol is *"the first k samples in the training set"*; the only
-departure here is skipping records that collide with the evaluation split.
+The official protocol is *"the first k samples in the training set"*; `first-k`
+departs from it only by skipping records that collide with the evaluation split.
+`stratified` departs further by not being the first k at all -- it is a separate
+arm, run alongside `first-k` rather than replacing it, so results stay comparable
+to the official baseline.
 """
 
 from __future__ import annotations
@@ -76,6 +79,7 @@ class ExampleSet:
     corpus: str
     examples: list[Example] = field(default_factory=list)
     n_requested: int = 0
+    strategy: str = "first-k"
     skipped_leak: list[str] = field(default_factory=list)
 
     @property
@@ -88,8 +92,11 @@ class ExampleSet:
     @property
     def ids_for_meta(self) -> dict:
         return {
+            "strategy": self.strategy,
             "examples": self.source_ids,
+            "valences": [round(e.valence, 2) for e in self.examples],
             "n_requested": self.n_requested,
+            "n_selected": len(self.examples),
             "skipped_as_leaking": self.skipped_leak,
         }
 
@@ -98,22 +105,8 @@ def _aspects_of(record: dict) -> list[dict]:
     return record.get("Aspect_VA") or record.get("Quadruplet") or record.get("Triplet") or []
 
 
-def load_examples(
-    lang: str,
-    domain: str,
-    n: int,
-    exclude_splits: tuple[str, ...] = ("dev", "test"),
-) -> ExampleSet:
-    """First `n` train records that carry an aspect and do not leak an eval item.
-
-    Each record contributes one example per aspect it contains, so a record with
-    two aspects yields two examples.
-    """
-    corpus = f"{lang}_{domain}"
-    result = ExampleSet(corpus=corpus, n_requested=n)
-    if n <= 0:
-        return result
-
+def _candidates(lang: str, domain: str, exclude_splits: tuple[str, ...]) -> tuple[list[Example], list[str]]:
+    """Every non-leaking (record, aspect) pair in the train split, in file order."""
     banned_ids: set[str] = set()
     banned_text: set[str] = set()
     for split in exclude_splits:
@@ -121,18 +114,15 @@ def load_examples(
             banned_ids.add(record["ID"])
             banned_text.add(normalise(record.get("Text", "")))
 
+    candidates: list[Example] = []
+    skipped: list[str] = []
     for record in load_jsonl(train_path(lang, domain)):
-        if len(result.examples) >= n:
-            break
-        aspects = _aspects_of(record)
-        if not aspects:
-            continue
         if record["ID"] in banned_ids or normalise(record.get("Text", "")) in banned_text:
-            result.skipped_leak.append(record["ID"])
+            skipped.append(record["ID"])
             continue
-        for item in aspects[:1]:  # one example per record, matching "first k samples"
+        for item in _aspects_of(record):
             valence, arousal = (float(x) for x in item["VA"].split("#"))
-            result.examples.append(
+            candidates.append(
                 Example(
                     source_id=record["ID"],
                     review=record["Text"],
@@ -141,6 +131,87 @@ def load_examples(
                     arousal=arousal,
                 )
             )
+    return candidates, skipped
+
+
+def _select_stratified(candidates: list[Example], n: int) -> list[Example]:
+    """One example per equal-width band of the 1-9 scale, records kept distinct.
+
+    Examples exist to calibrate a 1-9 scale, which the first n train records do
+    not guarantee -- that slice can land entirely at one end. Bands are cut over
+    the *scale*, not over the data: the train valence distribution is strongly
+    positive-skewed, so quantile bands would put two of three examples above 6.5
+    and change almost nothing.
+
+    At most one example per record, the same constraint `first-k` applies; without
+    it a single multi-aspect review can fill every band on its own.
+    """
+    edges = [1.0 + 8.0 * (k + 1) / n for k in range(n - 1)]
+
+    def band(value: float) -> int:
+        return sum(1 for edge in edges if value >= edge)
+
+    chosen: list[Example] = []
+    used_records: set[str] = set()
+    for target in range(n):
+        for candidate in candidates:
+            if candidate.source_id in used_records:
+                continue
+            if band(candidate.valence) == target:
+                chosen.append(candidate)
+                used_records.add(candidate.source_id)
+                break
+    # A band can be empty -- no train review may sit at that end of the scale.
+    # Top up in file order rather than returning fewer than n examples.
+    for candidate in candidates:
+        if len(chosen) >= n:
+            break
+        if candidate.source_id not in used_records:
+            chosen.append(candidate)
+            used_records.add(candidate.source_id)
+    return chosen[:n]
+
+
+def load_examples(
+    lang: str,
+    domain: str,
+    n: int,
+    exclude_splits: tuple[str, ...] = ("dev", "test"),
+    strategy: str = "first-k",
+) -> ExampleSet:
+    """`n` calibration examples from the train split of this corpus.
+
+    One example per record, so `n` is both the record count and the example count.
+
+    `strategy`:
+      - ``"first-k"`` — the first `n` records, matching the official protocol
+        (*"the first k samples in the training set"*).
+      - ``"stratified"`` — one example per equal-width band of the 1-9 scale, so
+        the set spans the scale instead of landing wherever the file happens to
+        start.
+    """
+    corpus = f"{lang}_{domain}"
+    result = ExampleSet(corpus=corpus, n_requested=n, strategy=strategy)
+    if n <= 0:
+        return result
+
+    candidates, skipped = _candidates(lang, domain, exclude_splits)
+    result.skipped_leak = skipped
+
+    if strategy == "stratified":
+        result.examples = _select_stratified(candidates, n)
+        return result
+    if strategy != "first-k":
+        raise ValueError(f"unknown strategy {strategy!r}")
+
+    seen_records: set[str] = set()
+    for candidate in candidates:
+        if len(result.examples) >= n:
+            break
+        if candidate.source_id in seen_records:
+            continue
+        seen_records.add(candidate.source_id)
+        result.examples.append(candidate)
     return result
 
 

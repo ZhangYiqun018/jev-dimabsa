@@ -54,21 +54,27 @@ def source_file(language: str, domain: str, split: str) -> Path:
             / f"{language}_{domain}_{split}_task1.jsonl")
 
 
-def run_one(language: str, domain: str, split: str, concurrency: int, shots: int) -> dict:
+def tag_for(shots: int, strategy: str) -> str:
+    """Short suffix distinguishing runs, so configurations cannot clobber each other."""
+    return f"s{shots}" if strategy == "first-k" else f"s{shots}_{strategy}"
+
+
+def run_one(language: str, domain: str, split: str, concurrency: int,
+            shots: int, strategy: str) -> dict:
     source = source_file(language, domain, split)
-    tag = f"{language}_{domain}"
-    # Tagged by shot count so n=0 and n=3 runs cannot clobber each other.
-    pred = REPORTS / f"pred_st1_{tag}_{split}_s{shots}.jsonl"
+    corpus = f"{language}_{domain}"
+    pred = REPORTS / f"pred_st1_{corpus}_{split}_{tag_for(shots, strategy)}.jsonl"
 
     started = time.time()
     run = subprocess.run(
         [PY, str(ROOT / "runners" / "run_st1.py"),
          "--data", str(source), "--out", str(pred), "--quiet", "--restart",
-         "--concurrency", str(concurrency), "--shots", str(shots)],
+         "--concurrency", str(concurrency), "--shots", str(shots),
+         "--example-selection", strategy],
         capture_output=True, text=True,
     )
     if run.returncode != 0:
-        return {"corpus": tag, "error": run.stderr.strip()[-300:]}
+        return {"corpus": corpus, "error": run.stderr.strip()[-300:]}
     elapsed = time.time() - started
 
     score = subprocess.run(
@@ -78,7 +84,7 @@ def run_one(language: str, domain: str, split: str, concurrency: int, shots: int
     )
     match = RESULTS_RE.search(score.stdout)
     if not match:
-        return {"corpus": tag, "error": (score.stdout + score.stderr).strip()[-300:]}
+        return {"corpus": corpus, "error": (score.stdout + score.stderr).strip()[-300:]}
 
     # The official script prints a Python dict repr, not JSON: single quotes and
     # np.float64(...) wrappers. Strip the wrappers and literal_eval it.
@@ -93,7 +99,7 @@ def run_one(language: str, domain: str, split: str, concurrency: int, shots: int
             n_gold += len(json.loads(line).get("Aspect_VA", []))
 
     return {
-        "corpus": tag,
+        "corpus": corpus,
         "n_gold": n_gold,
         "RMSE_VA": round(float(metrics["RMSE_VA"]), 4),
         "PCC_V": round(float(metrics["PCC_V"]), 4),
@@ -114,18 +120,21 @@ def main() -> int:
     parser.add_argument("--concurrency", type=int, default=8)
     parser.add_argument("--shots", type=int, default=3,
                         help="in-context calibration examples (0 = zero-shot control)")
+    parser.add_argument("--example-selection", default="first-k",
+                        choices=["first-k", "stratified"])
     args = parser.parse_args()
 
     REPORTS.mkdir(parents=True, exist_ok=True)
     rows = []
     for language, domain in CORPORA:
-        tag = f"{language}_{domain}"
-        print(f"\n{'=' * 70}\n{tag}  [{args.split}, shots={args.shots}]\n{'=' * 70}",
-              flush=True)
-        row = run_one(language, domain, args.split, args.concurrency, args.shots)
+        corpus = f"{language}_{domain}"
+        print(f"\n{'=' * 70}\n{corpus}  [{args.split}, shots={args.shots}, "
+              f"{args.example_selection}]\n{'=' * 70}", flush=True)
+        row = run_one(language, domain, args.split, args.concurrency,
+                      args.shots, args.example_selection)
         rows.append(row)
         print(json.dumps(row, indent=2), flush=True)
-        (REPORTS / f"st1_{args.split}_summary_s{args.shots}.json").write_text(
+        (REPORTS / f"st1_{args.split}_summary_{tag_for(args.shots, args.example_selection)}.json").write_text(
             json.dumps(rows, indent=2) + "\n")
 
     show_official = args.split == "test"
