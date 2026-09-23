@@ -1,8 +1,9 @@
-# Jev on DimABSA — Subtask 1 baseline
+# Jev on DimABSA — Task 1 & Task 2 baselines
 
 A **[TypeSafe Jev](https://typesafe.ai)** (System One) baseline for
 [DimABSA](https://github.com/DimABSA/DimABSA2026), the dimensional aspect-based sentiment
-analysis task from SemEval-2026 Task 3.
+analysis task from SemEval-2026 Task 3. Task 1 scores given aspects; Task 2 extracts
+aspect–opinion pairs and scores their sentiment.
 
 DimABSA replaces categorical polarity with continuous **valence–arousal (VA) scores on a
 1.00–9.00 scale**. Jev's [`Score`](https://docs.typesafe.ai/primitives/score) primitive returns
@@ -79,7 +80,10 @@ jev/
   rubrics.py    the 9-level valence/arousal scales and the question wording
   fewshot.py    in-context example selection and leak filtering
   data.py       jsonl loading, prediction de-duplication
+  triplets.py   Task 2 training-lexicon candidates, pair decisions and VA
 runners/
+  run.py           unified --task 1|2 inference and official scoring
+  execution.py     shared concurrency, resume and usage accounting
   run_st1.py        one corpus, one split
   run_all_st1.py    every corpus, then score each
 scoring/
@@ -106,14 +110,18 @@ export TYPESAFE_API_KEY=...          # the client also reads ~/.zshrc
 # view raw and calibrated test scores (zero-shot and 9-shot)
 cat reports/calibration_reproduction/test_summary.json
 
-# raw baseline: one corpus
-.venv/bin/python runners/run_st1.py \
-  --data vendor/DimABSA2026/task-dataset/track_a/subtask_1/eng/eng_restaurant_test_task1.jsonl \
-  --out reports/pred.jsonl --shots 3 --concurrency 10
+# raw Task 1 baseline, one corpus (or --corpus all)
+.venv/bin/python runners/run.py --task 1 --corpus eng_restaurant --split test \
+  --shots 3 --out reports/st1_reproduction --concurrency 5
 
-# raw baseline: every corpus, scored against the official script
-.venv/bin/python runners/run_all_st1.py --split test --shots 3 --concurrency 10
+# Task 2 baseline: all eight corpora, transferred Task 1 calibration included
+.venv/bin/python runners/run.py --task 2 --split test \
+  --out reports/st2_reproduction --concurrency 5
 ```
+
+Both tasks use `jev-1.13.0`; the dataset/scorer snapshot is pinned in
+[`data-version.json`](data-version.json). Outputs resume by ID. The original Task 1
+commands remain supported. Task 2 method and official baselines: [0006](logs/0006-st2-lexicon-pair-baseline.md).
 
 An API key comes from the [TypeSafe console](https://console.typesafe.ai/); the model is served
 at `https://api.typesafe.ai/v1/systemone`. Primitive and request-shape docs:

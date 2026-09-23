@@ -131,6 +131,7 @@ class JevClient:
             headers={
                 "Authorization": f"Bearer {self._key}",
                 "Content-Type": "application/json",
+                "User-Agent": "jev-dimabsa/0.1 (research baseline)",
             },
             method="POST",
         )

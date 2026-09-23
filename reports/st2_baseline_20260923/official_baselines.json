@@ -1,0 +1,46 @@
+{
+  "source": "https://aclanthology.org/2026.semeval-1.452/",
+  "table": 7,
+  "task": "Track A Subtask 2 (DimASTE)",
+  "split": "test",
+  "metric": "cF1",
+  "higher_is_better": true,
+  "systems": {
+    "Kimi-K2 Thinking": "one-shot",
+    "Qwen3-14B": "per-corpus QLoRA"
+  },
+  "corpora": {
+    "eng_restaurant": {
+      "Kimi-K2 Thinking": 0.492,
+      "Qwen3-14B": 0.4483
+    },
+    "eng_laptop": {
+      "Kimi-K2 Thinking": 0.4424,
+      "Qwen3-14B": 0.3827
+    },
+    "jpn_hotel": {
+      "Kimi-K2 Thinking": 0.3464,
+      "Qwen3-14B": 0.1622
+    },
+    "rus_restaurant": {
+      "Kimi-K2 Thinking": 0.4242,
+      "Qwen3-14B": 0.3341
+    },
+    "tat_restaurant": {
+      "Kimi-K2 Thinking": 0.3577,
+      "Qwen3-14B": 0.202
+    },
+    "ukr_restaurant": {
+      "Kimi-K2 Thinking": 0.422,
+      "Qwen3-14B": 0.3099
+    },
+    "zho_restaurant": {
+      "Kimi-K2 Thinking": 0.3529,
+      "Qwen3-14B": 0.2509
+    },
+    "zho_laptop": {
+      "Kimi-K2 Thinking": 0.2494,
+      "Qwen3-14B": 0.2099
+    }
+  }
+}
