@@ -76,4 +76,8 @@ contain dataset text; summaries contain only metrics and accounting.
   These are plumbing checks, not reported benchmark results.
 - Early full-run requests returned HTTP 403 / 1010. An explicit identifying User-Agent
   (`jev-dimabsa/0.1 (research baseline)`) restored service; successful rows were resumed.
+- HTTP 520 was observed on a small number of requests and added to the existing transient
+  retry statuses. Completed records were retained; only missing records were resumed.
+- Execution used concurrency 5 for dev and initially 5, then 10 on resume for test;
+  concurrency does not change the frozen prompts or extraction parameters.
 - Known usage excludes unreported charges from failed requests or partially completed records.

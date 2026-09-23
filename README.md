@@ -133,14 +133,15 @@ rate limits, 529 and timeouts with backoff. Each prediction also stores raw scor
 probabilities, confidence, returned model and usage in `_jev`. The default model is
 `jev-1.13.0`. Resume checks the saved request configuration; historical files without
 that configuration remain readable but require a new output path for new runs.
-`--restart` explicitly discards an existing run. Incomplete batch runs exit nonzero.
+The original `run_st1.py --restart` explicitly discards an existing run; use a new
+`--out` directory for a fresh unified run. Incomplete batch runs exit nonzero.
 
-## Few-shot examples
+## Task 1 few-shot examples
 
 Examples come only from the **train** split of the same corpus. They are frozen per corpus: the
 same records are used for every request in a run, recorded by ID in the run metadata, and never
-re-picked because a prediction came out badly. `--shots N` sets how many (default 3; `0` is the
-zero-shot control).
+re-picked because a prediction came out badly. `--shots N` sets how many (`0` is the zero-shot control). The unified runner
+defaults to 0; the original Task 1 runners retain their default of 3.
 
 `--example-selection` picks which:
 
@@ -165,4 +166,6 @@ drops nothing; at larger `k` it matters.
 - In the uncalibrated baseline, arousal stays under-predicted even with examples. `PCC_A` ≈ 0.49 against `PCC_V` ≈ 0.89
   (Pearson correlation per dimension; higher is better, 1 is perfect) — Jev orders valence well
   and arousal badly. Per-corpus values are in the logs.
-- Only Subtask 1 is implemented.
+- Task 2 uses a training vocabulary to propose explicit spans, so unseen terms and implicit
+  aspects/opinions cannot be extracted. Its transferred Task 1 calibration is a starting
+  point, not a Task 2-tuned model. Subtask 3 is not implemented.

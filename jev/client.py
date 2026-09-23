@@ -19,7 +19,7 @@ from typing import Any
 ENDPOINT = "https://api.typesafe.ai/v1/systemone"
 DEFAULT_MODEL = "jev-1.13.0"
 
-RETRYABLE_STATUS = frozenset({408, 425, 429, 500, 502, 503, 504, 529})
+RETRYABLE_STATUS = frozenset({408, 425, 429, 500, 502, 503, 504, 520, 529})
 
 
 def _retry_after(exc: urllib.error.HTTPError) -> float | None:
