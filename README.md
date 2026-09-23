@@ -52,6 +52,21 @@ Our best run is **0.0536 RMSE** behind PAI on this aggregate; matching it requir
 Published baselines: [arXiv:2601.23022](https://arxiv.org/abs/2601.23022), Table 3.
 Earlier experiments, per-corpus scores and costs: [`logs/`](logs/).
 
+## Result — Subtask 2 (DimASTE), official test split
+
+cF1, **higher is better**. Macro mean across all eight corpora (6,690 test texts).
+
+| System | cF1 (macro) |
+|---|---|
+| Kimi-K2 Thinking, one-shot | 0.3859 |
+| Qwen3-14B, QLoRA fine-tuned | 0.2875 |
+| **Jev, training lexicon + pair decisions + transferred shrink\*** | 0.2771 |
+
+\* Training-vocabulary spans, Jev pair classification and VA scoring, with frozen Task 1
+zero-shot calibration. No Task 2 tuning. Official baseline scores come from the
+[organizers’ report](https://aclanthology.org/2026.semeval-1.452/), Table 7; macro means
+are computed here. Per-corpus scores, limitations and costs: [0006](logs/0006-st2-lexicon-pair-baseline.md).
+
 ## Dataset
 
 The data belongs to the DimABSA organizers and is **not redistributed here**. Download it
@@ -62,10 +77,18 @@ yourself — the terms below are quoted from the competition rules.
 > - Datasets must not be redistributed or shared with third parties.
 > - Interested parties should be directed to the official website.
 
-**Download:** <https://github.com/DimABSA/DimABSA2026/tree/main/task-dataset>
+**Download:** [pinned official snapshot](https://github.com/DimABSA/DimABSA2026/tree/bdc93be1224106ae7d3eb95739c02a76ed4ae8a1/task-dataset)
+(commit `bdc93be12241`).
 
 Place it at `vendor/DimABSA2026/`, which is where the code expects it and which `.gitignore`
-excludes. The read-only evaluation script is vendored from that repository and is never
+excludes. To fetch this exact version:
+
+```bash
+git clone https://github.com/DimABSA/DimABSA2026.git vendor/DimABSA2026
+git -C vendor/DimABSA2026 checkout bdc93be1224106ae7d3eb95739c02a76ed4ae8a1
+```
+
+The read-only evaluation script is vendored from that repository and is never
 modified; `scoring/score.py` only shells out to it.
 
 Papers: [arXiv:2601.23022](https://arxiv.org/abs/2601.23022) (Track A dataset) ·

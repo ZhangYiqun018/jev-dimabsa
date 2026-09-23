@@ -36,10 +36,13 @@ facts only — anything a reader needs to not misread the table
 
 ## Index
 
-| # | Experiment | RMSE_VA (micro) | Cost |
+| # | Experiment | Test score | Cost |
 |---|---|---|---|
 | [0001](0001-st1-zero-shot.md) | Subtask 1, zero-shot | 2.4708 | $0.4588 |
 | [0002](0002-st1-few-shot-n3.md) | Subtask 1, 3-shot calibration | 2.1721 | $0.6700 |
 | [0003](0003-st1-few-shot-n3-stratified.md) | Subtask 1, 3-shot, valence-stratified examples | 2.1628 | $0.6752 |
 | [0004](0004-st1-example-count-sweep.md) | Subtask 1, example-count sweep n = 3, 5, 9 | 2.1309 / 2.0736 | $0.7445 / $0.8936 |
 | [0005](0005-st1-supervised-calibration.md) | Supervised shrink calibration, zero / 9-shot | 1.1395 / 1.1199 | $1.9588 |
+| [0006](0006-st2-lexicon-pair-baseline.md) | Subtask 2, lexicon + pair decisions + transferred shrink | cF1 0.2771 (macro) | $2.3029 (dev + test) |
+
+Task 1 scores are micro RMSE_VA (lower is better); Task 2 is macro cF1 (higher is better).

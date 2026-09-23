@@ -1,0 +1,37 @@
+{
+  "task": 2,
+  "model": "jev-1.13.0",
+  "data_snapshot_sha256": "980b1f8e015afafb8d59f272445616f3960140095d42ad44e6a209ebcc4ca6c5",
+  "rubric_sha256_12": "9877fbd18a68",
+  "aggregate": "unweighted arithmetic mean of eight corpus cF1 scores; not an official overall leaderboard score",
+  "input_price_assumption_usd_per_million": 0.042,
+  "splits": {
+    "dev": {
+      "corpora": 8,
+      "records": 1344,
+      "macro_cF1": 0.30684973858791365,
+      "input_tokens": 10833670,
+      "output_tokens": 853061,
+      "estimated_input_usd": 0.45501414,
+      "returned_models": [
+        "jev-1.13.0"
+      ]
+    },
+    "test": {
+      "corpora": 8,
+      "records": 6690,
+      "macro_cF1": 0.27711134437541995,
+      "input_tokens": 43997780,
+      "output_tokens": 3431350,
+      "estimated_input_usd": 1.84790676,
+      "returned_models": [
+        "jev-1.13.0"
+      ]
+    }
+  },
+  "official_test_macro_cF1": {
+    "Kimi-K2 Thinking": 0.385875,
+    "Qwen3-14B": 0.2875
+  },
+  "usage_note": "Completed baseline dev/test records only; excludes plumbing smoke runs and historical Task 1 calibration costs. Failed requests and partially completed records may have unreported charges. Dollar figures are input-token estimates, not an invoice."
+}

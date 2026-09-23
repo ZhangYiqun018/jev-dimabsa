@@ -1,0 +1,159 @@
+{
+  "task": 2,
+  "split": "test",
+  "limit": null,
+  "corpora": [
+    {
+      "corpus": "eng_restaurant",
+      "records": 1000,
+      "metrics": {
+        "TP": 745.8287685624867,
+        "FP": 945,
+        "FN": 1324,
+        "cPrecision": 0.4261878677499924,
+        "cRecall": 0.3503188203675372,
+        "cF1": 0.3845469288798591
+      },
+      "usage": {
+        "input_tokens": 2662129,
+        "output_tokens": 197798
+      },
+      "model": [
+        "jev-1.13.0"
+      ]
+    },
+    {
+      "corpus": "eng_laptop",
+      "records": 1000,
+      "metrics": {
+        "TP": 757.7075105004557,
+        "FP": 2281,
+        "FN": 1148,
+        "cPrecision": 0.2438711009013375,
+        "cRecall": 0.38384372365777897,
+        "cF1": 0.29825133261187
+      },
+      "usage": {
+        "input_tokens": 4928575,
+        "output_tokens": 382150
+      },
+      "model": [
+        "jev-1.13.0"
+      ]
+    },
+    {
+      "corpus": "zho_restaurant",
+      "records": 1000,
+      "metrics": {
+        "TP": 920.2333859054129,
+        "FP": 6358,
+        "FN": 1879,
+        "cPrecision": 0.12537239589992002,
+        "cRecall": 0.3216474609945519,
+        "cF1": 0.18042023054708617
+      },
+      "usage": {
+        "input_tokens": 17401700,
+        "output_tokens": 1403501
+      },
+      "model": [
+        "jev-1.13.0"
+      ]
+    },
+    {
+      "corpus": "zho_laptop",
+      "records": 1000,
+      "metrics": {
+        "TP": 517.2895372065145,
+        "FP": 3675,
+        "FN": 1382,
+        "cPrecision": 0.12263858160419974,
+        "cRecall": 0.26872183750987766,
+        "cF1": 0.1684159326734542
+      },
+      "usage": {
+        "input_tokens": 10166276,
+        "output_tokens": 804090
+      },
+      "model": [
+        "jev-1.13.0"
+      ]
+    },
+    {
+      "corpus": "jpn_hotel",
+      "records": 800,
+      "metrics": {
+        "TP": 631.5718383008153,
+        "FP": 1440,
+        "FN": 779,
+        "cPrecision": 0.30017672923042554,
+        "cRecall": 0.43767972162218666,
+        "cF1": 0.35611606332157614
+      },
+      "usage": {
+        "input_tokens": 3547757,
+        "output_tokens": 269540
+      },
+      "model": [
+        "jev-1.13.0"
+      ]
+    },
+    {
+      "corpus": "rus_restaurant",
+      "records": 630,
+      "metrics": {
+        "TP": 279.1116507396678,
+        "FP": 431,
+        "FN": 998,
+        "cPrecision": 0.3756549808070899,
+        "cRecall": 0.21306232880890674,
+        "cF1": 0.27190613808053365
+      },
+      "usage": {
+        "input_tokens": 1454690,
+        "output_tokens": 102027
+      },
+      "model": [
+        "jev-1.13.0"
+      ]
+    },
+    {
+      "corpus": "tat_restaurant",
+      "records": 630,
+      "metrics": {
+        "TP": 318.4288586977287,
+        "FP": 675,
+        "FN": 952,
+        "cPrecision": 0.3082563975776657,
+        "cRecall": 0.2430754646547547,
+        "cF1": 0.2718129395627219
+      },
+      "usage": {
+        "input_tokens": 2296178,
+        "output_tokens": 164317
+      },
+      "model": [
+        "jev-1.13.0"
+      ]
+    },
+    {
+      "corpus": "ukr_restaurant",
+      "records": 630,
+      "metrics": {
+        "TP": 298.69327462992976,
+        "FP": 448,
+        "FN": 975,
+        "cPrecision": 0.3814728922476753,
+        "cRecall": 0.22801013330528988,
+        "cF1": 0.2854211893262587
+      },
+      "usage": {
+        "input_tokens": 1540475,
+        "output_tokens": 107927
+      },
+      "model": [
+        "jev-1.13.0"
+      ]
+    }
+  ]
+}

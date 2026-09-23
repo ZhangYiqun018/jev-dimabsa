@@ -1,7 +1,7 @@
 {
   "source": "https://github.com/DimABSA/DimABSA2026",
   "snapshot_date": "2026-09-23",
-  "version_kind": "content-addressed local official dataset snapshot; vendor is not a separate git checkout",
+  "version_kind": "official upstream commit and content-addressed dataset/scorer snapshot",
   "snapshot_sha256": "980b1f8e015afafb8d59f272445616f3960140095d42ad44e6a209ebcc4ca6c5",
   "jev_model": "jev-1.13.0",
   "files": {
@@ -60,5 +60,6 @@
     "task-dataset/track_a/subtask_2/zho/zho_restaurant_test_task2.jsonl": "bd7e8dffba7e243d8d3ada012c33f983040a418273fba9a3f1a2f1790a1dc7fc",
     "task-dataset/track_a/subtask_2/zho/zho_restaurant_train_alltasks.jsonl": "6c3290734269f2bd4852daf57339fec7436af46cb93e3821c67f5926fd133849",
     "evaluation_script/metrics_subtask_1_2_3.py": "75eee32e50c5ebbd0000ed810b818954abedb9899f56987227c813667e3f9dbe"
-  }
+  },
+  "upstream_commit": "bdc93be1224106ae7d3eb95739c02a76ed4ae8a1"
 }

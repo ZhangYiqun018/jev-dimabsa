@@ -10,7 +10,8 @@ Aspect and opinion must both match before VA closeness receives credit.
 - Task 1 checkpoint before development: local commit `41b3c89`.
 - Model: `jev-1.13.0`, explicitly requested; returned versions recorded in summaries.
 - Data/scorer: [content-addressed snapshot](../data-version.json), SHA-256 `980b1f8e015afafb8d59f272445616f3960140095d42ad44e6a209ebcc4ca6c5`.
-  The vendor directory is not an independent Git checkout, so its parent repository's commit is **not** a dataset version.
+  The 55 recorded dataset/scorer files match upstream commit `bdc93be1224106ae7d3eb95739c02a76ed4ae8a1` byte-for-byte.
+  This revision was identified from the official archive; the local vendor directory itself is not a separate Git checkout.
 - No model training, threshold sweep, extraction tuning, or Task 2 calibration fitting.
 - All settings fixed before full dev/test runs; these splits are for reporting, not selecting configurations.
 
@@ -81,3 +82,30 @@ contain dataset text; summaries contain only metrics and accounting.
 - Execution used concurrency 5 for dev and initially 5, then 10 on resume for test;
   concurrency does not change the frozen prompts or extraction parameters.
 - Known usage excludes unreported charges from failed requests or partially completed records.
+
+## Results — full official dev/test splits
+
+Unchanged official scorer; cF1, higher is better. The final row is the unweighted
+arithmetic mean across eight corpora, not an official overall competition rank.
+
+| Corpus | Jev dev | Jev test | Kimi-K2 Thinking test | Qwen3-14B test |
+|---|---:|---:|---:|---:|
+| eng_restaurant | 0.4708 | 0.3845 | 0.4920 | 0.4483 |
+| eng_laptop | 0.3414 | 0.2983 | 0.4424 | 0.3827 |
+| jpn_hotel | 0.3818 | 0.3561 | 0.3464 | 0.1622 |
+| rus_restaurant | 0.3128 | 0.2719 | 0.4242 | 0.3341 |
+| tat_restaurant | 0.3183 | 0.2718 | 0.3577 | 0.2020 |
+| ukr_restaurant | 0.3041 | 0.2854 | 0.4220 | 0.3099 |
+| zho_restaurant | 0.1893 | 0.1804 | 0.3529 | 0.2509 |
+| zho_laptop | 0.1362 | 0.1684 | 0.2494 | 0.2099 |
+| **Macro mean** | **0.3068** | **0.2771** | **0.3859** | **0.2875** |
+
+## Usage and artifacts
+
+- Dev: 1,344 texts, 10,833,670 input / 853,061 output tokens; estimated input cost $0.4550.
+- Test: 6,690 texts, 43,997,780 input / 3,431,350 output tokens; estimated input cost $1.8479.
+- Assumed input price: $0.042/M tokens, as in the preceding experiments. These are known-token estimates, not billed totals; failed/partial request charges may be missing.
+- Returned model: `jev-1.13.0`; rubric fingerprint: `9877fbd18a68`.
+- Scores: [dev summary](../reports/st2_baseline_20260923/task2_dev_summary.json), [test summary](../reports/st2_baseline_20260923/task2_test_summary.json).
+- Aggregate and usage: [run_summary.json](../reports/st2_baseline_20260923/run_summary.json).
+- This accounting excludes smoke runs and the pre-existing Task 1 calibration expense. No Task 2 GPU training was performed.
