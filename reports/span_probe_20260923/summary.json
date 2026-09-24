@@ -1,0 +1,215 @@
+{
+  "model": "jev-1.13.0",
+  "selection": "first 2 dev rows per language, restaurant except Japanese hotel",
+  "task": "one leftmost explicit aspect, not full Task 2",
+  "tokenization": "CJK non-whitespace characters; other languages Unicode words and punctuation",
+  "n": 12,
+  "matches_any_gold": 6,
+  "matches_leftmost_gold": 6,
+  "results": [
+    {
+      "language": "eng",
+      "id": "rest26_aste_dev_1",
+      "matches_any_gold": true,
+      "matches_leftmost_gold": true,
+      "calls": 2,
+      "usage": [
+        {
+          "input_tokens": 428,
+          "output_tokens": 59
+        },
+        {
+          "input_tokens": 469,
+          "output_tokens": 52
+        }
+      ]
+    },
+    {
+      "language": "eng",
+      "id": "rest26_aste_dev_2",
+      "matches_any_gold": false,
+      "matches_leftmost_gold": false,
+      "calls": 2,
+      "usage": [
+        {
+          "input_tokens": 465,
+          "output_tokens": 80
+        },
+        {
+          "input_tokens": 523,
+          "output_tokens": 66
+        }
+      ]
+    },
+    {
+      "language": "zho",
+      "id": "R10040:S001",
+      "matches_any_gold": false,
+      "matches_leftmost_gold": false,
+      "calls": 2,
+      "usage": [
+        {
+          "input_tokens": 933,
+          "output_tokens": 366
+        },
+        {
+          "input_tokens": 2116,
+          "output_tokens": 338
+        }
+      ]
+    },
+    {
+      "language": "zho",
+      "id": "R6121:S000",
+      "matches_any_gold": true,
+      "matches_leftmost_gold": true,
+      "calls": 2,
+      "usage": [
+        {
+          "input_tokens": 587,
+          "output_tokens": 158
+        },
+        {
+          "input_tokens": 714,
+          "output_tokens": 116
+        }
+      ]
+    },
+    {
+      "language": "jpn",
+      "id": "hotel26_aste_dev_1",
+      "matches_any_gold": true,
+      "matches_leftmost_gold": true,
+      "calls": 2,
+      "usage": [
+        {
+          "input_tokens": 689,
+          "output_tokens": 222
+        },
+        {
+          "input_tokens": 1171,
+          "output_tokens": 215
+        }
+      ]
+    },
+    {
+      "language": "jpn",
+      "id": "hotel26_aste_dev_2",
+      "matches_any_gold": false,
+      "matches_leftmost_gold": false,
+      "calls": 2,
+      "usage": [
+        {
+          "input_tokens": 899,
+          "output_tokens": 350
+        },
+        {
+          "input_tokens": 2041,
+          "output_tokens": 343
+        }
+      ]
+    },
+    {
+      "language": "rus",
+      "id": "1077:4_0",
+      "matches_any_gold": true,
+      "matches_leftmost_gold": true,
+      "calls": 2,
+      "usage": [
+        {
+          "input_tokens": 1001,
+          "output_tokens": 310
+        },
+        {
+          "input_tokens": 2838,
+          "output_tokens": 289
+        }
+      ]
+    },
+    {
+      "language": "rus",
+      "id": "1206:9_1",
+      "matches_any_gold": false,
+      "matches_leftmost_gold": false,
+      "calls": 2,
+      "usage": [
+        {
+          "input_tokens": 1636,
+          "output_tokens": 622
+        },
+        {
+          "input_tokens": 11332,
+          "output_tokens": 615
+        }
+      ]
+    },
+    {
+      "language": "tat",
+      "id": "1077:4_0",
+      "matches_any_gold": true,
+      "matches_leftmost_gold": true,
+      "calls": 2,
+      "usage": [
+        {
+          "input_tokens": 1050,
+          "output_tokens": 302
+        },
+        {
+          "input_tokens": 3862,
+          "output_tokens": 295
+        }
+      ]
+    },
+    {
+      "language": "tat",
+      "id": "1206:9_1",
+      "matches_any_gold": false,
+      "matches_leftmost_gold": false,
+      "calls": 2,
+      "usage": [
+        {
+          "input_tokens": 1568,
+          "output_tokens": 550
+        },
+        {
+          "input_tokens": 9852,
+          "output_tokens": 529
+        }
+      ]
+    },
+    {
+      "language": "ukr",
+      "id": "1077:4_0",
+      "matches_any_gold": true,
+      "matches_leftmost_gold": true,
+      "calls": 2,
+      "usage": [
+        {
+          "input_tokens": 1003,
+          "output_tokens": 302
+        },
+        {
+          "input_tokens": 2908,
+          "output_tokens": 281
+        }
+      ]
+    },
+    {
+      "language": "ukr",
+      "id": "1206:9_1",
+      "matches_any_gold": false,
+      "matches_leftmost_gold": false,
+      "calls": 2,
+      "usage": [
+        {
+          "input_tokens": 1662,
+          "output_tokens": 630
+        },
+        {
+          "input_tokens": 11691,
+          "output_tokens": 623
+        }
+      ]
+    }
+  ]
+}

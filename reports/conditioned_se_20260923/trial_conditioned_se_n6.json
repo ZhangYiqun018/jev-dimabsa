@@ -1,0 +1,518 @@
+{
+  "split": "trial",
+  "config": {
+    "shots": 3,
+    "max_tokens": 254,
+    "context_radius": 2,
+    "pair_filter": false,
+    "null_aspect": true,
+    "null_opinion": false,
+    "model": "jev-1.13.0",
+    "fingerprint": "1699b1f9db02",
+    "dataset": "bdc93be1224106ae7d3eb95739c02a76ed4ae8a1"
+  },
+  "complete": true,
+  "n_requested": 24,
+  "n_completed": 24,
+  "corpora": [
+    {
+      "corpus": "eng_restaurant",
+      "ids": [
+        "rest16_quad_dev_9",
+        "rest16_quad_dev_17",
+        "rest16_quad_dev_14",
+        "rest16_quad_dev_2",
+        "rest16_quad_dev_15",
+        "rest16_quad_dev_10"
+      ],
+      "metrics": {
+        "aspect": {
+          "tp": 1,
+          "fp": 6,
+          "fn": 4,
+          "precision": 0.14285714285714285,
+          "recall": 0.2,
+          "f1": 0.16666666666666666
+        },
+        "opinion": {
+          "tp": 4,
+          "fp": 4,
+          "fn": 4,
+          "precision": 0.5,
+          "recall": 0.5,
+          "f1": 0.5
+        },
+        "linked_aspect": {
+          "tp": 1,
+          "fp": 5,
+          "fn": 4,
+          "precision": 0.16666666666666666,
+          "recall": 0.2,
+          "f1": 0.18181818181818182
+        },
+        "linked_opinion": {
+          "tp": 4,
+          "fp": 4,
+          "fn": 4,
+          "precision": 0.5,
+          "recall": 0.5,
+          "f1": 0.5
+        },
+        "pair": {
+          "tp": 1,
+          "fp": 11,
+          "fn": 9,
+          "precision": 0.08333333333333333,
+          "recall": 0.1,
+          "f1": 0.09090909090909091
+        },
+        "null_pair": {
+          "tp": 1,
+          "fp": 4,
+          "fn": 2,
+          "precision": 0.2,
+          "recall": 0.3333333333333333,
+          "f1": 0.25
+        },
+        "candidate_pair_recall": 0.1,
+        "pair_misses": {
+          "aspect_missing": 3,
+          "opinion_missing": 3,
+          "both_missing": 3,
+          "pair_rejected": 0
+        }
+      }
+    },
+    {
+      "corpus": "zho_restaurant",
+      "ids": [
+        "R0284:S018",
+        "R0285:S020",
+        "R0285:S01˙",
+        "R0284:S012",
+        "R0283:S004",
+        "R0285:S016"
+      ],
+      "metrics": {
+        "aspect": {
+          "tp": 5,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "opinion": {
+          "tp": 5,
+          "fp": 5,
+          "fn": 5,
+          "precision": 0.5,
+          "recall": 0.5,
+          "f1": 0.5
+        },
+        "linked_aspect": {
+          "tp": 5,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "linked_opinion": {
+          "tp": 5,
+          "fp": 5,
+          "fn": 5,
+          "precision": 0.5,
+          "recall": 0.5,
+          "f1": 0.5
+        },
+        "pair": {
+          "tp": 5,
+          "fp": 5,
+          "fn": 5,
+          "precision": 0.5,
+          "recall": 0.5,
+          "f1": 0.5
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 4,
+          "fn": 2,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.5,
+        "pair_misses": {
+          "aspect_missing": 0,
+          "opinion_missing": 5,
+          "both_missing": 0,
+          "pair_rejected": 0
+        }
+      }
+    },
+    {
+      "corpus": "zho_laptop",
+      "ids": [
+        "6699348:S1367",
+        "6699348:S875",
+        "6699348:S714",
+        "6699348:S1550",
+        "6699348:S823",
+        "6699348:S838"
+      ],
+      "metrics": {
+        "aspect": {
+          "tp": 3,
+          "fp": 5,
+          "fn": 5,
+          "precision": 0.375,
+          "recall": 0.375,
+          "f1": 0.375
+        },
+        "opinion": {
+          "tp": 5,
+          "fp": 3,
+          "fn": 2,
+          "precision": 0.625,
+          "recall": 0.7142857142857143,
+          "f1": 0.6666666666666666
+        },
+        "linked_aspect": {
+          "tp": 3,
+          "fp": 5,
+          "fn": 5,
+          "precision": 0.375,
+          "recall": 0.375,
+          "f1": 0.375
+        },
+        "linked_opinion": {
+          "tp": 5,
+          "fp": 3,
+          "fn": 2,
+          "precision": 0.625,
+          "recall": 0.7142857142857143,
+          "f1": 0.6666666666666666
+        },
+        "pair": {
+          "tp": 2,
+          "fp": 6,
+          "fn": 6,
+          "precision": 0.25,
+          "recall": 0.25,
+          "f1": 0.25
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.25,
+        "pair_misses": {
+          "aspect_missing": 4,
+          "opinion_missing": 1,
+          "both_missing": 1,
+          "pair_rejected": 0
+        }
+      }
+    },
+    {
+      "corpus": "rus_restaurant",
+      "ids": [
+        "6668:6_10",
+        "16137:14_25",
+        "3976:5_3",
+        "35867:2_36",
+        "16137:15_26",
+        "16137:12_24"
+      ],
+      "metrics": {
+        "aspect": {
+          "tp": 7,
+          "fp": 3,
+          "fn": 0,
+          "precision": 0.7,
+          "recall": 1.0,
+          "f1": 0.8235294117647058
+        },
+        "opinion": {
+          "tp": 6,
+          "fp": 4,
+          "fn": 5,
+          "precision": 0.6,
+          "recall": 0.5454545454545454,
+          "f1": 0.5714285714285714
+        },
+        "linked_aspect": {
+          "tp": 5,
+          "fp": 3,
+          "fn": 2,
+          "precision": 0.625,
+          "recall": 0.7142857142857143,
+          "f1": 0.6666666666666666
+        },
+        "linked_opinion": {
+          "tp": 6,
+          "fp": 4,
+          "fn": 5,
+          "precision": 0.6,
+          "recall": 0.5454545454545454,
+          "f1": 0.5714285714285714
+        },
+        "pair": {
+          "tp": 3,
+          "fp": 8,
+          "fn": 8,
+          "precision": 0.2727272727272727,
+          "recall": 0.2727272727272727,
+          "f1": 0.2727272727272727
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 2,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.2727272727272727,
+        "pair_misses": {
+          "aspect_missing": 0,
+          "opinion_missing": 5,
+          "both_missing": 0,
+          "pair_rejected": 3
+        }
+      }
+    }
+  ],
+  "macro_pair_f1": 0.2784090909090909,
+  "partial_macro_pair_f1": null,
+  "micro": {
+    "aspect": {
+      "tp": 16,
+      "fp": 14,
+      "fn": 9,
+      "precision": 0.5333333333333333,
+      "recall": 0.64,
+      "f1": 0.5818181818181818
+    },
+    "opinion": {
+      "tp": 20,
+      "fp": 16,
+      "fn": 16,
+      "precision": 0.5555555555555556,
+      "recall": 0.5555555555555556,
+      "f1": 0.5555555555555556
+    },
+    "linked_aspect": {
+      "tp": 14,
+      "fp": 13,
+      "fn": 11,
+      "precision": 0.5185185185185185,
+      "recall": 0.56,
+      "f1": 0.5384615384615384
+    },
+    "linked_opinion": {
+      "tp": 20,
+      "fp": 16,
+      "fn": 16,
+      "precision": 0.5555555555555556,
+      "recall": 0.5555555555555556,
+      "f1": 0.5555555555555556
+    },
+    "pair": {
+      "tp": 11,
+      "fp": 30,
+      "fn": 28,
+      "precision": 0.2682926829268293,
+      "recall": 0.28205128205128205,
+      "f1": 0.275
+    },
+    "null_pair": {
+      "tp": 1,
+      "fp": 10,
+      "fn": 4,
+      "precision": 0.09090909090909091,
+      "recall": 0.2,
+      "f1": 0.125
+    },
+    "candidate_pair_recall": 0.28205128205128205,
+    "pair_misses": {
+      "aspect_missing": 7,
+      "opinion_missing": 14,
+      "both_missing": 4,
+      "pair_rejected": 3
+    }
+  },
+  "null_opinion_gold_pairs": 2,
+  "calls": 216,
+  "input_tokens": 299521,
+  "stage_input_tokens": {
+    "opinion_end": 46343,
+    "opinion_start": 134084,
+    "aspect_end": 37555,
+    "aspect_start": 81539
+  },
+  "estimated_usd": 0.012579882,
+  "http_attempts": 219,
+  "returned_models": [
+    "jev-1.13.0"
+  ],
+  "references": {
+    "bio": {
+      "n": 24,
+      "threshold": 0.65,
+      "macro_pair_f1": 0.6121323529411764,
+      "micro": {
+        "aspect": {
+          "tp": 21,
+          "fp": 22,
+          "fn": 4,
+          "precision": 0.4883720930232558,
+          "recall": 0.84,
+          "f1": 0.6176470588235294
+        },
+        "opinion": {
+          "tp": 26,
+          "fp": 14,
+          "fn": 10,
+          "precision": 0.65,
+          "recall": 0.7222222222222222,
+          "f1": 0.6842105263157895
+        },
+        "linked_aspect": {
+          "tp": 16,
+          "fp": 8,
+          "fn": 9,
+          "precision": 0.6666666666666666,
+          "recall": 0.64,
+          "f1": 0.6530612244897959
+        },
+        "linked_opinion": {
+          "tp": 24,
+          "fp": 6,
+          "fn": 12,
+          "precision": 0.8,
+          "recall": 0.6666666666666666,
+          "f1": 0.7272727272727273
+        },
+        "pair": {
+          "tp": 22,
+          "fp": 12,
+          "fn": 17,
+          "precision": 0.6470588235294118,
+          "recall": 0.5641025641025641,
+          "f1": 0.6027397260273972
+        },
+        "null_pair": {
+          "tp": 1,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.3333333333333333,
+          "recall": 0.2,
+          "f1": 0.25
+        },
+        "candidate_pair_recall": 0.6410256410256411,
+        "pair_misses": {
+          "aspect_missing": 2,
+          "opinion_missing": 10,
+          "both_missing": 2,
+          "pair_rejected": 3
+        }
+      }
+    },
+    "pointer": {
+      "n": 24,
+      "threshold": 0.65,
+      "macro_pair_f1": 0.4797794117647059,
+      "micro": {
+        "aspect": {
+          "tp": 21,
+          "fp": 13,
+          "fn": 4,
+          "precision": 0.6176470588235294,
+          "recall": 0.84,
+          "f1": 0.711864406779661
+        },
+        "opinion": {
+          "tp": 23,
+          "fp": 11,
+          "fn": 13,
+          "precision": 0.6764705882352942,
+          "recall": 0.6388888888888888,
+          "f1": 0.6571428571428571
+        },
+        "linked_aspect": {
+          "tp": 15,
+          "fp": 8,
+          "fn": 10,
+          "precision": 0.6521739130434783,
+          "recall": 0.6,
+          "f1": 0.625
+        },
+        "linked_opinion": {
+          "tp": 19,
+          "fp": 8,
+          "fn": 17,
+          "precision": 0.7037037037037037,
+          "recall": 0.5277777777777778,
+          "f1": 0.6031746031746031
+        },
+        "pair": {
+          "tp": 17,
+          "fp": 14,
+          "fn": 22,
+          "precision": 0.5483870967741935,
+          "recall": 0.4358974358974359,
+          "f1": 0.4857142857142857
+        },
+        "null_pair": {
+          "tp": 1,
+          "fp": 3,
+          "fn": 4,
+          "precision": 0.25,
+          "recall": 0.2,
+          "f1": 0.2222222222222222
+        },
+        "candidate_pair_recall": 0.5384615384615384,
+        "pair_misses": {
+          "aspect_missing": 3,
+          "opinion_missing": 13,
+          "both_missing": 2,
+          "pair_rejected": 4
+        }
+      }
+    }
+  },
+  "cache_files": [
+    "reports/conditioned_se_20260923/cache/trial_cf578b0f3875a25f7332.json",
+    "reports/conditioned_se_20260923/cache/trial_5166fc5487d0cee833fe.json",
+    "reports/conditioned_se_20260923/cache/trial_abab914c628fc8f316e3.json",
+    "reports/conditioned_se_20260923/cache/trial_160998e09fe85aff949d.json",
+    "reports/conditioned_se_20260923/cache/trial_33355fdb1ad21c978845.json",
+    "reports/conditioned_se_20260923/cache/trial_d09479bb2e6b9bd2875f.json",
+    "reports/conditioned_se_20260923/cache/trial_7dc669d498fbb65e245c.json",
+    "reports/conditioned_se_20260923/cache/trial_eeaa63e1720ba788b8be.json",
+    "reports/conditioned_se_20260923/cache/trial_e259645052c9ec67e490.json",
+    "reports/conditioned_se_20260923/cache/trial_76231666c59aa278bdb9.json",
+    "reports/conditioned_se_20260923/cache/trial_ebc3944dccaff1324fc2.json",
+    "reports/conditioned_se_20260923/cache/trial_469c16f2143e9d6259aa.json",
+    "reports/conditioned_se_20260923/cache/trial_ad886699bdf0b7e7e714.json",
+    "reports/conditioned_se_20260923/cache/trial_9c68e9d93e15de4b92e6.json",
+    "reports/conditioned_se_20260923/cache/trial_0107fade7aba81d5b984.json",
+    "reports/conditioned_se_20260923/cache/trial_5e86b1994048f29d01d7.json",
+    "reports/conditioned_se_20260923/cache/trial_ede5a3658cc0918ae9db.json",
+    "reports/conditioned_se_20260923/cache/trial_f28362e981c431e9e647.json",
+    "reports/conditioned_se_20260923/cache/trial_084b760bdcd36e63f2ff.json",
+    "reports/conditioned_se_20260923/cache/trial_dded18e294bd46dddc24.json",
+    "reports/conditioned_se_20260923/cache/trial_45c7004de05248db5e61.json",
+    "reports/conditioned_se_20260923/cache/trial_6074b652dfda03969b0f.json",
+    "reports/conditioned_se_20260923/cache/trial_2d137d5f32755d926ff9.json",
+    "reports/conditioned_se_20260923/cache/trial_f778c13253de20df732d.json"
+  ],
+  "missing": [],
+  "metric_note": "Exact case-insensitive pair F1, no VA or probability threshold. probability=1 is an export marker, not calibrated confidence. candidate_pair_recall equals final recall because pairs are directly extracted; pair_rejected means both surfaces exist but the conditioned link was not extracted."
+}

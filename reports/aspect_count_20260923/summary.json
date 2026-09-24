@@ -1,0 +1,3116 @@
+{
+  "model": [
+    "jev-1.13.0"
+  ],
+  "fingerprint": "8e7085055972",
+  "definition": "Distinct case-insensitive explicit Aspect surface strings; NULL excluded; repeated opinions do not add aspects.",
+  "choices": "0..32",
+  "protocol": "One frozen zero-shot Choice per text; all 98 Track A trial rows and previously selected 96 dev rows. No prompt tuning.",
+  "splits": {
+    "trial": {
+      "overall": {
+        "n": 98,
+        "correct": 68,
+        "accuracy": 0.6938775510204082,
+        "under": 7,
+        "over": 23,
+        "mae": 0.41836734693877553,
+        "within_one": 0.9387755102040817,
+        "always_one_accuracy": 0.7244897959183674,
+        "gold_histogram": {
+          "0": 6,
+          "1": 71,
+          "2": 16,
+          "3": 3,
+          "4": 1,
+          "8": 1
+        },
+        "prediction_histogram": {
+          "0": 5,
+          "1": 58,
+          "2": 24,
+          "3": 5,
+          "4": 4,
+          "7": 2
+        }
+      },
+      "corpora": {
+        "eng_restaurant": {
+          "n": 20,
+          "correct": 12,
+          "accuracy": 0.6,
+          "under": 1,
+          "over": 7,
+          "mae": 0.45,
+          "within_one": 0.95,
+          "always_one_accuracy": 0.7,
+          "gold_histogram": {
+            "0": 5,
+            "1": 14,
+            "2": 1
+          },
+          "prediction_histogram": {
+            "0": 3,
+            "1": 12,
+            "2": 4,
+            "3": 1
+          }
+        },
+        "rus_restaurant": {
+          "n": 38,
+          "correct": 24,
+          "accuracy": 0.631578947368421,
+          "under": 4,
+          "over": 10,
+          "mae": 0.631578947368421,
+          "within_one": 0.868421052631579,
+          "always_one_accuracy": 0.631578947368421,
+          "gold_histogram": {
+            "1": 24,
+            "2": 11,
+            "3": 1,
+            "4": 1,
+            "8": 1
+          },
+          "prediction_histogram": {
+            "1": 20,
+            "2": 9,
+            "3": 3,
+            "4": 4,
+            "7": 2
+          }
+        },
+        "zho_laptop": {
+          "n": 20,
+          "correct": 15,
+          "accuracy": 0.75,
+          "under": 1,
+          "over": 4,
+          "mae": 0.25,
+          "within_one": 1.0,
+          "always_one_accuracy": 0.75,
+          "gold_histogram": {
+            "1": 15,
+            "2": 3,
+            "3": 2
+          },
+          "prediction_histogram": {
+            "1": 11,
+            "2": 8,
+            "3": 1
+          }
+        },
+        "zho_restaurant": {
+          "n": 20,
+          "correct": 17,
+          "accuracy": 0.85,
+          "under": 1,
+          "over": 2,
+          "mae": 0.15,
+          "within_one": 1.0,
+          "always_one_accuracy": 0.9,
+          "gold_histogram": {
+            "0": 1,
+            "1": 18,
+            "2": 1
+          },
+          "prediction_histogram": {
+            "0": 2,
+            "1": 15,
+            "2": 3
+          }
+        }
+      },
+      "multi_aspect": {
+        "n": 21,
+        "correct": 11,
+        "accuracy": 0.5238095238095238,
+        "under": 5,
+        "over": 5,
+        "mae": 0.6190476190476191,
+        "within_one": 0.8571428571428571,
+        "always_one_accuracy": 0.0,
+        "gold_histogram": {
+          "2": 16,
+          "3": 3,
+          "4": 1,
+          "8": 1
+        },
+        "prediction_histogram": {
+          "1": 1,
+          "2": 12,
+          "3": 4,
+          "4": 3,
+          "7": 1
+        }
+      },
+      "by_gold_count": {
+        "0": {
+          "n": 6,
+          "correct": 3,
+          "accuracy": 0.5,
+          "under": 0,
+          "over": 3,
+          "mae": 0.5,
+          "within_one": 1.0,
+          "always_one_accuracy": 0.0,
+          "gold_histogram": {
+            "0": 6
+          },
+          "prediction_histogram": {
+            "0": 3,
+            "1": 3
+          }
+        },
+        "1": {
+          "n": 71,
+          "correct": 54,
+          "accuracy": 0.7605633802816901,
+          "under": 2,
+          "over": 15,
+          "mae": 0.352112676056338,
+          "within_one": 0.9577464788732394,
+          "always_one_accuracy": 1.0,
+          "gold_histogram": {
+            "1": 71
+          },
+          "prediction_histogram": {
+            "0": 2,
+            "1": 54,
+            "2": 12,
+            "3": 1,
+            "4": 1,
+            "7": 1
+          }
+        },
+        "2": {
+          "n": 16,
+          "correct": 10,
+          "accuracy": 0.625,
+          "under": 1,
+          "over": 5,
+          "mae": 0.5625,
+          "within_one": 0.8125,
+          "always_one_accuracy": 0.0,
+          "gold_histogram": {
+            "2": 16
+          },
+          "prediction_histogram": {
+            "1": 1,
+            "2": 10,
+            "3": 2,
+            "4": 3
+          }
+        },
+        "3": {
+          "n": 3,
+          "correct": 1,
+          "accuracy": 0.3333333333333333,
+          "under": 2,
+          "over": 0,
+          "mae": 0.6666666666666666,
+          "within_one": 1.0,
+          "always_one_accuracy": 0.0,
+          "gold_histogram": {
+            "3": 3
+          },
+          "prediction_histogram": {
+            "2": 2,
+            "3": 1
+          }
+        },
+        "4": {
+          "n": 1,
+          "correct": 0,
+          "accuracy": 0.0,
+          "under": 1,
+          "over": 0,
+          "mae": 1.0,
+          "within_one": 1.0,
+          "always_one_accuracy": 0.0,
+          "gold_histogram": {
+            "4": 1
+          },
+          "prediction_histogram": {
+            "3": 1
+          }
+        },
+        "8": {
+          "n": 1,
+          "correct": 0,
+          "accuracy": 0.0,
+          "under": 1,
+          "over": 0,
+          "mae": 1.0,
+          "within_one": 1.0,
+          "always_one_accuracy": 0.0,
+          "gold_histogram": {
+            "8": 1
+          },
+          "prediction_histogram": {
+            "7": 1
+          }
+        }
+      },
+      "macro_accuracy": 0.7078947368421052
+    },
+    "dev": {
+      "overall": {
+        "n": 96,
+        "correct": 62,
+        "accuracy": 0.6458333333333334,
+        "under": 4,
+        "over": 30,
+        "mae": 0.5833333333333334,
+        "within_one": 0.8645833333333334,
+        "always_one_accuracy": 0.6770833333333334,
+        "gold_histogram": {
+          "1": 65,
+          "2": 14,
+          "3": 10,
+          "4": 5,
+          "5": 1,
+          "6": 1
+        },
+        "prediction_histogram": {
+          "1": 38,
+          "2": 31,
+          "3": 12,
+          "4": 11,
+          "5": 4
+        }
+      },
+      "corpora": {
+        "eng_laptop": {
+          "n": 12,
+          "correct": 9,
+          "accuracy": 0.75,
+          "under": 1,
+          "over": 2,
+          "mae": 0.4166666666666667,
+          "within_one": 0.9166666666666666,
+          "always_one_accuracy": 0.75,
+          "gold_histogram": {
+            "1": 9,
+            "2": 1,
+            "3": 2
+          },
+          "prediction_histogram": {
+            "1": 7,
+            "2": 3,
+            "3": 1,
+            "4": 1
+          }
+        },
+        "eng_restaurant": {
+          "n": 12,
+          "correct": 10,
+          "accuracy": 0.8333333333333334,
+          "under": 0,
+          "over": 2,
+          "mae": 0.16666666666666666,
+          "within_one": 1.0,
+          "always_one_accuracy": 0.5833333333333334,
+          "gold_histogram": {
+            "1": 7,
+            "2": 3,
+            "3": 1,
+            "4": 1
+          },
+          "prediction_histogram": {
+            "1": 5,
+            "2": 5,
+            "3": 1,
+            "4": 1
+          }
+        },
+        "jpn_hotel": {
+          "n": 12,
+          "correct": 9,
+          "accuracy": 0.75,
+          "under": 0,
+          "over": 3,
+          "mae": 0.5,
+          "within_one": 0.8333333333333334,
+          "always_one_accuracy": 0.6666666666666666,
+          "gold_histogram": {
+            "1": 8,
+            "2": 3,
+            "4": 1
+          },
+          "prediction_histogram": {
+            "1": 5,
+            "2": 4,
+            "3": 1,
+            "4": 2
+          }
+        },
+        "rus_restaurant": {
+          "n": 12,
+          "correct": 9,
+          "accuracy": 0.75,
+          "under": 1,
+          "over": 2,
+          "mae": 0.75,
+          "within_one": 0.75,
+          "always_one_accuracy": 0.75,
+          "gold_histogram": {
+            "1": 9,
+            "3": 2,
+            "4": 1
+          },
+          "prediction_histogram": {
+            "1": 8,
+            "3": 1,
+            "4": 2,
+            "5": 1
+          }
+        },
+        "tat_restaurant": {
+          "n": 12,
+          "correct": 7,
+          "accuracy": 0.5833333333333334,
+          "under": 1,
+          "over": 4,
+          "mae": 0.6666666666666666,
+          "within_one": 0.8333333333333334,
+          "always_one_accuracy": 0.5833333333333334,
+          "gold_histogram": {
+            "1": 7,
+            "2": 1,
+            "3": 3,
+            "4": 1
+          },
+          "prediction_histogram": {
+            "1": 3,
+            "2": 4,
+            "3": 3,
+            "4": 2
+          }
+        },
+        "ukr_restaurant": {
+          "n": 12,
+          "correct": 8,
+          "accuracy": 0.6666666666666666,
+          "under": 0,
+          "over": 4,
+          "mae": 0.6666666666666666,
+          "within_one": 0.75,
+          "always_one_accuracy": 0.8333333333333334,
+          "gold_histogram": {
+            "1": 10,
+            "3": 1,
+            "4": 1
+          },
+          "prediction_histogram": {
+            "1": 6,
+            "2": 1,
+            "3": 3,
+            "4": 2
+          }
+        },
+        "zho_laptop": {
+          "n": 12,
+          "correct": 6,
+          "accuracy": 0.5,
+          "under": 0,
+          "over": 6,
+          "mae": 0.75,
+          "within_one": 0.9166666666666666,
+          "always_one_accuracy": 0.75,
+          "gold_histogram": {
+            "1": 9,
+            "2": 3
+          },
+          "prediction_histogram": {
+            "1": 4,
+            "2": 6,
+            "3": 1,
+            "5": 1
+          }
+        },
+        "zho_restaurant": {
+          "n": 12,
+          "correct": 4,
+          "accuracy": 0.3333333333333333,
+          "under": 1,
+          "over": 7,
+          "mae": 0.75,
+          "within_one": 0.9166666666666666,
+          "always_one_accuracy": 0.5,
+          "gold_histogram": {
+            "1": 6,
+            "2": 3,
+            "3": 1,
+            "5": 1,
+            "6": 1
+          },
+          "prediction_histogram": {
+            "2": 8,
+            "3": 1,
+            "4": 1,
+            "5": 2
+          }
+        }
+      },
+      "multi_aspect": {
+        "n": 31,
+        "correct": 25,
+        "accuracy": 0.8064516129032258,
+        "under": 4,
+        "over": 2,
+        "mae": 0.22580645161290322,
+        "within_one": 0.967741935483871,
+        "always_one_accuracy": 0.0,
+        "gold_histogram": {
+          "2": 14,
+          "3": 10,
+          "4": 5,
+          "5": 1,
+          "6": 1
+        },
+        "prediction_histogram": {
+          "1": 1,
+          "2": 15,
+          "3": 7,
+          "4": 6,
+          "5": 2
+        }
+      },
+      "by_gold_count": {
+        "1": {
+          "n": 65,
+          "correct": 37,
+          "accuracy": 0.5692307692307692,
+          "under": 0,
+          "over": 28,
+          "mae": 0.7538461538461538,
+          "within_one": 0.8153846153846154,
+          "always_one_accuracy": 1.0,
+          "gold_histogram": {
+            "1": 65
+          },
+          "prediction_histogram": {
+            "1": 37,
+            "2": 16,
+            "3": 5,
+            "4": 5,
+            "5": 2
+          }
+        },
+        "2": {
+          "n": 14,
+          "correct": 13,
+          "accuracy": 0.9285714285714286,
+          "under": 0,
+          "over": 1,
+          "mae": 0.07142857142857142,
+          "within_one": 1.0,
+          "always_one_accuracy": 0.0,
+          "gold_histogram": {
+            "2": 14
+          },
+          "prediction_histogram": {
+            "2": 13,
+            "3": 1
+          }
+        },
+        "3": {
+          "n": 10,
+          "correct": 6,
+          "accuracy": 0.6,
+          "under": 3,
+          "over": 1,
+          "mae": 0.5,
+          "within_one": 0.9,
+          "always_one_accuracy": 0.0,
+          "gold_histogram": {
+            "3": 10
+          },
+          "prediction_histogram": {
+            "1": 1,
+            "2": 2,
+            "3": 6,
+            "4": 1
+          }
+        },
+        "4": {
+          "n": 5,
+          "correct": 5,
+          "accuracy": 1.0,
+          "under": 0,
+          "over": 0,
+          "mae": 0.0,
+          "within_one": 1.0,
+          "always_one_accuracy": 0.0,
+          "gold_histogram": {
+            "4": 5
+          },
+          "prediction_histogram": {
+            "4": 5
+          }
+        },
+        "5": {
+          "n": 1,
+          "correct": 1,
+          "accuracy": 1.0,
+          "under": 0,
+          "over": 0,
+          "mae": 0.0,
+          "within_one": 1.0,
+          "always_one_accuracy": 0.0,
+          "gold_histogram": {
+            "5": 1
+          },
+          "prediction_histogram": {
+            "5": 1
+          }
+        },
+        "6": {
+          "n": 1,
+          "correct": 0,
+          "accuracy": 0.0,
+          "under": 1,
+          "over": 0,
+          "mae": 1.0,
+          "within_one": 1.0,
+          "always_one_accuracy": 0.0,
+          "gold_histogram": {
+            "6": 1
+          },
+          "prediction_histogram": {
+            "5": 1
+          }
+        }
+      },
+      "macro_accuracy": 0.6458333333333334
+    }
+  },
+  "records": [
+    {
+      "split": "trial",
+      "corpus": "eng_restaurant",
+      "id": "rest16_quad_dev_1",
+      "prediction": 1,
+      "gold": 0,
+      "usage": {
+        "input_tokens": 643,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "eng_restaurant",
+      "id": "rest16_quad_dev_2",
+      "prediction": 2,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 659,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "eng_restaurant",
+      "id": "rest16_quad_dev_3",
+      "prediction": 2,
+      "gold": 2,
+      "usage": {
+        "input_tokens": 654,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "eng_restaurant",
+      "id": "rest16_quad_dev_4",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 638,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "eng_restaurant",
+      "id": "rest16_quad_dev_5",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 648,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "eng_restaurant",
+      "id": "rest16_quad_dev_6",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 652,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 2
+    },
+    {
+      "split": "trial",
+      "corpus": "eng_restaurant",
+      "id": "rest16_quad_dev_7",
+      "prediction": 3,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 654,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "eng_restaurant",
+      "id": "rest16_quad_dev_8",
+      "prediction": 2,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 649,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "eng_restaurant",
+      "id": "rest16_quad_dev_9",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 652,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "eng_restaurant",
+      "id": "rest16_quad_dev_10",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 653,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "eng_restaurant",
+      "id": "rest16_quad_dev_11",
+      "prediction": 0,
+      "gold": 0,
+      "usage": {
+        "input_tokens": 636,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "eng_restaurant",
+      "id": "rest16_quad_dev_12",
+      "prediction": 1,
+      "gold": 0,
+      "usage": {
+        "input_tokens": 645,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "eng_restaurant",
+      "id": "rest16_quad_dev_13",
+      "prediction": 0,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 644,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "eng_restaurant",
+      "id": "rest16_quad_dev_14",
+      "prediction": 1,
+      "gold": 0,
+      "usage": {
+        "input_tokens": 648,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 2
+    },
+    {
+      "split": "trial",
+      "corpus": "eng_restaurant",
+      "id": "rest16_quad_dev_15",
+      "prediction": 2,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 638,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "eng_restaurant",
+      "id": "rest16_quad_dev_16",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 645,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "eng_restaurant",
+      "id": "rest16_quad_dev_17",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 643,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 2
+    },
+    {
+      "split": "trial",
+      "corpus": "eng_restaurant",
+      "id": "rest16_quad_dev_18",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 645,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 2
+    },
+    {
+      "split": "trial",
+      "corpus": "eng_restaurant",
+      "id": "rest16_quad_dev_19",
+      "prediction": 0,
+      "gold": 0,
+      "usage": {
+        "input_tokens": 642,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "eng_restaurant",
+      "id": "rest16_quad_dev_20",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 637,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "3976:1_0",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 747,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "3976:3_1",
+      "prediction": 4,
+      "gold": 2,
+      "usage": {
+        "input_tokens": 783,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "3976:4_2",
+      "prediction": 2,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 713,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "3976:5_3",
+      "prediction": 2,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 678,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "3976:7_4",
+      "prediction": 2,
+      "gold": 2,
+      "usage": {
+        "input_tokens": 656,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "3976:8_5",
+      "prediction": 2,
+      "gold": 2,
+      "usage": {
+        "input_tokens": 672,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "3976:9_6",
+      "prediction": 4,
+      "gold": 2,
+      "usage": {
+        "input_tokens": 690,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "3976:10_7",
+      "prediction": 2,
+      "gold": 2,
+      "usage": {
+        "input_tokens": 661,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "6668:0_8",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 718,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "6668:2_9",
+      "prediction": 3,
+      "gold": 2,
+      "usage": {
+        "input_tokens": 690,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "6668:6_10",
+      "prediction": 2,
+      "gold": 2,
+      "usage": {
+        "input_tokens": 682,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "6668:7_11",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 699,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "6668:9_12",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 656,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "6668:10_13",
+      "prediction": 2,
+      "gold": 2,
+      "usage": {
+        "input_tokens": 683,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "6668:11_14",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 662,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "6668:12_15",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 673,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "6668:13_16",
+      "prediction": 3,
+      "gold": 2,
+      "usage": {
+        "input_tokens": 725,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "6668:14_17",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 650,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "6668:15_18",
+      "prediction": 2,
+      "gold": 3,
+      "usage": {
+        "input_tokens": 691,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "16137:1_19",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 683,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "16137:4_20",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 686,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "16137:6_21",
+      "prediction": 1,
+      "gold": 2,
+      "usage": {
+        "input_tokens": 720,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "16137:7_22",
+      "prediction": 2,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 727,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "16137:11_23",
+      "prediction": 4,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 699,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "16137:12_24",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 686,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "16137:14_25",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 662,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "16137:15_26",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 694,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "16137:16_27",
+      "prediction": 4,
+      "gold": 2,
+      "usage": {
+        "input_tokens": 706,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "16137:17_28",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 657,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "16137:19_29",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 645,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "30808:1_30",
+      "prediction": 3,
+      "gold": 4,
+      "usage": {
+        "input_tokens": 758,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "30808:3_31",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 660,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "30808:4_32",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 646,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "30808:5_33",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 663,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "30808:6_34",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 661,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "35867:1_35",
+      "prediction": 7,
+      "gold": 8,
+      "usage": {
+        "input_tokens": 809,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "35867:2_36",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 658,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "rus_restaurant",
+      "id": "35867:3_37",
+      "prediction": 7,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 850,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_laptop",
+      "id": "6700135:S006",
+      "prediction": 2,
+      "gold": 3,
+      "usage": {
+        "input_tokens": 663,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_laptop",
+      "id": "6699557:S020",
+      "prediction": 2,
+      "gold": 2,
+      "usage": {
+        "input_tokens": 658,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_laptop",
+      "id": "6699348:S996",
+      "prediction": 2,
+      "gold": 2,
+      "usage": {
+        "input_tokens": 649,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_laptop",
+      "id": "6699348:S875",
+      "prediction": 2,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 655,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_laptop",
+      "id": "6699348:S838",
+      "prediction": 3,
+      "gold": 3,
+      "usage": {
+        "input_tokens": 649,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_laptop",
+      "id": "6699348:S823",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 652,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_laptop",
+      "id": "6699348:S800",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 644,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_laptop",
+      "id": "6699348:S714",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 646,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_laptop",
+      "id": "6699348:S591",
+      "prediction": 2,
+      "gold": 2,
+      "usage": {
+        "input_tokens": 666,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_laptop",
+      "id": "6699348:S506",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 646,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_laptop",
+      "id": "6699348:S459",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 641,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_laptop",
+      "id": "6699348:S1799",
+      "prediction": 2,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 651,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_laptop",
+      "id": "6699348:S167",
+      "prediction": 2,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 659,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_laptop",
+      "id": "6699348:S1648",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 640,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_laptop",
+      "id": "6699348:S1622",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 647,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_laptop",
+      "id": "6699348:S1550",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 645,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_laptop",
+      "id": "6699348:S149",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 636,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_laptop",
+      "id": "6699348:S1367",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 653,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_laptop",
+      "id": "6699348:S135",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 638,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_laptop",
+      "id": "6699348:S1087",
+      "prediction": 2,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 651,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_restaurant",
+      "id": "R0283:S003",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 642,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_restaurant",
+      "id": "R0283:S004",
+      "prediction": 2,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 650,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_restaurant",
+      "id": "R0284:S012",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 639,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_restaurant",
+      "id": "R0284:S018",
+      "prediction": 2,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 642,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_restaurant",
+      "id": "R0284:S021",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 642,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_restaurant",
+      "id": "R0284:S025",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 640,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_restaurant",
+      "id": "R0284:S026",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 641,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_restaurant",
+      "id": "R0284:S027",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 643,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_restaurant",
+      "id": "R0284:S034",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 639,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_restaurant",
+      "id": "R0285:S009",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 638,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_restaurant",
+      "id": "R0285:S015",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 641,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_restaurant",
+      "id": "R0285:S016",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 636,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_restaurant",
+      "id": "R0285:S01\u02d9",
+      "prediction": 0,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 639,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_restaurant",
+      "id": "R0285:S020",
+      "prediction": 0,
+      "gold": 0,
+      "usage": {
+        "input_tokens": 641,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_restaurant",
+      "id": "R0285:S023",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 641,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_restaurant",
+      "id": "R0285:S027",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 639,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_restaurant",
+      "id": "R0285:S030",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 641,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_restaurant",
+      "id": "R0285:S031",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 642,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_restaurant",
+      "id": "R0285:S032",
+      "prediction": 2,
+      "gold": 2,
+      "usage": {
+        "input_tokens": 641,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "trial",
+      "corpus": "zho_restaurant",
+      "id": "R0285:S033",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 646,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "eng_restaurant",
+      "id": "rest26_aste_dev_69",
+      "prediction": 2,
+      "gold": 2,
+      "usage": {
+        "input_tokens": 640,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "eng_restaurant",
+      "id": "rest26_aste_dev_162",
+      "prediction": 2,
+      "gold": 2,
+      "usage": {
+        "input_tokens": 646,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "eng_restaurant",
+      "id": "rest26_aste_dev_98",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 638,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "eng_restaurant",
+      "id": "rest26_aste_dev_15",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 637,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "eng_restaurant",
+      "id": "rest26_aste_dev_130",
+      "prediction": 2,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 642,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "eng_restaurant",
+      "id": "rest26_aste_dev_136",
+      "prediction": 3,
+      "gold": 3,
+      "usage": {
+        "input_tokens": 650,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "eng_restaurant",
+      "id": "rest26_aste_dev_155",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 659,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "eng_restaurant",
+      "id": "rest26_aste_dev_184",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 637,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "eng_restaurant",
+      "id": "rest26_aste_dev_62",
+      "prediction": 2,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 644,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "eng_restaurant",
+      "id": "rest26_aste_dev_167",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 637,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "eng_restaurant",
+      "id": "rest26_aste_dev_200",
+      "prediction": 2,
+      "gold": 2,
+      "usage": {
+        "input_tokens": 641,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "eng_restaurant",
+      "id": "rest26_aste_dev_104",
+      "prediction": 4,
+      "gold": 4,
+      "usage": {
+        "input_tokens": 652,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "eng_laptop",
+      "id": "lap26_aste_dev_110",
+      "prediction": 2,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 650,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "eng_laptop",
+      "id": "lap26_aste_dev_194",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 646,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "eng_laptop",
+      "id": "lap26_aste_dev_125",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 647,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "eng_laptop",
+      "id": "lap26_aste_dev_71",
+      "prediction": 4,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 675,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "eng_laptop",
+      "id": "lap26_aste_dev_45",
+      "prediction": 2,
+      "gold": 2,
+      "usage": {
+        "input_tokens": 642,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "eng_laptop",
+      "id": "lap26_aste_dev_127",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 640,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "eng_laptop",
+      "id": "lap26_aste_dev_27",
+      "prediction": 3,
+      "gold": 3,
+      "usage": {
+        "input_tokens": 658,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "eng_laptop",
+      "id": "lap26_aste_dev_118",
+      "prediction": 2,
+      "gold": 3,
+      "usage": {
+        "input_tokens": 650,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "eng_laptop",
+      "id": "lap26_aste_dev_48",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 636,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "eng_laptop",
+      "id": "lap26_aste_dev_143",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 638,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "eng_laptop",
+      "id": "lap26_aste_dev_117",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 640,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "eng_laptop",
+      "id": "lap26_aste_dev_174",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 639,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "zho_restaurant",
+      "id": "R6009:S000",
+      "prediction": 2,
+      "gold": 2,
+      "usage": {
+        "input_tokens": 650,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "zho_restaurant",
+      "id": "R9693:S000",
+      "prediction": 2,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 696,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "zho_restaurant",
+      "id": "R10048:S002",
+      "prediction": 2,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 680,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "zho_restaurant",
+      "id": "R8019:S000",
+      "prediction": 2,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 652,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "zho_restaurant",
+      "id": "R9228:S002",
+      "prediction": 2,
+      "gold": 2,
+      "usage": {
+        "input_tokens": 651,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "zho_restaurant",
+      "id": "R6135:S007",
+      "prediction": 2,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 659,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "zho_restaurant",
+      "id": "R6765:S000",
+      "prediction": 3,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 682,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "zho_restaurant",
+      "id": "R9731:S016",
+      "prediction": 2,
+      "gold": 2,
+      "usage": {
+        "input_tokens": 666,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "zho_restaurant",
+      "id": "R5901:S000",
+      "prediction": 5,
+      "gold": 5,
+      "usage": {
+        "input_tokens": 743,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "zho_restaurant",
+      "id": "R10005:S004",
+      "prediction": 4,
+      "gold": 3,
+      "usage": {
+        "input_tokens": 673,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "zho_restaurant",
+      "id": "R9531:S011",
+      "prediction": 2,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 658,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "zho_restaurant",
+      "id": "R6136:S000",
+      "prediction": 5,
+      "gold": 6,
+      "usage": {
+        "input_tokens": 686,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "zho_laptop",
+      "id": "6973895:S034",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 655,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "zho_laptop",
+      "id": "6697182:S005",
+      "prediction": 5,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 742,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "zho_laptop",
+      "id": "7010970:S045",
+      "prediction": 2,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 653,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "zho_laptop",
+      "id": "6788726:S511",
+      "prediction": 2,
+      "gold": 2,
+      "usage": {
+        "input_tokens": 645,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "zho_laptop",
+      "id": "6759304:S024",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 650,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "zho_laptop",
+      "id": "6716431:S001",
+      "prediction": 2,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 658,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "zho_laptop",
+      "id": "6738095:S733",
+      "prediction": 2,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 644,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "zho_laptop",
+      "id": "7068377:S052",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 653,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "zho_laptop",
+      "id": "6990516:S001",
+      "prediction": 2,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 659,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "zho_laptop",
+      "id": "6940405:S103",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 645,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "zho_laptop",
+      "id": "6799971:S009",
+      "prediction": 3,
+      "gold": 2,
+      "usage": {
+        "input_tokens": 693,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "zho_laptop",
+      "id": "6917337:S020",
+      "prediction": 2,
+      "gold": 2,
+      "usage": {
+        "input_tokens": 653,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "jpn_hotel",
+      "id": "hotel26_aste_dev_60",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 665,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "jpn_hotel",
+      "id": "hotel26_aste_dev_124",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 651,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "jpn_hotel",
+      "id": "hotel26_aste_dev_71",
+      "prediction": 2,
+      "gold": 2,
+      "usage": {
+        "input_tokens": 659,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "jpn_hotel",
+      "id": "hotel26_aste_dev_50",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 655,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "jpn_hotel",
+      "id": "hotel26_aste_dev_34",
+      "prediction": 4,
+      "gold": 4,
+      "usage": {
+        "input_tokens": 667,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "jpn_hotel",
+      "id": "hotel26_aste_dev_145",
+      "prediction": 4,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 695,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "jpn_hotel",
+      "id": "hotel26_aste_dev_100",
+      "prediction": 2,
+      "gold": 2,
+      "usage": {
+        "input_tokens": 653,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "jpn_hotel",
+      "id": "hotel26_aste_dev_37",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 654,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "jpn_hotel",
+      "id": "hotel26_aste_dev_108",
+      "prediction": 2,
+      "gold": 2,
+      "usage": {
+        "input_tokens": 667,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "jpn_hotel",
+      "id": "hotel26_aste_dev_70",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 644,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "jpn_hotel",
+      "id": "hotel26_aste_dev_55",
+      "prediction": 2,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 658,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "jpn_hotel",
+      "id": "hotel26_aste_dev_4",
+      "prediction": 3,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 669,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "rus_restaurant",
+      "id": "36126:8_45",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 650,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "rus_restaurant",
+      "id": "10287:1_13",
+      "prediction": 4,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 695,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "rus_restaurant",
+      "id": "1408:5_3",
+      "prediction": 1,
+      "gold": 3,
+      "usage": {
+        "input_tokens": 713,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "rus_restaurant",
+      "id": "31778:9_32",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 689,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "rus_restaurant",
+      "id": "15100:1_27",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 648,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "rus_restaurant",
+      "id": "36402:1_46",
+      "prediction": 3,
+      "gold": 3,
+      "usage": {
+        "input_tokens": 681,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "rus_restaurant",
+      "id": "32206:4_33",
+      "prediction": 5,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 757,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "rus_restaurant",
+      "id": "14407:3_25",
+      "prediction": 4,
+      "gold": 4,
+      "usage": {
+        "input_tokens": 887,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "rus_restaurant",
+      "id": "12360:6_20",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 660,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "rus_restaurant",
+      "id": "14407:1_24",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 662,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "rus_restaurant",
+      "id": "15856:0_31",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 688,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "rus_restaurant",
+      "id": "36017:11_44",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 662,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "tat_restaurant",
+      "id": "3480:1_6",
+      "prediction": 2,
+      "gold": 2,
+      "usage": {
+        "input_tokens": 666,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "tat_restaurant",
+      "id": "36126:8_45",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 650,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "tat_restaurant",
+      "id": "10403:8_14",
+      "prediction": 2,
+      "gold": 3,
+      "usage": {
+        "input_tokens": 676,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "tat_restaurant",
+      "id": "31778:9_32",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 739,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "tat_restaurant",
+      "id": "13133:3_21",
+      "prediction": 4,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 821,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "tat_restaurant",
+      "id": "33720:6_39",
+      "prediction": 3,
+      "gold": 3,
+      "usage": {
+        "input_tokens": 693,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "tat_restaurant",
+      "id": "11657:6_18",
+      "prediction": 2,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 673,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "tat_restaurant",
+      "id": "14407:3_25",
+      "prediction": 4,
+      "gold": 4,
+      "usage": {
+        "input_tokens": 973,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "tat_restaurant",
+      "id": "15687:5_30",
+      "prediction": 2,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 714,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "tat_restaurant",
+      "id": "3236:1_4",
+      "prediction": 3,
+      "gold": 3,
+      "usage": {
+        "input_tokens": 692,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "tat_restaurant",
+      "id": "13541:4_22",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 742,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "tat_restaurant",
+      "id": "10731:4_15",
+      "prediction": 3,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 733,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "ukr_restaurant",
+      "id": "32584:9_34",
+      "prediction": 3,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 725,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "ukr_restaurant",
+      "id": "10731:4_15",
+      "prediction": 3,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 716,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "ukr_restaurant",
+      "id": "36402:1_46",
+      "prediction": 3,
+      "gold": 3,
+      "usage": {
+        "input_tokens": 677,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "ukr_restaurant",
+      "id": "15100:1_27",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 659,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "ukr_restaurant",
+      "id": "11657:6_18",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 674,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "ukr_restaurant",
+      "id": "10106:4_9",
+      "prediction": 2,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 769,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "ukr_restaurant",
+      "id": "35325:4_42",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 678,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "ukr_restaurant",
+      "id": "15856:0_31",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 693,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "ukr_restaurant",
+      "id": "31778:9_32",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 721,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "ukr_restaurant",
+      "id": "14551:0_26",
+      "prediction": 4,
+      "gold": 4,
+      "usage": {
+        "input_tokens": 771,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "ukr_restaurant",
+      "id": "10287:1_13",
+      "prediction": 4,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 716,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    },
+    {
+      "split": "dev",
+      "corpus": "ukr_restaurant",
+      "id": "36017:11_44",
+      "prediction": 1,
+      "gold": 1,
+      "usage": {
+        "input_tokens": 667,
+        "output_tokens": 271
+      },
+      "model": "jev-1.13.0",
+      "attempts": 1
+    }
+  ],
+  "input_tokens": 130233,
+  "estimated_usd": 0.005469786,
+  "calls": 194
+}

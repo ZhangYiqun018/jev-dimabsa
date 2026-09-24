@@ -1,0 +1,22 @@
+{
+  "selection_split": "trial",
+  "threshold_grid": [
+    0.5,
+    0.65,
+    0.8
+  ],
+  "bio_r2_macro_pair_f1": [
+    0.4421138072453862,
+    0.4984520123839009,
+    0.438515406162465
+  ],
+  "pointer_r2_macro_pair_f1": [
+    0.4674722048863925,
+    0.49630761395467277,
+    0.42210730446024564
+  ],
+  "chosen_revision": 2,
+  "chosen_threshold": 0.65,
+  "dev_per_corpus": 12,
+  "decision": "Both r2 methods are effectively tied on trial; compare both on the same frozen dev subset. No dev tuning in this round."
+}

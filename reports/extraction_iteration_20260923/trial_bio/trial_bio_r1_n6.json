@@ -1,0 +1,270 @@
+{
+  "split": "trial",
+  "mode": "bio",
+  "revision": 1,
+  "fingerprint": "b94799e261a4",
+  "model": [
+    "jev-1.13.0"
+  ],
+  "per_corpus": 6,
+  "threshold": 0.5,
+  "corpora": [
+    {
+      "corpus": "eng_restaurant",
+      "n": 6,
+      "ids": [
+        "rest16_quad_dev_9",
+        "rest16_quad_dev_17",
+        "rest16_quad_dev_14",
+        "rest16_quad_dev_2",
+        "rest16_quad_dev_15",
+        "rest16_quad_dev_10"
+      ],
+      "metrics": {
+        "aspect": {
+          "tp": 3,
+          "fp": 7,
+          "fn": 2,
+          "precision": 0.3,
+          "recall": 0.6,
+          "f1": 0.4
+        },
+        "opinion": {
+          "tp": 5,
+          "fp": 10,
+          "fn": 3,
+          "precision": 0.3333333333333333,
+          "recall": 0.625,
+          "f1": 0.43478260869565216
+        },
+        "pair": {
+          "tp": 5,
+          "fp": 7,
+          "fn": 5,
+          "precision": 0.4166666666666667,
+          "recall": 0.5,
+          "f1": 0.45454545454545453
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 4,
+          "fn": 3,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.5
+      }
+    },
+    {
+      "corpus": "zho_restaurant",
+      "n": 6,
+      "ids": [
+        "R0284:S018",
+        "R0285:S020",
+        "R0285:S01\u02d9",
+        "R0284:S012",
+        "R0283:S004",
+        "R0285:S016"
+      ],
+      "metrics": {
+        "aspect": {
+          "tp": 4,
+          "fp": 5,
+          "fn": 1,
+          "precision": 0.4444444444444444,
+          "recall": 0.8,
+          "f1": 0.5714285714285714
+        },
+        "opinion": {
+          "tp": 3,
+          "fp": 8,
+          "fn": 7,
+          "precision": 0.2727272727272727,
+          "recall": 0.3,
+          "f1": 0.2857142857142857
+        },
+        "pair": {
+          "tp": 3,
+          "fp": 5,
+          "fn": 7,
+          "precision": 0.375,
+          "recall": 0.3,
+          "f1": 0.3333333333333333
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 3,
+          "fn": 2,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.3
+      }
+    },
+    {
+      "corpus": "zho_laptop",
+      "n": 6,
+      "ids": [
+        "6699348:S1367",
+        "6699348:S875",
+        "6699348:S714",
+        "6699348:S1550",
+        "6699348:S823",
+        "6699348:S838"
+      ],
+      "metrics": {
+        "aspect": {
+          "tp": 6,
+          "fp": 9,
+          "fn": 2,
+          "precision": 0.4,
+          "recall": 0.75,
+          "f1": 0.5217391304347826
+        },
+        "opinion": {
+          "tp": 2,
+          "fp": 11,
+          "fn": 5,
+          "precision": 0.15384615384615385,
+          "recall": 0.2857142857142857,
+          "f1": 0.2
+        },
+        "pair": {
+          "tp": 3,
+          "fp": 9,
+          "fn": 5,
+          "precision": 0.25,
+          "recall": 0.375,
+          "f1": 0.3
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.375
+      }
+    },
+    {
+      "corpus": "rus_restaurant",
+      "n": 6,
+      "ids": [
+        "6668:6_10",
+        "16137:14_25",
+        "3976:5_3",
+        "35867:2_36",
+        "16137:15_26",
+        "16137:12_24"
+      ],
+      "metrics": {
+        "aspect": {
+          "tp": 7,
+          "fp": 5,
+          "fn": 0,
+          "precision": 0.5833333333333334,
+          "recall": 1.0,
+          "f1": 0.7368421052631579
+        },
+        "opinion": {
+          "tp": 8,
+          "fp": 7,
+          "fn": 3,
+          "precision": 0.5333333333333333,
+          "recall": 0.7272727272727273,
+          "f1": 0.6153846153846154
+        },
+        "pair": {
+          "tp": 5,
+          "fp": 5,
+          "fn": 6,
+          "precision": 0.5,
+          "recall": 0.45454545454545453,
+          "f1": 0.47619047619047616
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.7272727272727273
+      }
+    }
+  ],
+  "micro": {
+    "aspect": {
+      "tp": 20,
+      "fp": 26,
+      "fn": 5,
+      "precision": 0.43478260869565216,
+      "recall": 0.8,
+      "f1": 0.5633802816901409
+    },
+    "opinion": {
+      "tp": 18,
+      "fp": 36,
+      "fn": 18,
+      "precision": 0.3333333333333333,
+      "recall": 0.5,
+      "f1": 0.4
+    },
+    "pair": {
+      "tp": 16,
+      "fp": 26,
+      "fn": 23,
+      "precision": 0.38095238095238093,
+      "recall": 0.41025641025641024,
+      "f1": 0.3950617283950617
+    },
+    "null_pair": {
+      "tp": 0,
+      "fp": 9,
+      "fn": 5,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "candidate_pair_recall": 0.48717948717948717
+  },
+  "macro_pair_f1": 0.391017316017316,
+  "calls": 48,
+  "input_tokens": 79158,
+  "estimated_usd": 0.0033246360000000006,
+  "span_limit_hits": 0,
+  "chunked_records": 0,
+  "metric_note": "Case-insensitive exact surface-string set F1 per record; not official cF1. Span scores before pair filtering; baseline spans are final outputs.",
+  "selection": "SHA256(seed 20260923, corpus, ID), first N; dev excludes all trial text",
+  "cache_files": [
+    "reports/extraction_iteration_20260923/trial_bio/cache/bio_r1_b94799e261a4_077f1f06cb577c95.json",
+    "reports/extraction_iteration_20260923/trial_bio/cache/bio_r1_b94799e261a4_4426649e451754e1.json",
+    "reports/extraction_iteration_20260923/trial_bio/cache/bio_r1_b94799e261a4_4a444873360d0cb6.json",
+    "reports/extraction_iteration_20260923/trial_bio/cache/bio_r1_b94799e261a4_4a95dea0232537ed.json",
+    "reports/extraction_iteration_20260923/trial_bio/cache/bio_r1_b94799e261a4_4bca174c5e0fbd7c.json",
+    "reports/extraction_iteration_20260923/trial_bio/cache/bio_r1_b94799e261a4_5fad7091d921bf4d.json",
+    "reports/extraction_iteration_20260923/trial_bio/cache/bio_r1_b94799e261a4_65a58dd8a17878b2.json",
+    "reports/extraction_iteration_20260923/trial_bio/cache/bio_r1_b94799e261a4_6995195e907b5d48.json",
+    "reports/extraction_iteration_20260923/trial_bio/cache/bio_r1_b94799e261a4_6e6235dada524068.json",
+    "reports/extraction_iteration_20260923/trial_bio/cache/bio_r1_b94799e261a4_737c12005fea2041.json",
+    "reports/extraction_iteration_20260923/trial_bio/cache/bio_r1_b94799e261a4_823fa076b816c1cf.json",
+    "reports/extraction_iteration_20260923/trial_bio/cache/bio_r1_b94799e261a4_87ce1ff5cb61244e.json",
+    "reports/extraction_iteration_20260923/trial_bio/cache/bio_r1_b94799e261a4_91c1ef9ed6ae70a7.json",
+    "reports/extraction_iteration_20260923/trial_bio/cache/bio_r1_b94799e261a4_98de4997d146ffb1.json",
+    "reports/extraction_iteration_20260923/trial_bio/cache/bio_r1_b94799e261a4_9a0360ff642d7fe8.json",
+    "reports/extraction_iteration_20260923/trial_bio/cache/bio_r1_b94799e261a4_b4afaffaa9fcae04.json",
+    "reports/extraction_iteration_20260923/trial_bio/cache/bio_r1_b94799e261a4_b5749eab5132706b.json",
+    "reports/extraction_iteration_20260923/trial_bio/cache/bio_r1_b94799e261a4_bfc024934978a8a3.json",
+    "reports/extraction_iteration_20260923/trial_bio/cache/bio_r1_b94799e261a4_c9db8a0988d23e42.json",
+    "reports/extraction_iteration_20260923/trial_bio/cache/bio_r1_b94799e261a4_e02b012cccc207db.json",
+    "reports/extraction_iteration_20260923/trial_bio/cache/bio_r1_b94799e261a4_e13a11c2d3eebe84.json",
+    "reports/extraction_iteration_20260923/trial_bio/cache/bio_r1_b94799e261a4_ecf32df74e3204c3.json",
+    "reports/extraction_iteration_20260923/trial_bio/cache/bio_r1_b94799e261a4_ff6a1278706a06ac.json",
+    "reports/extraction_iteration_20260923/trial_bio/cache/bio_r1_b94799e261a4_ff8d5c96abfbc624.json"
+  ]
+}

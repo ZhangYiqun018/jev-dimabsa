@@ -1,0 +1,106 @@
+{
+  "model": "jev-1.13.0",
+  "config": "stack_v1",
+  "specs": {
+    "eng_restaurant": {
+      "source": "bio",
+      "rules": {
+        "null_policy": true,
+        "overlap": true,
+        "affix": [
+          "aspect"
+        ]
+      },
+      "variants": true
+    },
+    "eng_laptop": {
+      "source": "bio",
+      "rules": {
+        "null_policy": true,
+        "overlap": true,
+        "affix": [
+          "aspect"
+        ]
+      },
+      "variants": true
+    },
+    "zho_restaurant": {
+      "source": "bio",
+      "rules": {
+        "null_policy": true,
+        "overlap": true,
+        "affix": [
+          "aspect",
+          "opinion"
+        ]
+      },
+      "variants": true
+    },
+    "zho_laptop": {
+      "source": "bio",
+      "rules": {
+        "null_policy": true,
+        "overlap": true,
+        "affix": [
+          "aspect",
+          "opinion"
+        ]
+      },
+      "variants": true
+    },
+    "jpn_hotel": {
+      "source": "lexicon",
+      "lexicon_threshold": 0.65,
+      "merge_bio_null": true,
+      "rules": {
+        "null_policy": true,
+        "overlap": true,
+        "affix": [
+          "aspect",
+          "opinion"
+        ]
+      },
+      "variants": true
+    },
+    "rus_restaurant": {
+      "source": "bio",
+      "rules": {
+        "null_policy": true,
+        "overlap": true,
+        "affix": [
+          "aspect",
+          "opinion"
+        ]
+      },
+      "variants": true
+    },
+    "tat_restaurant": {
+      "source": "bio",
+      "rules": {
+        "null_policy": true,
+        "overlap": true,
+        "affix": [
+          "aspect",
+          "opinion"
+        ]
+      },
+      "variants": true
+    },
+    "ukr_restaurant": {
+      "source": "bio",
+      "rules": {
+        "null_policy": true,
+        "overlap": true,
+        "affix": [
+          "aspect",
+          "opinion"
+        ]
+      },
+      "variants": true
+    }
+  },
+  "bio_extractor_id": "41ea479bf861",
+  "pair_threshold": 0.65,
+  "lattice_threshold": 0.2,
+  "calibration": "Task1 zero-shot shrink, frozen"
+}

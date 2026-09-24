@@ -1,0 +1,1233 @@
+{
+  "split": "dev",
+  "mode": "bio",
+  "revision": 2,
+  "fingerprint": "cfcabdeb8d35",
+  "model": [
+    "jev-1.13.0"
+  ],
+  "per_corpus": 12,
+  "threshold": 0.65,
+  "corpora": [
+    {
+      "corpus": "eng_restaurant",
+      "n": 12,
+      "ids": [
+        "rest26_aste_dev_69",
+        "rest26_aste_dev_162",
+        "rest26_aste_dev_98",
+        "rest26_aste_dev_15",
+        "rest26_aste_dev_130",
+        "rest26_aste_dev_136",
+        "rest26_aste_dev_155",
+        "rest26_aste_dev_184",
+        "rest26_aste_dev_62",
+        "rest26_aste_dev_167",
+        "rest26_aste_dev_200",
+        "rest26_aste_dev_104"
+      ],
+      "metrics": {
+        "aspect": {
+          "tp": 18,
+          "fp": 5,
+          "fn": 2,
+          "precision": 0.782608695652174,
+          "recall": 0.9,
+          "f1": 0.8372093023255814
+        },
+        "opinion": {
+          "tp": 23,
+          "fp": 3,
+          "fn": 1,
+          "precision": 0.8846153846153846,
+          "recall": 0.9583333333333334,
+          "f1": 0.92
+        },
+        "linked_aspect": {
+          "tp": 18,
+          "fp": 2,
+          "fn": 2,
+          "precision": 0.9,
+          "recall": 0.9,
+          "f1": 0.9
+        },
+        "linked_opinion": {
+          "tp": 22,
+          "fp": 1,
+          "fn": 2,
+          "precision": 0.9565217391304348,
+          "recall": 0.9166666666666666,
+          "f1": 0.9361702127659575
+        },
+        "pair": {
+          "tp": 21,
+          "fp": 3,
+          "fn": 4,
+          "precision": 0.875,
+          "recall": 0.84,
+          "f1": 0.8571428571428571
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.88,
+        "pair_misses": {
+          "aspect_missing": 2,
+          "opinion_missing": 1,
+          "both_missing": 0,
+          "pair_rejected": 1
+        }
+      },
+      "baseline": {
+        "aspect": {
+          "tp": 14,
+          "fp": 6,
+          "fn": 6,
+          "precision": 0.7,
+          "recall": 0.7,
+          "f1": 0.7
+        },
+        "opinion": {
+          "tp": 18,
+          "fp": 6,
+          "fn": 6,
+          "precision": 0.75,
+          "recall": 0.75,
+          "f1": 0.75
+        },
+        "linked_aspect": {
+          "tp": 14,
+          "fp": 6,
+          "fn": 6,
+          "precision": 0.7,
+          "recall": 0.7,
+          "f1": 0.7
+        },
+        "linked_opinion": {
+          "tp": 18,
+          "fp": 6,
+          "fn": 6,
+          "precision": 0.75,
+          "recall": 0.75,
+          "f1": 0.75
+        },
+        "pair": {
+          "tp": 17,
+          "fp": 15,
+          "fn": 8,
+          "precision": 0.53125,
+          "recall": 0.68,
+          "f1": 0.5964912280701754
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.68,
+        "pair_misses": {
+          "aspect_missing": 2,
+          "opinion_missing": 2,
+          "both_missing": 4,
+          "pair_rejected": 0
+        }
+      }
+    },
+    {
+      "corpus": "eng_laptop",
+      "n": 12,
+      "ids": [
+        "lap26_aste_dev_110",
+        "lap26_aste_dev_194",
+        "lap26_aste_dev_125",
+        "lap26_aste_dev_71",
+        "lap26_aste_dev_45",
+        "lap26_aste_dev_127",
+        "lap26_aste_dev_27",
+        "lap26_aste_dev_118",
+        "lap26_aste_dev_48",
+        "lap26_aste_dev_143",
+        "lap26_aste_dev_117",
+        "lap26_aste_dev_174"
+      ],
+      "metrics": {
+        "aspect": {
+          "tp": 14,
+          "fp": 10,
+          "fn": 3,
+          "precision": 0.5833333333333334,
+          "recall": 0.8235294117647058,
+          "f1": 0.6829268292682927
+        },
+        "opinion": {
+          "tp": 15,
+          "fp": 7,
+          "fn": 3,
+          "precision": 0.6818181818181818,
+          "recall": 0.8333333333333334,
+          "f1": 0.75
+        },
+        "linked_aspect": {
+          "tp": 12,
+          "fp": 2,
+          "fn": 5,
+          "precision": 0.8571428571428571,
+          "recall": 0.7058823529411765,
+          "f1": 0.7741935483870968
+        },
+        "linked_opinion": {
+          "tp": 14,
+          "fp": 1,
+          "fn": 4,
+          "precision": 0.9333333333333333,
+          "recall": 0.7777777777777778,
+          "f1": 0.8484848484848485
+        },
+        "pair": {
+          "tp": 13,
+          "fp": 3,
+          "fn": 7,
+          "precision": 0.8125,
+          "recall": 0.65,
+          "f1": 0.7222222222222222
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.75,
+        "pair_misses": {
+          "aspect_missing": 2,
+          "opinion_missing": 2,
+          "both_missing": 1,
+          "pair_rejected": 2
+        }
+      },
+      "baseline": {
+        "aspect": {
+          "tp": 12,
+          "fp": 12,
+          "fn": 5,
+          "precision": 0.5,
+          "recall": 0.7058823529411765,
+          "f1": 0.5853658536585366
+        },
+        "opinion": {
+          "tp": 8,
+          "fp": 10,
+          "fn": 10,
+          "precision": 0.4444444444444444,
+          "recall": 0.4444444444444444,
+          "f1": 0.4444444444444444
+        },
+        "linked_aspect": {
+          "tp": 12,
+          "fp": 12,
+          "fn": 5,
+          "precision": 0.5,
+          "recall": 0.7058823529411765,
+          "f1": 0.5853658536585366
+        },
+        "linked_opinion": {
+          "tp": 8,
+          "fp": 10,
+          "fn": 10,
+          "precision": 0.4444444444444444,
+          "recall": 0.4444444444444444,
+          "f1": 0.4444444444444444
+        },
+        "pair": {
+          "tp": 8,
+          "fp": 24,
+          "fn": 12,
+          "precision": 0.25,
+          "recall": 0.4,
+          "f1": 0.3076923076923077
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.4,
+        "pair_misses": {
+          "aspect_missing": 2,
+          "opinion_missing": 4,
+          "both_missing": 6,
+          "pair_rejected": 0
+        }
+      }
+    },
+    {
+      "corpus": "zho_restaurant",
+      "n": 12,
+      "ids": [
+        "R6009:S000",
+        "R9693:S000",
+        "R10048:S002",
+        "R8019:S000",
+        "R9228:S002",
+        "R6135:S007",
+        "R6765:S000",
+        "R9731:S016",
+        "R5901:S000",
+        "R10005:S004",
+        "R9531:S011",
+        "R6136:S000"
+      ],
+      "metrics": {
+        "aspect": {
+          "tp": 21,
+          "fp": 37,
+          "fn": 5,
+          "precision": 0.3620689655172414,
+          "recall": 0.8076923076923077,
+          "f1": 0.5
+        },
+        "opinion": {
+          "tp": 19,
+          "fp": 33,
+          "fn": 10,
+          "precision": 0.36538461538461536,
+          "recall": 0.6551724137931034,
+          "f1": 0.4691358024691358
+        },
+        "linked_aspect": {
+          "tp": 19,
+          "fp": 9,
+          "fn": 7,
+          "precision": 0.6785714285714286,
+          "recall": 0.7307692307692307,
+          "f1": 0.7037037037037037
+        },
+        "linked_opinion": {
+          "tp": 18,
+          "fp": 7,
+          "fn": 11,
+          "precision": 0.72,
+          "recall": 0.6206896551724138,
+          "f1": 0.6666666666666666
+        },
+        "pair": {
+          "tp": 17,
+          "fp": 17,
+          "fn": 15,
+          "precision": 0.5,
+          "recall": 0.53125,
+          "f1": 0.5151515151515151
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 3,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.59375,
+        "pair_misses": {
+          "aspect_missing": 3,
+          "opinion_missing": 8,
+          "both_missing": 2,
+          "pair_rejected": 2
+        }
+      },
+      "baseline": {
+        "aspect": {
+          "tp": 15,
+          "fp": 14,
+          "fn": 11,
+          "precision": 0.5172413793103449,
+          "recall": 0.5769230769230769,
+          "f1": 0.5454545454545454
+        },
+        "opinion": {
+          "tp": 11,
+          "fp": 25,
+          "fn": 18,
+          "precision": 0.3055555555555556,
+          "recall": 0.3793103448275862,
+          "f1": 0.3384615384615385
+        },
+        "linked_aspect": {
+          "tp": 15,
+          "fp": 14,
+          "fn": 11,
+          "precision": 0.5172413793103449,
+          "recall": 0.5769230769230769,
+          "f1": 0.5454545454545454
+        },
+        "linked_opinion": {
+          "tp": 11,
+          "fp": 25,
+          "fn": 18,
+          "precision": 0.3055555555555556,
+          "recall": 0.3793103448275862,
+          "f1": 0.3384615384615385
+        },
+        "pair": {
+          "tp": 8,
+          "fp": 59,
+          "fn": 24,
+          "precision": 0.11940298507462686,
+          "recall": 0.25,
+          "f1": 0.16161616161616163
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.25,
+        "pair_misses": {
+          "aspect_missing": 6,
+          "opinion_missing": 8,
+          "both_missing": 10,
+          "pair_rejected": 0
+        }
+      }
+    },
+    {
+      "corpus": "zho_laptop",
+      "n": 12,
+      "ids": [
+        "6973895:S034",
+        "6697182:S005",
+        "7010970:S045",
+        "6788726:S511",
+        "6759304:S024",
+        "6716431:S001",
+        "6738095:S733",
+        "7068377:S052",
+        "6990516:S001",
+        "6940405:S103",
+        "6799971:S009",
+        "6917337:S020"
+      ],
+      "metrics": {
+        "aspect": {
+          "tp": 9,
+          "fp": 32,
+          "fn": 6,
+          "precision": 0.21951219512195122,
+          "recall": 0.6,
+          "f1": 0.32142857142857145
+        },
+        "opinion": {
+          "tp": 7,
+          "fp": 23,
+          "fn": 10,
+          "precision": 0.23333333333333334,
+          "recall": 0.4117647058823529,
+          "f1": 0.2978723404255319
+        },
+        "linked_aspect": {
+          "tp": 6,
+          "fp": 10,
+          "fn": 9,
+          "precision": 0.375,
+          "recall": 0.4,
+          "f1": 0.3870967741935484
+        },
+        "linked_opinion": {
+          "tp": 7,
+          "fp": 10,
+          "fn": 10,
+          "precision": 0.4117647058823529,
+          "recall": 0.4117647058823529,
+          "f1": 0.4117647058823529
+        },
+        "pair": {
+          "tp": 4,
+          "fp": 17,
+          "fn": 14,
+          "precision": 0.19047619047619047,
+          "recall": 0.2222222222222222,
+          "f1": 0.20512820512820512
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 3,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.2222222222222222,
+        "pair_misses": {
+          "aspect_missing": 4,
+          "opinion_missing": 6,
+          "both_missing": 4,
+          "pair_rejected": 0
+        }
+      },
+      "baseline": {
+        "aspect": {
+          "tp": 7,
+          "fp": 14,
+          "fn": 8,
+          "precision": 0.3333333333333333,
+          "recall": 0.4666666666666667,
+          "f1": 0.3888888888888889
+        },
+        "opinion": {
+          "tp": 5,
+          "fp": 19,
+          "fn": 12,
+          "precision": 0.20833333333333334,
+          "recall": 0.29411764705882354,
+          "f1": 0.24390243902439024
+        },
+        "linked_aspect": {
+          "tp": 7,
+          "fp": 14,
+          "fn": 8,
+          "precision": 0.3333333333333333,
+          "recall": 0.4666666666666667,
+          "f1": 0.3888888888888889
+        },
+        "linked_opinion": {
+          "tp": 5,
+          "fp": 19,
+          "fn": 12,
+          "precision": 0.20833333333333334,
+          "recall": 0.29411764705882354,
+          "f1": 0.24390243902439024
+        },
+        "pair": {
+          "tp": 3,
+          "fp": 36,
+          "fn": 15,
+          "precision": 0.07692307692307693,
+          "recall": 0.16666666666666666,
+          "f1": 0.10526315789473684
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.16666666666666666,
+        "pair_misses": {
+          "aspect_missing": 3,
+          "opinion_missing": 4,
+          "both_missing": 8,
+          "pair_rejected": 0
+        }
+      }
+    },
+    {
+      "corpus": "jpn_hotel",
+      "n": 12,
+      "ids": [
+        "hotel26_aste_dev_60",
+        "hotel26_aste_dev_124",
+        "hotel26_aste_dev_71",
+        "hotel26_aste_dev_50",
+        "hotel26_aste_dev_34",
+        "hotel26_aste_dev_145",
+        "hotel26_aste_dev_100",
+        "hotel26_aste_dev_37",
+        "hotel26_aste_dev_108",
+        "hotel26_aste_dev_70",
+        "hotel26_aste_dev_55",
+        "hotel26_aste_dev_4"
+      ],
+      "metrics": {
+        "aspect": {
+          "tp": 13,
+          "fp": 23,
+          "fn": 5,
+          "precision": 0.3611111111111111,
+          "recall": 0.7222222222222222,
+          "f1": 0.48148148148148145
+        },
+        "opinion": {
+          "tp": 14,
+          "fp": 31,
+          "fn": 11,
+          "precision": 0.3111111111111111,
+          "recall": 0.56,
+          "f1": 0.4
+        },
+        "linked_aspect": {
+          "tp": 8,
+          "fp": 3,
+          "fn": 10,
+          "precision": 0.7272727272727273,
+          "recall": 0.4444444444444444,
+          "f1": 0.5517241379310345
+        },
+        "linked_opinion": {
+          "tp": 9,
+          "fp": 5,
+          "fn": 16,
+          "precision": 0.6428571428571429,
+          "recall": 0.36,
+          "f1": 0.46153846153846156
+        },
+        "pair": {
+          "tp": 7,
+          "fp": 7,
+          "fn": 20,
+          "precision": 0.5,
+          "recall": 0.25925925925925924,
+          "f1": 0.34146341463414637
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 3,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.4444444444444444,
+        "pair_misses": {
+          "aspect_missing": 3,
+          "opinion_missing": 9,
+          "both_missing": 3,
+          "pair_rejected": 5
+        }
+      },
+      "baseline": {
+        "aspect": {
+          "tp": 13,
+          "fp": 10,
+          "fn": 5,
+          "precision": 0.5652173913043478,
+          "recall": 0.7222222222222222,
+          "f1": 0.6341463414634146
+        },
+        "opinion": {
+          "tp": 15,
+          "fp": 11,
+          "fn": 10,
+          "precision": 0.5769230769230769,
+          "recall": 0.6,
+          "f1": 0.5882352941176471
+        },
+        "linked_aspect": {
+          "tp": 13,
+          "fp": 10,
+          "fn": 5,
+          "precision": 0.5652173913043478,
+          "recall": 0.7222222222222222,
+          "f1": 0.6341463414634146
+        },
+        "linked_opinion": {
+          "tp": 15,
+          "fp": 11,
+          "fn": 10,
+          "precision": 0.5769230769230769,
+          "recall": 0.6,
+          "f1": 0.5882352941176471
+        },
+        "pair": {
+          "tp": 13,
+          "fp": 25,
+          "fn": 14,
+          "precision": 0.34210526315789475,
+          "recall": 0.48148148148148145,
+          "f1": 0.4
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 3,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.48148148148148145,
+        "pair_misses": {
+          "aspect_missing": 3,
+          "opinion_missing": 4,
+          "both_missing": 6,
+          "pair_rejected": 1
+        }
+      }
+    },
+    {
+      "corpus": "rus_restaurant",
+      "n": 12,
+      "ids": [
+        "36126:8_45",
+        "10287:1_13",
+        "1408:5_3",
+        "31778:9_32",
+        "15100:1_27",
+        "36402:1_46",
+        "32206:4_33",
+        "14407:3_25",
+        "12360:6_20",
+        "14407:1_24",
+        "15856:0_31",
+        "36017:11_44"
+      ],
+      "metrics": {
+        "aspect": {
+          "tp": 17,
+          "fp": 13,
+          "fn": 2,
+          "precision": 0.5666666666666667,
+          "recall": 0.8947368421052632,
+          "f1": 0.6938775510204082
+        },
+        "opinion": {
+          "tp": 12,
+          "fp": 26,
+          "fn": 8,
+          "precision": 0.3157894736842105,
+          "recall": 0.6,
+          "f1": 0.41379310344827586
+        },
+        "linked_aspect": {
+          "tp": 11,
+          "fp": 3,
+          "fn": 8,
+          "precision": 0.7857142857142857,
+          "recall": 0.5789473684210527,
+          "f1": 0.6666666666666666
+        },
+        "linked_opinion": {
+          "tp": 9,
+          "fp": 11,
+          "fn": 11,
+          "precision": 0.45,
+          "recall": 0.45,
+          "f1": 0.45
+        },
+        "pair": {
+          "tp": 8,
+          "fp": 12,
+          "fn": 18,
+          "precision": 0.4,
+          "recall": 0.3076923076923077,
+          "f1": 0.34782608695652173
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 4,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.5384615384615384,
+        "pair_misses": {
+          "aspect_missing": 2,
+          "opinion_missing": 9,
+          "both_missing": 1,
+          "pair_rejected": 6
+        }
+      },
+      "baseline": {
+        "aspect": {
+          "tp": 8,
+          "fp": 3,
+          "fn": 11,
+          "precision": 0.7272727272727273,
+          "recall": 0.42105263157894735,
+          "f1": 0.5333333333333333
+        },
+        "opinion": {
+          "tp": 5,
+          "fp": 10,
+          "fn": 15,
+          "precision": 0.3333333333333333,
+          "recall": 0.25,
+          "f1": 0.2857142857142857
+        },
+        "linked_aspect": {
+          "tp": 8,
+          "fp": 3,
+          "fn": 11,
+          "precision": 0.7272727272727273,
+          "recall": 0.42105263157894735,
+          "f1": 0.5333333333333333
+        },
+        "linked_opinion": {
+          "tp": 5,
+          "fp": 10,
+          "fn": 15,
+          "precision": 0.3333333333333333,
+          "recall": 0.25,
+          "f1": 0.2857142857142857
+        },
+        "pair": {
+          "tp": 5,
+          "fp": 12,
+          "fn": 21,
+          "precision": 0.29411764705882354,
+          "recall": 0.19230769230769232,
+          "f1": 0.23255813953488372
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.19230769230769232,
+        "pair_misses": {
+          "aspect_missing": 0,
+          "opinion_missing": 7,
+          "both_missing": 14,
+          "pair_rejected": 0
+        }
+      }
+    },
+    {
+      "corpus": "tat_restaurant",
+      "n": 12,
+      "ids": [
+        "3480:1_6",
+        "36126:8_45",
+        "10403:8_14",
+        "31778:9_32",
+        "13133:3_21",
+        "33720:6_39",
+        "11657:6_18",
+        "14407:3_25",
+        "15687:5_30",
+        "3236:1_4",
+        "13541:4_22",
+        "10731:4_15"
+      ],
+      "metrics": {
+        "aspect": {
+          "tp": 18,
+          "fp": 18,
+          "fn": 4,
+          "precision": 0.5,
+          "recall": 0.8181818181818182,
+          "f1": 0.6206896551724138
+        },
+        "opinion": {
+          "tp": 16,
+          "fp": 22,
+          "fn": 11,
+          "precision": 0.42105263157894735,
+          "recall": 0.5925925925925926,
+          "f1": 0.49230769230769234
+        },
+        "linked_aspect": {
+          "tp": 12,
+          "fp": 8,
+          "fn": 10,
+          "precision": 0.6,
+          "recall": 0.5454545454545454,
+          "f1": 0.5714285714285714
+        },
+        "linked_opinion": {
+          "tp": 14,
+          "fp": 9,
+          "fn": 13,
+          "precision": 0.6086956521739131,
+          "recall": 0.5185185185185185,
+          "f1": 0.56
+        },
+        "pair": {
+          "tp": 12,
+          "fp": 16,
+          "fn": 17,
+          "precision": 0.42857142857142855,
+          "recall": 0.41379310344827586,
+          "f1": 0.42105263157894735
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 4,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.5172413793103449,
+        "pair_misses": {
+          "aspect_missing": 3,
+          "opinion_missing": 8,
+          "both_missing": 3,
+          "pair_rejected": 3
+        }
+      },
+      "baseline": {
+        "aspect": {
+          "tp": 9,
+          "fp": 4,
+          "fn": 13,
+          "precision": 0.6923076923076923,
+          "recall": 0.4090909090909091,
+          "f1": 0.5142857142857142
+        },
+        "opinion": {
+          "tp": 9,
+          "fp": 14,
+          "fn": 18,
+          "precision": 0.391304347826087,
+          "recall": 0.3333333333333333,
+          "f1": 0.36
+        },
+        "linked_aspect": {
+          "tp": 9,
+          "fp": 4,
+          "fn": 13,
+          "precision": 0.6923076923076923,
+          "recall": 0.4090909090909091,
+          "f1": 0.5142857142857142
+        },
+        "linked_opinion": {
+          "tp": 9,
+          "fp": 14,
+          "fn": 18,
+          "precision": 0.391304347826087,
+          "recall": 0.3333333333333333,
+          "f1": 0.36
+        },
+        "pair": {
+          "tp": 6,
+          "fp": 27,
+          "fn": 23,
+          "precision": 0.18181818181818182,
+          "recall": 0.20689655172413793,
+          "f1": 0.1935483870967742
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.20689655172413793,
+        "pair_misses": {
+          "aspect_missing": 4,
+          "opinion_missing": 3,
+          "both_missing": 16,
+          "pair_rejected": 0
+        }
+      }
+    },
+    {
+      "corpus": "ukr_restaurant",
+      "n": 12,
+      "ids": [
+        "32584:9_34",
+        "10731:4_15",
+        "36402:1_46",
+        "15100:1_27",
+        "11657:6_18",
+        "10106:4_9",
+        "35325:4_42",
+        "15856:0_31",
+        "31778:9_32",
+        "14551:0_26",
+        "10287:1_13",
+        "36017:11_44"
+      ],
+      "metrics": {
+        "aspect": {
+          "tp": 12,
+          "fp": 22,
+          "fn": 5,
+          "precision": 0.35294117647058826,
+          "recall": 0.7058823529411765,
+          "f1": 0.47058823529411764
+        },
+        "opinion": {
+          "tp": 7,
+          "fp": 23,
+          "fn": 14,
+          "precision": 0.23333333333333334,
+          "recall": 0.3333333333333333,
+          "f1": 0.27450980392156865
+        },
+        "linked_aspect": {
+          "tp": 8,
+          "fp": 3,
+          "fn": 9,
+          "precision": 0.7272727272727273,
+          "recall": 0.47058823529411764,
+          "f1": 0.5714285714285714
+        },
+        "linked_opinion": {
+          "tp": 7,
+          "fp": 7,
+          "fn": 14,
+          "precision": 0.5,
+          "recall": 0.3333333333333333,
+          "f1": 0.4
+        },
+        "pair": {
+          "tp": 6,
+          "fp": 8,
+          "fn": 18,
+          "precision": 0.42857142857142855,
+          "recall": 0.25,
+          "f1": 0.3157894736842105
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.2916666666666667,
+        "pair_misses": {
+          "aspect_missing": 1,
+          "opinion_missing": 10,
+          "both_missing": 6,
+          "pair_rejected": 1
+        }
+      },
+      "baseline": {
+        "aspect": {
+          "tp": 6,
+          "fp": 4,
+          "fn": 11,
+          "precision": 0.6,
+          "recall": 0.35294117647058826,
+          "f1": 0.4444444444444444
+        },
+        "opinion": {
+          "tp": 4,
+          "fp": 11,
+          "fn": 17,
+          "precision": 0.26666666666666666,
+          "recall": 0.19047619047619047,
+          "f1": 0.2222222222222222
+        },
+        "linked_aspect": {
+          "tp": 6,
+          "fp": 4,
+          "fn": 11,
+          "precision": 0.6,
+          "recall": 0.35294117647058826,
+          "f1": 0.4444444444444444
+        },
+        "linked_opinion": {
+          "tp": 4,
+          "fp": 11,
+          "fn": 17,
+          "precision": 0.26666666666666666,
+          "recall": 0.19047619047619047,
+          "f1": 0.2222222222222222
+        },
+        "pair": {
+          "tp": 4,
+          "fp": 11,
+          "fn": 20,
+          "precision": 0.26666666666666666,
+          "recall": 0.16666666666666666,
+          "f1": 0.20512820512820512
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.16666666666666666,
+        "pair_misses": {
+          "aspect_missing": 0,
+          "opinion_missing": 3,
+          "both_missing": 17,
+          "pair_rejected": 0
+        }
+      }
+    }
+  ],
+  "micro": {
+    "aspect": {
+      "tp": 122,
+      "fp": 160,
+      "fn": 32,
+      "precision": 0.4326241134751773,
+      "recall": 0.7922077922077922,
+      "f1": 0.5596330275229358
+    },
+    "opinion": {
+      "tp": 113,
+      "fp": 168,
+      "fn": 68,
+      "precision": 0.40213523131672596,
+      "recall": 0.6243093922651933,
+      "f1": 0.48917748917748916
+    },
+    "linked_aspect": {
+      "tp": 94,
+      "fp": 40,
+      "fn": 60,
+      "precision": 0.7014925373134329,
+      "recall": 0.6103896103896104,
+      "f1": 0.6527777777777778
+    },
+    "linked_opinion": {
+      "tp": 100,
+      "fp": 51,
+      "fn": 81,
+      "precision": 0.6622516556291391,
+      "recall": 0.5524861878453039,
+      "f1": 0.6024096385542169
+    },
+    "pair": {
+      "tp": 88,
+      "fp": 83,
+      "fn": 113,
+      "precision": 0.5146198830409356,
+      "recall": 0.43781094527363185,
+      "f1": 0.4731182795698925
+    },
+    "null_pair": {
+      "tp": 0,
+      "fp": 16,
+      "fn": 3,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "candidate_pair_recall": 0.5373134328358209,
+    "pair_misses": {
+      "aspect_missing": 20,
+      "opinion_missing": 53,
+      "both_missing": 20,
+      "pair_rejected": 20
+    }
+  },
+  "macro_pair_f1": 0.4657220508123282,
+  "calls": 244,
+  "input_tokens": 710763,
+  "estimated_usd": 0.029852046000000004,
+  "span_limit_hits": 0,
+  "chunked_records": 0,
+  "metric_note": "Case-insensitive exact surface-string set F1 per record; not official cF1. Span scores before pair filtering; baseline spans are final outputs.",
+  "selection": "SHA256(seed 20260923, corpus, ID), first N; dev excludes all trial text",
+  "cache_files": [
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_06b2d8da879be4ac.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_0792f61b0c184d24.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_0b37d30d558ee3d8.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_1116954b8cd06eab.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_111f1febac2dbb8e.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_12e6adf75f7c935c.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_14ecff64b8ba8314.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_16dd5b2b62514ae8.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_1dbb5ffa70994993.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_1dfb04502dcf2ad2.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_1e984823164278dc.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_21d135e6379fe6aa.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_24534dc4339e347b.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_2569e6522c6683c4.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_25959765ea480066.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_271dd4015fb12f1e.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_2d7fa51253ea32ed.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_33e9da006e079a68.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_345c65cfafef24f6.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_35a4f9ba6c1885fa.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_36fe3fdf8820d008.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_3888ab5cdbe915f6.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_3be05337798d7a7b.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_44accd9cea5b4bd6.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_48e815371c0c348d.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_4b14cdf5437a3d6c.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_4bb91260afdc3bfb.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_4c226754904552a3.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_4d3aaedeaf1bc696.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_4da6dd447acf0790.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_4e4bd503a2396976.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_4ef876016bf9bc6e.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_514614e159d01437.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_52f1b8b9f9ff8961.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_53d724a219515817.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_546780049faa6629.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_574a7793b1a44610.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_5994715b8d94a219.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_5ae4a6c98200c089.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_5bd7d7815919e86d.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_60ef8f72602fa9e3.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_61165047152883c6.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_6251cc192f3d8e94.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_6377e76a4d2926de.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_64a8bfea222fa471.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_6e9b347024edfe85.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_6f846e970aa13a3e.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_703a0dd1aa164bce.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_748df8fa3b66124e.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_764b237bd2d7b855.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_7cca8a0bf240a18d.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_7da4483e0e74d75b.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_80f02fd75ae5a806.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_814f93c31e583eea.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_81b56513557db6a8.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_84914537715864b5.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_87b98e405ec293eb.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_89b00bb9df2db4f5.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_8f93dea3e0745afc.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_9052ede9c3ef5a2f.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_96258b8e8aaa3a7f.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_968278c722aaaa41.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_9c5b1664786a14d5.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_9e15e8f93d1ca234.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_a1290436c44a4288.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_a213af2c43c970eb.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_acd199912ff42c27.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_acede36bac0dce1f.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_ae9339c8aa21ebd0.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_b27a341d9568b857.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_b9d00e089f2dfea8.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_bbcfc34254b2f5ca.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_bbff90127b8a924f.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_c0931344d66e5dee.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_c161ac1604347477.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_c16395fc60a74343.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_c638ada628a622d5.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_c6f11eb638f3979a.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_cd177818162d6c5e.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_cd80e1bebcf60a77.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_cd8ba344d0fd61df.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_cedb3e58a293a28b.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_d1d7d84da251d4b8.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_d9fbf203d9111916.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_dad2d0e54f6c98a6.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_e1b1fa1a3f047ec9.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_e697ef97d97844a2.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_e91875223088e6b6.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_ead0b6ef1f6fe5a0.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_ec03ada2006cc69a.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_ec8497268b44dab8.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_f1884c6ac79271c3.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_f70a6ed872f1d9a2.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_f997477e481e608c.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_fa2c62333cbcae28.json",
+    "reports/extraction_iteration_20260923/dev_bio_r2/cache/bio_r2_cfcabdeb8d35_fcbb289c209d0835.json"
+  ],
+  "baseline_macro_pair_f1": 0.2752871983791556
+}

@@ -1,0 +1,16 @@
+{
+  "split": "dev",
+  "threshold": 0.8,
+  "false_positive_categories": {
+    "substring_related_to_a_gold_pair": 130,
+    "other": 63,
+    "both_gold_surfaces_wrong_relation": 1
+  },
+  "candidate_probability_medians": {
+    "gold_candidate": 0.78,
+    "nongold_candidate": 0.28
+  },
+  "max_candidates": 736,
+  "max_pairs": 1664,
+  "note": "Post-hoc description only, no prompt/threshold changes. Substring relation is a surface heuristic, not adjudicated semantic correctness."
+}

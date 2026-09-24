@@ -1,0 +1,145 @@
+{
+  "n": 24,
+  "complete": true,
+  "macro_pair_f1": 0.5412698412698412,
+  "micro_pair": {
+    "tp": 20,
+    "fp": 15,
+    "fn": 19,
+    "precision": 0.5714285714285714,
+    "recall": 0.5128205128205128,
+    "f1": 0.5405405405405406
+  },
+  "corpora": [
+    {
+      "corpus": "eng_restaurant",
+      "n": 6,
+      "pair": {
+        "tp": 5,
+        "fp": 6,
+        "fn": 5,
+        "precision": 0.45454545454545453,
+        "recall": 0.5,
+        "f1": 0.47619047619047616
+      }
+    },
+    {
+      "corpus": "zho_restaurant",
+      "n": 6,
+      "pair": {
+        "tp": 4,
+        "fp": 1,
+        "fn": 6,
+        "precision": 0.8,
+        "recall": 0.4,
+        "f1": 0.5333333333333333
+      }
+    },
+    {
+      "corpus": "zho_laptop",
+      "n": 6,
+      "pair": {
+        "tp": 5,
+        "fp": 5,
+        "fn": 3,
+        "precision": 0.5,
+        "recall": 0.625,
+        "f1": 0.5555555555555556
+      }
+    },
+    {
+      "corpus": "rus_restaurant",
+      "n": 6,
+      "pair": {
+        "tp": 6,
+        "fp": 3,
+        "fn": 5,
+        "precision": 0.6666666666666666,
+        "recall": 0.5454545454545454,
+        "f1": 0.6
+      }
+    }
+  ],
+  "vote_histogram": {
+    "1": {
+      "gold": 0,
+      "non_gold": 3
+    },
+    "2": {
+      "gold": 2,
+      "non_gold": 7
+    },
+    "3": {
+      "gold": 18,
+      "non_gold": 8
+    }
+  },
+  "new_api_calls": 0,
+  "new_input_tokens": 0,
+  "new_estimated_usd": 0,
+  "protocol": "Fixed >=2/3 votes on accepted AO pairs; per-arm Noul >=0.65; deduplicate within each arm; lowercase exact surface matching; NULL is an ordinary pair element.",
+  "notes": [
+    "AO adaptation: no category, VA, correction or score averaging.",
+    "Vote fraction is not a calibrated probability; probability=1 only marks final acceptance for the existing evaluator.",
+    "Only pair metrics reported: ensemble does not create a new span extractor.",
+    "Existing development trial24; no new independent validation or threshold selection."
+  ],
+  "baselines_same_rows": {
+    "bio_r3": {
+      "macro_pair_f1": 0.6121323529411764,
+      "micro_pair": {
+        "tp": 22,
+        "fp": 12,
+        "fn": 17,
+        "precision": 0.6470588235294118,
+        "recall": 0.5641025641025641,
+        "f1": 0.6027397260273972
+      }
+    },
+    "bm25_2": {
+      "macro_pair_f1": 0.5833471546513342,
+      "micro_pair": {
+        "tp": 21,
+        "fp": 13,
+        "fn": 18,
+        "precision": 0.6176470588235294,
+        "recall": 0.5384615384615384,
+        "f1": 0.5753424657534246
+      }
+    },
+    "bigram": {
+      "macro_pair_f1": 0.5333333333333333,
+      "micro_pair": {
+        "tp": 19,
+        "fp": 13,
+        "fn": 20,
+        "precision": 0.59375,
+        "recall": 0.48717948717948717,
+        "f1": 0.5352112676056338
+      }
+    },
+    "trigram": {
+      "macro_pair_f1": 0.5494397759103642,
+      "micro_pair": {
+        "tp": 20,
+        "fp": 14,
+        "fn": 19,
+        "precision": 0.5882352941176471,
+        "recall": 0.5128205128205128,
+        "f1": 0.547945205479452
+      }
+    },
+    "word": {
+      "macro_pair_f1": 0.5310187232787852,
+      "micro_pair": {
+        "tp": 19,
+        "fp": 14,
+        "fn": 20,
+        "precision": 0.5757575757575758,
+        "recall": 0.48717948717948717,
+        "f1": 0.5277777777777778
+      }
+    }
+  },
+  "three_arm_logical_input_tokens": 1079035
+}

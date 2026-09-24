@@ -1,0 +1,1236 @@
+{
+  "split": "dev",
+  "mode": "bio",
+  "revision": 3,
+  "fingerprint": "41ea479bf861",
+  "model": [
+    "jev-1.13.0"
+  ],
+  "per_corpus": 12,
+  "threshold": 0.65,
+  "corpora": [
+    {
+      "corpus": "eng_restaurant",
+      "n": 12,
+      "ids": [
+        "rest26_aste_dev_69",
+        "rest26_aste_dev_162",
+        "rest26_aste_dev_98",
+        "rest26_aste_dev_15",
+        "rest26_aste_dev_130",
+        "rest26_aste_dev_136",
+        "rest26_aste_dev_155",
+        "rest26_aste_dev_184",
+        "rest26_aste_dev_62",
+        "rest26_aste_dev_167",
+        "rest26_aste_dev_200",
+        "rest26_aste_dev_104"
+      ],
+      "metrics": {
+        "aspect": {
+          "tp": 18,
+          "fp": 8,
+          "fn": 2,
+          "precision": 0.6923076923076923,
+          "recall": 0.9,
+          "f1": 0.782608695652174
+        },
+        "opinion": {
+          "tp": 23,
+          "fp": 2,
+          "fn": 1,
+          "precision": 0.92,
+          "recall": 0.9583333333333334,
+          "f1": 0.9387755102040817
+        },
+        "linked_aspect": {
+          "tp": 18,
+          "fp": 3,
+          "fn": 2,
+          "precision": 0.8571428571428571,
+          "recall": 0.9,
+          "f1": 0.8780487804878049
+        },
+        "linked_opinion": {
+          "tp": 23,
+          "fp": 1,
+          "fn": 1,
+          "precision": 0.9583333333333334,
+          "recall": 0.9583333333333334,
+          "f1": 0.9583333333333334
+        },
+        "pair": {
+          "tp": 21,
+          "fp": 5,
+          "fn": 4,
+          "precision": 0.8076923076923077,
+          "recall": 0.84,
+          "f1": 0.8235294117647058
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.88,
+        "pair_misses": {
+          "aspect_missing": 2,
+          "opinion_missing": 1,
+          "both_missing": 0,
+          "pair_rejected": 1
+        }
+      },
+      "baseline": {
+        "aspect": {
+          "tp": 14,
+          "fp": 6,
+          "fn": 6,
+          "precision": 0.7,
+          "recall": 0.7,
+          "f1": 0.7
+        },
+        "opinion": {
+          "tp": 18,
+          "fp": 6,
+          "fn": 6,
+          "precision": 0.75,
+          "recall": 0.75,
+          "f1": 0.75
+        },
+        "linked_aspect": {
+          "tp": 14,
+          "fp": 6,
+          "fn": 6,
+          "precision": 0.7,
+          "recall": 0.7,
+          "f1": 0.7
+        },
+        "linked_opinion": {
+          "tp": 18,
+          "fp": 6,
+          "fn": 6,
+          "precision": 0.75,
+          "recall": 0.75,
+          "f1": 0.75
+        },
+        "pair": {
+          "tp": 17,
+          "fp": 15,
+          "fn": 8,
+          "precision": 0.53125,
+          "recall": 0.68,
+          "f1": 0.5964912280701754
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.68,
+        "pair_misses": {
+          "aspect_missing": 2,
+          "opinion_missing": 2,
+          "both_missing": 4,
+          "pair_rejected": 0
+        }
+      }
+    },
+    {
+      "corpus": "eng_laptop",
+      "n": 12,
+      "ids": [
+        "lap26_aste_dev_110",
+        "lap26_aste_dev_194",
+        "lap26_aste_dev_125",
+        "lap26_aste_dev_71",
+        "lap26_aste_dev_45",
+        "lap26_aste_dev_127",
+        "lap26_aste_dev_27",
+        "lap26_aste_dev_118",
+        "lap26_aste_dev_48",
+        "lap26_aste_dev_143",
+        "lap26_aste_dev_117",
+        "lap26_aste_dev_174"
+      ],
+      "metrics": {
+        "aspect": {
+          "tp": 15,
+          "fp": 14,
+          "fn": 2,
+          "precision": 0.5172413793103449,
+          "recall": 0.8823529411764706,
+          "f1": 0.6521739130434783
+        },
+        "opinion": {
+          "tp": 14,
+          "fp": 10,
+          "fn": 4,
+          "precision": 0.5833333333333334,
+          "recall": 0.7777777777777778,
+          "f1": 0.6666666666666666
+        },
+        "linked_aspect": {
+          "tp": 12,
+          "fp": 1,
+          "fn": 5,
+          "precision": 0.9230769230769231,
+          "recall": 0.7058823529411765,
+          "f1": 0.8
+        },
+        "linked_opinion": {
+          "tp": 12,
+          "fp": 2,
+          "fn": 6,
+          "precision": 0.8571428571428571,
+          "recall": 0.6666666666666666,
+          "f1": 0.75
+        },
+        "pair": {
+          "tp": 12,
+          "fp": 3,
+          "fn": 8,
+          "precision": 0.8,
+          "recall": 0.6,
+          "f1": 0.6857142857142857
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.75,
+        "pair_misses": {
+          "aspect_missing": 1,
+          "opinion_missing": 3,
+          "both_missing": 1,
+          "pair_rejected": 3
+        }
+      },
+      "baseline": {
+        "aspect": {
+          "tp": 12,
+          "fp": 12,
+          "fn": 5,
+          "precision": 0.5,
+          "recall": 0.7058823529411765,
+          "f1": 0.5853658536585366
+        },
+        "opinion": {
+          "tp": 8,
+          "fp": 10,
+          "fn": 10,
+          "precision": 0.4444444444444444,
+          "recall": 0.4444444444444444,
+          "f1": 0.4444444444444444
+        },
+        "linked_aspect": {
+          "tp": 12,
+          "fp": 12,
+          "fn": 5,
+          "precision": 0.5,
+          "recall": 0.7058823529411765,
+          "f1": 0.5853658536585366
+        },
+        "linked_opinion": {
+          "tp": 8,
+          "fp": 10,
+          "fn": 10,
+          "precision": 0.4444444444444444,
+          "recall": 0.4444444444444444,
+          "f1": 0.4444444444444444
+        },
+        "pair": {
+          "tp": 8,
+          "fp": 24,
+          "fn": 12,
+          "precision": 0.25,
+          "recall": 0.4,
+          "f1": 0.3076923076923077
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.4,
+        "pair_misses": {
+          "aspect_missing": 2,
+          "opinion_missing": 4,
+          "both_missing": 6,
+          "pair_rejected": 0
+        }
+      }
+    },
+    {
+      "corpus": "zho_restaurant",
+      "n": 12,
+      "ids": [
+        "R6009:S000",
+        "R9693:S000",
+        "R10048:S002",
+        "R8019:S000",
+        "R9228:S002",
+        "R6135:S007",
+        "R6765:S000",
+        "R9731:S016",
+        "R5901:S000",
+        "R10005:S004",
+        "R9531:S011",
+        "R6136:S000"
+      ],
+      "metrics": {
+        "aspect": {
+          "tp": 20,
+          "fp": 44,
+          "fn": 6,
+          "precision": 0.3125,
+          "recall": 0.7692307692307693,
+          "f1": 0.4444444444444444
+        },
+        "opinion": {
+          "tp": 20,
+          "fp": 33,
+          "fn": 9,
+          "precision": 0.37735849056603776,
+          "recall": 0.6896551724137931,
+          "f1": 0.4878048780487805
+        },
+        "linked_aspect": {
+          "tp": 18,
+          "fp": 11,
+          "fn": 8,
+          "precision": 0.6206896551724138,
+          "recall": 0.6923076923076923,
+          "f1": 0.6545454545454545
+        },
+        "linked_opinion": {
+          "tp": 18,
+          "fp": 8,
+          "fn": 11,
+          "precision": 0.6923076923076923,
+          "recall": 0.6206896551724138,
+          "f1": 0.6545454545454545
+        },
+        "pair": {
+          "tp": 16,
+          "fp": 19,
+          "fn": 16,
+          "precision": 0.45714285714285713,
+          "recall": 0.5,
+          "f1": 0.47761194029850745
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 3,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.5625,
+        "pair_misses": {
+          "aspect_missing": 5,
+          "opinion_missing": 8,
+          "both_missing": 1,
+          "pair_rejected": 2
+        }
+      },
+      "baseline": {
+        "aspect": {
+          "tp": 15,
+          "fp": 14,
+          "fn": 11,
+          "precision": 0.5172413793103449,
+          "recall": 0.5769230769230769,
+          "f1": 0.5454545454545454
+        },
+        "opinion": {
+          "tp": 11,
+          "fp": 25,
+          "fn": 18,
+          "precision": 0.3055555555555556,
+          "recall": 0.3793103448275862,
+          "f1": 0.3384615384615385
+        },
+        "linked_aspect": {
+          "tp": 15,
+          "fp": 14,
+          "fn": 11,
+          "precision": 0.5172413793103449,
+          "recall": 0.5769230769230769,
+          "f1": 0.5454545454545454
+        },
+        "linked_opinion": {
+          "tp": 11,
+          "fp": 25,
+          "fn": 18,
+          "precision": 0.3055555555555556,
+          "recall": 0.3793103448275862,
+          "f1": 0.3384615384615385
+        },
+        "pair": {
+          "tp": 8,
+          "fp": 59,
+          "fn": 24,
+          "precision": 0.11940298507462686,
+          "recall": 0.25,
+          "f1": 0.16161616161616163
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.25,
+        "pair_misses": {
+          "aspect_missing": 6,
+          "opinion_missing": 8,
+          "both_missing": 10,
+          "pair_rejected": 0
+        }
+      }
+    },
+    {
+      "corpus": "zho_laptop",
+      "n": 12,
+      "ids": [
+        "6973895:S034",
+        "6697182:S005",
+        "7010970:S045",
+        "6788726:S511",
+        "6759304:S024",
+        "6716431:S001",
+        "6738095:S733",
+        "7068377:S052",
+        "6990516:S001",
+        "6940405:S103",
+        "6799971:S009",
+        "6917337:S020"
+      ],
+      "metrics": {
+        "aspect": {
+          "tp": 10,
+          "fp": 32,
+          "fn": 5,
+          "precision": 0.23809523809523808,
+          "recall": 0.6666666666666666,
+          "f1": 0.3508771929824561
+        },
+        "opinion": {
+          "tp": 9,
+          "fp": 21,
+          "fn": 8,
+          "precision": 0.3,
+          "recall": 0.5294117647058824,
+          "f1": 0.3829787234042553
+        },
+        "linked_aspect": {
+          "tp": 7,
+          "fp": 7,
+          "fn": 8,
+          "precision": 0.5,
+          "recall": 0.4666666666666667,
+          "f1": 0.4827586206896552
+        },
+        "linked_opinion": {
+          "tp": 9,
+          "fp": 7,
+          "fn": 8,
+          "precision": 0.5625,
+          "recall": 0.5294117647058824,
+          "f1": 0.5454545454545454
+        },
+        "pair": {
+          "tp": 6,
+          "fp": 12,
+          "fn": 12,
+          "precision": 0.3333333333333333,
+          "recall": 0.3333333333333333,
+          "f1": 0.3333333333333333
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 3,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.3333333333333333,
+        "pair_misses": {
+          "aspect_missing": 4,
+          "opinion_missing": 6,
+          "both_missing": 2,
+          "pair_rejected": 0
+        }
+      },
+      "baseline": {
+        "aspect": {
+          "tp": 7,
+          "fp": 14,
+          "fn": 8,
+          "precision": 0.3333333333333333,
+          "recall": 0.4666666666666667,
+          "f1": 0.3888888888888889
+        },
+        "opinion": {
+          "tp": 5,
+          "fp": 19,
+          "fn": 12,
+          "precision": 0.20833333333333334,
+          "recall": 0.29411764705882354,
+          "f1": 0.24390243902439024
+        },
+        "linked_aspect": {
+          "tp": 7,
+          "fp": 14,
+          "fn": 8,
+          "precision": 0.3333333333333333,
+          "recall": 0.4666666666666667,
+          "f1": 0.3888888888888889
+        },
+        "linked_opinion": {
+          "tp": 5,
+          "fp": 19,
+          "fn": 12,
+          "precision": 0.20833333333333334,
+          "recall": 0.29411764705882354,
+          "f1": 0.24390243902439024
+        },
+        "pair": {
+          "tp": 3,
+          "fp": 36,
+          "fn": 15,
+          "precision": 0.07692307692307693,
+          "recall": 0.16666666666666666,
+          "f1": 0.10526315789473684
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.16666666666666666,
+        "pair_misses": {
+          "aspect_missing": 3,
+          "opinion_missing": 4,
+          "both_missing": 8,
+          "pair_rejected": 0
+        }
+      }
+    },
+    {
+      "corpus": "jpn_hotel",
+      "n": 12,
+      "ids": [
+        "hotel26_aste_dev_60",
+        "hotel26_aste_dev_124",
+        "hotel26_aste_dev_71",
+        "hotel26_aste_dev_50",
+        "hotel26_aste_dev_34",
+        "hotel26_aste_dev_145",
+        "hotel26_aste_dev_100",
+        "hotel26_aste_dev_37",
+        "hotel26_aste_dev_108",
+        "hotel26_aste_dev_70",
+        "hotel26_aste_dev_55",
+        "hotel26_aste_dev_4"
+      ],
+      "metrics": {
+        "aspect": {
+          "tp": 14,
+          "fp": 23,
+          "fn": 4,
+          "precision": 0.3783783783783784,
+          "recall": 0.7777777777777778,
+          "f1": 0.509090909090909
+        },
+        "opinion": {
+          "tp": 12,
+          "fp": 25,
+          "fn": 13,
+          "precision": 0.32432432432432434,
+          "recall": 0.48,
+          "f1": 0.3870967741935484
+        },
+        "linked_aspect": {
+          "tp": 7,
+          "fp": 4,
+          "fn": 11,
+          "precision": 0.6363636363636364,
+          "recall": 0.3888888888888889,
+          "f1": 0.4827586206896552
+        },
+        "linked_opinion": {
+          "tp": 8,
+          "fp": 6,
+          "fn": 17,
+          "precision": 0.5714285714285714,
+          "recall": 0.32,
+          "f1": 0.41025641025641024
+        },
+        "pair": {
+          "tp": 6,
+          "fp": 8,
+          "fn": 21,
+          "precision": 0.42857142857142855,
+          "recall": 0.2222222222222222,
+          "f1": 0.2926829268292683
+        },
+        "null_pair": {
+          "tp": 1,
+          "fp": 1,
+          "fn": 2,
+          "precision": 0.5,
+          "recall": 0.3333333333333333,
+          "f1": 0.4
+        },
+        "candidate_pair_recall": 0.4074074074074074,
+        "pair_misses": {
+          "aspect_missing": 2,
+          "opinion_missing": 11,
+          "both_missing": 3,
+          "pair_rejected": 5
+        }
+      },
+      "baseline": {
+        "aspect": {
+          "tp": 13,
+          "fp": 10,
+          "fn": 5,
+          "precision": 0.5652173913043478,
+          "recall": 0.7222222222222222,
+          "f1": 0.6341463414634146
+        },
+        "opinion": {
+          "tp": 15,
+          "fp": 11,
+          "fn": 10,
+          "precision": 0.5769230769230769,
+          "recall": 0.6,
+          "f1": 0.5882352941176471
+        },
+        "linked_aspect": {
+          "tp": 13,
+          "fp": 10,
+          "fn": 5,
+          "precision": 0.5652173913043478,
+          "recall": 0.7222222222222222,
+          "f1": 0.6341463414634146
+        },
+        "linked_opinion": {
+          "tp": 15,
+          "fp": 11,
+          "fn": 10,
+          "precision": 0.5769230769230769,
+          "recall": 0.6,
+          "f1": 0.5882352941176471
+        },
+        "pair": {
+          "tp": 13,
+          "fp": 25,
+          "fn": 14,
+          "precision": 0.34210526315789475,
+          "recall": 0.48148148148148145,
+          "f1": 0.4
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 3,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.48148148148148145,
+        "pair_misses": {
+          "aspect_missing": 3,
+          "opinion_missing": 4,
+          "both_missing": 6,
+          "pair_rejected": 1
+        }
+      }
+    },
+    {
+      "corpus": "rus_restaurant",
+      "n": 12,
+      "ids": [
+        "36126:8_45",
+        "10287:1_13",
+        "1408:5_3",
+        "31778:9_32",
+        "15100:1_27",
+        "36402:1_46",
+        "32206:4_33",
+        "14407:3_25",
+        "12360:6_20",
+        "14407:1_24",
+        "15856:0_31",
+        "36017:11_44"
+      ],
+      "metrics": {
+        "aspect": {
+          "tp": 16,
+          "fp": 18,
+          "fn": 3,
+          "precision": 0.47058823529411764,
+          "recall": 0.8421052631578947,
+          "f1": 0.6037735849056604
+        },
+        "opinion": {
+          "tp": 13,
+          "fp": 27,
+          "fn": 7,
+          "precision": 0.325,
+          "recall": 0.65,
+          "f1": 0.43333333333333335
+        },
+        "linked_aspect": {
+          "tp": 9,
+          "fp": 7,
+          "fn": 10,
+          "precision": 0.5625,
+          "recall": 0.47368421052631576,
+          "f1": 0.5142857142857142
+        },
+        "linked_opinion": {
+          "tp": 9,
+          "fp": 12,
+          "fn": 11,
+          "precision": 0.42857142857142855,
+          "recall": 0.45,
+          "f1": 0.43902439024390244
+        },
+        "pair": {
+          "tp": 6,
+          "fp": 17,
+          "fn": 20,
+          "precision": 0.2608695652173913,
+          "recall": 0.23076923076923078,
+          "f1": 0.24489795918367346
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 4,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.4230769230769231,
+        "pair_misses": {
+          "aspect_missing": 6,
+          "opinion_missing": 8,
+          "both_missing": 1,
+          "pair_rejected": 5
+        }
+      },
+      "baseline": {
+        "aspect": {
+          "tp": 8,
+          "fp": 3,
+          "fn": 11,
+          "precision": 0.7272727272727273,
+          "recall": 0.42105263157894735,
+          "f1": 0.5333333333333333
+        },
+        "opinion": {
+          "tp": 5,
+          "fp": 10,
+          "fn": 15,
+          "precision": 0.3333333333333333,
+          "recall": 0.25,
+          "f1": 0.2857142857142857
+        },
+        "linked_aspect": {
+          "tp": 8,
+          "fp": 3,
+          "fn": 11,
+          "precision": 0.7272727272727273,
+          "recall": 0.42105263157894735,
+          "f1": 0.5333333333333333
+        },
+        "linked_opinion": {
+          "tp": 5,
+          "fp": 10,
+          "fn": 15,
+          "precision": 0.3333333333333333,
+          "recall": 0.25,
+          "f1": 0.2857142857142857
+        },
+        "pair": {
+          "tp": 5,
+          "fp": 12,
+          "fn": 21,
+          "precision": 0.29411764705882354,
+          "recall": 0.19230769230769232,
+          "f1": 0.23255813953488372
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.19230769230769232,
+        "pair_misses": {
+          "aspect_missing": 0,
+          "opinion_missing": 7,
+          "both_missing": 14,
+          "pair_rejected": 0
+        }
+      }
+    },
+    {
+      "corpus": "tat_restaurant",
+      "n": 12,
+      "ids": [
+        "3480:1_6",
+        "36126:8_45",
+        "10403:8_14",
+        "31778:9_32",
+        "13133:3_21",
+        "33720:6_39",
+        "11657:6_18",
+        "14407:3_25",
+        "15687:5_30",
+        "3236:1_4",
+        "13541:4_22",
+        "10731:4_15"
+      ],
+      "metrics": {
+        "aspect": {
+          "tp": 20,
+          "fp": 25,
+          "fn": 2,
+          "precision": 0.4444444444444444,
+          "recall": 0.9090909090909091,
+          "f1": 0.5970149253731343
+        },
+        "opinion": {
+          "tp": 18,
+          "fp": 23,
+          "fn": 9,
+          "precision": 0.43902439024390244,
+          "recall": 0.6666666666666666,
+          "f1": 0.5294117647058824
+        },
+        "linked_aspect": {
+          "tp": 15,
+          "fp": 9,
+          "fn": 7,
+          "precision": 0.625,
+          "recall": 0.6818181818181818,
+          "f1": 0.6521739130434783
+        },
+        "linked_opinion": {
+          "tp": 16,
+          "fp": 8,
+          "fn": 11,
+          "precision": 0.6666666666666666,
+          "recall": 0.5925925925925926,
+          "f1": 0.6274509803921569
+        },
+        "pair": {
+          "tp": 14,
+          "fp": 14,
+          "fn": 15,
+          "precision": 0.5,
+          "recall": 0.4827586206896552,
+          "f1": 0.49122807017543857
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 3,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.6551724137931034,
+        "pair_misses": {
+          "aspect_missing": 1,
+          "opinion_missing": 6,
+          "both_missing": 3,
+          "pair_rejected": 5
+        }
+      },
+      "baseline": {
+        "aspect": {
+          "tp": 9,
+          "fp": 4,
+          "fn": 13,
+          "precision": 0.6923076923076923,
+          "recall": 0.4090909090909091,
+          "f1": 0.5142857142857142
+        },
+        "opinion": {
+          "tp": 9,
+          "fp": 14,
+          "fn": 18,
+          "precision": 0.391304347826087,
+          "recall": 0.3333333333333333,
+          "f1": 0.36
+        },
+        "linked_aspect": {
+          "tp": 9,
+          "fp": 4,
+          "fn": 13,
+          "precision": 0.6923076923076923,
+          "recall": 0.4090909090909091,
+          "f1": 0.5142857142857142
+        },
+        "linked_opinion": {
+          "tp": 9,
+          "fp": 14,
+          "fn": 18,
+          "precision": 0.391304347826087,
+          "recall": 0.3333333333333333,
+          "f1": 0.36
+        },
+        "pair": {
+          "tp": 6,
+          "fp": 27,
+          "fn": 23,
+          "precision": 0.18181818181818182,
+          "recall": 0.20689655172413793,
+          "f1": 0.1935483870967742
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.20689655172413793,
+        "pair_misses": {
+          "aspect_missing": 4,
+          "opinion_missing": 3,
+          "both_missing": 16,
+          "pair_rejected": 0
+        }
+      }
+    },
+    {
+      "corpus": "ukr_restaurant",
+      "n": 12,
+      "ids": [
+        "32584:9_34",
+        "10731:4_15",
+        "36402:1_46",
+        "15100:1_27",
+        "11657:6_18",
+        "10106:4_9",
+        "35325:4_42",
+        "15856:0_31",
+        "31778:9_32",
+        "14551:0_26",
+        "10287:1_13",
+        "36017:11_44"
+      ],
+      "metrics": {
+        "aspect": {
+          "tp": 12,
+          "fp": 24,
+          "fn": 5,
+          "precision": 0.3333333333333333,
+          "recall": 0.7058823529411765,
+          "f1": 0.4528301886792453
+        },
+        "opinion": {
+          "tp": 7,
+          "fp": 24,
+          "fn": 14,
+          "precision": 0.22580645161290322,
+          "recall": 0.3333333333333333,
+          "f1": 0.2692307692307692
+        },
+        "linked_aspect": {
+          "tp": 8,
+          "fp": 3,
+          "fn": 9,
+          "precision": 0.7272727272727273,
+          "recall": 0.47058823529411764,
+          "f1": 0.5714285714285714
+        },
+        "linked_opinion": {
+          "tp": 7,
+          "fp": 8,
+          "fn": 14,
+          "precision": 0.4666666666666667,
+          "recall": 0.3333333333333333,
+          "f1": 0.3888888888888889
+        },
+        "pair": {
+          "tp": 6,
+          "fp": 9,
+          "fn": 18,
+          "precision": 0.4,
+          "recall": 0.25,
+          "f1": 0.3076923076923077
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.2916666666666667,
+        "pair_misses": {
+          "aspect_missing": 1,
+          "opinion_missing": 10,
+          "both_missing": 6,
+          "pair_rejected": 1
+        }
+      },
+      "baseline": {
+        "aspect": {
+          "tp": 6,
+          "fp": 4,
+          "fn": 11,
+          "precision": 0.6,
+          "recall": 0.35294117647058826,
+          "f1": 0.4444444444444444
+        },
+        "opinion": {
+          "tp": 4,
+          "fp": 11,
+          "fn": 17,
+          "precision": 0.26666666666666666,
+          "recall": 0.19047619047619047,
+          "f1": 0.2222222222222222
+        },
+        "linked_aspect": {
+          "tp": 6,
+          "fp": 4,
+          "fn": 11,
+          "precision": 0.6,
+          "recall": 0.35294117647058826,
+          "f1": 0.4444444444444444
+        },
+        "linked_opinion": {
+          "tp": 4,
+          "fp": 11,
+          "fn": 17,
+          "precision": 0.26666666666666666,
+          "recall": 0.19047619047619047,
+          "f1": 0.2222222222222222
+        },
+        "pair": {
+          "tp": 4,
+          "fp": 11,
+          "fn": 20,
+          "precision": 0.26666666666666666,
+          "recall": 0.16666666666666666,
+          "f1": 0.20512820512820512
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.16666666666666666,
+        "pair_misses": {
+          "aspect_missing": 0,
+          "opinion_missing": 3,
+          "both_missing": 17,
+          "pair_rejected": 0
+        }
+      }
+    }
+  ],
+  "micro": {
+    "aspect": {
+      "tp": 125,
+      "fp": 188,
+      "fn": 29,
+      "precision": 0.3993610223642173,
+      "recall": 0.8116883116883117,
+      "f1": 0.5353319057815846
+    },
+    "opinion": {
+      "tp": 116,
+      "fp": 165,
+      "fn": 65,
+      "precision": 0.4128113879003559,
+      "recall": 0.6408839779005525,
+      "f1": 0.5021645021645021
+    },
+    "linked_aspect": {
+      "tp": 94,
+      "fp": 45,
+      "fn": 60,
+      "precision": 0.6762589928057554,
+      "recall": 0.6103896103896104,
+      "f1": 0.6416382252559727
+    },
+    "linked_opinion": {
+      "tp": 102,
+      "fp": 52,
+      "fn": 79,
+      "precision": 0.6623376623376623,
+      "recall": 0.56353591160221,
+      "f1": 0.608955223880597
+    },
+    "pair": {
+      "tp": 87,
+      "fp": 87,
+      "fn": 114,
+      "precision": 0.5,
+      "recall": 0.43283582089552236,
+      "f1": 0.464
+    },
+    "null_pair": {
+      "tp": 1,
+      "fp": 16,
+      "fn": 2,
+      "precision": 0.058823529411764705,
+      "recall": 0.3333333333333333,
+      "f1": 0.1
+    },
+    "candidate_pair_recall": 0.5422885572139303,
+    "pair_misses": {
+      "aspect_missing": 22,
+      "opinion_missing": 53,
+      "both_missing": 17,
+      "pair_rejected": 22
+    }
+  },
+  "macro_pair_f1": 0.45708627937394003,
+  "calls": 247,
+  "input_tokens": 712052,
+  "questions": 5875,
+  "extraction_input_tokens": 593906,
+  "pair_input_tokens": 118146,
+  "estimated_usd": 0.029906184000000002,
+  "span_limit_hits": 0,
+  "chunked_records": 0,
+  "metric_note": "Case-insensitive exact surface-string set F1 per record; not official cF1. Span scores before pair filtering; baseline spans are final outputs.",
+  "selection": "SHA256(seed 20260923, corpus, ID), first N; dev excludes all trial text",
+  "cache_files": [
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_06b2d8da879be4ac.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_0792f61b0c184d24.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_0b37d30d558ee3d8.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_1116954b8cd06eab.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_111f1febac2dbb8e.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_12e6adf75f7c935c.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_14ecff64b8ba8314.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_16dd5b2b62514ae8.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_1dbb5ffa70994993.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_1dfb04502dcf2ad2.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_1e984823164278dc.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_21d135e6379fe6aa.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_24534dc4339e347b.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_2569e6522c6683c4.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_25959765ea480066.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_271dd4015fb12f1e.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_2d7fa51253ea32ed.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_33e9da006e079a68.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_345c65cfafef24f6.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_35a4f9ba6c1885fa.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_36fe3fdf8820d008.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_3888ab5cdbe915f6.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_3be05337798d7a7b.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_44accd9cea5b4bd6.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_48e815371c0c348d.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_4b14cdf5437a3d6c.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_4bb91260afdc3bfb.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_4c226754904552a3.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_4d3aaedeaf1bc696.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_4da6dd447acf0790.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_4e4bd503a2396976.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_4ef876016bf9bc6e.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_514614e159d01437.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_52f1b8b9f9ff8961.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_53d724a219515817.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_546780049faa6629.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_574a7793b1a44610.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_5994715b8d94a219.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_5ae4a6c98200c089.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_5bd7d7815919e86d.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_60ef8f72602fa9e3.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_61165047152883c6.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_6251cc192f3d8e94.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_6377e76a4d2926de.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_64a8bfea222fa471.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_6e9b347024edfe85.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_6f846e970aa13a3e.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_703a0dd1aa164bce.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_748df8fa3b66124e.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_764b237bd2d7b855.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_7cca8a0bf240a18d.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_7da4483e0e74d75b.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_80f02fd75ae5a806.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_814f93c31e583eea.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_81b56513557db6a8.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_84914537715864b5.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_87b98e405ec293eb.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_89b00bb9df2db4f5.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_8f93dea3e0745afc.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_9052ede9c3ef5a2f.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_96258b8e8aaa3a7f.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_968278c722aaaa41.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_9c5b1664786a14d5.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_9e15e8f93d1ca234.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_a1290436c44a4288.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_a213af2c43c970eb.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_acd199912ff42c27.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_acede36bac0dce1f.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_ae9339c8aa21ebd0.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_b27a341d9568b857.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_b9d00e089f2dfea8.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_bbcfc34254b2f5ca.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_bbff90127b8a924f.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_c0931344d66e5dee.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_c161ac1604347477.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_c16395fc60a74343.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_c638ada628a622d5.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_c6f11eb638f3979a.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_cd177818162d6c5e.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_cd80e1bebcf60a77.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_cd8ba344d0fd61df.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_cedb3e58a293a28b.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_d1d7d84da251d4b8.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_d9fbf203d9111916.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_dad2d0e54f6c98a6.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_e1b1fa1a3f047ec9.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_e697ef97d97844a2.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_e91875223088e6b6.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_ead0b6ef1f6fe5a0.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_ec03ada2006cc69a.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_ec8497268b44dab8.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_f1884c6ac79271c3.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_f70a6ed872f1d9a2.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_f997477e481e608c.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_fa2c62333cbcae28.json",
+    "reports/extraction_comparison_20260923/dev_bio/cache/bio_r3_41ea479bf861_fcbb289c209d0835.json"
+  ],
+  "baseline_macro_pair_f1": 0.2752871983791556
+}

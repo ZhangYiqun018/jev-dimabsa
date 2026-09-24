@@ -1,0 +1,44 @@
+{
+  "splits": {
+    "trial": {
+      "complete": true,
+      "n": 24,
+      "macro_delta": -0.028785198289842162,
+      "micro_f1_delta": -0.0273972602739726,
+      "macro_delta_95_percentile_interval": [
+        -0.11375646412411111,
+        0.0117647058823529
+      ],
+      "micro_f1_delta_95_percentile_interval": [
+        -0.08996667900777489,
+        0.015513370075525668
+      ],
+      "logical_input_ratio": 1.0273182983191116,
+      "new_input_tokens": 91960,
+      "new_estimated_usd": 0.0038623200000000002
+    },
+    "dev": {
+      "complete": true,
+      "n": 96,
+      "macro_delta": -0.010396681464526492,
+      "micro_f1_delta": -0.01663157894736844,
+      "macro_delta_95_percentile_interval": [
+        -0.04887587188210424,
+        0.03739502621427393
+      ],
+      "micro_f1_delta_95_percentile_interval": [
+        -0.05649236192714452,
+        0.02504004062658699
+      ],
+      "logical_input_ratio": 1.0403257065495217,
+      "new_input_tokens": 711857,
+      "new_estimated_usd": 0.029897994000000004
+    }
+  },
+  "bootstrap": {
+    "replicates": 5000,
+    "seed": 20260923,
+    "unit": "review, paired arms, stratified by corpus",
+    "note": "Descriptive uncertainty on reused development data, not independent validation; no model-repeat uncertainty."
+  }
+}

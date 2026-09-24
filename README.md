@@ -1,5 +1,14 @@
 # Jev on DimABSA — Task 1 & Task 2 baselines
 
+<p align="center">
+  <a href="#running-it"><strong>Quick start</strong></a> &nbsp;·&nbsp;
+  <a href="#task-1-results">Task 1 results</a> &nbsp;·&nbsp;
+  <a href="#task-2-results">Task 2 results</a> &nbsp;·&nbsp;
+  <a href="#dataset">Dataset</a> &nbsp;·&nbsp;
+  <a href="logs/README.md">Experiments</a> &nbsp;·&nbsp;
+  <a href="#known-limits">Limitations</a>
+</p>
+
 A **[TypeSafe Jev](https://typesafe.ai)** (System One) baseline for
 [DimABSA](https://github.com/DimABSA/DimABSA2026), the dimensional aspect-based sentiment
 analysis task from SemEval-2026 Task 3. Task 1 scores given aspects; Task 2 extracts
@@ -11,6 +20,8 @@ a continuous probability-weighted position on a described scale, so the task map
 without any text generation or output parsing.
 
 No GPU and no fine-tuning. One API key and about an hour.
+
+<a id="task-1-results"></a>
 
 ## Result — Subtask 1 (DimASR), official test split
 
@@ -52,6 +63,8 @@ Our best run is **0.0536 RMSE** behind PAI on this aggregate; matching it requir
 Published baselines: [arXiv:2601.23022](https://arxiv.org/abs/2601.23022), Table 3.
 Earlier experiments, per-corpus scores and costs: [`logs/`](logs/).
 
+<a id="task-2-results"></a>
+
 ## Result — Subtask 2 (DimASTE), official test split
 
 cF1, **higher is better**. Macro mean across all eight corpora (6,690 test texts).
@@ -66,6 +79,9 @@ cF1, **higher is better**. Macro mean across all eight corpora (6,690 test texts
 zero-shot calibration. No Task 2 tuning. Official baseline scores come from the
 [organizers’ report](https://aclanthology.org/2026.semeval-1.452/), Table 7; macro means
 are computed here. Per-corpus scores, limitations and costs: [0006](logs/0006-st2-lexicon-pair-baseline.md).
+
+A token-level BIO extractor with Jev pair decisions is under development. It has been
+evaluated on dev only, so it is not in this table; see [`deving/`](deving/README.md).
 
 ## Dataset
 
@@ -103,7 +119,9 @@ jev/
   rubrics.py    the 9-level valence/arousal scales and the question wording
   fewshot.py    in-context example selection and leak filtering
   data.py       jsonl loading, prediction de-duplication
-  triplets.py   Task 2 training-lexicon candidates, pair decisions and VA
+  triplets.py   Task 2 baseline: training-lexicon candidates, pair decisions and VA
+  extraction.py Task 2 development extractor: per-token BIO Choice + Noul pair decisions
+  task2.py      Task 2 shared helpers: AO diagnostics, request cache, pair VA, official cF1
 runners/
   run.py           unified --task 1|2 inference and official scoring
   execution.py     shared concurrency, resume and usage accounting
@@ -115,7 +133,11 @@ tools/
   leakage_audit.py  train/dev/test overlap report
   probe_fewshot.py  how calibration examples are delivered to the API
   calibrate_st1.py  train calibration, dev selection, frozen test evaluation
-logs/               one file per experiment
+  evaluate_bio_r3_dev.py   Task 2 BIO extractor on full dev, official scorer
+  summarize_bio_r3_dev.py  offline comparison of that run with the baseline
+logs/               one file per mature experiment
+deving/             development records; archive/ holds retired experiment code
+docs/               project status/handoff and Task 1 design notes
 ```
 
 ## Running it
@@ -189,6 +211,6 @@ drops nothing; at larger `k` it matters.
 - In the uncalibrated baseline, arousal stays under-predicted even with examples. `PCC_A` ≈ 0.49 against `PCC_V` ≈ 0.89
   (Pearson correlation per dimension; higher is better, 1 is perfect) — Jev orders valence well
   and arousal badly. Per-corpus values are in the logs.
-- Task 2 uses a training vocabulary to propose explicit spans, so unseen terms and implicit
+- The Task 2 baseline uses a training vocabulary to propose explicit spans, so unseen terms and implicit
   aspects/opinions cannot be extracted. Its transferred Task 1 calibration is a starting
   point, not a Task 2-tuned model. Subtask 3 is not implemented.

@@ -1,0 +1,41 @@
+{
+  "model": "jev-1.13.0",
+  "config": "r0",
+  "specs": {
+    "eng_restaurant": {
+      "source": "bio",
+      "rules": {}
+    },
+    "eng_laptop": {
+      "source": "bio",
+      "rules": {}
+    },
+    "zho_restaurant": {
+      "source": "bio",
+      "rules": {}
+    },
+    "zho_laptop": {
+      "source": "bio",
+      "rules": {}
+    },
+    "jpn_hotel": {
+      "source": "bio",
+      "rules": {}
+    },
+    "rus_restaurant": {
+      "source": "bio",
+      "rules": {}
+    },
+    "tat_restaurant": {
+      "source": "bio",
+      "rules": {}
+    },
+    "ukr_restaurant": {
+      "source": "bio",
+      "rules": {}
+    }
+  },
+  "bio_extractor_id": "41ea479bf861",
+  "pair_threshold": 0.65,
+  "calibration": "Task1 zero-shot shrink, frozen"
+}

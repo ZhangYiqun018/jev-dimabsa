@@ -1,0 +1,19 @@
+{
+  "split": "trial",
+  "model": "jev-1.13.0",
+  "shots": 2,
+  "threshold": 0.65,
+  "retrieval": "BM25 k1=1.5 b=0.75; Chinese/Japanese character bigrams; other languages alphanumeric tokenizer units; ID tie-break",
+  "dataset": "bdc93be1224106ae7d3eb95739c02a76ed4ae8a1",
+  "fingerprint": "0b7b09e56e85",
+  "max_new_input_tokens": 194302,
+  "concurrency": 3,
+  "baseline": "BIO r3 41ea479bf861; same extraction/pair rules and questions; replace only example package",
+  "example_field": "invented_examples renamed to examples to correctly describe retrieved training records",
+  "train_pool_sizes": {
+    "eng_restaurant": 2256,
+    "zho_restaurant": 6002,
+    "zho_laptop": 3470,
+    "rus_restaurant": 1240
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "train_same_start": [
+    {
+      "corpus": "eng_restaurant",
+      "reviews": 2284,
+      "aspect_unique_aligned_spans": 2305,
+      "aspect_ambiguous_or_unaligned_surfaces": 32,
+      "aspect_same_start_groups": 0,
+      "aspect_same_start_extra_spans": 0,
+      "opinion_unique_aligned_spans": 2652,
+      "opinion_ambiguous_or_unaligned_surfaces": 37,
+      "opinion_same_start_groups": 0,
+      "opinion_same_start_extra_spans": 0
+    },
+    {
+      "corpus": "eng_laptop",
+      "reviews": 4076,
+      "aspect_unique_aligned_spans": 3870,
+      "aspect_ambiguous_or_unaligned_surfaces": 60,
+      "aspect_same_start_groups": 0,
+      "aspect_same_start_extra_spans": 0,
+      "opinion_unique_aligned_spans": 3880,
+      "opinion_ambiguous_or_unaligned_surfaces": 54,
+      "opinion_same_start_groups": 1,
+      "opinion_same_start_extra_spans": 1
+    },
+    {
+      "corpus": "zho_restaurant",
+      "reviews": 6050,
+      "aspect_unique_aligned_spans": 7119,
+      "aspect_ambiguous_or_unaligned_surfaces": 207,
+      "aspect_same_start_groups": 56,
+      "aspect_same_start_extra_spans": 56,
+      "opinion_unique_aligned_spans": 8221,
+      "opinion_ambiguous_or_unaligned_surfaces": 26,
+      "opinion_same_start_groups": 1,
+      "opinion_same_start_extra_spans": 1
+    },
+    {
+      "corpus": "zho_laptop",
+      "reviews": 3490,
+      "aspect_unique_aligned_spans": 5583,
+      "aspect_ambiguous_or_unaligned_surfaces": 321,
+      "aspect_same_start_groups": 64,
+      "aspect_same_start_extra_spans": 64,
+      "opinion_unique_aligned_spans": 5963,
+      "opinion_ambiguous_or_unaligned_surfaces": 155,
+      "opinion_same_start_groups": 0,
+      "opinion_same_start_extra_spans": 0
+    },
+    {
+      "corpus": "jpn_hotel",
+      "reviews": 1600,
+      "aspect_unique_aligned_spans": 2092,
+      "aspect_ambiguous_or_unaligned_surfaces": 96,
+      "aspect_same_start_groups": 5,
+      "aspect_same_start_extra_spans": 5,
+      "opinion_unique_aligned_spans": 2593,
+      "opinion_ambiguous_or_unaligned_surfaces": 24,
+      "opinion_same_start_groups": 2,
+      "opinion_same_start_extra_spans": 2
+    },
+    {
+      "corpus": "rus_restaurant",
+      "reviews": 1240,
+      "aspect_unique_aligned_spans": 1938,
+      "aspect_ambiguous_or_unaligned_surfaces": 23,
+      "aspect_same_start_groups": 0,
+      "aspect_same_start_extra_spans": 0,
+      "opinion_unique_aligned_spans": 2216,
+      "opinion_ambiguous_or_unaligned_surfaces": 7,
+      "opinion_same_start_groups": 8,
+      "opinion_same_start_extra_spans": 8
+    },
+    {
+      "corpus": "tat_restaurant",
+      "reviews": 1240,
+      "aspect_unique_aligned_spans": 1948,
+      "aspect_ambiguous_or_unaligned_surfaces": 18,
+      "aspect_same_start_groups": 1,
+      "aspect_same_start_extra_spans": 1,
+      "opinion_unique_aligned_spans": 2191,
+      "opinion_ambiguous_or_unaligned_surfaces": 27,
+      "opinion_same_start_groups": 7,
+      "opinion_same_start_extra_spans": 7
+    },
+    {
+      "corpus": "ukr_restaurant",
+      "reviews": 1240,
+      "aspect_unique_aligned_spans": 1934,
+      "aspect_ambiguous_or_unaligned_surfaces": 24,
+      "aspect_same_start_groups": 0,
+      "aspect_same_start_extra_spans": 0,
+      "opinion_unique_aligned_spans": 2214,
+      "opinion_ambiguous_or_unaligned_surfaces": 10,
+      "opinion_same_start_groups": 8,
+      "opinion_same_start_extra_spans": 8
+    }
+  ],
+  "se_aspect_errors": {
+    "fp": 13,
+    "fp_substring_related": 4,
+    "fn": 4,
+    "fn_substring_related": 4,
+    "fp_other": 9
+  },
+  "component_pair_coverage": {
+    "bio_bio": {
+      "covered_gold": 25,
+      "candidate_pairs": 111,
+      "gold": 39
+    },
+    "se_bio": {
+      "covered_gold": 23,
+      "candidate_pairs": 102,
+      "gold": 39
+    },
+    "bio_se": {
+      "covered_gold": 22,
+      "candidate_pairs": 94,
+      "gold": 39
+    },
+    "se_se": {
+      "covered_gold": 21,
+      "candidate_pairs": 84,
+      "gold": 39
+    }
+  },
+  "combined_dev_rank": {
+    "covered_gold": 170,
+    "covered_gold_below_080": 92,
+    "gold_with_boundary_negative": 151,
+    "gold_below_best_boundary_negative": 90,
+    "gold_above_best_boundary_negative": 57,
+    "gold_tied_best_boundary_negative": 4
+  },
+  "combined_dev_oracle_threshold": {
+    "threshold": 0.83,
+    "tp": 65,
+    "fp": 120,
+    "fn": 136,
+    "micro_f1": 0.33678756476683935
+  },
+  "note": "Substring matches are structural signals, not manually confirmed error causes; oracle threshold uses the development set itself."
+}

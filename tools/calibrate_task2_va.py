@@ -45,8 +45,8 @@ def sample(corpus):
 
 
 def main():
-    (OUT / 'calls').mkdir(parents=True, exist_ok=True)
-    client = CachedClient(JevClient(timeout=90), OUT / 'calls', DEFAULT_MODEL, 'va_train')
+    (OUT / 'cache/calls').mkdir(parents=True, exist_ok=True)
+    client = CachedClient(JevClient(timeout=90), OUT / 'cache/calls', DEFAULT_MODEL, 'va_train')
     params = {}
     for corpus in CORPORA:
         rows = sample(corpus)

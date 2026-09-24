@@ -1,0 +1,1233 @@
+{
+  "split": "trial",
+  "configuration": {
+    "width": 8,
+    "shots": 3,
+    "screen_threshold": 0.35,
+    "batch_size": 48,
+    "bm25_k1": 1.5,
+    "bm25_b": 0.75,
+    "model": "jev-1.13.0",
+    "fingerprint": "82772f80e102",
+    "dataset": "bdc93be1224106ae7d3eb95739c02a76ed4ae8a1"
+  },
+  "complete": true,
+  "n_requested": 24,
+  "n_completed": 24,
+  "threshold": 0.8,
+  "corpora": [
+    {
+      "corpus": "eng_restaurant",
+      "ids": [
+        "rest16_quad_dev_9",
+        "rest16_quad_dev_17",
+        "rest16_quad_dev_14",
+        "rest16_quad_dev_2",
+        "rest16_quad_dev_15",
+        "rest16_quad_dev_10"
+      ],
+      "metrics": {
+        "aspect": {
+          "tp": 5,
+          "fp": 15,
+          "fn": 0,
+          "precision": 0.25,
+          "recall": 1.0,
+          "f1": 0.4
+        },
+        "opinion": {
+          "tp": 8,
+          "fp": 10,
+          "fn": 0,
+          "precision": 0.4444444444444444,
+          "recall": 1.0,
+          "f1": 0.6153846153846154
+        },
+        "linked_aspect": {
+          "tp": 4,
+          "fp": 6,
+          "fn": 1,
+          "precision": 0.4,
+          "recall": 0.8,
+          "f1": 0.5333333333333333
+        },
+        "linked_opinion": {
+          "tp": 4,
+          "fp": 4,
+          "fn": 4,
+          "precision": 0.5,
+          "recall": 0.5,
+          "f1": 0.5
+        },
+        "pair": {
+          "tp": 4,
+          "fp": 13,
+          "fn": 6,
+          "precision": 0.23529411764705882,
+          "recall": 0.4,
+          "f1": 0.2962962962962963
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 3,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.8,
+        "pair_misses": {
+          "aspect_missing": 0,
+          "opinion_missing": 2,
+          "both_missing": 0,
+          "pair_rejected": 4
+        }
+      }
+    },
+    {
+      "corpus": "zho_restaurant",
+      "ids": [
+        "R0284:S018",
+        "R0285:S020",
+        "R0285:S01˙",
+        "R0284:S012",
+        "R0283:S004",
+        "R0285:S016"
+      ],
+      "metrics": {
+        "aspect": {
+          "tp": 5,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.8333333333333334,
+          "recall": 1.0,
+          "f1": 0.9090909090909091
+        },
+        "opinion": {
+          "tp": 9,
+          "fp": 20,
+          "fn": 1,
+          "precision": 0.3103448275862069,
+          "recall": 0.9,
+          "f1": 0.46153846153846156
+        },
+        "linked_aspect": {
+          "tp": 3,
+          "fp": 1,
+          "fn": 2,
+          "precision": 0.75,
+          "recall": 0.6,
+          "f1": 0.6666666666666666
+        },
+        "linked_opinion": {
+          "tp": 4,
+          "fp": 0,
+          "fn": 6,
+          "precision": 1.0,
+          "recall": 0.4,
+          "f1": 0.5714285714285714
+        },
+        "pair": {
+          "tp": 4,
+          "fp": 1,
+          "fn": 6,
+          "precision": 0.8,
+          "recall": 0.4,
+          "f1": 0.5333333333333333
+        },
+        "null_pair": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1": 0.6666666666666666
+        },
+        "candidate_pair_recall": 0.9,
+        "pair_misses": {
+          "aspect_missing": 0,
+          "opinion_missing": 1,
+          "both_missing": 0,
+          "pair_rejected": 5
+        }
+      }
+    },
+    {
+      "corpus": "zho_laptop",
+      "ids": [
+        "6699348:S1367",
+        "6699348:S875",
+        "6699348:S714",
+        "6699348:S1550",
+        "6699348:S823",
+        "6699348:S838"
+      ],
+      "metrics": {
+        "aspect": {
+          "tp": 8,
+          "fp": 18,
+          "fn": 0,
+          "precision": 0.3076923076923077,
+          "recall": 1.0,
+          "f1": 0.47058823529411764
+        },
+        "opinion": {
+          "tp": 7,
+          "fp": 39,
+          "fn": 0,
+          "precision": 0.15217391304347827,
+          "recall": 1.0,
+          "f1": 0.2641509433962264
+        },
+        "linked_aspect": {
+          "tp": 5,
+          "fp": 7,
+          "fn": 3,
+          "precision": 0.4166666666666667,
+          "recall": 0.625,
+          "f1": 0.5
+        },
+        "linked_opinion": {
+          "tp": 3,
+          "fp": 3,
+          "fn": 4,
+          "precision": 0.5,
+          "recall": 0.42857142857142855,
+          "f1": 0.46153846153846156
+        },
+        "pair": {
+          "tp": 4,
+          "fp": 8,
+          "fn": 4,
+          "precision": 0.3333333333333333,
+          "recall": 0.5,
+          "f1": 0.4
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 1.0,
+        "pair_misses": {
+          "aspect_missing": 0,
+          "opinion_missing": 0,
+          "both_missing": 0,
+          "pair_rejected": 4
+        }
+      }
+    },
+    {
+      "corpus": "rus_restaurant",
+      "ids": [
+        "6668:6_10",
+        "16137:14_25",
+        "3976:5_3",
+        "35867:2_36",
+        "16137:15_26",
+        "16137:12_24"
+      ],
+      "metrics": {
+        "aspect": {
+          "tp": 6,
+          "fp": 8,
+          "fn": 1,
+          "precision": 0.42857142857142855,
+          "recall": 0.8571428571428571,
+          "f1": 0.5714285714285714
+        },
+        "opinion": {
+          "tp": 10,
+          "fp": 39,
+          "fn": 1,
+          "precision": 0.20408163265306123,
+          "recall": 0.9090909090909091,
+          "f1": 0.3333333333333333
+        },
+        "linked_aspect": {
+          "tp": 3,
+          "fp": 5,
+          "fn": 4,
+          "precision": 0.375,
+          "recall": 0.42857142857142855,
+          "f1": 0.4
+        },
+        "linked_opinion": {
+          "tp": 5,
+          "fp": 8,
+          "fn": 6,
+          "precision": 0.38461538461538464,
+          "recall": 0.45454545454545453,
+          "f1": 0.4166666666666667
+        },
+        "pair": {
+          "tp": 3,
+          "fp": 15,
+          "fn": 8,
+          "precision": 0.16666666666666666,
+          "recall": 0.2727272727272727,
+          "f1": 0.20689655172413793
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.7272727272727273,
+        "pair_misses": {
+          "aspect_missing": 2,
+          "opinion_missing": 1,
+          "both_missing": 0,
+          "pair_rejected": 5
+        }
+      }
+    }
+  ],
+  "macro_pair_f1": 0.3591315453384419,
+  "partial_macro_pair_f1": null,
+  "micro": {
+    "aspect": {
+      "tp": 24,
+      "fp": 42,
+      "fn": 1,
+      "precision": 0.36363636363636365,
+      "recall": 0.96,
+      "f1": 0.5274725274725275
+    },
+    "opinion": {
+      "tp": 34,
+      "fp": 108,
+      "fn": 2,
+      "precision": 0.23943661971830985,
+      "recall": 0.9444444444444444,
+      "f1": 0.38202247191011235
+    },
+    "linked_aspect": {
+      "tp": 15,
+      "fp": 19,
+      "fn": 10,
+      "precision": 0.4411764705882353,
+      "recall": 0.6,
+      "f1": 0.5084745762711864
+    },
+    "linked_opinion": {
+      "tp": 16,
+      "fp": 15,
+      "fn": 20,
+      "precision": 0.5161290322580645,
+      "recall": 0.4444444444444444,
+      "f1": 0.47761194029850745
+    },
+    "pair": {
+      "tp": 15,
+      "fp": 37,
+      "fn": 24,
+      "precision": 0.28846153846153844,
+      "recall": 0.38461538461538464,
+      "f1": 0.32967032967032966
+    },
+    "null_pair": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 4,
+      "precision": 1.0,
+      "recall": 0.2,
+      "f1": 0.3333333333333333
+    },
+    "candidate_pair_recall": 0.8461538461538461,
+    "pair_misses": {
+      "aspect_missing": 2,
+      "opinion_missing": 4,
+      "both_missing": 0,
+      "pair_rejected": 18
+    }
+  },
+  "pre_screen_coverage": {
+    "gold_pairs": 39,
+    "reachable_pairs": 37,
+    "null_opinion_pairs": 2,
+    "recall": 0.9487179487179487
+  },
+  "candidate_counts": {
+    "full": 1734,
+    "aspect": 66,
+    "opinion": 142,
+    "pairs": 514
+  },
+  "models": [
+    "jev-1.13.0"
+  ],
+  "calls": 173,
+  "questions": 3982,
+  "input_tokens": 341785,
+  "stage_input_tokens": {
+    "span_screen": 225119,
+    "conditioned_opinion": 116666
+  },
+  "experiment_input_tokens": 341785,
+  "new_input_tokens": 341785,
+  "estimated_usd": 0.014354970000000002,
+  "experiment_estimated_usd": 0.014354970000000002,
+  "http_attempts": 173,
+  "cache_files": [
+    "reports/extraction_combined_20260923/cache/trial_6f13eea952e0976bc07c.json",
+    "reports/extraction_combined_20260923/cache/trial_eeccf284481fbee9134b.json",
+    "reports/extraction_combined_20260923/cache/trial_277c678f7742a3f02c82.json",
+    "reports/extraction_combined_20260923/cache/trial_96bd17b15bc966ccda00.json",
+    "reports/extraction_combined_20260923/cache/trial_743aa2fcc44ae021b57f.json",
+    "reports/extraction_combined_20260923/cache/trial_88a662ecb5fd163fcd5b.json",
+    "reports/extraction_combined_20260923/cache/trial_75d4f6c9ed4990b16c20.json",
+    "reports/extraction_combined_20260923/cache/trial_828fd27e0e6794262bfe.json",
+    "reports/extraction_combined_20260923/cache/trial_e4193ffe7c54652c3449.json",
+    "reports/extraction_combined_20260923/cache/trial_f9492124f3e800e3cd0b.json",
+    "reports/extraction_combined_20260923/cache/trial_4a25881561894348f7db.json",
+    "reports/extraction_combined_20260923/cache/trial_bdcd5e5689d0336df943.json",
+    "reports/extraction_combined_20260923/cache/trial_781c1e8d4f8555b66890.json",
+    "reports/extraction_combined_20260923/cache/trial_3ec9a2cb2354c759887f.json",
+    "reports/extraction_combined_20260923/cache/trial_dd3a012a7a9f1a882dc6.json",
+    "reports/extraction_combined_20260923/cache/trial_86bd16a2a9038daf6d26.json",
+    "reports/extraction_combined_20260923/cache/trial_f80c05973fcb1b775805.json",
+    "reports/extraction_combined_20260923/cache/trial_1cc2f20f3e7009f0f395.json",
+    "reports/extraction_combined_20260923/cache/trial_b155c8796cdf263f95fd.json",
+    "reports/extraction_combined_20260923/cache/trial_5e38df23d55c0fa74076.json",
+    "reports/extraction_combined_20260923/cache/trial_885c51fd1894a14aabdd.json",
+    "reports/extraction_combined_20260923/cache/trial_3c0e11930b53f3ad5850.json",
+    "reports/extraction_combined_20260923/cache/trial_7147da272a314cafc5c8.json",
+    "reports/extraction_combined_20260923/cache/trial_e2970d58601747ae1d79.json"
+  ],
+  "missing": [],
+  "metric_note": "Exact case-insensitive surface pair F1 without VA; not official cF1. Incomplete runs are explicitly partial; usage includes unfinished records.",
+  "trial_threshold_grid": {
+    "0.5": {
+      "macro_pair_f1": 0.22449039264828738,
+      "corpora": {
+        "eng_restaurant": {
+          "aspect": {
+            "tp": 5,
+            "fp": 15,
+            "fn": 0,
+            "precision": 0.25,
+            "recall": 1.0,
+            "f1": 0.4
+          },
+          "opinion": {
+            "tp": 8,
+            "fp": 10,
+            "fn": 0,
+            "precision": 0.4444444444444444,
+            "recall": 1.0,
+            "f1": 0.6153846153846154
+          },
+          "linked_aspect": {
+            "tp": 4,
+            "fp": 9,
+            "fn": 1,
+            "precision": 0.3076923076923077,
+            "recall": 0.8,
+            "f1": 0.4444444444444444
+          },
+          "linked_opinion": {
+            "tp": 6,
+            "fp": 7,
+            "fn": 2,
+            "precision": 0.46153846153846156,
+            "recall": 0.75,
+            "f1": 0.5714285714285714
+          },
+          "pair": {
+            "tp": 6,
+            "fp": 38,
+            "fn": 4,
+            "precision": 0.13636363636363635,
+            "recall": 0.6,
+            "f1": 0.2222222222222222
+          },
+          "null_pair": {
+            "tp": 0,
+            "fp": 7,
+            "fn": 3,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "candidate_pair_recall": 0.8,
+          "pair_misses": {
+            "aspect_missing": 0,
+            "opinion_missing": 2,
+            "both_missing": 0,
+            "pair_rejected": 2
+          }
+        },
+        "zho_restaurant": {
+          "aspect": {
+            "tp": 5,
+            "fp": 1,
+            "fn": 0,
+            "precision": 0.8333333333333334,
+            "recall": 1.0,
+            "f1": 0.9090909090909091
+          },
+          "opinion": {
+            "tp": 9,
+            "fp": 20,
+            "fn": 1,
+            "precision": 0.3103448275862069,
+            "recall": 0.9,
+            "f1": 0.46153846153846156
+          },
+          "linked_aspect": {
+            "tp": 5,
+            "fp": 1,
+            "fn": 0,
+            "precision": 0.8333333333333334,
+            "recall": 1.0,
+            "f1": 0.9090909090909091
+          },
+          "linked_opinion": {
+            "tp": 5,
+            "fp": 10,
+            "fn": 5,
+            "precision": 0.3333333333333333,
+            "recall": 0.5,
+            "f1": 0.4
+          },
+          "pair": {
+            "tp": 5,
+            "fp": 13,
+            "fn": 5,
+            "precision": 0.2777777777777778,
+            "recall": 0.5,
+            "f1": 0.35714285714285715
+          },
+          "null_pair": {
+            "tp": 1,
+            "fp": 7,
+            "fn": 1,
+            "precision": 0.125,
+            "recall": 0.5,
+            "f1": 0.2
+          },
+          "candidate_pair_recall": 0.9,
+          "pair_misses": {
+            "aspect_missing": 0,
+            "opinion_missing": 1,
+            "both_missing": 0,
+            "pair_rejected": 4
+          }
+        },
+        "zho_laptop": {
+          "aspect": {
+            "tp": 8,
+            "fp": 18,
+            "fn": 0,
+            "precision": 0.3076923076923077,
+            "recall": 1.0,
+            "f1": 0.47058823529411764
+          },
+          "opinion": {
+            "tp": 7,
+            "fp": 39,
+            "fn": 0,
+            "precision": 0.15217391304347827,
+            "recall": 1.0,
+            "f1": 0.2641509433962264
+          },
+          "linked_aspect": {
+            "tp": 8,
+            "fp": 15,
+            "fn": 0,
+            "precision": 0.34782608695652173,
+            "recall": 1.0,
+            "f1": 0.5161290322580645
+          },
+          "linked_opinion": {
+            "tp": 7,
+            "fp": 17,
+            "fn": 0,
+            "precision": 0.2916666666666667,
+            "recall": 1.0,
+            "f1": 0.45161290322580644
+          },
+          "pair": {
+            "tp": 8,
+            "fp": 59,
+            "fn": 0,
+            "precision": 0.11940298507462686,
+            "recall": 1.0,
+            "f1": 0.21333333333333335
+          },
+          "null_pair": {
+            "tp": 0,
+            "fp": 7,
+            "fn": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "candidate_pair_recall": 1.0,
+          "pair_misses": {
+            "aspect_missing": 0,
+            "opinion_missing": 0,
+            "both_missing": 0,
+            "pair_rejected": 0
+          }
+        },
+        "rus_restaurant": {
+          "aspect": {
+            "tp": 6,
+            "fp": 8,
+            "fn": 1,
+            "precision": 0.42857142857142855,
+            "recall": 0.8571428571428571,
+            "f1": 0.5714285714285714
+          },
+          "opinion": {
+            "tp": 10,
+            "fp": 39,
+            "fn": 1,
+            "precision": 0.20408163265306123,
+            "recall": 0.9090909090909091,
+            "f1": 0.3333333333333333
+          },
+          "linked_aspect": {
+            "tp": 5,
+            "fp": 8,
+            "fn": 2,
+            "precision": 0.38461538461538464,
+            "recall": 0.7142857142857143,
+            "f1": 0.5
+          },
+          "linked_opinion": {
+            "tp": 8,
+            "fp": 24,
+            "fn": 3,
+            "precision": 0.25,
+            "recall": 0.7272727272727273,
+            "f1": 0.37209302325581395
+          },
+          "pair": {
+            "tp": 4,
+            "fp": 61,
+            "fn": 7,
+            "precision": 0.06153846153846154,
+            "recall": 0.36363636363636365,
+            "f1": 0.10526315789473684
+          },
+          "null_pair": {
+            "tp": 0,
+            "fp": 7,
+            "fn": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "candidate_pair_recall": 0.7272727272727273,
+          "pair_misses": {
+            "aspect_missing": 2,
+            "opinion_missing": 1,
+            "both_missing": 0,
+            "pair_rejected": 4
+          }
+        }
+      }
+    },
+    "0.65": {
+      "macro_pair_f1": 0.3141099467844632,
+      "corpora": {
+        "eng_restaurant": {
+          "aspect": {
+            "tp": 5,
+            "fp": 15,
+            "fn": 0,
+            "precision": 0.25,
+            "recall": 1.0,
+            "f1": 0.4
+          },
+          "opinion": {
+            "tp": 8,
+            "fp": 10,
+            "fn": 0,
+            "precision": 0.4444444444444444,
+            "recall": 1.0,
+            "f1": 0.6153846153846154
+          },
+          "linked_aspect": {
+            "tp": 4,
+            "fp": 7,
+            "fn": 1,
+            "precision": 0.36363636363636365,
+            "recall": 0.8,
+            "f1": 0.5
+          },
+          "linked_opinion": {
+            "tp": 6,
+            "fp": 7,
+            "fn": 2,
+            "precision": 0.46153846153846156,
+            "recall": 0.75,
+            "f1": 0.5714285714285714
+          },
+          "pair": {
+            "tp": 6,
+            "fp": 25,
+            "fn": 4,
+            "precision": 0.1935483870967742,
+            "recall": 0.6,
+            "f1": 0.2926829268292683
+          },
+          "null_pair": {
+            "tp": 0,
+            "fp": 1,
+            "fn": 3,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "candidate_pair_recall": 0.8,
+          "pair_misses": {
+            "aspect_missing": 0,
+            "opinion_missing": 2,
+            "both_missing": 0,
+            "pair_rejected": 2
+          }
+        },
+        "zho_restaurant": {
+          "aspect": {
+            "tp": 5,
+            "fp": 1,
+            "fn": 0,
+            "precision": 0.8333333333333334,
+            "recall": 1.0,
+            "f1": 0.9090909090909091
+          },
+          "opinion": {
+            "tp": 9,
+            "fp": 20,
+            "fn": 1,
+            "precision": 0.3103448275862069,
+            "recall": 0.9,
+            "f1": 0.46153846153846156
+          },
+          "linked_aspect": {
+            "tp": 4,
+            "fp": 1,
+            "fn": 1,
+            "precision": 0.8,
+            "recall": 0.8,
+            "f1": 0.8
+          },
+          "linked_opinion": {
+            "tp": 5,
+            "fp": 2,
+            "fn": 5,
+            "precision": 0.7142857142857143,
+            "recall": 0.5,
+            "f1": 0.5882352941176471
+          },
+          "pair": {
+            "tp": 5,
+            "fp": 3,
+            "fn": 5,
+            "precision": 0.625,
+            "recall": 0.5,
+            "f1": 0.5555555555555556
+          },
+          "null_pair": {
+            "tp": 1,
+            "fp": 2,
+            "fn": 1,
+            "precision": 0.3333333333333333,
+            "recall": 0.5,
+            "f1": 0.4
+          },
+          "candidate_pair_recall": 0.9,
+          "pair_misses": {
+            "aspect_missing": 0,
+            "opinion_missing": 1,
+            "both_missing": 0,
+            "pair_rejected": 4
+          }
+        },
+        "zho_laptop": {
+          "aspect": {
+            "tp": 8,
+            "fp": 18,
+            "fn": 0,
+            "precision": 0.3076923076923077,
+            "recall": 1.0,
+            "f1": 0.47058823529411764
+          },
+          "opinion": {
+            "tp": 7,
+            "fp": 39,
+            "fn": 0,
+            "precision": 0.15217391304347827,
+            "recall": 1.0,
+            "f1": 0.2641509433962264
+          },
+          "linked_aspect": {
+            "tp": 7,
+            "fp": 15,
+            "fn": 1,
+            "precision": 0.3181818181818182,
+            "recall": 0.875,
+            "f1": 0.4666666666666667
+          },
+          "linked_opinion": {
+            "tp": 5,
+            "fp": 9,
+            "fn": 2,
+            "precision": 0.35714285714285715,
+            "recall": 0.7142857142857143,
+            "f1": 0.47619047619047616
+          },
+          "pair": {
+            "tp": 5,
+            "fp": 24,
+            "fn": 3,
+            "precision": 0.1724137931034483,
+            "recall": 0.625,
+            "f1": 0.2702702702702703
+          },
+          "null_pair": {
+            "tp": 0,
+            "fp": 1,
+            "fn": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "candidate_pair_recall": 1.0,
+          "pair_misses": {
+            "aspect_missing": 0,
+            "opinion_missing": 0,
+            "both_missing": 0,
+            "pair_rejected": 3
+          }
+        },
+        "rus_restaurant": {
+          "aspect": {
+            "tp": 6,
+            "fp": 8,
+            "fn": 1,
+            "precision": 0.42857142857142855,
+            "recall": 0.8571428571428571,
+            "f1": 0.5714285714285714
+          },
+          "opinion": {
+            "tp": 10,
+            "fp": 39,
+            "fn": 1,
+            "precision": 0.20408163265306123,
+            "recall": 0.9090909090909091,
+            "f1": 0.3333333333333333
+          },
+          "linked_aspect": {
+            "tp": 4,
+            "fp": 8,
+            "fn": 3,
+            "precision": 0.3333333333333333,
+            "recall": 0.5714285714285714,
+            "f1": 0.42105263157894735
+          },
+          "linked_opinion": {
+            "tp": 7,
+            "fp": 21,
+            "fn": 4,
+            "precision": 0.25,
+            "recall": 0.6363636363636364,
+            "f1": 0.358974358974359
+          },
+          "pair": {
+            "tp": 4,
+            "fp": 43,
+            "fn": 7,
+            "precision": 0.0851063829787234,
+            "recall": 0.36363636363636365,
+            "f1": 0.13793103448275862
+          },
+          "null_pair": {
+            "tp": 0,
+            "fp": 1,
+            "fn": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "candidate_pair_recall": 0.7272727272727273,
+          "pair_misses": {
+            "aspect_missing": 2,
+            "opinion_missing": 1,
+            "both_missing": 0,
+            "pair_rejected": 4
+          }
+        }
+      }
+    },
+    "0.8": {
+      "macro_pair_f1": 0.3591315453384419,
+      "corpora": {
+        "eng_restaurant": {
+          "aspect": {
+            "tp": 5,
+            "fp": 15,
+            "fn": 0,
+            "precision": 0.25,
+            "recall": 1.0,
+            "f1": 0.4
+          },
+          "opinion": {
+            "tp": 8,
+            "fp": 10,
+            "fn": 0,
+            "precision": 0.4444444444444444,
+            "recall": 1.0,
+            "f1": 0.6153846153846154
+          },
+          "linked_aspect": {
+            "tp": 4,
+            "fp": 6,
+            "fn": 1,
+            "precision": 0.4,
+            "recall": 0.8,
+            "f1": 0.5333333333333333
+          },
+          "linked_opinion": {
+            "tp": 4,
+            "fp": 4,
+            "fn": 4,
+            "precision": 0.5,
+            "recall": 0.5,
+            "f1": 0.5
+          },
+          "pair": {
+            "tp": 4,
+            "fp": 13,
+            "fn": 6,
+            "precision": 0.23529411764705882,
+            "recall": 0.4,
+            "f1": 0.2962962962962963
+          },
+          "null_pair": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 3,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "candidate_pair_recall": 0.8,
+          "pair_misses": {
+            "aspect_missing": 0,
+            "opinion_missing": 2,
+            "both_missing": 0,
+            "pair_rejected": 4
+          }
+        },
+        "zho_restaurant": {
+          "aspect": {
+            "tp": 5,
+            "fp": 1,
+            "fn": 0,
+            "precision": 0.8333333333333334,
+            "recall": 1.0,
+            "f1": 0.9090909090909091
+          },
+          "opinion": {
+            "tp": 9,
+            "fp": 20,
+            "fn": 1,
+            "precision": 0.3103448275862069,
+            "recall": 0.9,
+            "f1": 0.46153846153846156
+          },
+          "linked_aspect": {
+            "tp": 3,
+            "fp": 1,
+            "fn": 2,
+            "precision": 0.75,
+            "recall": 0.6,
+            "f1": 0.6666666666666666
+          },
+          "linked_opinion": {
+            "tp": 4,
+            "fp": 0,
+            "fn": 6,
+            "precision": 1.0,
+            "recall": 0.4,
+            "f1": 0.5714285714285714
+          },
+          "pair": {
+            "tp": 4,
+            "fp": 1,
+            "fn": 6,
+            "precision": 0.8,
+            "recall": 0.4,
+            "f1": 0.5333333333333333
+          },
+          "null_pair": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 1,
+            "precision": 1.0,
+            "recall": 0.5,
+            "f1": 0.6666666666666666
+          },
+          "candidate_pair_recall": 0.9,
+          "pair_misses": {
+            "aspect_missing": 0,
+            "opinion_missing": 1,
+            "both_missing": 0,
+            "pair_rejected": 5
+          }
+        },
+        "zho_laptop": {
+          "aspect": {
+            "tp": 8,
+            "fp": 18,
+            "fn": 0,
+            "precision": 0.3076923076923077,
+            "recall": 1.0,
+            "f1": 0.47058823529411764
+          },
+          "opinion": {
+            "tp": 7,
+            "fp": 39,
+            "fn": 0,
+            "precision": 0.15217391304347827,
+            "recall": 1.0,
+            "f1": 0.2641509433962264
+          },
+          "linked_aspect": {
+            "tp": 5,
+            "fp": 7,
+            "fn": 3,
+            "precision": 0.4166666666666667,
+            "recall": 0.625,
+            "f1": 0.5
+          },
+          "linked_opinion": {
+            "tp": 3,
+            "fp": 3,
+            "fn": 4,
+            "precision": 0.5,
+            "recall": 0.42857142857142855,
+            "f1": 0.46153846153846156
+          },
+          "pair": {
+            "tp": 4,
+            "fp": 8,
+            "fn": 4,
+            "precision": 0.3333333333333333,
+            "recall": 0.5,
+            "f1": 0.4
+          },
+          "null_pair": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "candidate_pair_recall": 1.0,
+          "pair_misses": {
+            "aspect_missing": 0,
+            "opinion_missing": 0,
+            "both_missing": 0,
+            "pair_rejected": 4
+          }
+        },
+        "rus_restaurant": {
+          "aspect": {
+            "tp": 6,
+            "fp": 8,
+            "fn": 1,
+            "precision": 0.42857142857142855,
+            "recall": 0.8571428571428571,
+            "f1": 0.5714285714285714
+          },
+          "opinion": {
+            "tp": 10,
+            "fp": 39,
+            "fn": 1,
+            "precision": 0.20408163265306123,
+            "recall": 0.9090909090909091,
+            "f1": 0.3333333333333333
+          },
+          "linked_aspect": {
+            "tp": 3,
+            "fp": 5,
+            "fn": 4,
+            "precision": 0.375,
+            "recall": 0.42857142857142855,
+            "f1": 0.4
+          },
+          "linked_opinion": {
+            "tp": 5,
+            "fp": 8,
+            "fn": 6,
+            "precision": 0.38461538461538464,
+            "recall": 0.45454545454545453,
+            "f1": 0.4166666666666667
+          },
+          "pair": {
+            "tp": 3,
+            "fp": 15,
+            "fn": 8,
+            "precision": 0.16666666666666666,
+            "recall": 0.2727272727272727,
+            "f1": 0.20689655172413793
+          },
+          "null_pair": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "candidate_pair_recall": 0.7272727272727273,
+          "pair_misses": {
+            "aspect_missing": 2,
+            "opinion_missing": 1,
+            "both_missing": 0,
+            "pair_rejected": 5
+          }
+        }
+      }
+    }
+  },
+  "references_on_completed_records": {
+    "bio": {
+      "n": 24,
+      "threshold": 0.65,
+      "micro": {
+        "aspect": {
+          "tp": 21,
+          "fp": 22,
+          "fn": 4,
+          "precision": 0.4883720930232558,
+          "recall": 0.84,
+          "f1": 0.6176470588235294
+        },
+        "opinion": {
+          "tp": 26,
+          "fp": 14,
+          "fn": 10,
+          "precision": 0.65,
+          "recall": 0.7222222222222222,
+          "f1": 0.6842105263157895
+        },
+        "linked_aspect": {
+          "tp": 16,
+          "fp": 8,
+          "fn": 9,
+          "precision": 0.6666666666666666,
+          "recall": 0.64,
+          "f1": 0.6530612244897959
+        },
+        "linked_opinion": {
+          "tp": 24,
+          "fp": 6,
+          "fn": 12,
+          "precision": 0.8,
+          "recall": 0.6666666666666666,
+          "f1": 0.7272727272727273
+        },
+        "pair": {
+          "tp": 22,
+          "fp": 12,
+          "fn": 17,
+          "precision": 0.6470588235294118,
+          "recall": 0.5641025641025641,
+          "f1": 0.6027397260273972
+        },
+        "null_pair": {
+          "tp": 1,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.3333333333333333,
+          "recall": 0.2,
+          "f1": 0.25
+        },
+        "candidate_pair_recall": 0.6410256410256411,
+        "pair_misses": {
+          "aspect_missing": 2,
+          "opinion_missing": 10,
+          "both_missing": 2,
+          "pair_rejected": 3
+        }
+      },
+      "macro_pair_f1": 0.6121323529411764
+    },
+    "pointer": {
+      "n": 24,
+      "threshold": 0.65,
+      "micro": {
+        "aspect": {
+          "tp": 21,
+          "fp": 13,
+          "fn": 4,
+          "precision": 0.6176470588235294,
+          "recall": 0.84,
+          "f1": 0.711864406779661
+        },
+        "opinion": {
+          "tp": 23,
+          "fp": 11,
+          "fn": 13,
+          "precision": 0.6764705882352942,
+          "recall": 0.6388888888888888,
+          "f1": 0.6571428571428571
+        },
+        "linked_aspect": {
+          "tp": 15,
+          "fp": 8,
+          "fn": 10,
+          "precision": 0.6521739130434783,
+          "recall": 0.6,
+          "f1": 0.625
+        },
+        "linked_opinion": {
+          "tp": 19,
+          "fp": 8,
+          "fn": 17,
+          "precision": 0.7037037037037037,
+          "recall": 0.5277777777777778,
+          "f1": 0.6031746031746031
+        },
+        "pair": {
+          "tp": 17,
+          "fp": 14,
+          "fn": 22,
+          "precision": 0.5483870967741935,
+          "recall": 0.4358974358974359,
+          "f1": 0.4857142857142857
+        },
+        "null_pair": {
+          "tp": 1,
+          "fp": 3,
+          "fn": 4,
+          "precision": 0.25,
+          "recall": 0.2,
+          "f1": 0.2222222222222222
+        },
+        "candidate_pair_recall": 0.5384615384615384,
+        "pair_misses": {
+          "aspect_missing": 3,
+          "opinion_missing": 13,
+          "both_missing": 2,
+          "pair_rejected": 4
+        }
+      },
+      "macro_pair_f1": 0.4797794117647059
+    }
+  }
+}

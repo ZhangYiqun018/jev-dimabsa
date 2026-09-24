@@ -1,0 +1,97 @@
+{
+  "model": "jev-1.13.0",
+  "config": "stack",
+  "specs": {
+    "eng_restaurant": {
+      "source": "bio",
+      "rules": {
+        "null_policy": true,
+        "overlap": true,
+        "affix": [
+          "aspect"
+        ]
+      }
+    },
+    "eng_laptop": {
+      "source": "bio",
+      "rules": {
+        "null_policy": true,
+        "overlap": true,
+        "affix": [
+          "aspect"
+        ]
+      }
+    },
+    "zho_restaurant": {
+      "source": "bio",
+      "rules": {
+        "null_policy": true,
+        "overlap": true,
+        "affix": [
+          "aspect",
+          "opinion"
+        ]
+      }
+    },
+    "zho_laptop": {
+      "source": "bio",
+      "rules": {
+        "null_policy": true,
+        "overlap": true,
+        "affix": [
+          "aspect",
+          "opinion"
+        ]
+      }
+    },
+    "jpn_hotel": {
+      "source": "lexicon",
+      "lexicon_threshold": 0.65,
+      "merge_bio_null": true,
+      "rules": {
+        "null_policy": true,
+        "overlap": true,
+        "affix": [
+          "aspect",
+          "opinion"
+        ]
+      }
+    },
+    "rus_restaurant": {
+      "source": "bio",
+      "rules": {
+        "null_policy": true,
+        "overlap": true,
+        "affix": [
+          "aspect",
+          "opinion"
+        ]
+      }
+    },
+    "tat_restaurant": {
+      "source": "bio",
+      "rules": {
+        "null_policy": true,
+        "overlap": true,
+        "affix": [
+          "aspect",
+          "opinion"
+        ]
+      }
+    },
+    "ukr_restaurant": {
+      "source": "bio",
+      "rules": {
+        "null_policy": true,
+        "overlap": true,
+        "affix": [
+          "aspect",
+          "opinion"
+        ]
+      }
+    }
+  },
+  "bio_extractor_id": "41ea479bf861",
+  "pair_threshold": 0.65,
+  "calibration": "Task1 zero-shot shrink, frozen"
+}

@@ -1,6 +1,7 @@
 # Experiment log
 
-One file per experiment, numbered in the order they were run.
+One file per mature, finalized experiment, numbered in the order they were recorded.
+Exploratory trial/dev iterations belong in [`deving/`](../deving/README.md), not here.
 
 **What goes in an entry:** the configuration that was run, the numbers that came out, what it
 cost, and any observed fact that affects how the numbers should be read. Nothing else.

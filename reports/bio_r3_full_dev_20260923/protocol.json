@@ -1,0 +1,96 @@
+{
+  "model": "jev-1.13.0",
+  "method": "bio_r3",
+  "extractor_id": "41ea479bf861",
+  "pair_threshold": 0.65,
+  "va_batch_pairs": 16,
+  "dataset": "bdc93be1224106ae7d3eb95739c02a76ed4ae8a1",
+  "calibration": "Task1 zero-shot train-fitted shrink; previously selected on Task1 dev; frozen, no refit",
+  "calibration_sha256": "11c9c4495ad74a6d8a893278ed94a11d825093f3a04ae614f6bdaa16d9e1a0c6",
+  "parameters": {
+    "eng_restaurant": {
+      "slope": [
+        0.75,
+        0.25
+      ],
+      "intercept": [
+        1.6676259445843868,
+        5.585377833753154
+      ]
+    },
+    "eng_laptop": {
+      "slope": [
+        0.5,
+        0.25
+      ],
+      "intercept": [
+        3.1293899204244036,
+        5.546293103448278
+      ]
+    },
+    "zho_restaurant": {
+      "slope": [
+        0.5,
+        0.25
+      ],
+      "intercept": [
+        2.5613764044943856,
+        4.600400280898874
+      ]
+    },
+    "zho_laptop": {
+      "slope": [
+        0.5,
+        0.25
+      ],
+      "intercept": [
+        2.6043473895582325,
+        4.433132530120483
+      ]
+    },
+    "jpn_hotel": {
+      "slope": [
+        0.75,
+        0.25
+      ],
+      "intercept": [
+        1.094649122807021,
+        5.34243421052631
+      ]
+    },
+    "rus_restaurant": {
+      "slope": [
+        0.75,
+        0.5
+      ],
+      "intercept": [
+        1.4876366396761158,
+        4.487570850202423
+      ]
+    },
+    "tat_restaurant": {
+      "slope": [
+        0.75,
+        0.25
+      ],
+      "intercept": [
+        1.5878087044534555,
+        5.724873481781371
+      ]
+    },
+    "ukr_restaurant": {
+      "slope": [
+        0.75,
+        0.5
+      ],
+      "intercept": [
+        1.5055971659919143,
+        4.500647773279349
+      ]
+    }
+  },
+  "concurrency": 8,
+  "null_opinion_supported": false,
+  "primary": "calibrated cF1",
+  "secondary": "raw cF1 and exact AO F1"
+}

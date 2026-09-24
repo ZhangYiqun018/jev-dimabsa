@@ -1,0 +1,929 @@
+{
+  "n": 24,
+  "corpora": [
+    {
+      "corpus": "eng_restaurant",
+      "ids": [
+        "rest16_quad_dev_9",
+        "rest16_quad_dev_17",
+        "rest16_quad_dev_14",
+        "rest16_quad_dev_2",
+        "rest16_quad_dev_15",
+        "rest16_quad_dev_10"
+      ],
+      "metrics": {
+        "aspect": {
+          "tp": 3,
+          "fp": 8,
+          "fn": 2,
+          "precision": 0.2727272727272727,
+          "recall": 0.6,
+          "f1": 0.375
+        },
+        "opinion": {
+          "tp": 7,
+          "fp": 5,
+          "fn": 1,
+          "precision": 0.5833333333333334,
+          "recall": 0.875,
+          "f1": 0.7
+        },
+        "linked_aspect": {
+          "tp": 3,
+          "fp": 3,
+          "fn": 2,
+          "precision": 0.5,
+          "recall": 0.6,
+          "f1": 0.5454545454545454
+        },
+        "linked_opinion": {
+          "tp": 6,
+          "fp": 1,
+          "fn": 2,
+          "precision": 0.8571428571428571,
+          "recall": 0.75,
+          "f1": 0.8
+        },
+        "pair": {
+          "tp": 5,
+          "fp": 6,
+          "fn": 5,
+          "precision": 0.45454545454545453,
+          "recall": 0.5,
+          "f1": 0.47619047619047616
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 2,
+          "fn": 3,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.6,
+        "pair_misses": {
+          "aspect_missing": 1,
+          "opinion_missing": 2,
+          "both_missing": 1,
+          "pair_rejected": 1
+        }
+      }
+    },
+    {
+      "corpus": "zho_restaurant",
+      "ids": [
+        "R0284:S018",
+        "R0285:S020",
+        "R0285:S01˙",
+        "R0284:S012",
+        "R0283:S004",
+        "R0285:S016"
+      ],
+      "metrics": {
+        "aspect": {
+          "tp": 5,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.8333333333333334,
+          "recall": 1.0,
+          "f1": 0.9090909090909091
+        },
+        "opinion": {
+          "tp": 5,
+          "fp": 3,
+          "fn": 5,
+          "precision": 0.625,
+          "recall": 0.5,
+          "f1": 0.5555555555555556
+        },
+        "linked_aspect": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 2,
+          "precision": 1.0,
+          "recall": 0.6,
+          "f1": 0.75
+        },
+        "linked_opinion": {
+          "tp": 5,
+          "fp": 1,
+          "fn": 5,
+          "precision": 0.8333333333333334,
+          "recall": 0.5,
+          "f1": 0.625
+        },
+        "pair": {
+          "tp": 5,
+          "fp": 1,
+          "fn": 5,
+          "precision": 0.8333333333333334,
+          "recall": 0.5,
+          "f1": 0.625
+        },
+        "null_pair": {
+          "tp": 1,
+          "fp": 1,
+          "fn": 1,
+          "precision": 0.5,
+          "recall": 0.5,
+          "f1": 0.5
+        },
+        "candidate_pair_recall": 0.5,
+        "pair_misses": {
+          "aspect_missing": 0,
+          "opinion_missing": 5,
+          "both_missing": 0,
+          "pair_rejected": 0
+        }
+      }
+    },
+    {
+      "corpus": "zho_laptop",
+      "ids": [
+        "6699348:S1367",
+        "6699348:S875",
+        "6699348:S714",
+        "6699348:S1550",
+        "6699348:S823",
+        "6699348:S838"
+      ],
+      "metrics": {
+        "aspect": {
+          "tp": 7,
+          "fp": 7,
+          "fn": 1,
+          "precision": 0.5,
+          "recall": 0.875,
+          "f1": 0.6363636363636364
+        },
+        "opinion": {
+          "tp": 5,
+          "fp": 4,
+          "fn": 2,
+          "precision": 0.5555555555555556,
+          "recall": 0.7142857142857143,
+          "f1": 0.625
+        },
+        "linked_aspect": {
+          "tp": 7,
+          "fp": 2,
+          "fn": 1,
+          "precision": 0.7777777777777778,
+          "recall": 0.875,
+          "f1": 0.8235294117647058
+        },
+        "linked_opinion": {
+          "tp": 5,
+          "fp": 3,
+          "fn": 2,
+          "precision": 0.625,
+          "recall": 0.7142857142857143,
+          "f1": 0.6666666666666666
+        },
+        "pair": {
+          "tp": 6,
+          "fp": 3,
+          "fn": 2,
+          "precision": 0.6666666666666666,
+          "recall": 0.75,
+          "f1": 0.7058823529411765
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.75,
+        "pair_misses": {
+          "aspect_missing": 0,
+          "opinion_missing": 1,
+          "both_missing": 1,
+          "pair_rejected": 0
+        }
+      }
+    },
+    {
+      "corpus": "rus_restaurant",
+      "ids": [
+        "6668:6_10",
+        "16137:14_25",
+        "3976:5_3",
+        "35867:2_36",
+        "16137:15_26",
+        "16137:12_24"
+      ],
+      "metrics": {
+        "aspect": {
+          "tp": 7,
+          "fp": 4,
+          "fn": 0,
+          "precision": 0.6363636363636364,
+          "recall": 1.0,
+          "f1": 0.7777777777777778
+        },
+        "opinion": {
+          "tp": 7,
+          "fp": 4,
+          "fn": 4,
+          "precision": 0.6363636363636364,
+          "recall": 0.6363636363636364,
+          "f1": 0.6363636363636364
+        },
+        "linked_aspect": {
+          "tp": 3,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.6,
+          "recall": 0.42857142857142855,
+          "f1": 0.5
+        },
+        "linked_opinion": {
+          "tp": 5,
+          "fp": 3,
+          "fn": 6,
+          "precision": 0.625,
+          "recall": 0.45454545454545453,
+          "f1": 0.5263157894736842
+        },
+        "pair": {
+          "tp": 5,
+          "fp": 3,
+          "fn": 6,
+          "precision": 0.625,
+          "recall": 0.45454545454545453,
+          "f1": 0.5263157894736842
+        },
+        "null_pair": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "candidate_pair_recall": 0.6363636363636364,
+        "pair_misses": {
+          "aspect_missing": 0,
+          "opinion_missing": 4,
+          "both_missing": 0,
+          "pair_rejected": 2
+        }
+      }
+    }
+  ],
+  "micro": {
+    "aspect": {
+      "tp": 22,
+      "fp": 20,
+      "fn": 3,
+      "precision": 0.5238095238095238,
+      "recall": 0.88,
+      "f1": 0.6567164179104478
+    },
+    "opinion": {
+      "tp": 24,
+      "fp": 16,
+      "fn": 12,
+      "precision": 0.6,
+      "recall": 0.6666666666666666,
+      "f1": 0.631578947368421
+    },
+    "linked_aspect": {
+      "tp": 16,
+      "fp": 7,
+      "fn": 9,
+      "precision": 0.6956521739130435,
+      "recall": 0.64,
+      "f1": 0.6666666666666666
+    },
+    "linked_opinion": {
+      "tp": 21,
+      "fp": 8,
+      "fn": 15,
+      "precision": 0.7241379310344828,
+      "recall": 0.5833333333333334,
+      "f1": 0.6461538461538462
+    },
+    "pair": {
+      "tp": 21,
+      "fp": 13,
+      "fn": 18,
+      "precision": 0.6176470588235294,
+      "recall": 0.5384615384615384,
+      "f1": 0.5753424657534246
+    },
+    "null_pair": {
+      "tp": 1,
+      "fp": 3,
+      "fn": 4,
+      "precision": 0.25,
+      "recall": 0.2,
+      "f1": 0.2222222222222222
+    },
+    "candidate_pair_recall": 0.6153846153846154,
+    "pair_misses": {
+      "aspect_missing": 1,
+      "opinion_missing": 12,
+      "both_missing": 2,
+      "pair_rejected": 3
+    }
+  },
+  "config": {
+    "split": "trial",
+    "model": "jev-1.13.0",
+    "shots": 2,
+    "threshold": 0.65,
+    "retrieval": "BM25 k1=1.5 b=0.75; Chinese/Japanese character bigrams; other languages alphanumeric tokenizer units; ID tie-break",
+    "dataset": "bdc93be1224106ae7d3eb95739c02a76ed4ae8a1",
+    "fingerprint": "0b7b09e56e85",
+    "max_new_input_tokens": 194302,
+    "concurrency": 3,
+    "baseline": "BIO r3 41ea479bf861; same extraction/pair rules and questions; replace only example package",
+    "example_field": "invented_examples renamed to examples to correctly describe retrieved training records",
+    "train_pool_sizes": {
+      "eng_restaurant": 2256,
+      "zho_restaurant": 6002,
+      "zho_laptop": 3470,
+      "rus_restaurant": 1240
+    }
+  },
+  "complete": true,
+  "n_requested": 24,
+  "macro_pair_f1": 0.5833471546513342,
+  "partial_macro_pair_f1": null,
+  "baseline_same_completed_rows": {
+    "n": 24,
+    "corpora": [
+      {
+        "corpus": "eng_restaurant",
+        "ids": [
+          "rest16_quad_dev_9",
+          "rest16_quad_dev_17",
+          "rest16_quad_dev_14",
+          "rest16_quad_dev_2",
+          "rest16_quad_dev_15",
+          "rest16_quad_dev_10"
+        ],
+        "metrics": {
+          "aspect": {
+            "tp": 3,
+            "fp": 9,
+            "fn": 2,
+            "precision": 0.25,
+            "recall": 0.6,
+            "f1": 0.35294117647058826
+          },
+          "opinion": {
+            "tp": 7,
+            "fp": 5,
+            "fn": 1,
+            "precision": 0.5833333333333334,
+            "recall": 0.875,
+            "f1": 0.7
+          },
+          "linked_aspect": {
+            "tp": 3,
+            "fp": 3,
+            "fn": 2,
+            "precision": 0.5,
+            "recall": 0.6,
+            "f1": 0.5454545454545454
+          },
+          "linked_opinion": {
+            "tp": 6,
+            "fp": 1,
+            "fn": 2,
+            "precision": 0.8571428571428571,
+            "recall": 0.75,
+            "f1": 0.8
+          },
+          "pair": {
+            "tp": 5,
+            "fp": 5,
+            "fn": 5,
+            "precision": 0.5,
+            "recall": 0.5,
+            "f1": 0.5
+          },
+          "null_pair": {
+            "tp": 0,
+            "fp": 1,
+            "fn": 3,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "candidate_pair_recall": 0.6,
+          "pair_misses": {
+            "aspect_missing": 1,
+            "opinion_missing": 2,
+            "both_missing": 1,
+            "pair_rejected": 1
+          }
+        }
+      },
+      {
+        "corpus": "zho_restaurant",
+        "ids": [
+          "R0284:S018",
+          "R0285:S020",
+          "R0285:S01˙",
+          "R0284:S012",
+          "R0283:S004",
+          "R0285:S016"
+        ],
+        "metrics": {
+          "aspect": {
+            "tp": 5,
+            "fp": 2,
+            "fn": 0,
+            "precision": 0.7142857142857143,
+            "recall": 1.0,
+            "f1": 0.8333333333333334
+          },
+          "opinion": {
+            "tp": 5,
+            "fp": 3,
+            "fn": 5,
+            "precision": 0.625,
+            "recall": 0.5,
+            "f1": 0.5555555555555556
+          },
+          "linked_aspect": {
+            "tp": 3,
+            "fp": 0,
+            "fn": 2,
+            "precision": 1.0,
+            "recall": 0.6,
+            "f1": 0.75
+          },
+          "linked_opinion": {
+            "tp": 5,
+            "fp": 1,
+            "fn": 5,
+            "precision": 0.8333333333333334,
+            "recall": 0.5,
+            "f1": 0.625
+          },
+          "pair": {
+            "tp": 5,
+            "fp": 1,
+            "fn": 5,
+            "precision": 0.8333333333333334,
+            "recall": 0.5,
+            "f1": 0.625
+          },
+          "null_pair": {
+            "tp": 1,
+            "fp": 1,
+            "fn": 1,
+            "precision": 0.5,
+            "recall": 0.5,
+            "f1": 0.5
+          },
+          "candidate_pair_recall": 0.5,
+          "pair_misses": {
+            "aspect_missing": 0,
+            "opinion_missing": 5,
+            "both_missing": 0,
+            "pair_rejected": 0
+          }
+        }
+      },
+      {
+        "corpus": "zho_laptop",
+        "ids": [
+          "6699348:S1367",
+          "6699348:S875",
+          "6699348:S714",
+          "6699348:S1550",
+          "6699348:S823",
+          "6699348:S838"
+        ],
+        "metrics": {
+          "aspect": {
+            "tp": 7,
+            "fp": 6,
+            "fn": 1,
+            "precision": 0.5384615384615384,
+            "recall": 0.875,
+            "f1": 0.6666666666666666
+          },
+          "opinion": {
+            "tp": 6,
+            "fp": 3,
+            "fn": 1,
+            "precision": 0.6666666666666666,
+            "recall": 0.8571428571428571,
+            "f1": 0.75
+          },
+          "linked_aspect": {
+            "tp": 7,
+            "fp": 2,
+            "fn": 1,
+            "precision": 0.7777777777777778,
+            "recall": 0.875,
+            "f1": 0.8235294117647058
+          },
+          "linked_opinion": {
+            "tp": 6,
+            "fp": 2,
+            "fn": 1,
+            "precision": 0.75,
+            "recall": 0.8571428571428571,
+            "f1": 0.8
+          },
+          "pair": {
+            "tp": 7,
+            "fp": 2,
+            "fn": 1,
+            "precision": 0.7777777777777778,
+            "recall": 0.875,
+            "f1": 0.8235294117647058
+          },
+          "null_pair": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "candidate_pair_recall": 0.875,
+          "pair_misses": {
+            "aspect_missing": 0,
+            "opinion_missing": 0,
+            "both_missing": 1,
+            "pair_rejected": 0
+          }
+        }
+      },
+      {
+        "corpus": "rus_restaurant",
+        "ids": [
+          "6668:6_10",
+          "16137:14_25",
+          "3976:5_3",
+          "35867:2_36",
+          "16137:15_26",
+          "16137:12_24"
+        ],
+        "metrics": {
+          "aspect": {
+            "tp": 6,
+            "fp": 5,
+            "fn": 1,
+            "precision": 0.5454545454545454,
+            "recall": 0.8571428571428571,
+            "f1": 0.6666666666666666
+          },
+          "opinion": {
+            "tp": 8,
+            "fp": 3,
+            "fn": 3,
+            "precision": 0.7272727272727273,
+            "recall": 0.7272727272727273,
+            "f1": 0.7272727272727273
+          },
+          "linked_aspect": {
+            "tp": 3,
+            "fp": 3,
+            "fn": 4,
+            "precision": 0.5,
+            "recall": 0.42857142857142855,
+            "f1": 0.46153846153846156
+          },
+          "linked_opinion": {
+            "tp": 7,
+            "fp": 2,
+            "fn": 4,
+            "precision": 0.7777777777777778,
+            "recall": 0.6363636363636364,
+            "f1": 0.7
+          },
+          "pair": {
+            "tp": 5,
+            "fp": 4,
+            "fn": 6,
+            "precision": 0.5555555555555556,
+            "recall": 0.45454545454545453,
+            "f1": 0.5
+          },
+          "null_pair": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "candidate_pair_recall": 0.6363636363636364,
+          "pair_misses": {
+            "aspect_missing": 1,
+            "opinion_missing": 3,
+            "both_missing": 0,
+            "pair_rejected": 2
+          }
+        }
+      }
+    ],
+    "macro_pair_f1": 0.6121323529411764,
+    "micro": {
+      "aspect": {
+        "tp": 21,
+        "fp": 22,
+        "fn": 4,
+        "precision": 0.4883720930232558,
+        "recall": 0.84,
+        "f1": 0.6176470588235294
+      },
+      "opinion": {
+        "tp": 26,
+        "fp": 14,
+        "fn": 10,
+        "precision": 0.65,
+        "recall": 0.7222222222222222,
+        "f1": 0.6842105263157895
+      },
+      "linked_aspect": {
+        "tp": 16,
+        "fp": 8,
+        "fn": 9,
+        "precision": 0.6666666666666666,
+        "recall": 0.64,
+        "f1": 0.6530612244897959
+      },
+      "linked_opinion": {
+        "tp": 24,
+        "fp": 6,
+        "fn": 12,
+        "precision": 0.8,
+        "recall": 0.6666666666666666,
+        "f1": 0.7272727272727273
+      },
+      "pair": {
+        "tp": 22,
+        "fp": 12,
+        "fn": 17,
+        "precision": 0.6470588235294118,
+        "recall": 0.5641025641025641,
+        "f1": 0.6027397260273972
+      },
+      "null_pair": {
+        "tp": 1,
+        "fp": 2,
+        "fn": 4,
+        "precision": 0.3333333333333333,
+        "recall": 0.2,
+        "f1": 0.25
+      },
+      "candidate_pair_recall": 0.6410256410256411,
+      "pair_misses": {
+        "aspect_missing": 2,
+        "opinion_missing": 10,
+        "both_missing": 2,
+        "pair_rejected": 3
+      }
+    }
+  },
+  "new_input_tokens": 91960,
+  "stage_new_input_tokens": {
+    "extract": 85735,
+    "pair": 6225
+  },
+  "new_calls": 35,
+  "new_http_attempts": 35,
+  "reused_pair_requests": 13,
+  "new_estimated_usd": 0.0038623200000000002,
+  "logical_input_tokens_completed": 99805,
+  "logical_baseline_input_tokens_same_rows": 97151,
+  "returned_models": [
+    "jev-1.13.0"
+  ],
+  "examples": [
+    {
+      "corpus": "eng_restaurant",
+      "ID": "rest16_quad_dev_9",
+      "example_ids": [
+        "rest16_quad_train_1087",
+        "rest16_quad_train_357"
+      ]
+    },
+    {
+      "corpus": "zho_restaurant",
+      "ID": "R0284:S018",
+      "example_ids": [
+        "R1556:S005",
+        "R1572:S044"
+      ]
+    },
+    {
+      "corpus": "zho_laptop",
+      "ID": "6699348:S1367",
+      "example_ids": [
+        "6958125:S009",
+        "6848038:S049"
+      ]
+    },
+    {
+      "corpus": "rus_restaurant",
+      "ID": "6668:6_10",
+      "example_ids": [
+        "13912:12_546",
+        "12270:13_435"
+      ]
+    },
+    {
+      "corpus": "eng_restaurant",
+      "ID": "rest16_quad_dev_17",
+      "example_ids": [
+        "rest16_quad_train_1172",
+        "rest16_quad_train_839"
+      ]
+    },
+    {
+      "corpus": "zho_restaurant",
+      "ID": "R0285:S020",
+      "example_ids": [
+        "R0146:S026",
+        "R0306:S051"
+      ]
+    },
+    {
+      "corpus": "zho_laptop",
+      "ID": "6699348:S875",
+      "example_ids": [
+        "6986981:S001",
+        "6770036:S385"
+      ]
+    },
+    {
+      "corpus": "rus_restaurant",
+      "ID": "16137:14_25",
+      "example_ids": [
+        "11102:3_320",
+        "19265:3_787"
+      ]
+    },
+    {
+      "corpus": "eng_restaurant",
+      "ID": "rest16_quad_dev_14",
+      "example_ids": [
+        "rest16_quad_train_425",
+        "rest16_quad_train_1030"
+      ]
+    },
+    {
+      "corpus": "zho_restaurant",
+      "ID": "R0285:S01˙",
+      "example_ids": [
+        "R0304:S028",
+        "R0910:S040"
+      ]
+    },
+    {
+      "corpus": "zho_laptop",
+      "ID": "6699348:S714",
+      "example_ids": [
+        "6756274:S029",
+        "6707403:S324"
+      ]
+    },
+    {
+      "corpus": "rus_restaurant",
+      "ID": "3976:5_3",
+      "example_ids": [
+        "16647:2_667",
+        "28112:15_1146"
+      ]
+    },
+    {
+      "corpus": "eng_restaurant",
+      "ID": "rest16_quad_dev_2",
+      "example_ids": [
+        "rest16_quad_train_1436",
+        "rest16_quad_test_290"
+      ]
+    },
+    {
+      "corpus": "zho_restaurant",
+      "ID": "R0284:S012",
+      "example_ids": [
+        "R0296:S024",
+        "R0703:S011"
+      ]
+    },
+    {
+      "corpus": "zho_laptop",
+      "ID": "6699348:S1550",
+      "example_ids": [
+        "6707403:S911",
+        "7111630:S032"
+      ]
+    },
+    {
+      "corpus": "rus_restaurant",
+      "ID": "35867:2_36",
+      "example_ids": [
+        "14865:5_587",
+        "11027:18_313"
+      ]
+    },
+    {
+      "corpus": "eng_restaurant",
+      "ID": "rest16_quad_dev_15",
+      "example_ids": [
+        "rest16_quad_train_172",
+        "rest16_quad_test_201"
+      ]
+    },
+    {
+      "corpus": "zho_restaurant",
+      "ID": "R0283:S004",
+      "example_ids": [
+        "R0142:S018",
+        "R1189:S062"
+      ]
+    },
+    {
+      "corpus": "zho_laptop",
+      "ID": "6699348:S823",
+      "example_ids": [
+        "6745361:S467",
+        "6745361:S060"
+      ]
+    },
+    {
+      "corpus": "rus_restaurant",
+      "ID": "16137:15_26",
+      "example_ids": [
+        "29383:3_1198",
+        "11116:3_324"
+      ]
+    },
+    {
+      "corpus": "eng_restaurant",
+      "ID": "rest16_quad_dev_10",
+      "example_ids": [
+        "rest16_quad_train_1334",
+        "rest16_quad_train_296"
+      ]
+    },
+    {
+      "corpus": "zho_restaurant",
+      "ID": "R0285:S016",
+      "example_ids": [
+        "R2263:S006",
+        "R2069:S006"
+      ]
+    },
+    {
+      "corpus": "zho_laptop",
+      "ID": "6699348:S838",
+      "example_ids": [
+        "6878187:S061",
+        "6920254:S236"
+      ]
+    },
+    {
+      "corpus": "rus_restaurant",
+      "ID": "16137:12_24",
+      "example_ids": [
+        "11116:6_326",
+        "11793:0_387"
+      ]
+    }
+  ],
+  "cache_files": [
+    "reports/bio_bm25_20260923/trial/cache/d755e21179351fd7e521.json",
+    "reports/bio_bm25_20260923/trial/cache/42ebcc2228129a29b9a2.json",
+    "reports/bio_bm25_20260923/trial/cache/5e65c4395128a28a8d05.json",
+    "reports/bio_bm25_20260923/trial/cache/cedfa2a1f8da4bd042ca.json",
+    "reports/bio_bm25_20260923/trial/cache/55dd8acc9e0320b60986.json",
+    "reports/bio_bm25_20260923/trial/cache/e62d44681994a5549c98.json",
+    "reports/bio_bm25_20260923/trial/cache/c86c22c64c23fe1ca1fe.json",
+    "reports/bio_bm25_20260923/trial/cache/8b65ce3f449f969cefd6.json",
+    "reports/bio_bm25_20260923/trial/cache/7b4a2c85b5639902196c.json",
+    "reports/bio_bm25_20260923/trial/cache/53435c3f4e1ed6c1b76f.json",
+    "reports/bio_bm25_20260923/trial/cache/9c5d750824539fb1f92d.json",
+    "reports/bio_bm25_20260923/trial/cache/8dd0b8e835835595fa18.json",
+    "reports/bio_bm25_20260923/trial/cache/9cc1d81456c015d72023.json",
+    "reports/bio_bm25_20260923/trial/cache/eb4ab029a1e62b334106.json",
+    "reports/bio_bm25_20260923/trial/cache/7bf180bb052ba9c4a9bd.json",
+    "reports/bio_bm25_20260923/trial/cache/8b0798e76531f34ee610.json",
+    "reports/bio_bm25_20260923/trial/cache/438f69c5b454402ce454.json",
+    "reports/bio_bm25_20260923/trial/cache/86f4895d0b350683334a.json",
+    "reports/bio_bm25_20260923/trial/cache/30aff8f9235252cad8d8.json",
+    "reports/bio_bm25_20260923/trial/cache/10df09c6747d1145b121.json",
+    "reports/bio_bm25_20260923/trial/cache/3fe0ff1758704299da48.json",
+    "reports/bio_bm25_20260923/trial/cache/21e0a2dc3ae38afbcebd.json",
+    "reports/bio_bm25_20260923/trial/cache/49bb3e5d57e3707f347c.json",
+    "reports/bio_bm25_20260923/trial/cache/97ed17bf6a6347295e26.json"
+  ],
+  "missing": [],
+  "budget_note": "Stop new requests after successful input reaches limit; up to three in-flight calls may overrun. Failed-attempt token usage unknown.",
+  "metric_note": "Exact case-insensitive AO surface-pair F1, no VA. Existing development samples, not independent validation."
+}

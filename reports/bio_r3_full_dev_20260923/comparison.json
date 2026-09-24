@@ -1,0 +1,102 @@
+{
+  "corpora": [
+    {
+      "corpus": "eng_restaurant",
+      "n": 200,
+      "ao_set_f1": 0.7525252525252525,
+      "official_categorical_f1": 0.7525252525252525,
+      "raw_cf1": 0.6074228665257422,
+      "calibrated_cf1": 0.6938110344542235,
+      "old_lexicon_dev_cf1": 0.47081735857959656,
+      "delta_vs_lexicon": 0.22299367587462698
+    },
+    {
+      "corpus": "eng_laptop",
+      "n": 200,
+      "ao_set_f1": 0.6601626016260163,
+      "official_categorical_f1": 0.6601626016260163,
+      "raw_cf1": 0.5224529559712867,
+      "calibrated_cf1": 0.6064330901880588,
+      "old_lexicon_dev_cf1": 0.34142272018990566,
+      "delta_vs_lexicon": 0.26501036999815314
+    },
+    {
+      "corpus": "zho_restaurant",
+      "n": 300,
+      "ao_set_f1": 0.4581818181818182,
+      "official_categorical_f1": 0.4581818181818182,
+      "raw_cf1": 0.3890226233524971,
+      "calibrated_cf1": 0.43588642542017186,
+      "old_lexicon_dev_cf1": 0.1892643983936936,
+      "delta_vs_lexicon": 0.24662202702647826
+    },
+    {
+      "corpus": "zho_laptop",
+      "n": 300,
+      "ao_set_f1": 0.2813257881972514,
+      "official_categorical_f1": 0.2813257881972514,
+      "raw_cf1": 0.2374086608231262,
+      "calibrated_cf1": 0.26720183404901443,
+      "old_lexicon_dev_cf1": 0.13622574131070775,
+      "delta_vs_lexicon": 0.13097609273830668
+    },
+    {
+      "corpus": "jpn_hotel",
+      "n": 200,
+      "ao_set_f1": 0.19138755980861244,
+      "official_categorical_f1": 0.1907790143084261,
+      "raw_cf1": 0.15359959890356548,
+      "calibrated_cf1": 0.17846177484340664,
+      "old_lexicon_dev_cf1": 0.3818033859414303,
+      "delta_vs_lexicon": -0.20334161109802368
+    },
+    {
+      "corpus": "rus_restaurant",
+      "n": 48,
+      "ao_set_f1": 0.45544554455445546,
+      "official_categorical_f1": 0.45544554455445546,
+      "raw_cf1": 0.38759887854223585,
+      "calibrated_cf1": 0.4162818069960134,
+      "old_lexicon_dev_cf1": 0.31280777989480424,
+      "delta_vs_lexicon": 0.10347402710120918
+    },
+    {
+      "corpus": "tat_restaurant",
+      "n": 48,
+      "ao_set_f1": 0.4897959183673469,
+      "official_categorical_f1": 0.4897959183673469,
+      "raw_cf1": 0.4136163553177404,
+      "calibrated_cf1": 0.44440248558101764,
+      "old_lexicon_dev_cf1": 0.31834633128933354,
+      "delta_vs_lexicon": 0.1260561542916841
+    },
+    {
+      "corpus": "ukr_restaurant",
+      "n": 48,
+      "ao_set_f1": 0.48205128205128206,
+      "official_categorical_f1": 0.48205128205128206,
+      "raw_cf1": 0.41061921634539306,
+      "calibrated_cf1": 0.43830084350183873,
+      "old_lexicon_dev_cf1": 0.3041101931038374,
+      "delta_vs_lexicon": 0.13419065039800132
+    }
+  ],
+  "macro_ao_set_f1": 0.4713594706640044,
+  "macro_official_categorical_f1": 0.4712834024764811,
+  "macro_raw_cf1": 0.39021764447269836,
+  "macro_calibrated_cf1": 0.43509741187921813,
+  "macro_lexicon_cf1": 0.30684973858791365,
+  "micro_official_categorical": {
+    "tp": 1254.0,
+    "fp": 1555,
+    "fn": 1453,
+    "f1": 0.45467730239303844
+  },
+  "micro_official_calibrated": {
+    "ctp": 1170.5544467308755,
+    "precision": 0.416715716173327,
+    "recall": 0.43241760130435003,
+    "cf1": 0.4244214817733414
+  },
+  "note": "All new/lexicon comparisons above use the same full dev. Official competition results are test and do not constitute a ranking of this run."
+}

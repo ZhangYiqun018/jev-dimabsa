@@ -1,0 +1,50 @@
+{
+  "model": "jev-1.13.0",
+  "config": "lattice",
+  "specs": {
+    "eng_restaurant": {
+      "source": "lattice",
+      "threshold": 0.65,
+      "rules": {}
+    },
+    "eng_laptop": {
+      "source": "lattice",
+      "threshold": 0.65,
+      "rules": {}
+    },
+    "zho_restaurant": {
+      "source": "lattice",
+      "threshold": 0.65,
+      "rules": {}
+    },
+    "zho_laptop": {
+      "source": "lattice",
+      "threshold": 0.65,
+      "rules": {}
+    },
+    "jpn_hotel": {
+      "source": "lattice",
+      "threshold": 0.65,
+      "rules": {}
+    },
+    "rus_restaurant": {
+      "source": "lattice",
+      "threshold": 0.65,
+      "rules": {}
+    },
+    "tat_restaurant": {
+      "source": "lattice",
+      "threshold": 0.65,
+      "rules": {}
+    },
+    "ukr_restaurant": {
+      "source": "lattice",
+      "threshold": 0.65,
+      "rules": {}
+    }
+  },
+  "bio_extractor_id": "41ea479bf861",
+  "pair_threshold": 0.65,
+  "lattice_threshold": 0.2,
+  "calibration": "Task1 zero-shot shrink, frozen"
+}
