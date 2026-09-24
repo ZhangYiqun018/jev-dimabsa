@@ -46,5 +46,6 @@ facts only — anything a reader needs to not misread the table
 | [0005](0005-st1-supervised-calibration.md) | Supervised shrink calibration, zero / 9-shot | 1.1395 / 1.1199 | $1.9588 |
 | [0006](0006-st2-lexicon-pair-baseline.md) | Subtask 2, lexicon + pair decisions + transferred shrink | cF1 0.2771 (macro) | $2.3029 (dev + test) |
 | [0007](0007-st2-lattice-reranker.md) | Subtask 2, BIO lattice candidates + example-conditioned checks + reranker | cF1 0.5168 (macro) | ≈ $5.44 test + ≈ $1.5 dev |
+| [0008](0008-st3-category-choice.md) | Subtask 3, category Choice + train lookups on the Subtask 2 pairs | cF1 0.4362 (macro) | ≈ $1.27 test + ≈ $2.2 dev |
 
-Task 1 scores are micro RMSE_VA (lower is better); Task 2 is macro cF1 (higher is better).
+Task 1 scores are micro RMSE_VA (lower is better); Tasks 2 and 3 are macro cF1 (higher is better).

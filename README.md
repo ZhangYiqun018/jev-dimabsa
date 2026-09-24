@@ -12,7 +12,7 @@
 [![Dependencies](https://img.shields.io/badge/deps-numpy%20%C2%B7%20scipy-2b8a3e)](#quick-start)
 [![No GPU](https://img.shields.io/badge/GPU-none-495057)](#quick-start)
 
-[Results](#results-at-a-glance) · [Task 1](#task-1--dimasr-valencearousal-of-a-given-aspect) · [Task 2](#task-2--dimaste-aspectopinionva-triplets) · [Quick start](#quick-start) · [Layout](#repository-layout) · [Experiment logs](logs/README.md) · [Data](#dataset)
+[Results](#results-at-a-glance) · [Task 1](#task-1--dimasr-valencearousal-of-a-given-aspect) · [Task 2](#task-2--dimaste-aspectopinionva-triplets) · [Task 3](#task-3--dimasqp-adding-the-category) · [Quick start](#quick-start) · [Layout](#repository-layout) · [Experiment logs](logs/README.md) · [Data](#dataset)
 
 </div>
 
@@ -29,8 +29,9 @@ unchanged official scorer.
 
 <table>
 <tr>
-<th width="50%">Task 1 · DimASR — score a given aspect</th>
-<th width="50%">Task 2 · DimASTE — extract aspect–opinion–VA triplets</th>
+<th width="33%">Task 1 · DimASR — score a given aspect</th>
+<th width="33%">Task 2 · DimASTE — extract aspect–opinion–VA triplets</th>
+<th width="33%">Task 3 · DimASQP — add the aspect category</th>
 </tr>
 <tr>
 <td align="center">
@@ -45,10 +46,16 @@ official test, 8 corpora, macro, higher is better<br>
 <b>between 6th and 7th of the 12 teams with all eight corpora</b><br>
 (PAI 57.73 leads · within 2 points of the per-corpus winners on English)
 </td>
+<td align="center">
+<h3>43.62 cF1</h3>
+official test, 8 corpora, macro, higher is better<br>
+<b>between 5th and 6th of the 9 teams with all eight corpora</b><br>
+(PALI 49.20 leads · fine-tuned Llama-3.3-70B baseline 38.62)
+</td>
 </tr>
 </table>
 
-Both numbers come from a single frozen run on the official test split, after all choices
+Each number comes from a single frozen run on the official test split, after all choices
 were made on train and dev. Full protocols are in [`logs/`](logs/README.md).
 
 ## Task 1 · DimASR: valence/arousal of a given aspect
@@ -196,6 +203,76 @@ set. Protocol, costs and caveats: log [0007](logs/0007-st2-lattice-reranker.md).
 
 </details>
 
+## Task 3 · DimASQP: adding the category
+
+Task 3 asks for `(Aspect, Category, Opinion, V#A)`, where the category is an `ENTITY#ATTRIBUTE`
+label (12 in restaurants, 44 in the hotel corpus, 113–121 in laptops). Its reviews and gold
+pairs are those of Task 2, so the frozen Task 2 pairs and V/A are reused and only the category
+is added.
+
+```mermaid
+flowchart LR
+    P["Task 2 pairs + V/A<br/>(frozen)"] --> C["Jev Choice per pair<br/>over the train categories"]
+    T[("Train split<br/>BM25 examples · glossary<br/>aspect / opinion counts")] -.-> C
+    T -.-> M
+    C --> M["Conditional logit<br/>per language group<br/>fitted on train"]
+    M --> O["Quadruplets"]
+```
+
+- **Choice with examples** ([`jev/categories.py`](jev/categories.py)). Every option is its
+  entity plus a one-line attribute meaning; the state adds four BM25-retrieved train reviews
+  with their annotated categories and the most frequent train aspects of each category.
+- **Train lookups.** P(category | aspect) and P(category | opinion) from train counts; the
+  opinion often decides the attribute (portability vs design, quality vs general).
+- **Combiner** fitted on a train sample with leave-one-out counts, so dev only selected the
+  design: [`reports/task3/category_weights.json`](reports/task3/category_weights.json).
+
+| System (official test, macro over 8 corpora) | cF1 ↑ |
+|---|---:|
+| PALI † | 49.20 |
+| Takoyaki † | 48.03 |
+| nchellwig | 47.19 |
+| ALPS-Lab | 45.81 |
+| TeamLasse | 44.33 |
+| **Jev, Task 2 pairs + category Choice + train lookups** | **43.62** |
+| AILS-NTUA | 40.63 |
+| Llama-3.3-70B, fine-tuned | 38.62 |
+| GPT-OSS-120B, fine-tuned | 37.27 |
+| TeleAI | 31.26 |
+| Scmhl5 | 30.65 |
+| Kimi-K2 Thinking, one-shot | 26.95 |
+| Habib University | 22.07 |
+| Qwen3-14B, QLoRA fine-tuned | 14.51 |
+
+Participant rows are all teams with results on all eight corpora in the
+[official overview](https://aclanthology.org/2026.semeval-1.452/), Table 8 (macro computed
+here). † Per-corpus winners among them (Takoyaki: English restaurant and laptop, Tatar; PALI:
+Japanese); PAI (Russian, Ukrainian) and NYCU Speech Lab (both Chinese corpora) reported only
+some corpora. Baselines: [arXiv:2601.23022](https://arxiv.org/abs/2601.23022), Table 3.
+
+<details>
+<summary><b>Per-corpus Task 3 results</b>: test cF1, category accuracy, and the leading systems</summary>
+
+<br>
+
+| Corpus | Jev dev | **Jev test** | Category accuracy | Best official (team) | PALI | Takoyaki |
+|---|---:|---:|---:|---:|---:|---:|
+| eng_restaurant | 73.36 | **63.94** | 0.929 | 65.14 (Takoyaki) | 63.95 | 65.14 |
+| eng_laptop | 39.69 | **37.22** | 0.603 | 42.27 (Takoyaki) | 37.93 | 42.27 |
+| zho_restaurant | 54.89 | **44.99** | 0.925 | 55.21 (NYCU Speech Lab) | 53.57 | 49.66 |
+| zho_laptop | 32.03 | **31.06** | 0.802 | 48.24 (NYCU Speech Lab) | 43.19 | 37.45 |
+| jpn_hotel | 42.36 | **37.17** | 0.753 | 42.52 (PALI) | 42.52 | 40.86 |
+| rus_restaurant | 49.75 | **46.62** | 0.919 | 55.99 (PAI) | 54.96 | 51.30 |
+| tat_restaurant | 49.67 | **42.78** | 0.920 | 47.36 (Takoyaki) | 44.43 | 47.36 |
+| ukr_restaurant | 48.87 | **45.22** | 0.925 | 54.37 (PAI) | 53.07 | 50.19 |
+| **Macro** | **48.83** | **43.62** | — | — | 49.20 | 48.03 |
+
+Category accuracy is over predicted pairs that match a gold pair; Task 3 cF1 is close to the
+Task 2 cF1 times this accuracy, so the remaining gap is mostly the Task 2 pairs. Protocol,
+costs and caveats: log [0008](logs/0008-st3-category-choice.md).
+
+</details>
+
 ## Quick start
 
 ```bash
@@ -241,7 +318,21 @@ replays a finished run without API calls. A full test run is about 130M input to
 
 </details>
 
-Both tasks pin `jev-1.13.0`; the dataset and scorer snapshot is pinned in
+<details open>
+<summary><b>Task 3</b>: category for the Task 2 pairs (after the Task 2 runs above)</summary>
+
+```bash
+# 1. Jev on a train sample, fit the combiner weights
+.venv/bin/python tools/run_task3.py fit
+# 2. dev: categories for the out-of-fold Task 2 dev pairs, official Task 3 score
+.venv/bin/python tools/run_task3.py dev
+# 3. test: frozen weights, official scorer
+.venv/bin/python tools/run_task3.py test --variant full
+```
+
+</details>
+
+All tasks pin `jev-1.13.0`; the dataset and scorer snapshot is pinned in
 [`data-version.json`](data-version.json). API keys come from the
 [TypeSafe console](https://console.typesafe.ai/); request shapes are documented at
 <https://docs.typesafe.ai/introduction>.
@@ -258,14 +349,16 @@ jev/
   extraction.py   Task 2 ① per-token BIO Choice + Noul pair decisions
   spans.py        Task 2 train statistics: NULL policy, edge affixes
   lattice.py      Task 2 ② lattice candidates, Noul per pair
-  retrieval.py    Task 2 BM25 train examples
+  retrieval.py    Task 2/3 BM25 train examples
   checks.py       Task 2 ③ example-conditioned span and pair checks
   rerank.py       Task 2 ④ features, per-group logistic reranker, selection
   task2.py        Task 2 request cache, pair V/A ⑤, official cF1
+  categories.py   Task 3 category Choice, train lookups, per-group combiner
 runners/          unified --task 1|2 inference, concurrency, resume, usage accounting
 tools/
   calibrate_st1.py   Task 1 train calibration, dev selection, frozen test
   run_task2.py       Task 2 pipeline: va | dev | test
+  run_task3.py       Task 3 categories on the Task 2 pairs: fit | dev | test
   leakage_audit.py   train/dev/test overlap report
   analyze_st1_design.py, probe_fewshot.py   Task 1 official-score checks and delivery probes
 scoring/score.py  wraps the official metrics script, unmodified
@@ -312,4 +405,5 @@ Papers: [arXiv:2601.23022](https://arxiv.org/abs/2601.23022) (Track A dataset) �
   23 train sentences in test). Example selection and retrieval drop any train record whose
   normalised text occurs in the evaluated split ([`tools/leakage_audit.py`](tools/leakage_audit.py)).
 - **Coverage.** Task 2 does not output NULL opinions, proposes NULL aspects only for Japanese,
-  and cannot recover spans that no candidate source proposes. Subtask 3 is not implemented.
+  and cannot recover spans that no candidate source proposes. Task 3 outputs one category per
+  pair.
