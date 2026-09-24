@@ -119,7 +119,8 @@ reported only those two. Participant aggregates are reconstructed from the
 [official overview](https://aclanthology.org/2026.semeval-1.452/), Table 6, as
 `√(Σ N_c · RMSE_c² / Σ N_c)`; the competition ranks each corpus, not this aggregate. Baseline
 aggregates are reconstructed the same way from [arXiv:2601.23022](https://arxiv.org/abs/2601.23022),
-Table 3. The joint-calibration aggregate is 0.0024 below PAI's; per corpus it has the lowest
+Table 3. The joint-calibration aggregate is 0.0024 below PAI's (a fresh repeat of all 9,658
+test requests gave 1.0645, 0.0018 below); per corpus it has the lowest
 RMSE of any team on English laptop and Tatar, and a higher one than the per-corpus best on the
 other eight (log [0009](logs/0009-st1-joint-calibration.md)). Earlier per-corpus comparison
 for the 1.1199 system: [`docs/sota-comparison-2026-09-23.md`](docs/sota-comparison-2026-09-23.md).

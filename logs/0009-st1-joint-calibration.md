@@ -57,14 +57,25 @@ Micro RMSE_V 0.7068, RMSE_A 0.7951. Official per-corpus scores:
 aggregates (`√(Σ N_c · RMSE_c² / Σ N_c)`) of the 14 teams with all ten corpora, best first:
 PAI ≈ 1.0663, TeleAI ≈ 1.0737, PALI ≈ 1.1340, HUS@NLP-VNU ≈ 1.1368, Habib University ≈ 1.1467.
 
+### Fresh repeat of the test requests
+
+All 9,658 test requests were sent again through the 0005 runner (same examples and request
+configuration, checked by digest; no response cache) and scored with the same frozen
+parameters ([`test_rerun_summary.json`](../reports/task1/test_rerun_summary.json)):
+micro RMSE_VA **1.0645** (+0.0006). Per corpus the change is −0.0014 to +0.0039
+(ukr_restaurant 1.3464, eng_laptop 1.2086, tat_restaurant 1.4604). Individual Jev scores
+differ by 0.050 on average between the two runs (8.9% identical, mean shift −0.0004).
+
 ## Cost
 
-No new requests for the selected system. The BM25 candidate used 9.1M input tokens on the
+No new requests for the selected system's first test scoring; the fresh repeat used 21.3M
+input tokens (≈ $0.89). The BM25 candidate used 9.1M input tokens on the
 train sample and dev (≈ $0.38 at $0.042/M).
 
 ## Artifacts
 
-- [`test_summary.json`](../reports/task1/test_summary.json) (official scorer per corpus).
+- [`test_summary.json`](../reports/task1/test_summary.json) and
+  [`test_rerun_summary.json`](../reports/task1/test_rerun_summary.json) (official scorer per corpus).
 - Frozen parameters and selection: [`parameters.json`](../reports/task1/parameters.json),
   [`selection.json`](../reports/task1/selection.json).
 - BM25 predictions and requests: ignored `reports/task1/cache/`.
@@ -72,7 +83,7 @@ train sample and dev (≈ $0.38 at $0.042/M).
 ## Observed
 
 - The joint calibration lowers test RMSE on all ten corpora; micro −0.0560 (−5.0%), dev −5.6%.
-- Its test micro is 0.0024 below PAI's reconstructed aggregate. The competition ranks each
+- Its test micro is 0.0024 below PAI's reconstructed aggregate (0.0018 in the fresh repeat). The competition ranks each
   corpus, not this aggregate, and without the teams' predictions no paired test of that
   difference is possible.
 - Per corpus its RMSE is lower than the official best on eng_laptop and tat_restaurant, and

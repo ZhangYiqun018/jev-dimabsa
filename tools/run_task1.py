@@ -16,6 +16,7 @@ are compared on dev, each fitted on the same train calibration sample:
     .venv/bin/python tools/run_task1.py bm25 --split dev
     .venv/bin/python tools/run_task1.py dev    # fit, compare with the 0005 system, freeze
     .venv/bin/python tools/run_task1.py test   # frozen choice, official scorer
+    .venv/bin/python tools/run_task1.py rerun  # fresh Jev test requests, same frozen choice
 
 The fixed-example arm reuses the 0005 caches (reports/calibration_20260923/cache).
 Selection keeps the 0005 rule: the best dev candidate replaces the frozen system
@@ -40,7 +41,7 @@ from jev.retrieval import Retriever
 from jev.task2 import CachedClient
 from runners.run_st1 import build_questions
 from tools.analyze_st1_design import official_check
-from tools.calibrate_st1 import CORPORA as ST1_CORPORA, PARALLEL, SEED, align, apply, digest, fit, metrics, save
+from tools.calibrate_st1 import CORPORA as ST1_CORPORA, PARALLEL, SEED, align, apply, digest, fit, infer, metrics, save
 
 OUT = ROOT / 'reports/task1'
 CACHE = OUT / 'cache'
@@ -218,16 +219,26 @@ def run_dev():
           f"improvement {report['selection']['improvement']:.4f}, CI95 {np.round(interval, 4).tolist()})")
 
 
-def run_test(client):
+def run_test(client, rerun=False):
+    """Score the frozen choice on test; ``rerun`` first repeats every fixed-example test request
+    through the 0005 runner (no response cache), so the result reflects fresh Jev answers."""
     selection = json.loads((OUT / 'selection.json').read_text())
     params = json.loads((OUT / 'parameters.json').read_text())
     if digest(params) != selection['parameters_sha256'] or digest(SAMPLES) != selection['samples_sha256']:
         sys.exit('Frozen parameters or samples changed')
     arm, method = selection['accepted'].split('/')
+    split = 'test'
     if arm == 'bm25':
         infer_bm25(client, 'test')
-    test = load_arm(arm, 'test')
-    report = {'system': selection['accepted'], 'model': DEFAULT_MODEL, 'corpora': {}}
+    elif rerun:
+        split = 'test_rerun'
+        for c in CORPORA:
+            path = infer(FIXED, c, source_of(c, 'test'), split, SHOTS)
+            config = lambda stage: json.loads(Path(f'{prediction_path(arm, c, stage)}.meta.json').read_text())['config']
+            if path != prediction_path(arm, c, split) or digest(config(split)) != digest(config('test')):
+                sys.exit(f'{c}: rerun request differs from the scored test request')
+    test = {c: align(source_of(c, 'test'), prediction_path(arm, c, split), None, c) for c in CORPORA}
+    report = {'system': selection['accepted'], 'predictions': split, 'model': DEFAULT_MODEL, 'corpora': {}}
     for c in CORPORA:
         x, y, _, keys = test[c]
         values = predict(method, x, params[arm][c])
@@ -239,15 +250,15 @@ def run_test(client):
     n = sum(m['n_gold'] for m in report['corpora'].values())
     report['aggregate'] = {'n_gold': n, 'RMSE_VA': float(np.sqrt(
         sum(m['n_gold'] * m['official_RMSE_VA']**2 for m in report['corpora'].values()) / n))}
-    save(OUT / 'test_summary.json', report)
-    print(f"test {selection['accepted']}: micro RMSE_VA {report['aggregate']['RMSE_VA']:.4f}")
+    save(OUT / f'{split}_summary.json', report)
+    print(f"{split} {selection['accepted']}: micro RMSE_VA {report['aggregate']['RMSE_VA']:.4f}")
     for c, m in report['corpora'].items():
         print(f"  {c:15s} {m['official_RMSE_VA']:.4f}")
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__.split('\n')[0])
-    parser.add_argument('step', choices=['bm25', 'dev', 'test'])
+    parser.add_argument('step', choices=['bm25', 'dev', 'test', 'rerun'])
     parser.add_argument('--split', choices=['calibration', 'dev'], help='bm25 only')
     parser.add_argument('--cache-only', action='store_true', help='fail on any request missing from the cache')
     args = parser.parse_args()
@@ -258,7 +269,7 @@ def main():
         return infer_bm25(client.with_stage(f'bm25_{args.split}'), args.split)
     if args.step == 'dev':
         return run_dev()
-    run_test(client.with_stage('bm25_test'))
+    run_test(client.with_stage('bm25_test'), rerun=args.step == 'rerun')
 
 
 if __name__ == '__main__':

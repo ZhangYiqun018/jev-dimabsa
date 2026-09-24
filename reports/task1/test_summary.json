@@ -1,5 +1,6 @@
 {
   "system": "fixed/joint",
+  "predictions": "test",
   "model": "jev-1.13.0",
   "corpora": {
     "eng_restaurant": {
