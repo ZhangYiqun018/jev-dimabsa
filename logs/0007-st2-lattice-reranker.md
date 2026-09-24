@@ -45,25 +45,30 @@ on the `dev` branch) and frozen before this single test run.
 
 Unchanged official scorer. Dev is 5-fold out-of-fold by record (dev is the reranker's
 training data). *Perfect-VA F1* is the categorical F1 of the same pairs, i.e. cF1 with
-exact V/A. PAI, PALI and AILS-NTUA are the systems listed with all eight corpora in the
-official overview ([arXiv:2604.07066](https://arxiv.org/abs/2604.07066), Table 10); per-corpus
-winners also include Takoyaki (eng_restaurant 70.21, eng_laptop 63.66) and TeleAI
-(jpn_hotel 58.37).
+exact V/A. *Official best* is the highest score of any team on that corpus; PAI and PALI have
+the two highest macro scores among the teams with all eight corpora in the official overview
+([ACL Anthology](https://aclanthology.org/2026.semeval-1.452/), Table 7).
 
-| Corpus | Dev cF1 | **Test cF1** | Test perfect-VA F1 | PAI | PALI | AILS-NTUA |
+| Corpus | Dev cF1 | **Test cF1** | Test perfect-VA F1 | Official best (team) | PAI | PALI |
 |---|---:|---:|---:|---:|---:|---:|
-| eng_restaurant | 76.35 | **68.76** | 74.13 | 69.03 | 69.28 | 65.18 |
-| eng_laptop | 67.67 | **61.86** | 67.37 | 61.69 | 62.42 | 53.11 |
-| zho_restaurant | 57.89 | **48.64** | 51.82 | 56.38 | 56.34 | 50.42 |
-| zho_laptop | 37.84 | **38.72** | 40.72 | 53.06 | 53.08 | 46.46 |
-| jpn_hotel | 53.58 | **49.43** | 51.96 | 56.82 | 56.66 | 50.21 |
-| rus_restaurant | 53.75 | **50.75** | 56.33 | 57.93 | 57.24 | 49.88 |
-| tat_restaurant | 51.59 | **46.44** | 52.19 | 49.08 | 48.28 | 38.74 |
-| ukr_restaurant | 53.03 | **48.87** | 54.40 | 57.87 | 56.71 | 47.25 |
-| **Macro** | **56.46** | **51.68** | 56.12 | 57.73 | 57.50 | 50.16 |
+| eng_restaurant | 76.35 | **68.76** | 74.13 | 70.21 (Takoyaki) | 69.03 | 69.28 |
+| eng_laptop | 67.67 | **61.86** | 67.37 | 63.66 (Takoyaki) | 61.69 | 62.42 |
+| zho_restaurant | 57.89 | **48.64** | 51.82 | 56.38 (PAI) | 56.38 | 56.34 |
+| zho_laptop | 37.84 | **38.72** | 40.72 | 53.08 (PALI) | 53.06 | 53.08 |
+| jpn_hotel | 53.58 | **49.43** | 51.96 | 58.37 (TeleAI) | 56.82 | 56.66 |
+| rus_restaurant | 53.75 | **50.75** | 56.33 | 57.93 (PAI) | 57.93 | 57.24 |
+| tat_restaurant | 51.59 | **46.44** | 52.19 | 51.19 (nchellwig) | 49.08 | 48.28 |
+| ukr_restaurant | 53.03 | **48.87** | 54.40 | 57.87 (PAI) | 57.87 | 56.71 |
+| **Macro** | **56.46** | **51.68** | 56.12 | — | 57.73 | 57.50 |
+
+Macro cF1 of the 12 teams with all eight corpora (computed from Table 7): PAI 57.73, PALI
+57.50, nchellwig 56.55, Takoyaki 56.20, TeleAI 55.66, TeamLasse 53.43, kevinyu66 51.48,
+AILS-NTUA 50.16, Habib University 47.15, Scmhl5 41.95, ICT-NLP 40.98, ALPS-Lab 32.51.
 
 Earlier Jev system on the same test split: 27.71 ([0006](0006-st2-lexicon-pair-baseline.md)).
-Official baselines: Kimi-K2 Thinking one-shot 38.59, Qwen3-14B QLoRA 28.75.
+Baselines ([arXiv:2601.23022](https://arxiv.org/abs/2601.23022), Table 3): Llama-3.3-70B
+fine-tuned 46.40, GPT-OSS-120B fine-tuned 45.71, Kimi-K2 Thinking one-shot 38.59, Qwen3-14B
+QLoRA 28.75.
 
 ## Cost
 

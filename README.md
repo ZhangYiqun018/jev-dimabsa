@@ -36,14 +36,14 @@ unchanged official scorer.
 <td align="center">
 <h3>1.1199 RMSE<sub>VA</sub></h3>
 official test, 10 corpora, lower is better<br>
-<b>ahead of one of the three per-dataset winners</b><br>
-(PAI ≈ 1.066 · TeleAI ≈ 1.074 · ICT-NLP ≈ 1.159, reconstructed aggregates)
+<b>behind only PAI and TeleAI among the 14 teams with all ten corpora</b><br>
+(PAI ≈ 1.066 · TeleAI ≈ 1.074, reconstructed micro aggregates)
 </td>
 <td align="center">
 <h3>51.68 cF1</h3>
 official test, 8 corpora, macro, higher is better<br>
-<b>within 2 points of the per-corpus winners on English</b><br>
-(best fully listed team PAI 57.73 · official Kimi-K2 baseline 38.59)
+<b>between 6th and 7th of the 12 teams with all eight corpora</b><br>
+(PAI 57.73 leads · within 2 points of the per-corpus winners on English)
 </td>
 </tr>
 </table>
@@ -85,22 +85,30 @@ Official scorer, `--do_norm` off. `RMSE_VA = √(mean(ΔV² + ΔA²))` in scale 
 | [PAI](https://aclanthology.org/2026.semeval-1.193/), Qwen3-32B LoRA + Sinkhorn adaptation † | ≈ 1.0663 |
 | [TeleAI](https://aclanthology.org/2026.semeval-1.233/), Qwen2.5-7B LoRA regression + calibration † | ≈ 1.0737 |
 | **Jev, 9-shot + shrink calibration** | **1.1199** |
+| PALI | ≈ 1.1340 |
+| HUS@NLP-VNU † | ≈ 1.1368 |
 | **Jev, zero-shot + shrink calibration** | **1.1395** |
+| Habib University | ≈ 1.1467 |
 | [ICT-NLP](https://aclanthology.org/2026.semeval-1.131/), multilingual XLM-R large ensemble † | ≈ 1.1592 |
-| Kimi-K2, one-shot | 1.8873 |
+| GPT-OSS-120B, fine-tuned | ≈ 1.2362 |
+| Kimi-K2, one-shot | ≈ 1.8873 |
 | Jev, 9-shot, valence-stratified | 2.0736 |
-| GPT-5 mini, one-shot | 2.1552 |
+| GPT-5 mini, one-shot | ≈ 2.1552 |
 | Jev, 3-shot | 2.1721 |
-| Qwen3-14B, QLoRA fine-tuned | 2.1841 |
-| Kimi-K2, zero-shot | 2.3849 |
+| Qwen3-14B, QLoRA fine-tuned | ≈ 2.1841 |
+| Kimi-K2, zero-shot | ≈ 2.3849 |
 | Jev, zero-shot | 2.4708 |
-| GPT-5 mini, zero-shot | 2.7439 |
+| GPT-5 mini, zero-shot | ≈ 2.7439 |
 
-† Official per-dataset winners (PAI: Russian, Tatar, Ukrainian; TeleAI: both Japanese corpora and
-Chinese laptop; ICT-NLP: Chinese restaurant). Their micro aggregates are reconstructed from the
+Participant rows are every team with results on all ten corpora down to ICT-NLP; the other
+eight such teams are above 1.16. † Official per-dataset winners
+(PAI: Russian, Tatar, Ukrainian; TeleAI: both Japanese corpora and Chinese laptop; ICT-NLP:
+Chinese restaurant; HUS@NLP-VNU: Chinese finance). LogSigma won both English corpora but
+reported only those two. Participant aggregates are reconstructed from the
 [official overview](https://aclanthology.org/2026.semeval-1.452/), Table 6, as
-`√(Σ N_c · RMSE_c² / Σ N_c)`; the competition ranks each corpus, not this aggregate. Baselines:
-[arXiv:2601.23022](https://arxiv.org/abs/2601.23022), Table 3. Per-corpus comparison:
+`√(Σ N_c · RMSE_c² / Σ N_c)`; the competition ranks each corpus, not this aggregate. Baseline
+aggregates are reconstructed the same way from [arXiv:2601.23022](https://arxiv.org/abs/2601.23022),
+Table 3. Per-corpus comparison:
 [`docs/sota-comparison-2026-09-23.md`](docs/sota-comparison-2026-09-23.md).
 
 </details>
@@ -144,34 +152,43 @@ flowchart TD
 |---|---:|
 | PAI † | 57.73 |
 | PALI † | 57.50 |
+| nchellwig † | 56.55 |
+| Takoyaki † | 56.20 |
+| TeleAI † | 55.66 |
+| TeamLasse | 53.43 |
 | **Jev, lattice candidates + checks + reranker** | **51.68** |
-| AILS-NTUA † | 50.16 |
-| Habib University † | 47.15 |
+| kevinyu66 | 51.48 |
+| AILS-NTUA | 50.16 |
+| Habib University | 47.15 |
+| Llama-3.3-70B, fine-tuned | 46.40 |
+| GPT-OSS-120B, fine-tuned | 45.71 |
 | Kimi-K2 Thinking, one-shot | 38.59 |
 | Qwen3-14B, QLoRA fine-tuned | 28.75 |
 | Jev, training lexicon + pair decisions ([0006](logs/0006-st2-lexicon-pair-baseline.md)) | 27.71 |
 
-† Participant systems listed with all eight corpora in the [official overview](https://arxiv.org/abs/2604.07066),
-Table 10 (macro computed here); the competition ranks each corpus separately. Per-corpus winners
-include Takoyaki on English (70.21 / 63.66) and TeleAI on Japanese (58.37). Baselines:
-organizers' report, Table 7.
+Participant rows are the teams with results on all eight corpora in the
+[official overview](https://aclanthology.org/2026.semeval-1.452/), Table 7, down to Habib
+University (macro computed here); the three others score below 42. The competition ranks each
+corpus separately. † Per-corpus winners (Takoyaki: both English corpora; TeleAI: Japanese;
+PAI: Russian, Ukrainian, Chinese restaurant; nchellwig: Tatar; PALI: Chinese laptop).
+Baselines: [arXiv:2601.23022](https://arxiv.org/abs/2601.23022), Table 3.
 
 <details>
 <summary><b>Per-corpus Task 2 results</b>: test cF1, dev estimate, and the leading systems</summary>
 
 <br>
 
-| Corpus | Jev dev (5-fold CV) | **Jev test** | PAI | PALI | AILS-NTUA |
+| Corpus | Jev dev (5-fold CV) | **Jev test** | Best official (team) | PAI | PALI |
 |---|---:|---:|---:|---:|---:|
-| eng_restaurant | 76.35 | **68.76** | 69.03 | 69.28 | 65.18 |
-| eng_laptop | 67.67 | **61.86** | 61.69 | 62.42 | 53.11 |
-| zho_restaurant | 57.89 | **48.64** | 56.38 | 56.34 | 50.42 |
-| zho_laptop | 37.84 | **38.72** | 53.06 | 53.08 | 46.46 |
-| jpn_hotel | 53.58 | **49.43** | 56.82 | 56.66 | 50.21 |
-| rus_restaurant | 53.75 | **50.75** | 57.93 | 57.24 | 49.88 |
-| tat_restaurant | 51.59 | **46.44** | 49.08 | 48.28 | 38.74 |
-| ukr_restaurant | 53.03 | **48.87** | 57.87 | 56.71 | 47.25 |
-| **Macro** | **56.46** | **51.68** | 57.73 | 57.50 | 50.16 |
+| eng_restaurant | 76.35 | **68.76** | 70.21 (Takoyaki) | 69.03 | 69.28 |
+| eng_laptop | 67.67 | **61.86** | 63.66 (Takoyaki) | 61.69 | 62.42 |
+| zho_restaurant | 57.89 | **48.64** | 56.38 (PAI) | 56.38 | 56.34 |
+| zho_laptop | 37.84 | **38.72** | 53.08 (PALI) | 53.06 | 53.08 |
+| jpn_hotel | 53.58 | **49.43** | 58.37 (TeleAI) | 56.82 | 56.66 |
+| rus_restaurant | 53.75 | **50.75** | 57.93 (PAI) | 57.93 | 57.24 |
+| tat_restaurant | 51.59 | **46.44** | 51.19 (nchellwig) | 49.08 | 48.28 |
+| ukr_restaurant | 53.03 | **48.87** | 57.87 (PAI) | 57.87 | 56.71 |
+| **Macro** | **56.46** | **51.68** | — | 57.73 | 57.50 |
 
 With exact V/A the same pairs would score 56.12 on test; the remaining gap to the leading
 systems is extraction, above all Chinese laptop, where only about 62% of gold pairs reach the candidate
