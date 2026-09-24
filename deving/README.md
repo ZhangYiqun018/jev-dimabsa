@@ -32,6 +32,7 @@ cF1. Code for retired experiments is in [`archive/`](archive/README.md).
 
 | Record | What was tried | Result (macro) | Outputs |
 |---|---|---|---|
+| [Task 3 category](20260924-task3-category.md) | Category Choice + train lookups on the frozen Task 2 pairs, two iterations | dev 48.83%, official test 43.62% | `reports/task3/` |
 | [Span probe](20260923-span-probe.md) | Leftmost aspect by start/end Choice; tool survey | 6/12 exact | `reports/span_probe_20260923/` |
 | [BIO / SE trial-dev](20260923-extraction-trial-dev.md) | Per-token BIO vs start/end Choice, r1→r2 | dev96 AO: BIO 46.57%, SE 42.86%, lexicon 27.53% | `reports/extraction_iteration_20260923/` |
 | [Aspect count](20260923-aspect-count.md) | Predict the number of aspects directly | dev96 64.58% vs always-one 67.71% | `reports/aspect_count_20260923/` |
