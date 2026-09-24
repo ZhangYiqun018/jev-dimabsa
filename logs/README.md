@@ -47,6 +47,6 @@ facts only — anything a reader needs to not misread the table
 | [0006](0006-st2-lexicon-pair-baseline.md) | Subtask 2, lexicon + pair decisions + transferred shrink | cF1 0.2771 (macro) | $2.3029 (dev + test) |
 | [0007](0007-st2-lattice-reranker.md) | Subtask 2, BIO lattice candidates + example-conditioned checks + reranker | cF1 0.5168 (macro) | ≈ $5.44 test + ≈ $1.5 dev |
 | [0008](0008-st3-category-choice.md) | Subtask 3, category Choice + train lookups on the Subtask 2 pairs | cF1 0.4362 (macro) | ≈ $1.27 test + ≈ $2.2 dev |
-| [0009](0009-st1-joint-calibration.md) | Subtask 1, joint V/A calibration of the 0005 9-shot predictions | 1.0639 (fresh repeat 1.0645) | $0 test + ≈ $0.89 repeat + ≈ $0.38 dev |
+| [0009](0009-st1-joint-calibration.md) | Subtask 1, joint V/A calibration of the 0005 9-shot predictions | 1.0645 (fresh run) | ≈ $0.89 test + ≈ $0.38 dev |
 
 Task 1 scores are micro RMSE_VA (lower is better); Tasks 2 and 3 are macro cF1 (higher is better).

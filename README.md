@@ -11,6 +11,7 @@
 [![Python](https://img.shields.io/badge/python-3.12-3776ab?logo=python&logoColor=white)](#quick-start)
 [![Dependencies](https://img.shields.io/badge/deps-numpy%20%C2%B7%20scipy-2b8a3e)](#quick-start)
 [![No GPU](https://img.shields.io/badge/GPU-none-495057)](#quick-start)
+[![Task 1 SOTA](https://img.shields.io/badge/Task%201-SOTA%20%C2%B7%2010--corpus%20micro%20RMSE-f59f00)](#task-1--dimasr-valencearousal-of-a-given-aspect)
 
 [Results](#results-at-a-glance) · [Task 1](#task-1--dimasr-valencearousal-of-a-given-aspect) · [Task 2](#task-2--dimaste-aspectopinionva-triplets) · [Task 3](#task-3--dimasqp-adding-the-category) · [Quick start](#quick-start) · [Layout](#repository-layout) · [Experiment logs](logs/README.md) · [Data](#dataset)
 
@@ -35,9 +36,9 @@ unchanged official scorer.
 </tr>
 <tr>
 <td align="center">
-<h3>1.0639 RMSE<sub>VA</sub></h3>
+<h3>1.0645 RMSE<sub>VA</sub> 🏆</h3>
 official test, 10 corpora, lower is better<br>
-<b>lowest reconstructed micro aggregate of the 14 teams with all ten corpora</b><br>
+<b>state of the art on the 10-corpus micro aggregate:<br>lowest of the 14 teams with all ten corpora</b><br>
 (PAI ≈ 1.066 · TeleAI ≈ 1.074; the competition ranks each corpus)
 </td>
 <td align="center">
@@ -61,6 +62,11 @@ were made on train and dev. Full protocols are in [`logs/`](logs/README.md).
 ## Task 1 · DimASR: valence/arousal of a given aspect
 
 Given a review and one of its aspects, predict `V#A`.
+
+> **State of the art on the 10-corpus micro aggregate.** 1.0645 RMSE<sub>VA</sub> on the official
+> test, below every participant with all ten corpora (best: PAI ≈ 1.0663, TeleAI ≈ 1.0737),
+> from a fresh run of all test requests. The competition itself ranks each corpus; per corpus
+> Jev is best on English laptop and Tatar.
 
 ```mermaid
 flowchart LR
@@ -92,7 +98,7 @@ Official scorer, `--do_norm` off. `RMSE_VA = √(mean(ΔV² + ΔA²))` in scale 
 
 | System | RMSE<sub>VA</sub> ↓ |
 |---|---:|
-| **Jev, 9-shot + joint V/A calibration** | **1.0639** |
+| **Jev, 9-shot + joint V/A calibration** 🏆 | **1.0645** |
 | [PAI](https://aclanthology.org/2026.semeval-1.193/), Qwen3-32B LoRA + Sinkhorn adaptation † | ≈ 1.0663 |
 | [TeleAI](https://aclanthology.org/2026.semeval-1.233/), Qwen2.5-7B LoRA regression + calibration † | ≈ 1.0737 |
 | Jev, 9-shot + per-dimension shrink calibration | 1.1199 |
@@ -119,8 +125,9 @@ reported only those two. Participant aggregates are reconstructed from the
 [official overview](https://aclanthology.org/2026.semeval-1.452/), Table 6, as
 `√(Σ N_c · RMSE_c² / Σ N_c)`; the competition ranks each corpus, not this aggregate. Baseline
 aggregates are reconstructed the same way from [arXiv:2601.23022](https://arxiv.org/abs/2601.23022),
-Table 3. The joint-calibration aggregate is 0.0024 below PAI's (a fresh repeat of all 9,658
-test requests gave 1.0645, 0.0018 below); per corpus it has the lowest
+Table 3. The Jev score is a complete fresh run of all 9,658 test requests with the frozen
+calibration. Its aggregate is 0.0018 below PAI's, the best participant aggregate; without the
+teams' predictions this margin cannot be tested for significance. Per corpus it has the lowest
 RMSE of any team on English laptop and Tatar, and a higher one than the per-corpus best on the
 other eight (log [0009](logs/0009-st1-joint-calibration.md)). Earlier per-corpus comparison
 for the 1.1199 system: [`docs/sota-comparison-2026-09-23.md`](docs/sota-comparison-2026-09-23.md).

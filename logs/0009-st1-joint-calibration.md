@@ -1,6 +1,6 @@
 # 0009 — Task 1 (DimASR): joint V/A calibration
 
-**2026-09-24** · **`jev-1.13.0`** · **official test, run once for this configuration** · **micro RMSE_VA**
+**2026-09-24** · **`jev-1.13.0`** · **official test, fresh run** · **micro RMSE_VA**
 
 ## Configuration
 
@@ -36,59 +36,60 @@ Selected improvement 0.0506, 95% interval [−0.0626, −0.0395]
 ([`dev_summary.json`](../reports/task1/dev_summary.json),
 [`selection.json`](../reports/task1/selection.json)).
 
-Test (unchanged official scorer, `--do_norm` off, 16,186 entries):
+Test, **fresh run**: all 9,658 test requests sent again through the 0005 runner (same
+examples and request configuration, checked by digest; no response cache), every response
+`jev-1.13.0`, scored with the frozen parameters by the unchanged official scorer
+(`--do_norm` off, 16,186 entries; [`test_rerun_summary.json`](../reports/task1/test_rerun_summary.json)).
 
-| Corpus | N | 0005 (shrink) | **0009 (joint)** | Official best (team) |
+| Corpus | N | 0005 (shrink) | **0009 (joint, fresh run)** | Official best (team) |
 |---|---:|---:|---:|---:|
-| eng_restaurant | 1504 | 1.2903 | **1.2150** | 1.1035 (LogSigma) |
-| eng_laptop | 1421 | 1.3364 | **1.2088** | 1.2408 (LogSigma) |
-| jpn_hotel | 1092 | 0.6997 | **0.6440** | 0.5561 (TeleAI) |
-| jpn_finance | 1302 | 0.7562 | **0.7289** | 0.6581 (TeleAI) |
-| rus_restaurant | 1637 | 1.3763 | **1.3304** | 1.2190 (PAI) |
-| tat_restaurant | 1637 | 1.4903 | **1.4613** | 1.5294 (PAI) |
-| ukr_restaurant | 1637 | 1.3846 | **1.3425** | 1.1888 (PAI) |
-| zho_restaurant | 1929 | 1.0577 | **0.9585** | 0.9256 (ICT-NLP) |
-| zho_laptop | 1673 | 0.7721 | **0.7600** | 0.6103 (TeleAI) |
-| zho_finance | 2354 | 0.6345 | **0.5815** | 0.4841 (HUS@NLP-VNU) |
-| **Micro** | 16186 | 1.1199 | **1.0639** | — |
+| eng_restaurant | 1504 | 1.2903 | **1.2163** | 1.1035 (LogSigma) |
+| eng_laptop | 1421 | 1.3364 | **1.2086** | 1.2408 (LogSigma) |
+| jpn_hotel | 1092 | 0.6997 | **0.6454** | 0.5561 (TeleAI) |
+| jpn_finance | 1302 | 0.7562 | **0.7296** | 0.6581 (TeleAI) |
+| rus_restaurant | 1637 | 1.3763 | **1.3290** | 1.2190 (PAI) |
+| tat_restaurant | 1637 | 1.4903 | **1.4604** | 1.5294 (PAI) |
+| ukr_restaurant | 1637 | 1.3846 | **1.3464** | 1.1888 (PAI) |
+| zho_restaurant | 1929 | 1.0577 | **0.9591** | 0.9256 (ICT-NLP) |
+| zho_laptop | 1673 | 0.7721 | **0.7611** | 0.6103 (TeleAI) |
+| zho_finance | 2354 | 0.6345 | **0.5823** | 0.4841 (HUS@NLP-VNU) |
+| **Micro** | 16186 | 1.1199 | **1.0645** | — |
 
-Micro RMSE_V 0.7068, RMSE_A 0.7951. Official per-corpus scores:
+Micro RMSE_V 0.7076, RMSE_A 0.7952. Official per-corpus scores:
 [ACL Anthology](https://aclanthology.org/2026.semeval-1.452/), Table 6. Reconstructed micro
 aggregates (`√(Σ N_c · RMSE_c² / Σ N_c)`) of the 14 teams with all ten corpora, best first:
 PAI ≈ 1.0663, TeleAI ≈ 1.0737, PALI ≈ 1.1340, HUS@NLP-VNU ≈ 1.1368, Habib University ≈ 1.1467.
 
-### Fresh repeat of the test requests
-
-All 9,658 test requests were sent again through the 0005 runner (same examples and request
-configuration, checked by digest; no response cache) and scored with the same frozen
-parameters ([`test_rerun_summary.json`](../reports/task1/test_rerun_summary.json)):
-micro RMSE_VA **1.0645** (+0.0006). Per corpus the change is −0.0014 to +0.0039
-(ukr_restaurant 1.3464, eng_laptop 1.2086, tat_restaurant 1.4604). Individual Jev scores
-differ by 0.050 on average between the two runs (8.9% identical, mean shift −0.0004).
+The frozen parameters were first scored on the cached 0005 test responses: 1.0639
+([`test_summary.json`](../reports/task1/test_summary.json)); per corpus the fresh run differs
+by −0.0014 to +0.0039. Individual Jev scores differ by 0.050 on average between the two sets
+of responses (8.9% identical, mean shift −0.0004).
 
 ## Cost
 
-No new requests for the selected system's first test scoring; the fresh repeat used 21.3M
-input tokens (≈ $0.89). The BM25 candidate used 9.1M input tokens on the
-train sample and dev (≈ $0.38 at $0.042/M).
+Fresh test run: 9,658 requests, 21.3M input tokens (≈ $0.89 at $0.042/M). The BM25 candidate
+used 9.1M input tokens on the train sample and dev (≈ $0.38).
 
 ## Artifacts
 
-- [`test_summary.json`](../reports/task1/test_summary.json) and
-  [`test_rerun_summary.json`](../reports/task1/test_rerun_summary.json) (official scorer per corpus).
+- [`test_rerun_summary.json`](../reports/task1/test_rerun_summary.json) (fresh run) and
+  [`test_summary.json`](../reports/task1/test_summary.json) (cached responses), official scorer per corpus.
+- Fresh responses: ignored `reports/calibration_20260923/cache/*/test_rerun_s9.jsonl`.
 - Frozen parameters and selection: [`parameters.json`](../reports/task1/parameters.json),
   [`selection.json`](../reports/task1/selection.json).
 - BM25 predictions and requests: ignored `reports/task1/cache/`.
 
 ## Observed
 
-- The joint calibration lowers test RMSE on all ten corpora; micro −0.0560 (−5.0%), dev −5.6%.
-- Its test micro is 0.0024 below PAI's reconstructed aggregate (0.0018 in the fresh repeat). The competition ranks each
+- The joint calibration lowers test RMSE on all ten corpora; micro −0.0554 (−4.9%), dev −5.6%.
+- Its test micro is the lowest reconstructed aggregate of the 14 teams with all ten corpora,
+  0.0018 below PAI (0.0024 on the cached responses). The competition ranks each
   corpus, not this aggregate, and without the teams' predictions no paired test of that
   difference is possible.
 - Per corpus its RMSE is lower than the official best on eng_laptop and tat_restaurant, and
-  higher on the other eight (by 0.03–0.15).
+  higher on the other eight (by 0.03–0.16).
 - BM25-retrieved examples did not help on dev: with joint calibration better on six corpora,
   worse on four, and 0.0041 worse overall.
 - Task 1 test had been scored for logs 0001–0005 before this configuration was chosen; the
-  choice here used train and dev only, and test was scored once.
+  choice here used train and dev only. The frozen parameters were scored on test twice, on the
+  cached responses and on the fresh run, with no change in between.
