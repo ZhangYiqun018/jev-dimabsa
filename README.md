@@ -35,10 +35,10 @@ unchanged official scorer.
 </tr>
 <tr>
 <td align="center">
-<h3>1.1199 RMSE<sub>VA</sub></h3>
+<h3>1.0639 RMSE<sub>VA</sub></h3>
 official test, 10 corpora, lower is better<br>
-<b>behind only PAI and TeleAI among the 14 teams with all ten corpora</b><br>
-(PAI ≈ 1.066 · TeleAI ≈ 1.074, reconstructed micro aggregates)
+<b>lowest reconstructed micro aggregate of the 14 teams with all ten corpora</b><br>
+(PAI ≈ 1.066 · TeleAI ≈ 1.074; the competition ranks each corpus)
 </td>
 <td align="center">
 <h3>51.68 cF1</h3>
@@ -66,7 +66,7 @@ Given a review and one of its aspects, predict `V#A`.
 flowchart LR
     A["Review + aspect"] --> B["9 stratified train examples<br/>(same corpus, leak-filtered)"]
     B --> C["Jev Score × 2<br/>valence · arousal<br/>9-level rubrics"]
-    C --> D["Shrink calibration<br/>per corpus and dimension<br/>fitted on 256 train groups"]
+    C --> D["Joint V/A calibration<br/>ridge per corpus on V, A, |V−5|, V×A<br/>fitted on 256 train groups"]
     D --> E["V#A in [1, 9]"]
 ```
 
@@ -76,9 +76,12 @@ flowchart LR
 - **Examples.** Nine train records per corpus, the earliest in each equal-width valence band
   (topped up in file order where a band is empty), frozen for the whole run and never re-picked
   ([`jev/fewshot.py`](jev/fewshot.py)).
-- **Calibration.** `mean_gold + α · (raw − mean_raw)` per corpus and dimension, α chosen by
-  grouped 5-fold CV on train; the method family was selected on dev and frozen before test
-  ([`tools/calibrate_st1.py`](tools/calibrate_st1.py), log [0005](logs/0005-st1-supervised-calibration.md)).
+- **Joint calibration.** Per corpus, one ridge regression maps the two Jev scores and two
+  derived terms, |V − 5| and V × A, to both gold dimensions, so arousal can use how extreme
+  the valence is. The penalty is chosen by grouped 5-fold CV on a 256-group train sample;
+  the design was selected on dev and frozen before test
+  ([`tools/run_task1.py`](tools/run_task1.py), log [0009](logs/0009-st1-joint-calibration.md)).
+  The earlier per-dimension shrink ([0005](logs/0005-st1-supervised-calibration.md)) scored 1.1199.
 
 <details>
 <summary><b>Task 1 results</b>: official test, micro RMSE<sub>VA</sub> over 16,186 gold entries</summary>
@@ -89,12 +92,13 @@ Official scorer, `--do_norm` off. `RMSE_VA = √(mean(ΔV² + ΔA²))` in scale 
 
 | System | RMSE<sub>VA</sub> ↓ |
 |---|---:|
+| **Jev, 9-shot + joint V/A calibration** | **1.0639** |
 | [PAI](https://aclanthology.org/2026.semeval-1.193/), Qwen3-32B LoRA + Sinkhorn adaptation † | ≈ 1.0663 |
 | [TeleAI](https://aclanthology.org/2026.semeval-1.233/), Qwen2.5-7B LoRA regression + calibration † | ≈ 1.0737 |
-| **Jev, 9-shot + shrink calibration** | **1.1199** |
+| Jev, 9-shot + per-dimension shrink calibration | 1.1199 |
 | PALI | ≈ 1.1340 |
 | HUS@NLP-VNU † | ≈ 1.1368 |
-| **Jev, zero-shot + shrink calibration** | **1.1395** |
+| Jev, zero-shot + per-dimension shrink calibration | 1.1395 |
 | Habib University | ≈ 1.1467 |
 | [ICT-NLP](https://aclanthology.org/2026.semeval-1.131/), multilingual XLM-R large ensemble † | ≈ 1.1592 |
 | GPT-OSS-120B, fine-tuned | ≈ 1.2362 |
@@ -115,8 +119,10 @@ reported only those two. Participant aggregates are reconstructed from the
 [official overview](https://aclanthology.org/2026.semeval-1.452/), Table 6, as
 `√(Σ N_c · RMSE_c² / Σ N_c)`; the competition ranks each corpus, not this aggregate. Baseline
 aggregates are reconstructed the same way from [arXiv:2601.23022](https://arxiv.org/abs/2601.23022),
-Table 3. Per-corpus comparison:
-[`docs/sota-comparison-2026-09-23.md`](docs/sota-comparison-2026-09-23.md).
+Table 3. The joint-calibration aggregate is 0.0024 below PAI's; per corpus it has the lowest
+RMSE of any team on English laptop and Tatar, and a higher one than the per-corpus best on the
+other eight (log [0009](logs/0009-st1-joint-calibration.md)). Earlier per-corpus comparison
+for the 1.1199 system: [`docs/sota-comparison-2026-09-23.md`](docs/sota-comparison-2026-09-23.md).
 
 </details>
 
@@ -282,14 +288,18 @@ export TYPESAFE_API_KEY=...        # the client also reads ~/.zshrc
 ```
 
 <details open>
-<summary><b>Task 1</b>: 9-shot + shrink calibration</summary>
+<summary><b>Task 1</b>: 9-shot + joint V/A calibration</summary>
 
 ```bash
-# fit calibration on train, select on dev, save parameters
-.venv/bin/python tools/calibrate_st1.py dev  --out reports/calibration_reproduction
-# apply the frozen calibration to test and score
-.venv/bin/python tools/calibrate_st1.py test --out reports/calibration_reproduction
-cat reports/calibration_reproduction/test_summary.json
+# Jev 9-shot predictions for the train calibration sample, dev and test (log 0005)
+.venv/bin/python tools/calibrate_st1.py dev
+.venv/bin/python tools/calibrate_st1.py test
+# optional BM25-example candidate on the train sample and dev
+.venv/bin/python tools/run_task1.py bm25 --split calibration
+.venv/bin/python tools/run_task1.py bm25 --split dev
+# fit the candidates on train, select on dev, then score the frozen choice on test
+.venv/bin/python tools/run_task1.py dev
+.venv/bin/python tools/run_task1.py test
 
 # raw inference for one corpus (or --corpus all)
 .venv/bin/python runners/run.py --task 1 --corpus eng_restaurant --split test \
@@ -358,6 +368,7 @@ runners/          unified --task 1|2 inference, concurrency, resume, usage accou
 tools/
   calibrate_st1.py   Task 1 train calibration, dev selection, frozen test
   run_task2.py       Task 2 pipeline: va | dev | test
+  run_task1.py       Task 1 joint calibration and BM25-example candidate: bm25 | dev | test
   run_task3.py       Task 3 categories on the Task 2 pairs: fit | dev | test
   leakage_audit.py   train/dev/test overlap report
   analyze_st1_design.py, probe_fewshot.py   Task 1 official-score checks and delivery probes
@@ -399,6 +410,8 @@ Papers: [arXiv:2601.23022](https://arxiv.org/abs/2601.23022) (Track A dataset) �
 
 - **Jev is not deterministic.** Identical calls differ by about 0.04 per V/A dimension, so single
   runs carry that noise.
+- **Task 1 test was scored before.** Logs 0001–0005 scored earlier configurations on the same
+  test split; the 0009 calibration was chosen on train and dev and scored on test once.
 - **Dev is optimistic for Task 2.** The reranker is trained on dev and its threshold and features
   were chosen there; test came in 4.8 points below the cross-validated dev estimate.
 - **Sentence reuse across splits.** IDs are disjoint but some text is not (`jpn_hotel` repeats

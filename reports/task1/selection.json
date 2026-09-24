@@ -1,0 +1,12 @@
+{
+  "candidate": "fixed/joint",
+  "accepted": "fixed/joint",
+  "improvement": 0.05055795920382067,
+  "delta_ci95": [
+    -0.06258165286097357,
+    -0.03945139389240945
+  ],
+  "model": "jev-1.13.0",
+  "parameters_sha256": "c8c707dff53a7a636fe16ef228565610a1b7a13553f59d9ff4a6af25ce267d86",
+  "samples_sha256": "e25ac578fb14ec3af3176f97c8cbf3311fdaf5add4a1a1f3289b1544d326a2da"
+}
