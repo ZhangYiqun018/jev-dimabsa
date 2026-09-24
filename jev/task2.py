@@ -108,9 +108,9 @@ def score_pair_list(client, record, pairs, calibration):
     return {'ID': record['ID'], 'raw': raw, 'calibrated': calibrated, 'trace': trace}
 
 
-def official_score(gold, pred, log):
-    """Run the unmodified official Task 2 scorer; stdout/stderr are kept in ``log``."""
-    result = subprocess.run([sys.executable, str(ROOT / 'scoring/score.py'), '--task', '2',
+def official_score(gold, pred, log, task=2):
+    """Run the unmodified official Task 2 (or 3) scorer; stdout/stderr are kept in ``log``."""
+    result = subprocess.run([sys.executable, str(ROOT / 'scoring/score.py'), '--task', str(task),
                              '--gold', str(gold), '--pred', str(pred)],
                             capture_output=True, text=True)
     log.write_text(result.stdout + result.stderr)
