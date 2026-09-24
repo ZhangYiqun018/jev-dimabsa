@@ -1,194 +1,298 @@
-# Jev on DimABSA — Task 1 & Task 2 baselines
+<div align="center">
 
-A **[TypeSafe Jev](https://typesafe.ai)** (System One) baseline for
-[DimABSA](https://github.com/DimABSA/DimABSA2026), the dimensional aspect-based sentiment
-analysis task from SemEval-2026 Task 3. Task 1 scores given aspects; Task 2 extracts
-aspect–opinion pairs and scores their sentiment.
+# Jev × DimABSA
 
-DimABSA replaces categorical polarity with continuous **valence–arousal (VA) scores on a
-1.00–9.00 scale**. Jev's [`Score`](https://docs.typesafe.ai/primitives/score) primitive returns
-a continuous probability-weighted position on a described scale, so the task maps onto it
-without any text generation or output parsing.
+**Dimensional aspect-based sentiment analysis with a classification-only model: no text generation, no fine-tuning, no GPU.**
 
-No GPU and no fine-tuning. One API key and about an hour.
+[TypeSafe Jev](https://typesafe.ai) (System One) on [SemEval-2026 Task 3 · DimABSA](https://github.com/DimABSA/DimABSA2026), Track A
 
-## Result — Subtask 1 (DimASR), official test split
+[![SemEval-2026 Task 3](https://img.shields.io/badge/SemEval--2026-Task%203%20DimABSA-4c6ef5)](https://github.com/DimABSA/DimABSA2026)
+[![Model](https://img.shields.io/badge/model-jev--1.13.0-7048e8)](https://docs.typesafe.ai/introduction)
+[![Python](https://img.shields.io/badge/python-3.12-3776ab?logo=python&logoColor=white)](#quick-start)
+[![Dependencies](https://img.shields.io/badge/deps-numpy%20%C2%B7%20scipy-2b8a3e)](#quick-start)
+[![No GPU](https://img.shields.io/badge/GPU-none-495057)](#quick-start)
 
-Official scorer, `--do_norm` **off**. Micro average, weighted by gold entry count (N = 16,186),
-best first.
+[Results](#results-at-a-glance) · [Task 1](#task-1--dimasr-valencearousal-of-a-given-aspect) · [Task 2](#task-2--dimaste-aspectopinionva-triplets) · [Quick start](#quick-start) · [Layout](#repository-layout) · [Experiment logs](logs/README.md) · [Data](#dataset)
 
-`RMSE_VA` is the root mean squared error of the predicted valence–arousal pair against gold,
-`√(mean(Δvalence² + Δarousal²))`, in the same units as the 1–9 scale. **Lower is better; 0 is
-perfect.** It is not a per-dimension error — both dimensions are pooled under one root.
+</div>
 
-| System | RMSE_VA |
-|---|---|
-| [PAI](https://aclanthology.org/2026.semeval-1.193/), Qwen3-32B LoRA + Sinkhorn adaptation† | ≈1.0663 |
-| [TeleAI](https://aclanthology.org/2026.semeval-1.233/), Qwen2.5-7B LoRA regression + calibration† | ≈1.0737 |
-| **Jev, 9-shot + shrink calibration\*** | **1.1199** |
-| **Jev, zero-shot + shrink calibration\*** | **1.1395** |
-| [ICT-NLP](https://aclanthology.org/2026.semeval-1.131/), multilingual XLM-R large ensemble† | ≈1.1592 |
+---
+
+DimABSA replaces sentiment polarity with continuous **valence and arousal on a 1–9 scale**. Jev
+has no text-generation interface: it answers typed questions about a state. Its
+[`Score`](https://docs.typesafe.ai/primitives/score) returns a probability-weighted position on a
+described scale, while `Choice` and `Noul` return probabilities over options and yes/no. Every
+system here is built from those three primitives, a few train-split statistics and the
+unchanged official scorer.
+
+## Results at a glance
+
+<table>
+<tr>
+<th width="50%">Task 1 · DimASR — score a given aspect</th>
+<th width="50%">Task 2 · DimASTE — extract aspect–opinion–VA triplets</th>
+</tr>
+<tr>
+<td align="center">
+<h3>1.1199 RMSE<sub>VA</sub></h3>
+official test, 10 corpora, lower is better<br>
+<b>ahead of one of the three per-dataset winners</b><br>
+(PAI ≈ 1.066 · TeleAI ≈ 1.074 · ICT-NLP ≈ 1.159, reconstructed aggregates)
+</td>
+<td align="center">
+<h3>51.68 cF1</h3>
+official test, 8 corpora, macro, higher is better<br>
+<b>within 2 points of the per-corpus winners on English</b><br>
+(best fully listed team PAI 57.73 · official Kimi-K2 baseline 38.59)
+</td>
+</tr>
+</table>
+
+Both numbers come from a single frozen run on the official test split, after all choices
+were made on train and dev. Full protocols are in [`logs/`](logs/README.md).
+
+## Task 1 · DimASR: valence/arousal of a given aspect
+
+Given a review and one of its aspects, predict `V#A`.
+
+```mermaid
+flowchart LR
+    A["Review + aspect"] --> B["9 stratified train examples<br/>(same corpus, leak-filtered)"]
+    B --> C["Jev Score × 2<br/>valence · arousal<br/>9-level rubrics"]
+    C --> D["Shrink calibration<br/>per corpus and dimension<br/>fitted on 256 train groups"]
+    D --> E["V#A in [1, 9]"]
+```
+
+- **Rubrics.** Each dimension is a 9-level scale whose levels describe the emotional content,
+  not the writing style ([`jev/rubrics.py`](jev/rubrics.py)); `Score` returns the
+  probability-weighted level, mapped linearly to 1–9.
+- **Examples.** Nine train records per corpus, the earliest in each equal-width valence band
+  (topped up in file order where a band is empty), frozen for the whole run and never re-picked
+  ([`jev/fewshot.py`](jev/fewshot.py)).
+- **Calibration.** `mean_gold + α · (raw − mean_raw)` per corpus and dimension, α chosen by
+  grouped 5-fold CV on train; the method family was selected on dev and frozen before test
+  ([`tools/calibrate_st1.py`](tools/calibrate_st1.py), log [0005](logs/0005-st1-supervised-calibration.md)).
+
+<details>
+<summary><b>Task 1 results</b>: official test, micro RMSE<sub>VA</sub> over 16,186 gold entries</summary>
+
+<br>
+
+Official scorer, `--do_norm` off. `RMSE_VA = √(mean(ΔV² + ΔA²))` in scale units; 0 is perfect.
+
+| System | RMSE<sub>VA</sub> ↓ |
+|---|---:|
+| [PAI](https://aclanthology.org/2026.semeval-1.193/), Qwen3-32B LoRA + Sinkhorn adaptation † | ≈ 1.0663 |
+| [TeleAI](https://aclanthology.org/2026.semeval-1.233/), Qwen2.5-7B LoRA regression + calibration † | ≈ 1.0737 |
+| **Jev, 9-shot + shrink calibration** | **1.1199** |
+| **Jev, zero-shot + shrink calibration** | **1.1395** |
+| [ICT-NLP](https://aclanthology.org/2026.semeval-1.131/), multilingual XLM-R large ensemble † | ≈ 1.1592 |
 | Kimi-K2, one-shot | 1.8873 |
-| **Jev, 9-shot, valence-stratified** | **2.0736** |
+| Jev, 9-shot, valence-stratified | 2.0736 |
 | GPT-5 mini, one-shot | 2.1552 |
-| **Jev, 3-shot** | **2.1721** |
+| Jev, 3-shot | 2.1721 |
 | Qwen3-14B, QLoRA fine-tuned | 2.1841 |
 | Kimi-K2, zero-shot | 2.3849 |
-| **Jev, zero-shot** | **2.4708** |
+| Jev, zero-shot | 2.4708 |
 | GPT-5 mini, zero-shot | 2.7439 |
 
-\* Supervised calibration using 256 training text groups per corpus; fitted on train,
-selected on dev, and frozen before test. Few-shot example scores stay unchanged.
-Test was used in earlier experiments. Full protocol and results: [0005](logs/0005-st1-supervised-calibration.md).
+† Official per-dataset winners (PAI: Russian, Tatar, Ukrainian; TeleAI: both Japanese corpora and
+Chinese laptop; ICT-NLP: Chinese restaurant). Their micro aggregates are reconstructed from the
+[official overview](https://aclanthology.org/2026.semeval-1.452/), Table 6, as
+`√(Σ N_c · RMSE_c² / Σ N_c)`; the competition ranks each corpus, not this aggregate. Baselines:
+[arXiv:2601.23022](https://arxiv.org/abs/2601.23022), Table 3. Per-corpus comparison:
+[`docs/sota-comparison-2026-09-23.md`](docs/sota-comparison-2026-09-23.md).
 
-† Official ST1 dataset winners: PAI (Russian, Tatar, Ukrainian), TeleAI (both Japanese
-corpora, Chinese laptop), ICT-NLP (Chinese restaurant). Scores are approximate micro
-aggregates reconstructed from the [official overview](https://aclanthology.org/2026.semeval-1.452/),
-Table 6: `√(Σ N_c × RMSE_c² / Σ N_c)`. The competition ranks each corpus, not this aggregate.
+</details>
 
-Our best run is **0.0536 RMSE** behind PAI on this aggregate; matching it requires a further
-**4.8%** reduction. Methods, per-corpus results and next steps: [SOTA comparison](docs/sota-comparison-2026-09-23.md).
+## Task 2 · DimASTE: aspect–opinion–VA triplets
 
-Published baselines: [arXiv:2601.23022](https://arxiv.org/abs/2601.23022), Table 3.
-Earlier experiments, per-corpus scores and costs: [`logs/`](logs/).
+Given only the review, output every `(Aspect, Opinion, V#A)`. A pair scores only if both
+strings match the annotation exactly, so span boundaries decide most of the metric.
 
-## Result — Subtask 2 (DimASTE), official test split
+```mermaid
+flowchart TD
+    R["Review text"] --> S1["① BIO extraction<br/>Choice B/I/O per token and role"]
+    S1 --> S2["② Lattice candidates<br/>argmax spans · BIO-marginal spans ≥ 0.2<br/>train affix variants · train-lexicon matches"]
+    S2 --> N["Noul per aspect × opinion pair"]
+    T[("Train split<br/>BM25 examples · statistics")] -.-> S3
+    T -.-> S4
+    N --> S3["③ Example-conditioned checks<br/>Noul per span · Noul per pair"]
+    S3 --> S4["④ Reranker<br/>logistic regression per language group<br/>overlap suppression · threshold 0.25"]
+    S4 --> S5["⑤ V/A<br/>Jev Score + lines fitted on train gold pairs"]
+    S5 --> O["Triplets"]
+```
 
-cF1, **higher is better**. Macro mean across all eight corpora (6,690 test texts).
+1. **BIO extraction** ([`jev/extraction.py`](jev/extraction.py)). Deterministic tokens (CJK
+   characters, other words); one `Choice` over B/I/O per token and role.
+2. **Lattice candidates** ([`jev/lattice.py`](jev/lattice.py)). Instead of one boundary per
+   span, keep every span the per-token probabilities support, its train edge-affix variant
+   ([`jev/spans.py`](jev/spans.py)) and literal train-vocabulary matches, then ask one `Noul`
+   per aspect × opinion pair. Candidate coverage on dev rises from 57% to 78% of gold pairs.
+3. **Checks with real examples** ([`jev/checks.py`](jev/checks.py),
+   [`jev/retrieval.py`](jev/retrieval.py)). Four BM25-retrieved train reviews with their
+   annotated phrases show Jev the dataset's boundary conventions; it judges each candidate
+   span and each likely pair against them. This is the strongest single signal (AUC 0.80–0.90).
+4. **Reranker** ([`jev/rerank.py`](jev/rerank.py)). A logistic regression per language group
+   combines the Jev answers with train statistics (edge-affix log-odds, annotation counts,
+   lengths, competing variants). Pairs are kept in score order, dropping any that overlap a
+   kept pair on both roles. Fitted on dev and frozen: [`reports/task2/reranker.json`](reports/task2/reranker.json).
+5. **V/A** uses the Task 1 questions on each kept pair, then one line per corpus and dimension
+   fitted on Task 2 train gold pairs ([`reports/task2/va_calibration.json`](reports/task2/va_calibration.json)).
 
-| System | cF1 (macro) |
-|---|---|
-| Kimi-K2 Thinking, one-shot | 0.3859 |
-| Qwen3-14B, QLoRA fine-tuned | 0.2875 |
-| **Jev, training lexicon + pair decisions + transferred shrink\*** | 0.2771 |
+| System (official test, macro over 8 corpora) | cF1 ↑ |
+|---|---:|
+| PAI † | 57.73 |
+| PALI † | 57.50 |
+| **Jev, lattice candidates + checks + reranker** | **51.68** |
+| AILS-NTUA † | 50.16 |
+| Habib University † | 47.15 |
+| Kimi-K2 Thinking, one-shot | 38.59 |
+| Qwen3-14B, QLoRA fine-tuned | 28.75 |
+| Jev, training lexicon + pair decisions ([0006](logs/0006-st2-lexicon-pair-baseline.md)) | 27.71 |
 
-\* Training-vocabulary spans, Jev pair classification and VA scoring, with frozen Task 1
-zero-shot calibration. No Task 2 tuning. Official baseline scores come from the
-[organizers’ report](https://aclanthology.org/2026.semeval-1.452/), Table 7; macro means
-are computed here. Per-corpus scores, limitations and costs: [0006](logs/0006-st2-lexicon-pair-baseline.md).
+† Participant systems listed with all eight corpora in the [official overview](https://arxiv.org/abs/2604.07066),
+Table 10 (macro computed here); the competition ranks each corpus separately. Per-corpus winners
+include Takoyaki on English (70.21 / 63.66) and TeleAI on Japanese (58.37). Baselines:
+organizers' report, Table 7.
+
+<details>
+<summary><b>Per-corpus Task 2 results</b>: test cF1, dev estimate, and the leading systems</summary>
+
+<br>
+
+| Corpus | Jev dev (5-fold CV) | **Jev test** | PAI | PALI | AILS-NTUA |
+|---|---:|---:|---:|---:|---:|
+| eng_restaurant | 76.35 | **68.76** | 69.03 | 69.28 | 65.18 |
+| eng_laptop | 67.67 | **61.86** | 61.69 | 62.42 | 53.11 |
+| zho_restaurant | 57.89 | **48.64** | 56.38 | 56.34 | 50.42 |
+| zho_laptop | 37.84 | **38.72** | 53.06 | 53.08 | 46.46 |
+| jpn_hotel | 53.58 | **49.43** | 56.82 | 56.66 | 50.21 |
+| rus_restaurant | 53.75 | **50.75** | 57.93 | 57.24 | 49.88 |
+| tat_restaurant | 51.59 | **46.44** | 49.08 | 48.28 | 38.74 |
+| ukr_restaurant | 53.03 | **48.87** | 57.87 | 56.71 | 47.25 |
+| **Macro** | **56.46** | **51.68** | 57.73 | 57.50 | 50.16 |
+
+With exact V/A the same pairs would score 56.12 on test; the remaining gap to the leading
+systems is extraction, above all Chinese laptop, where only about 62% of gold pairs reach the candidate
+set. Protocol, costs and caveats: log [0007](logs/0007-st2-lattice-reranker.md).
+
+</details>
+
+## Quick start
+
+```bash
+uv venv .venv && uv pip install --python .venv/bin/python numpy scipy
+export TYPESAFE_API_KEY=...        # the client also reads ~/.zshrc
+# Data: see "Dataset" below; the code expects vendor/DimABSA2026/
+```
+
+<details open>
+<summary><b>Task 1</b>: 9-shot + shrink calibration</summary>
+
+```bash
+# fit calibration on train, select on dev, save parameters
+.venv/bin/python tools/calibrate_st1.py dev  --out reports/calibration_reproduction
+# apply the frozen calibration to test and score
+.venv/bin/python tools/calibrate_st1.py test --out reports/calibration_reproduction
+cat reports/calibration_reproduction/test_summary.json
+
+# raw inference for one corpus (or --corpus all)
+.venv/bin/python runners/run.py --task 1 --corpus eng_restaurant --split test \
+  --shots 3 --out reports/st1_reproduction --concurrency 5
+```
+
+</details>
+
+<details open>
+<summary><b>Task 2</b>: lattice candidates + checks + reranker</summary>
+
+```bash
+# 0. lexicon baseline per split; its pair answers are reranker features
+.venv/bin/python runners/run.py --task 2 --split dev  --out reports/st2_baseline_20260923
+.venv/bin/python runners/run.py --task 2 --split test --out reports/st2_baseline_20260923
+# 1. V/A lines from train gold pairs
+.venv/bin/python tools/run_task2.py va
+# 2. dev: all Jev signals, 5-fold CV score, fit and save the reranker
+.venv/bin/python tools/run_task2.py dev
+# 3. test: signals, frozen reranker, official scorer
+.venv/bin/python tools/run_task2.py test
+```
+
+Every request and per-record stage is cached, so interrupted runs resume and `--cache-only`
+replays a finished run without API calls. A full test run is about 130M input tokens (≈ $5.4).
+
+</details>
+
+Both tasks pin `jev-1.13.0`; the dataset and scorer snapshot is pinned in
+[`data-version.json`](data-version.json). API keys come from the
+[TypeSafe console](https://console.typesafe.ai/); request shapes are documented at
+<https://docs.typesafe.ai/introduction>.
+
+## Repository layout
+
+```
+jev/
+  client.py       Jev HTTP client: retries, never logs the key
+  rubrics.py      9-level valence/arousal scales and question wording
+  fewshot.py      Task 1 example selection and leak filtering
+  data.py         jsonl loading, prediction de-duplication
+  triplets.py     Task 2 training-lexicon candidates and pair decisions
+  extraction.py   Task 2 ① per-token BIO Choice + Noul pair decisions
+  spans.py        Task 2 train statistics: NULL policy, edge affixes
+  lattice.py      Task 2 ② lattice candidates, Noul per pair
+  retrieval.py    Task 2 BM25 train examples
+  checks.py       Task 2 ③ example-conditioned span and pair checks
+  rerank.py       Task 2 ④ features, per-group logistic reranker, selection
+  task2.py        Task 2 request cache, pair V/A ⑤, official cF1
+runners/          unified --task 1|2 inference, concurrency, resume, usage accounting
+tools/
+  calibrate_st1.py   Task 1 train calibration, dev selection, frozen test
+  run_task2.py       Task 2 pipeline: va | dev | test
+  leakage_audit.py   train/dev/test overlap report
+  analyze_st1_design.py, probe_fewshot.py   Task 1 official-score checks and delivery probes
+scoring/score.py  wraps the official metrics script, unmodified
+logs/             one record per finalized experiment
+reports/          metrics summaries and frozen parameters (no dataset text)
+```
+
+**Branches.** `main` holds the current best systems and their frozen results. The `dev` branch
+keeps the full development history: every dev iteration record (`deving/`), retired
+extractors and exploratory reports.
 
 ## Dataset
 
-The data belongs to the DimABSA organizers and is **not redistributed here**. Download it
-yourself — the terms below are quoted from the competition rules.
+The data belongs to the DimABSA organizers and is **not redistributed here**. From the
+competition rules:
 
 > - Datasets should only be used for scientific or research purposes.
 > - Any other use is explicitly prohibited.
 > - Datasets must not be redistributed or shared with third parties.
 > - Interested parties should be directed to the official website.
 
-**Download:** [pinned official snapshot](https://github.com/DimABSA/DimABSA2026/tree/bdc93be1224106ae7d3eb95739c02a76ed4ae8a1/task-dataset)
-(commit `bdc93be12241`).
-
-Place it at `vendor/DimABSA2026/`, which is where the code expects it and which `.gitignore`
-excludes. To fetch this exact version:
+Fetch the [pinned official snapshot](https://github.com/DimABSA/DimABSA2026/tree/bdc93be1224106ae7d3eb95739c02a76ed4ae8a1/task-dataset)
+into `vendor/DimABSA2026/` (ignored by Git):
 
 ```bash
 git clone https://github.com/DimABSA/DimABSA2026.git vendor/DimABSA2026
 git -C vendor/DimABSA2026 checkout bdc93be1224106ae7d3eb95739c02a76ed4ae8a1
 ```
 
-The read-only evaluation script is vendored from that repository and is never
-modified; `scoring/score.py` only shells out to it.
+Anything that embeds dataset text (predictions, requests, responses) stays in ignored
+`reports/**/cache/` directories and prediction files; committed reports hold metrics only.
 
 Papers: [arXiv:2601.23022](https://arxiv.org/abs/2601.23022) (Track A dataset) ·
 [arXiv:2601.21483](https://arxiv.org/abs/2601.21483) (Track B) ·
 [arXiv:2604.07066](https://arxiv.org/abs/2604.07066) (task overview)
 
-## Layout
-
-```
-jev/
-  client.py     Jev HTTP client — no third-party deps; retries; never logs the key
-  rubrics.py    the 9-level valence/arousal scales and the question wording
-  fewshot.py    in-context example selection and leak filtering
-  data.py       jsonl loading, prediction de-duplication
-  triplets.py   Task 2 training-lexicon candidates, pair decisions and VA
-runners/
-  run.py           unified --task 1|2 inference and official scoring
-  execution.py     shared concurrency, resume and usage accounting
-  run_st1.py        one corpus, one split
-  run_all_st1.py    every corpus, then score each
-scoring/
-  score.py          wraps the official metrics script, unmodified
-tools/
-  leakage_audit.py  train/dev/test overlap report
-  probe_fewshot.py  how calibration examples are delivered to the API
-  calibrate_st1.py  train calibration, dev selection, frozen test evaluation
-logs/               one file per experiment
-```
-
-## Running it
-
-```bash
-uv venv .venv && uv pip install --python .venv/bin/python numpy scipy
-export TYPESAFE_API_KEY=...          # the client also reads ~/.zshrc
-
-# fit calibration on train, select on dev, and save parameters
-.venv/bin/python tools/calibrate_st1.py dev --out reports/calibration_reproduction
-
-# apply the saved calibration to test predictions, export and score both arms
-.venv/bin/python tools/calibrate_st1.py test --out reports/calibration_reproduction
-
-# view raw and calibrated test scores (zero-shot and 9-shot)
-cat reports/calibration_reproduction/test_summary.json
-
-# raw Task 1 baseline, one corpus (or --corpus all)
-.venv/bin/python runners/run.py --task 1 --corpus eng_restaurant --split test \
-  --shots 3 --out reports/st1_reproduction --concurrency 5
-
-# Task 2 baseline: all eight corpora, transferred Task 1 calibration included
-.venv/bin/python runners/run.py --task 2 --split test \
-  --out reports/st2_reproduction --concurrency 5
-```
-
-Both tasks use `jev-1.13.0`; the dataset/scorer snapshot is pinned in
-[`data-version.json`](data-version.json). Outputs resume by ID. The original Task 1
-commands remain supported. Task 2 method and official baselines: [0006](logs/0006-st2-lexicon-pair-baseline.md).
-
-An API key comes from the [TypeSafe console](https://console.typesafe.ai/); the model is served
-at `https://api.typesafe.ai/v1/systemone`. Primitive and request-shape docs:
-<https://docs.typesafe.ai/introduction>.
-
-`numpy` supports local calibration; `scipy` is used by the official scorer. Predictions are
-appended as each sentence completes, so an interrupted run resumes by ID; the client retries
-rate limits, 529 and timeouts with backoff. Each prediction also stores raw scores,
-probabilities, confidence, returned model and usage in `_jev`. The default model is
-`jev-1.13.0`. Resume checks the saved request configuration; historical files without
-that configuration remain readable but require a new output path for new runs.
-The original `run_st1.py --restart` explicitly discards an existing run; use a new
-`--out` directory for a fresh unified run. Incomplete batch runs exit nonzero.
-
-## Task 1 few-shot examples
-
-Examples come only from the **train** split of the same corpus. They are frozen per corpus: the
-same records are used for every request in a run, recorded by ID in the run metadata, and never
-re-picked because a prediction came out badly. `--shots N` sets how many (`0` is the zero-shot control). The unified runner
-defaults to 0; the original Task 1 runners retain their default of 3.
-
-`--example-selection` picks which:
-
-- `first-k` (default) — the first N train records, matching the official rule *"the first k
-  samples in the training set"*. This is the arm to compare against the published baselines.
-- `stratified` — the earliest non-leaking record in each equal-width band of the 1–9 scale, so
-  the examples span the scale instead of clustering wherever the file happens to start.
-
-Both take at most one example per record. The two arms differ by 0.0093 micro RMSE — see
-[0003](logs/0003-st1-few-shot-n3-stratified.md).
-
-`tools/leakage_audit.py` found that ID sets are disjoint across splits but **sentence text is
-not** — `jpn_hotel` reuses 23 sentences between train and test, `tat_restaurant` 2, and
-`eng_restaurant` 1 between train and dev. Example selection therefore drops any train record
-whose normalised text or ID also occurs in the split being evaluated. At `--shots 3` this
-drops nothing; at larger `k` it matters.
-
 ## Known limits
 
-- **Jev is not deterministic.** Repeated calls on identical input differ by roughly 0.04 per
-  dimension. This single-call variation is not a significance threshold for aggregate RMSE.
-- In the uncalibrated baseline, arousal stays under-predicted even with examples. `PCC_A` ≈ 0.49 against `PCC_V` ≈ 0.89
-  (Pearson correlation per dimension; higher is better, 1 is perfect) — Jev orders valence well
-  and arousal badly. Per-corpus values are in the logs.
-- Task 2 uses a training vocabulary to propose explicit spans, so unseen terms and implicit
-  aspects/opinions cannot be extracted. Its transferred Task 1 calibration is a starting
-  point, not a Task 2-tuned model. Subtask 3 is not implemented.
+- **Jev is not deterministic.** Identical calls differ by about 0.04 per V/A dimension, so single
+  runs carry that noise.
+- **Dev is optimistic for Task 2.** The reranker is trained on dev and its threshold and features
+  were chosen there; test came in 4.8 points below the cross-validated dev estimate.
+- **Sentence reuse across splits.** IDs are disjoint but some text is not (`jpn_hotel` repeats
+  23 train sentences in test). Example selection and retrieval drop any train record whose
+  normalised text occurs in the evaluated split ([`tools/leakage_audit.py`](tools/leakage_audit.py)).
+- **Coverage.** Task 2 does not output NULL opinions, proposes NULL aspects only for Japanese,
+  and cannot recover spans that no candidate source proposes. Subtask 3 is not implemented.

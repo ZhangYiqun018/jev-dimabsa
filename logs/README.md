@@ -1,6 +1,7 @@
 # Experiment log
 
-One file per experiment, numbered in the order they were run.
+One file per finalized experiment, numbered in the order they were recorded. Exploratory
+development iterations are kept on the `dev` branch (`deving/`), not here.
 
 **What goes in an entry:** the configuration that was run, the numbers that came out, what it
 cost, and any observed fact that affects how the numbers should be read. Nothing else.
@@ -44,5 +45,6 @@ facts only — anything a reader needs to not misread the table
 | [0004](0004-st1-example-count-sweep.md) | Subtask 1, example-count sweep n = 3, 5, 9 | 2.1309 / 2.0736 | $0.7445 / $0.8936 |
 | [0005](0005-st1-supervised-calibration.md) | Supervised shrink calibration, zero / 9-shot | 1.1395 / 1.1199 | $1.9588 |
 | [0006](0006-st2-lexicon-pair-baseline.md) | Subtask 2, lexicon + pair decisions + transferred shrink | cF1 0.2771 (macro) | $2.3029 (dev + test) |
+| [0007](0007-st2-lattice-reranker.md) | Subtask 2, BIO lattice candidates + example-conditioned checks + reranker | cF1 0.5168 (macro) | ≈ $5.44 test + ≈ $1.5 dev |
 
 Task 1 scores are micro RMSE_VA (lower is better); Task 2 is macro cF1 (higher is better).

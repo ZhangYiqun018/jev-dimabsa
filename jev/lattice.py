@@ -1,28 +1,25 @@
-"""Task 2 lattice pairing: many boundary candidates per role, Noul per pair, suppression.
+"""Task 2 lattice candidates: several boundary variants per role, one Noul per pair.
 
-Reuses a cached BIO r3 extraction. Candidates per role are the BIO argmax spans,
-every span whose BIO-marginal score reaches ``LATTICE_THRESHOLD``, the
-train-affix normalisation of each, and train-lexicon matches. Every non-overlapping
-aspect x opinion pair gets the BIO r3 Noul pair question (NULL aspects only where
-train/README allow them). Decoding keeps accepted pairs in probability order and
-suppresses a pair whose aspect and opinion both overlap an already kept pair, so
-competing boundary variants resolve to the one Noul prefers.
+Reuses a BIO r3 extraction (jev/extraction.py). Candidates per role are the BIO
+argmax spans, every span whose BIO-marginal score (start x continuation x end
+probability) reaches ``LATTICE_THRESHOLD``, the train-affix variant of each
+(jev/spans.py), and train-lexicon matches (jev/triplets.py). Every
+non-overlapping aspect x opinion pair gets the BIO r3 Noul pair question; NULL
+aspects only where train/README allow them. Choosing among the variants is the
+reranker's job (jev/rerank.py).
 """
 from __future__ import annotations
 
 from .extraction import RULES, pair_question, tokenize
-from .postprocess import normalise_span, null_disabled, occurrences
+from .spans import normalise_span, null_disabled, occurrences
 
 LATTICE_THRESHOLD = .2
 LATTICE_MAX_TOKENS = 12
 PAIR_BATCH = 32
-# Revision 2: chains of up to MERGE_CHAIN candidates separated by at most MERGE_GAP tokens,
-# because many missed gold phrases are adjacent BIO fragments (a hedge word plus an adjective).
-MERGE_GAP, MERGE_CHAIN, MERGE_MAX_TOKENS = 1, 3, 16
 
 
 def marginals(extracted, text):
-    """Per-token B/I/O probabilities for each role from the cached label requests."""
+    """Per-token B/I/O probabilities for each role from the extraction's label requests."""
     tokens = tokenize(text)
     probs = {'aspect': [None] * len(tokens), 'opinion': [None] * len(tokens)}
     offset, previous = 0, None
@@ -55,21 +52,7 @@ def lattice_spans(tokens, probs, threshold=LATTICE_THRESHOLD):
     return spans
 
 
-def merge_adjacent(tokens, spans):
-    """Spans plus chains of spans separated by at most MERGE_GAP tokens."""
-    starts = {t.start: k for k, t in enumerate(tokens)}
-    ends = {t.end: k for k, t in enumerate(tokens)}
-    units = [(starts[s], ends[e]) for s, e in spans if s in starts and e in ends]
-    found, frontier = set(units), set(units)
-    for _ in range(MERGE_CHAIN - 1):
-        grown = {(i, l) for i, j in frontier for k, l in units
-                 if j < k <= j + 1 + MERGE_GAP and l - i < MERGE_MAX_TOKENS} - found
-        found |= grown
-        frontier = grown
-    return set(spans) | {(tokens[i].start, tokens[j].end) for i, j in found}
-
-
-def candidates(extracted, text, corpus, lexicon=None, merge=False):
+def candidates(extracted, text, corpus, lexicon=None):
     """{role: {lower surface: (surface, first offset)}} ordered by first offset."""
     tokens, probs = marginals(extracted, text)
     patterns = {'aspect': lexicon.aspect_pattern, 'opinion': lexicon.opinion_pattern} if lexicon else {}
@@ -77,8 +60,6 @@ def candidates(extracted, text, corpus, lexicon=None, merge=False):
     for role in ('aspect', 'opinion'):
         spans = {tuple(s) for s in extracted['offsets'][role]} | set(lattice_spans(tokens, probs[role]))
         spans |= {normalise_span(text, tokens, corpus, role, s, e) for s, e in list(spans)}
-        if merge:
-            spans = merge_adjacent(tokens, spans)
         if role in patterns:
             spans |= {(m.start(1), m.end(1)) for m in patterns[role].finditer(text)}
         found = {}
@@ -90,8 +71,8 @@ def candidates(extracted, text, corpus, lexicon=None, merge=False):
     return out
 
 
-def _overlap(x, y, text_l):
-    """Surfaces overlap: containment, or any two text occurrences intersect."""
+def overlap(x, y, text_l):
+    """Lower-case surfaces overlap: containment, or any two text occurrences intersect."""
     if x == 'null' or y == 'null':
         return x == y
     if x in y or y in x:
@@ -101,29 +82,19 @@ def _overlap(x, y, text_l):
 
 
 class LatticePairer:
-    """Noul for every candidate pair; returns all pairs with probabilities.
-
-    ``known`` maps lower-case pairs to probabilities from an earlier revision;
-    those pairs are not asked again.
-    """
-
-    def __init__(self, merge=False, known=None):
-        self.merge, self.known = merge, known or {}
+    """Noul for every candidate pair; returns the candidates and all pairs with probabilities."""
 
     def __call__(self, client, record, extracted, corpus, lexicon=None):
         text = record['Text']  # Deliberately never read annotations.
         text_l = text.lower()
-        cands = candidates(extracted, text, corpus, lexicon, self.merge)
+        cands = candidates(extracted, text, corpus, lexicon)
         aspects = [s for s, _ in cands['aspect'].values()]
         if not null_disabled(corpus):
             aspects.append('NULL')
         opinions = [s for s, _ in cands['opinion'].values()]
         pairs = [(a, o) for a in aspects for o in opinions
-                 if a == 'NULL' or not _overlap(a.lower(), o.lower(), text_l)]
-        out = [{'Aspect': a, 'Opinion': o, 'probability': self.known[(a.lower(), o.lower())]}
-               for a, o in pairs if (a.lower(), o.lower()) in self.known]
-        pairs = [(a, o) for a, o in pairs if (a.lower(), o.lower()) not in self.known]
-        trace = []
+                 if a == 'NULL' or not overlap(a.lower(), o.lower(), text_l)]
+        out, trace = [], []
         for offset in range(0, len(pairs), PAIR_BATCH):
             batch = pairs[offset:offset + PAIR_BATCH]
             questions = {f'p{i}': pair_question(a, o) for i, (a, o) in enumerate(batch)}
@@ -134,17 +105,3 @@ class LatticePairer:
                        for i, (a, o) in enumerate(batch))
         return {'ID': record['ID'], 'candidates': {r: list(c) for r, c in cands.items()},
                 'pairs': out, 'trace': trace}
-
-
-def suppress(pairs, text, threshold):
-    """Accepted pairs, highest probability first, without overlapping boundary variants."""
-    text_l = text.lower()
-    kept = []
-    for pair in sorted((p for p in pairs if p['probability'] >= threshold),
-                       key=lambda p: -p['probability']):
-        a, o = pair['Aspect'].lower(), pair['Opinion'].lower()
-        if any(_overlap(a, k['Aspect'].lower(), text_l) and _overlap(o, k['Opinion'].lower(), text_l)
-               for k in kept):
-            continue
-        kept.append(pair)
-    return kept

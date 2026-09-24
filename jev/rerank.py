@@ -26,8 +26,8 @@ from scipy.optimize import minimize
 
 from .data import _annotation_items
 from .extraction import tokenize
-from .lattice import _overlap, lattice_spans, marginals
-from .postprocess import affix_counts, normalise_span, occurrences, train_rows
+from .lattice import lattice_spans, marginals, overlap
+from .spans import affix_counts, normalise_span, occurrences, train_rows
 from .task2 import CORPORA
 
 CANDIDATE_MINIMUM = .3
@@ -120,7 +120,7 @@ def features(corpus, text, lattice, extracted, signals):
     rows = []
     for (a, o), p in zip(keys, pool):
         competing = [q['probability'] for (qa, qo), q in zip(keys, pool)
-                     if q is not p and _overlap(a, qa, text_l) and _overlap(o, qo, text_l)]
+                     if q is not p and overlap(a, qa, text_l) and overlap(o, qo, text_l)]
         span_a = 1. if a == 'null' else signals['spancheck']['aspect'].get(a, .5)
         span_o = signals['spancheck']['opinion'].get(o, .5)
         main = [_logit(p['probability']),
@@ -165,7 +165,7 @@ def select(scored, text, threshold):
     for s, (a, o) in sorted(scored, key=lambda x: -x[0]):
         if s < threshold:
             break
-        if not any(_overlap(a, ka, text_l) and _overlap(o, ko, text_l) for ka, ko in kept):
+        if not any(overlap(a, ka, text_l) and overlap(o, ko, text_l) for ka, ko in kept):
             kept.append((a, o))
     return kept
 

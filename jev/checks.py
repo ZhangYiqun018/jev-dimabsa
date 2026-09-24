@@ -1,14 +1,16 @@
-"""Task 2 span check: one Noul per candidate span and role, with retrieved train examples.
+"""Task 2 example-conditioned checks: Noul per candidate span and per candidate pair.
 
-Complements pair decisions with a role-level judgement of each lattice
-candidate: is this exact string one annotated phrase of that role, with the
-boundaries the dataset uses? The state shows BM25-retrieved same-corpus train
-reviews with their annotated phrases (jev/variants.py).
+The state shows the review and BM25-retrieved same-corpus train reviews with
+their annotated aspect and opinion phrases (jev/retrieval.py), so each judgement
+can follow the dataset's boundary conventions:
+
+- span check: is this exact string one annotated phrase of that role?
+- pair check: would the annotations pair this opinion with this aspect?
 """
 from __future__ import annotations
 
 from .extraction import TYPES
-from .variants import Retriever, example  # noqa: F401  (Retriever re-exported for callers)
+from .retrieval import example
 
 QUESTION_BATCH = 32
 GUIDANCE = (

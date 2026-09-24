@@ -3,7 +3,7 @@ import unittest
 from jev.client import Answer, Response
 from jev.lattice import LatticePairer
 from jev.rerank import select
-from jev.spancheck import PairChecker, SpanChecker
+from jev.checks import PairChecker, SpanChecker
 
 
 class FakeClient:
@@ -29,7 +29,7 @@ class RerankTests(unittest.TestCase):
                   (.7, ('keyboard', 'great')), (.1, ('keyboard', 'is great'))]
         self.assertEqual(select(scored, text, .25), [('screen', 'very bright'), ('keyboard', 'great')])
 
-    def test_candidate_stages_never_send_annotations_and_reuse_known_pairs(self):
+    def test_candidate_stages_never_send_annotations(self):
         record = {'ID': 'x', 'Text': 'Food great but service slow.',
                   'Triplet': [{'Aspect': 'GOLD_SENTINEL', 'Opinion': 'DO_NOT_READ'}]}
         extracted = {'offsets': {'aspect': [[0, 4], [15, 22]], 'opinion': [[5, 10], [23, 27]]},
@@ -39,10 +39,10 @@ class RerankTests(unittest.TestCase):
         extracted['trace'] = [{'state': {'tokens': '\n'.join(['a'] * 6)}, 'answers': {
             f'{r}_{i}': {'probabilities': {'O': 1.}} for r in ('aspect', 'opinion') for i in range(6)}}]
         client = FakeClient()
-        result = LatticePairer(known={('food', 'great'): .9})(client, record, extracted, 'eng_restaurant')
+        result = LatticePairer()(client, record, extracted, 'eng_restaurant')
         asked = [q['instructions'] for call in client.sent for q in call['questions'].values()]
         self.assertEqual(len(result['pairs']), 4)
-        self.assertEqual(len(asked), 3)  # The known pair is not asked again; no NULL in English.
+        self.assertEqual(len(asked), 4)  # Two aspects x two opinions; no NULL aspect in English.
         SpanChecker()(client, record, result['candidates'], FakeRetriever())
         PairChecker()(client, record, result['pairs'], FakeRetriever())
         self.assertNotIn('GOLD_SENTINEL', repr(client.sent))

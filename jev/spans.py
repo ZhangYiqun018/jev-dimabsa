@@ -1,14 +1,11 @@
-"""Deterministic Task 2 decoding rules applied to cached extractor outputs.
+"""Train-split span statistics for Task 2: NULL-aspect policy and edge affixes.
 
-Every rule parameter comes from the corpus train split or the official README;
-dev labels are used only for scoring. Rules (see deving/20260924-task2-plan.md):
-
-- NULL policy: drop NULL-aspect pairs where the official README says test has no
-  implicit aspects (English) or where train has fewer than 5% NULL aspects.
-- Overlap filter: drop a pair whose aspect and opinion overlap in the text or
-  contain one another.
-- Affix normalisation: strip span-edge affixes that train annotations almost
-  always leave outside a span, and extend by affixes they almost always include.
+- NULL policy: implicit (NULL) aspects are not proposed where the official
+  README says test has none (English) or where train has fewer than 5% of them.
+- Edge affixes: for every train span, each 1..n-token affix at its edges is
+  counted as inside the span or immediately outside it. Affixes almost always
+  left outside (>= 90%, >= 20 times) are stripped from candidate spans and
+  those almost always inside are added, producing boundary variants.
 """
 from __future__ import annotations
 
@@ -146,55 +143,3 @@ def normalise_span(text, tokens, corpus, role, s, e, extend=True):
         if not changed:
             break
     return tokens[i].start, tokens[j - 1].end
-
-
-def _overlaps(a, o, a_occ, o_occ, text_l):
-    al, ol = a.lower(), o.lower()
-    if al in ol or ol in al:
-        return True
-    a_occ = a_occ + occurrences(text_l, al)
-    o_occ = o_occ + occurrences(text_l, ol)
-    return any(s1 < e2 and s2 < e1 for s1, e1 in a_occ for s2, e2 in o_occ)
-
-
-def decode(extracted, text, corpus, config, threshold):
-    """Accepted pairs after affix rewriting, thresholding, NULL policy and overlap filter.
-
-    ``config`` keys: ``null_policy`` (bool), ``overlap`` (bool), ``affix`` (set of
-    roles to normalise, possibly empty). Returns dicts with rewritten
-    ``Aspect``/``Opinion``, the Noul ``probability`` and the ``source`` pair.
-    Pairs keep the extractor's order (so V/A requests match historical batches);
-    case-insensitive duplicates keep the first occurrence.
-    """
-    tokens = tokenize(text)
-    rewrite = {}
-    for role in ('aspect', 'opinion'):
-        by_surface = defaultdict(list)
-        for s, e in extracted['offsets'][role]:
-            by_surface[text[s:e]].append((s, e))
-        rewrite[role] = {}
-        for surface, occ in by_surface.items():
-            if role in config.get('affix', ()):
-                occ = [normalise_span(text, tokens, corpus, role, s, e) for s, e in occ]
-            rewrite[role][surface] = (text[occ[0][0]:occ[0][1]], occ)
-    text_l = text.lower()
-    accepted = []
-    for pair in extracted['pairs']:
-        if pair['probability'] < threshold:
-            continue
-        a, o = pair['Aspect'], pair['Opinion']
-        if a == 'NULL' and config.get('null_policy') and null_disabled(corpus):
-            continue
-        new_a, a_occ = ('NULL', []) if a == 'NULL' else rewrite['aspect'][a]
-        new_o, o_occ = rewrite['opinion'][o]
-        if config.get('overlap') and new_a != 'NULL' and _overlaps(new_a, new_o, a_occ, o_occ, text_l):
-            continue
-        accepted.append({'Aspect': new_a, 'Opinion': new_o, 'probability': pair['probability'],
-                         'source': (a, o)})
-    seen, out = set(), []
-    for pair in accepted:
-        key = (pair['Aspect'].lower(), pair['Opinion'].lower())
-        if key not in seen:
-            seen.add(key)
-            out.append(pair)
-    return out

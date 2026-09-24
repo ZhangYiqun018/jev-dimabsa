@@ -1,9 +1,9 @@
-"""Task 2 BIO r3 extractor: text-only aspect/opinion spans plus Jev pair decisions.
+"""Task 2 BIO r3 extractor: per-token B/I/O Choice per role, then Noul per span pair.
 
-This is the frozen development configuration evaluated on the full dev split
-(see deving/20260923-bio-r3-full-dev.md). It never reads annotations and makes
-no VA calls. The retired start/end (SE) mode and revisions 1-2 are archived in
-deving/archive/jev/extraction.py.
+Stage 1 of the Task 2 pipeline (tools/run_task2.py). It never reads annotations
+and makes no VA calls. Its argmax spans, per-token probabilities and pair
+answers feed the lattice candidates and the reranker. Earlier revisions are
+kept on the ``dev`` branch.
 """
 from __future__ import annotations
 
@@ -102,14 +102,7 @@ class BIOExtractor:
     Candidate pairs are every extracted aspect (plus NULL) crossed with every
     extracted opinion; NULL opinions are not supported. Returned pairs carry the
     Noul probability; thresholding is the caller's decision.
-
-    ``examples`` (optional) maps the review text to real annotated train examples
-    that replace the invented ones in the label state (revision "ex"); the pair
-    stage can be skipped with ``pairs=False``.
     """
-
-    def __init__(self, examples=None, pairs=True):
-        self.examples, self.pairs = examples, pairs
 
     def __call__(self, client, record):
         text = record['Text']  # Deliberately never read annotations.
@@ -129,11 +122,8 @@ class BIOExtractor:
             chunk = tokens[offset:offset + CHUNK_TOKENS]
             state = {'review': text, 'rules': RULES,
                      'tokens': '\n'.join(f'{i}|{t.text}' for i, t in enumerate(chunk)),
-                     'boundary_guidance': BOUNDARY_GUIDANCE}
-            if self.examples is None:
-                state['invented_examples'] = INVENTED_EXAMPLES
-            else:
-                state['annotation_examples'] = self.examples(text)
+                     'boundary_guidance': BOUNDARY_GUIDANCE,
+                     'invented_examples': INVENTED_EXAMPLES}
             questions = {f'{kind}_{i}': label_question(kind, i, token)
                          for kind in TYPES for i, token in enumerate(chunk)}
             answers = {}
@@ -146,7 +136,7 @@ class BIOExtractor:
 
         terms = {kind: list(dict.fromkeys(text[s:e] for s, e in spans))
                  for kind, spans in found.items()}
-        pairs = [(a, o) for a in [*terms['aspect'], 'NULL'] for o in terms['opinion']] if self.pairs else []
+        pairs = [(a, o) for a in [*terms['aspect'], 'NULL'] for o in terms['opinion']]
         accepted = []
         for offset in range(0, len(pairs), PAIR_BATCH):
             batch = pairs[offset:offset + PAIR_BATCH]

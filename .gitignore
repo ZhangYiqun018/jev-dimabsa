@@ -2,8 +2,8 @@
 #   "Datasets must not be redistributed or shared with third parties."
 # So neither the data nor anything embedding its text is committed.
 vendor/
-reports/*.jsonl
-reports/*.jsonl.meta.json
+reports/**/*.jsonl
+reports/**/*.jsonl.meta.json
 reports/_gold_*
 reports/social/
 
@@ -14,9 +14,13 @@ __pycache__/
 
 # local session config
 .claude/
+AGENTS.md
 
 # Calibration experiment inputs and raw responses contain dataset text.
 reports/**/cache/
+reports/**/calls/
+# Scorer console output; the metrics are kept in each summary.json.
+reports/**/*_scorer.txt
 
 # Console output from the local calibration runs.
 reports/calibration_*execution.log
