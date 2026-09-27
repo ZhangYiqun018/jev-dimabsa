@@ -6,7 +6,9 @@ described by the Jev answers already collected for it and by train statistics:
 - lattice Noul, BIO r3 Noul, lexicon-baseline Noul (when the pair was asked);
 - example-conditioned span checks (aspect, opinion) and pair check;
 - BIO-marginal span scores, BIO argmax / affix-normalised membership;
-- train annotation counts, span lengths, competing boundary variants, distance.
+- train annotation counts, span lengths, competing boundary variants, distance;
+- optionally: an opinion-extension flag (jev/extend.py), the checks repeated with other
+  retrieval views (mean and min logit), and each check relative to its best overlapping rival.
 
 One model per language group is fitted with an L2 penalty and applied per record: pairs are kept in
 score order, a pair overlapping a kept pair on both roles is suppressed, and the
@@ -138,7 +140,22 @@ def features(corpus, text, lattice, extracted, signals):
             *edge_features(corpus, 'aspect', a, text, tokens), *edge_features(corpus, 'opinion', o, text, tokens)]
         f += [float(corpus == c) for c in CORPORA]
         f += [x * (g == group) for g in GROUPS for x in main]  # Per-language-group slopes.
+        if 'extension' in signals:  # Opinion extensions (jev/extend.py) joined the pool.
+            f += [float(o in signals['extension'])]
+        if 'views' in signals:  # Checks repeated with other retrieval views: mean and min logit.
+            per_view = [[_logit(1. if a == 'null' else v['spancheck']['aspect'].get(a, span_a)),
+                         _logit(v['spancheck']['opinion'].get(o, span_o)),
+                         _logit(v['paircheck'].get((a, o), signals['paircheck'].get((a, o), .5)))]
+                        for v in signals['views']] + [main[4:7]]
+            f += [*np.mean(per_view, axis=0), *np.min(per_view, axis=0)]
         rows.append((f, (a, o)))
+    if signals.get('relative'):  # Each check relative to the best overlapping competitor.
+        base = len(rows[0][0]) - 6 if rows and 'views' in signals else None
+        for k, (f, (a, o)) in enumerate(rows):
+            rivals = [g for g, (qa, qo) in rows if (qa, qo) != (a, o)
+                      and overlap(a, qa, text_l) and overlap(o, qo, text_l)]
+            cols = [4, 5, 6] + ([base, base + 1, base + 2] if base is not None else [])
+            f += [f[i] - max((g[i] for g in rivals), default=-7.) for i in cols]
     return rows
 
 

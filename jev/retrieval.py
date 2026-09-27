@@ -19,10 +19,31 @@ def bigrams(text):
     return [text[i:i + 2] for i in range(len(text) - 1)] or ([text] if text else [])
 
 
-class Retriever:
-    """BM25 (k1 1.5, b 0.75) over character bigrams of same-corpus train reviews."""
+def trigrams(text):
+    text = ''.join(text.lower().split())
+    return [text[i:i + 3] for i in range(len(text) - 2)] or ([text] if text else [])
 
-    def __init__(self, rows, banned_texts=()):
+
+def words(text):
+    """jieba words for Chinese; otherwise the deterministic extraction tokens (CJK characters,
+    other words), without punctuation."""
+    import re
+    if re.search(r'[\u4e00-\u9fff]', text) and not re.search(r'[\u3040-\u30ff]', text):
+        import jieba
+        units = jieba.lcut(text.lower())
+    else:
+        units = re.findall(r'[\u3040-\u30ff\u3400-\u9fff]|[^\W\u3040-\u30ff\u3400-\u9fff]+', text.lower())
+    return [u for u in units if u.strip() and re.search(r'\w', u)] or [text.lower()]
+
+
+VIEWS = {'bigram': bigrams, 'trigram': trigrams, 'word': words}
+
+
+class Retriever:
+    """BM25 (k1 1.5, b 0.75) over ``terms`` (character bigrams by default) of same-corpus train reviews."""
+
+    def __init__(self, rows, banned_texts=(), terms=bigrams):
+        self.terms = terms
         seen = {normalise(t) for t in banned_texts}
         self.rows = []
         for row in rows:
@@ -30,7 +51,7 @@ class Retriever:
             if key not in seen and _annotation_items(row):
                 self.rows.append(row)
                 seen.add(key)
-        self.tf = [Counter(bigrams(r['Text'])) for r in self.rows]
+        self.tf = [Counter(terms(r['Text'])) for r in self.rows]
         self.lengths = [sum(c.values()) for c in self.tf]
         self.avg = sum(self.lengths) / max(1, len(self.lengths)) or 1
         self.df = Counter(t for counts in self.tf for t in counts)
@@ -42,7 +63,7 @@ class Retriever:
     def select(self, text, n=EXAMPLES, exclude=None):
         """Top ``n`` rows; ``exclude`` drops rows with that (normalised) text, e.g. the query itself."""
         scores = Counter()
-        for term in set(bigrams(text)):
+        for term in set(self.terms(text)):
             idf = math.log(1 + (len(self.rows) - self.df[term] + .5) / (self.df[term] + .5))
             for i in self.index.get(term, ()):
                 freq = self.tf[i][term]

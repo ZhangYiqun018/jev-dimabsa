@@ -3,7 +3,7 @@
 
 Task 3 dev/test are the Task 2 reviews in the same order (IDs may differ, e.g.
 ``_aste_`` vs ``_asqp_``); their gold equals Task 2 gold plus Category. Pairs and
-V/A are therefore read from the Task 2 predictions (reports/task2/{split}/, dev
+V/A are therefore read from the Task 2 predictions (reports/task2_v2/{split}/, dev
 out-of-fold), and only the category is added:
 
     .venv/bin/python tools/run_task3.py fit    # Jev on a train sample, fit combiner weights
@@ -35,10 +35,10 @@ from jev.rerank import GROUPS, group_of
 from jev.retrieval import Retriever
 from jev.task2 import DATA, CORPORA, CachedClient, digest, official_score, record_key, save_json, split_path
 
-OUT = ROOT / 'reports/task3'
-CACHE = OUT / 'cache'
-TASK2 = ROOT / 'reports/task2'
-WEIGHTS = OUT / 'category_weights.json'
+OUT = ROOT / 'reports/task3_v2'  # Categories for the reports/task2_v2 pairs; 0008 outputs stay in reports/task3.
+CACHE = ROOT / 'reports/task3/cache'
+TASK2 = ROOT / 'reports/task2_v2'
+WEIGHTS = ROOT / 'reports/task3/category_weights.json'  # Fitted on train only (log 0008), unchanged.
 FIT_SAMPLE_PAIRS = 1000
 CONCURRENCY = 10
 STAGE = f'category_{digest(ATTRIBUTES)[:8]}'  # Per-record answers are tied to the criteria wording.
@@ -89,7 +89,8 @@ def ask_all(jobs, run):
 
 
 def categorise(client, info, corpus, split, record, pairs, exclude=None):
-    path = CACHE / split / STAGE / f'{record_key(corpus, record)}.json'
+    # Keyed by the pairs too, so a different Task 2 selection never reuses stale answers.
+    path = CACHE / split / STAGE / f'{record_key(corpus, record)}_{digest(pairs)[:12]}.json'
     try:
         answer = cached_stage(path, lambda: CategoryChooser()(
             client.with_stage(f'category_{split}'), {'ID': record['ID'], 'Text': record['Text']},
@@ -138,7 +139,7 @@ def predict(client, split, variants):
     weights = json.loads(WEIGHTS.read_text())['weights']
     task2 = json.loads((TASK2 / f'{split}_summary.json').read_text())['corpora']
     (CACHE / split / STAGE).mkdir(parents=True, exist_ok=True)
-    report = {'split': split, 'model': DEFAULT_MODEL, 'stage': STAGE, 'pairs_from': f'reports/task2/{split}', 'variants': {}}
+    report = {'split': split, 'model': DEFAULT_MODEL, 'stage': STAGE, 'pairs_from': f'{TASK2.relative_to(ROOT)}/{split}', 'variants': {}}
     per_corpus = {v: {} for v in variants}
     for corpus in CORPORA:
         info = Corpus(corpus)
@@ -182,7 +183,7 @@ def predict(client, split, variants):
         for c, m in corpora.items():
             print(f"  {c:15s} cF1 {m['cF1'] * 100:6.2f}  retention {m['retention_vs_task2']:.3f}  "
                   f"category acc (matched) {m['category_accuracy_on_matched_pairs']:.3f}")
-        if split == 'dev':
+        if split == 'dev' and (TASK2 / 'test_summary.json').exists():
             test2 = json.loads((TASK2 / 'test_summary.json').read_text())['corpora']
             projected = sum(test2[c]['cF1'] * corpora[c]['retention_vs_task2'] for c in CORPORA) / len(CORPORA)
             report['variants'][v]['projected_test_macro_cF1'] = projected

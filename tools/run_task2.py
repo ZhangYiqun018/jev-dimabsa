@@ -14,7 +14,9 @@ Then:
     .venv/bin/python tools/run_task2.py test   # signals, frozen reranker, official score
 
 Per record: BIO r3 extraction -> lattice candidates with one Noul per pair ->
-span and pair checks with retrieved train examples. The per-language-group
+span and pair checks with retrieved train examples (character bigram, trigram and
+word BM25 views) -> longer opinion variants kept by the span check, with their
+pair Noul and pair check (jev/extend.py). The per-language-group
 logistic reranker scores each candidate pair; pairs are kept in score order
 unless they overlap a kept pair on both roles, down to THRESHOLD. Kept pairs get
 Jev V/A with the Task 2 train calibration and the unchanged official scorer.
@@ -39,17 +41,18 @@ from jev.client import DEFAULT_MODEL, JevClient
 from jev.data import _annotation_items, load_jsonl, write_jsonl
 from jev.extraction import BIOExtractor
 from jev.fewshot import normalise
+from jev.extend import KEEP, check_extensions, extension_pairs
 from jev.lattice import LatticePairer
 from jev.rerank import cross_validate, features, fit_groups, group_of, score, select
-from jev.retrieval import Retriever
-from jev.task2 import CORPORA, CachedClient, official_score, record_key, save_json, score_pair_list, split_path
+from jev.retrieval import VIEWS, Retriever
+from jev.task2 import CORPORA, CachedClient, digest, official_score, record_key, save_json, score_pair_list, split_path
 from jev.triplets import TripletPredictor
 
-OUT = ROOT / 'reports/task2'
-CACHE = OUT / 'cache'
+OUT = ROOT / 'reports/task2_v2'  # This system; the 0007 system's outputs stay in reports/task2.
+CACHE = ROOT / 'reports/task2/cache'
 LEXICON = ROOT / 'reports/st2_baseline_20260923/cache'
 TASK1_SHRINK = ROOT / 'reports/calibration_20260923/parameters.json'
-VA_CALIBRATION = OUT / 'va_calibration.json'
+VA_CALIBRATION = ROOT / 'reports/task2/va_calibration.json'
 RERANKER = OUT / 'reranker.json'
 THRESHOLD = .25
 VA_SAMPLE_PAIRS = 1000
@@ -95,12 +98,14 @@ def client_for(args):
 
 def collect(split, client):
     """[(corpus, row, feature rows, gold pairs)] after running every signal stage."""
-    for stage in ('extract', 'lattice', 'spancheck', 'paircheck'):
+    extra_views = [v for v in VIEWS if v != 'bigram']
+    for stage in ('extract', 'lattice', 'spancheck', 'paircheck', 'extcheck', 'extpairs',
+                  *(f'{s}_{v}' for s in ('spancheck', 'paircheck') for v in extra_views)):
         (CACHE / split / stage).mkdir(parents=True, exist_ok=True)
     lexicons = {c: Lexicon(c, split) for c in CORPORA}
-    retrievers = {c: Retriever(load_jsonl(split_path(c, 'train')),
-                               [r['Text'] for s in ('dev', 'test') for r in load_jsonl(split_path(c, s))])
-                  for c in CORPORA}
+    retrievers = {(c, v): Retriever(load_jsonl(split_path(c, 'train')),
+                                    [r['Text'] for s in ('dev', 'test') for r in load_jsonl(split_path(c, s))], VIEWS[v])
+                  for c in CORPORA for v in VIEWS}
     rows = {c: load_jsonl(split_path(c, split)) for c in CORPORA}
     # Round-robin corpora so an interrupted run covers every language.
     jobs = [(c, rs[i]) for i in range(max(map(len, rows.values()))) for c, rs in rows.items() if i < len(rs)]
@@ -115,15 +120,30 @@ def collect(split, client):
             lattice = cached_stage(path('lattice'), lambda: LatticePairer()(
                 client.with_stage('lattice'), record, extracted, corpus, lexicons[corpus].predictor))
             spans = cached_stage(path('spancheck'), lambda: SpanChecker()(
-                client.with_stage('spancheck'), record, lattice['candidates'], retrievers[corpus]))
+                client.with_stage('spancheck'), record, lattice['candidates'], retrievers[(corpus, 'bigram')]))
             pairs = cached_stage(path('paircheck'), lambda: PairChecker()(
-                client.with_stage('paircheck'), record, lattice['pairs'], retrievers[corpus]))
+                client.with_stage('paircheck'), record, lattice['pairs'], retrievers[(corpus, 'bigram')]))
+            views = [(cached_stage(path(f'spancheck_{v}'), lambda v=v: SpanChecker()(
+                         client.with_stage(f'spancheck_{v}'), record, lattice['candidates'], retrievers[(corpus, v)])),
+                      cached_stage(path(f'paircheck_{v}'), lambda v=v: PairChecker()(
+                         client.with_stage(f'paircheck_{v}'), record, lattice['pairs'], retrievers[(corpus, v)])))
+                     for v in extra_views]
+            checked = cached_stage(path('extcheck'), lambda: check_extensions(
+                client.with_stage('extcheck'), record, lattice, retrievers[(corpus, 'bigram')]))
+            extended = cached_stage(path('extpairs'), lambda: extension_pairs(
+                client.with_stage('extpairs'), record, lattice, checked, corpus, retrievers[(corpus, 'bigram')]))
         except Exception as exc:  # API errors can echo review text; keep details out of logs.
             print(f'{corpus} {row["ID"]}: {type(exc).__name__}; rerun to resume', flush=True)
             return None
-        signals = {'lexicon': lexicons[corpus].probabilities(row), 'spancheck': spans['spans'],
-                   'paircheck': {(p['Aspect'].lower(), p['Opinion'].lower()): p['probability']
-                                 for p in pairs['pairs']}}
+        by_pair = lambda answers: {(p['Aspect'].lower(), p['Opinion'].lower()): p['probability'] for p in answers}
+        signals = {'lexicon': lexicons[corpus].probabilities(row),
+                   'spancheck': {'aspect': spans['spans']['aspect'],
+                                 'opinion': {**spans['spans']['opinion'], **checked['opinion']}},
+                   'paircheck': {**by_pair(pairs['pairs']), **by_pair(extended['paircheck'])},
+                   'extension': {s for s, p in checked['opinion'].items() if p >= KEEP},
+                   'views': [{'spancheck': sp['spans'], 'paircheck': by_pair(pc['pairs'])} for sp, pc in views],
+                   'relative': True}
+        lattice = {**lattice, 'pairs': lattice['pairs'] + extended['pairs']}
         gold = {(x['Aspect'].lower(), x['Opinion'].lower()) for x in _annotation_items(row)}
         with lock:
             done[0] += 1
@@ -150,7 +170,8 @@ def predict_and_score(split, items, scored, client, label):
         surface = lambda x: 'NULL' if x == 'null' else text[text_l.find(x):text_l.find(x) + len(x)]
         chosen = [(surface(a), surface(o)) for a, o in select(candidates, text, THRESHOLD)]
         calibration = {k: va_params[corpus][k] for k in ('slope', 'intercept')}
-        va = cached_stage(CACHE / split / 'va' / f'{record_key(corpus, row)}.json',
+        # Keyed by the chosen pairs too, so a different selection never reuses stale V/A.
+        va = cached_stage(CACHE / split / 'va' / f'{record_key(corpus, row)}_{digest(chosen)[:12]}.json',
                           lambda: score_pair_list(client.with_stage('va'), {'ID': row['ID'], 'Text': text},
                                                   chosen, calibration)
                           if chosen else {'raw': [], 'calibrated': [], 'trace': []})
