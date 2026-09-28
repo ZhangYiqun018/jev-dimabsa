@@ -13,7 +13,7 @@
 [![No GPU](https://img.shields.io/badge/GPU-none-495057)](#quick-start)
 [![Task 1 SOTA](https://img.shields.io/badge/Task%201-SOTA%20%C2%B7%2010--corpus%20micro%20RMSE-f59f00)](#task-1--dimasr-valencearousal-of-a-given-aspect)
 
-[Results](#results-at-a-glance) · [Task 1](#task-1--dimasr-valencearousal-of-a-given-aspect) · [Task 2](#task-2--dimaste-aspectopinionva-triplets) · [Task 3](#task-3--dimasqp-adding-the-category) · [Quick start](#quick-start) · [Layout](#repository-layout) · [Experiment logs](logs/README.md) · [Data](#dataset)
+[Method](#method-overview) · [Results](#results-at-a-glance) · [Task 1](#task-1--dimasr-valencearousal-of-a-given-aspect) · [Task 2](#task-2--dimaste-aspectopinionva-triplets) · [Task 3](#task-3--dimasqp-adding-the-category) · [Quick start](#quick-start) · [Layout](#repository-layout) · [Experiment logs](logs/README.md) · [Data](#dataset)
 
 </div>
 
@@ -25,6 +25,12 @@ has no text-generation interface: it answers typed questions about a state. Its
 described scale, while `Choice` and `Noul` return probabilities over options and yes/no. Every
 system here is built from those three primitives, a few train-split statistics and the
 unchanged official scorer.
+
+## Method overview
+
+[![Overview of the three tasks: given-aspect V/A scoring, aspect-opinion extraction, and category enrichment.](docs/figures/dimabsa-overview-editable/overview.png)](docs/figures/dimabsa-overview-editable/overview.pdf)
+
+Click the figure to open the **[vector PDF](docs/figures/dimabsa-overview-editable/overview.pdf)**.
 
 ## Results at a glance
 
@@ -67,14 +73,6 @@ Given a review and one of its aspects, predict `V#A`.
 > test, below every participant with all ten corpora (best: PAI ≈ 1.0663, TeleAI ≈ 1.0737),
 > from a fresh run of all test requests. The competition itself ranks each corpus; per corpus
 > Jev is best on English laptop and Tatar.
-
-```mermaid
-flowchart LR
-    A["Review + aspect"] --> B["9 stratified train examples<br/>(same corpus, leak-filtered)"]
-    B --> C["Jev Score × 2<br/>valence · arousal<br/>9-level rubrics"]
-    C --> D["Joint V/A calibration<br/>ridge per corpus on V, A, |V−5|, V×A<br/>fitted on 256 train groups"]
-    D --> E["V#A in [1, 9]"]
-```
 
 - **Rubrics.** Each dimension is a 9-level scale whose levels describe the emotional content,
   not the writing style ([`jev/rubrics.py`](jev/rubrics.py)); `Score` returns the
@@ -138,19 +136,6 @@ for the 1.1199 system: [`docs/sota-comparison-2026-09-23.md`](docs/sota-comparis
 
 Given only the review, output every `(Aspect, Opinion, V#A)`. A pair scores only if both
 strings match the annotation exactly, so span boundaries decide most of the metric.
-
-```mermaid
-flowchart TD
-    R["Review text"] --> S1["① BIO extraction<br/>Choice B/I/O per token and role"]
-    S1 --> S2["② Lattice candidates<br/>argmax spans · BIO-marginal spans ≥ 0.2<br/>train affix variants · train-lexicon matches<br/>checked opinion extensions"]
-    S2 --> N["Noul per aspect × opinion pair"]
-    T[("Train split<br/>BM25 examples · statistics")] -.-> S3
-    T -.-> S4
-    N --> S3["③ Example-conditioned checks<br/>Noul per span · Noul per pair<br/>examples from three BM25 views"]
-    S3 --> S4["④ Reranker<br/>logistic regression per language group<br/>overlap suppression · threshold 0.25"]
-    S4 --> S5["⑤ V/A<br/>Jev Score + lines fitted on train gold pairs"]
-    S5 --> O["Triplets"]
-```
 
 1. **BIO extraction** ([`jev/extraction.py`](jev/extraction.py)). Deterministic tokens (CJK
    characters, other words); one `Choice` over B/I/O per token and role.
@@ -229,15 +214,6 @@ Task 3 asks for `(Aspect, Category, Opinion, V#A)`, where the category is an `EN
 label (12 in restaurants, 44 in the hotel corpus, 113–121 in laptops). Its reviews and gold
 pairs are those of Task 2, so the frozen Task 2 pairs and V/A are reused and only the category
 is added.
-
-```mermaid
-flowchart LR
-    P["Task 2 pairs + V/A<br/>(frozen)"] --> C["Jev Choice per pair<br/>over the train categories"]
-    T[("Train split<br/>BM25 examples · glossary<br/>aspect / opinion counts")] -.-> C
-    T -.-> M
-    C --> M["Conditional logit<br/>per language group<br/>fitted on train"]
-    M --> O["Quadruplets"]
-```
 
 - **Choice with examples** ([`jev/categories.py`](jev/categories.py)). Every option is its
   entity plus a one-line attribute meaning; the state adds four BM25-retrieved train reviews
