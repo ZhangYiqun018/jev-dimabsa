@@ -12,7 +12,8 @@ Raw requests, predictions and dataset text stay in ignored `reports/**/cache/`.
 | Lexicon baseline ([log 0006](../logs/0006-st2-lexicon-pair-baseline.md)) | cF1 27.71% | official test |
 | Lexicon baseline, same pipeline | cF1 30.68% | full dev |
 | BIO r3 ([record](20260923-bio-r3-full-dev.md)) | cF1 43.51% | full dev; not run on test |
-| **Lattice reranker** ([record](20260924-task2-plan.md)) | **cF1 56.46% / 51.68%** | full dev (5-fold CV) / official test |
+| Lattice reranker ([record](20260924-task2-plan.md)) | cF1 56.46% / 51.68% | full dev (5-fold CV) / official test |
+| **v2: + extensions, views, rival features** ([record](20260928-task2-v2.md)) | **cF1 57.96% / 52.09%** | full dev (5-fold CV) / official test |
 
 BIO r3 is the development reference: [`jev/extraction.py`](../jev/extraction.py)
 (`BIOExtractor`) plus [`tools/evaluate_bio_r3_dev.py`](../tools/evaluate_bio_r3_dev.py).
@@ -32,6 +33,7 @@ cF1. Code for retired experiments is in [`archive/`](archive/README.md).
 
 | Record | What was tried | Result (macro) | Outputs |
 |---|---|---|---|
+| [Task 2 v2](20260928-task2-v2.md) | Opinion extensions, three BM25 views, rival features; pair Choice, thresholds, joint V/A not adopted | dev 57.96%, official test 52.09% (Task 3 44.06%) | `reports/task2_v2/`, `reports/task3_v2/` |
 | [Task 3 category](20260924-task3-category.md) | Category Choice + train lookups on the frozen Task 2 pairs, two iterations | dev 48.83%, official test 43.62% | `reports/task3/` |
 | [Span probe](20260923-span-probe.md) | Leftmost aspect by start/end Choice; tool survey | 6/12 exact | `reports/span_probe_20260923/` |
 | [BIO / SE trial-dev](20260923-extraction-trial-dev.md) | Per-token BIO vs start/end Choice, r1→r2 | dev96 AO: BIO 46.57%, SE 42.86%, lexicon 27.53% | `reports/extraction_iteration_20260923/` |
