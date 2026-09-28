@@ -1,0 +1,101 @@
+{
+  "split": "test",
+  "model": "jev-1.13.0",
+  "stage": "category_a8f57f5d",
+  "pairs_from": "reports/task2_v2/test",
+  "variants": {
+    "full": {
+      "macro_cF1": 0.44063658825198815,
+      "corpora": {
+        "eng_restaurant": {
+          "TP": 1287.3748109317928,
+          "FP": 540,
+          "FN": 742,
+          "cPrecision": 0.6680720347336756,
+          "cRecall": 0.6046852094559854,
+          "cF1": 0.6348002026290893,
+          "categorical_TP": 1387.0,
+          "category_accuracy_on_matched_pairs": 0.9302481556002683,
+          "retention_vs_task2": 0.9306013208082282
+        },
+        "eng_laptop": {
+          "TP": 677.9188048513871,
+          "FP": 913,
+          "FN": 1236,
+          "cPrecision": 0.41036247267033116,
+          "cRecall": 0.34325002777285424,
+          "cF1": 0.3738179238221049,
+          "categorical_TP": 739.0,
+          "category_accuracy_on_matched_pairs": 0.6017915309446255,
+          "retention_vs_task2": 0.6005478559801734
+        },
+        "zho_restaurant": {
+          "TP": 1213.6682867760412,
+          "FP": 1065,
+          "FN": 1568,
+          "cPrecision": 0.514702411694674,
+          "cRecall": 0.4242112152310525,
+          "cF1": 0.46509610529834877,
+          "categorical_TP": 1293.0,
+          "category_accuracy_on_matched_pairs": 0.9262177650429799,
+          "retention_vs_task2": 0.9263690302168203
+        },
+        "zho_laptop": {
+          "TP": 504.6798199541922,
+          "FP": 710,
+          "FN": 1394,
+          "cPrecision": 0.40667189359725403,
+          "cRecall": 0.2621713350411388,
+          "cF1": 0.31881226781692495,
+          "categorical_TP": 531.0,
+          "category_accuracy_on_matched_pairs": 0.8082191780821918,
+          "retention_vs_task2": 0.8084721256125091
+        },
+        "jpn_hotel": {
+          "TP": 500.7064312318855,
+          "FP": 696,
+          "FN": 918,
+          "cPrecision": 0.4100789772578915,
+          "cRecall": 0.3469899038336005,
+          "cF1": 0.37590572915306714,
+          "categorical_TP": 525.0,
+          "category_accuracy_on_matched_pairs": 0.7532281205164992,
+          "retention_vs_task2": 0.751335314977341
+        },
+        "rus_restaurant": {
+          "TP": 568.3927077311191,
+          "FP": 488,
+          "FN": 679,
+          "cPrecision": 0.5079470131645389,
+          "cRecall": 0.43388756315352606,
+          "cF1": 0.46800552303920884,
+          "categorical_TP": 631.0,
+          "category_accuracy_on_matched_pairs": 0.9131693198263386,
+          "retention_vs_task2": 0.9130454726768634
+        },
+        "tat_restaurant": {
+          "TP": 481.6181575613321,
+          "FP": 441,
+          "FN": 769,
+          "cPrecision": 0.49044618896266,
+          "cRecall": 0.36764744852010084,
+          "cF1": 0.42026017239208735,
+          "categorical_TP": 541.0,
+          "category_accuracy_on_matched_pairs": 0.9311531841652324,
+          "retention_vs_task2": 0.932047984796508
+        },
+        "ukr_restaurant": {
+          "TP": 568.1628704023345,
+          "FP": 484,
+          "FN": 678,
+          "cPrecision": 0.5091065146974324,
+          "cRecall": 0.4337121148109424,
+          "cF1": 0.46839478186507383,
+          "categorical_TP": 632.0,
+          "category_accuracy_on_matched_pairs": 0.9321533923303835,
+          "retention_vs_task2": 0.9323152884465232
+        }
+      }
+    }
+  }
+}

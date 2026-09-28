@@ -42,13 +42,13 @@ official test, 10 corpora, lower is better<br>
 (PAI ≈ 1.066 · TeleAI ≈ 1.074; the competition ranks each corpus)
 </td>
 <td align="center">
-<h3>51.68 cF1</h3>
+<h3>52.09 cF1</h3>
 official test, 8 corpora, macro, higher is better<br>
 <b>between 6th and 7th of the 12 teams with all eight corpora</b><br>
 (PAI 57.73 leads · within 2 points of the per-corpus winners on English)
 </td>
 <td align="center">
-<h3>43.62 cF1</h3>
+<h3>44.06 cF1</h3>
 official test, 8 corpora, macro, higher is better<br>
 <b>between 5th and 6th of the 9 teams with all eight corpora</b><br>
 (PALI 49.20 leads · fine-tuned Llama-3.3-70B baseline 38.62)
@@ -142,11 +142,11 @@ strings match the annotation exactly, so span boundaries decide most of the metr
 ```mermaid
 flowchart TD
     R["Review text"] --> S1["① BIO extraction<br/>Choice B/I/O per token and role"]
-    S1 --> S2["② Lattice candidates<br/>argmax spans · BIO-marginal spans ≥ 0.2<br/>train affix variants · train-lexicon matches"]
+    S1 --> S2["② Lattice candidates<br/>argmax spans · BIO-marginal spans ≥ 0.2<br/>train affix variants · train-lexicon matches<br/>checked opinion extensions"]
     S2 --> N["Noul per aspect × opinion pair"]
     T[("Train split<br/>BM25 examples · statistics")] -.-> S3
     T -.-> S4
-    N --> S3["③ Example-conditioned checks<br/>Noul per span · Noul per pair"]
+    N --> S3["③ Example-conditioned checks<br/>Noul per span · Noul per pair<br/>examples from three BM25 views"]
     S3 --> S4["④ Reranker<br/>logistic regression per language group<br/>overlap suppression · threshold 0.25"]
     S4 --> S5["⑤ V/A<br/>Jev Score + lines fitted on train gold pairs"]
     S5 --> O["Triplets"]
@@ -158,14 +158,19 @@ flowchart TD
    span, keep every span the per-token probabilities support, its train edge-affix variant
    ([`jev/spans.py`](jev/spans.py)) and literal train-vocabulary matches, then ask one `Noul`
    per aspect × opinion pair. Candidate coverage on dev rises from 57% to 78% of gold pairs.
+   Opinion candidates are also extended by up to three tokens left and two right
+   ([`jev/extend.py`](jev/extend.py)); variants the span check below accepts join the pool.
 3. **Checks with real examples** ([`jev/checks.py`](jev/checks.py),
    [`jev/retrieval.py`](jev/retrieval.py)). Four BM25-retrieved train reviews with their
    annotated phrases show Jev the dataset's boundary conventions; it judges each candidate
    span and each likely pair against them. This is the strongest single signal (AUC 0.80–0.90).
+   Each check is asked three times, with examples retrieved by character-bigram,
+   character-trigram and word BM25.
 4. **Reranker** ([`jev/rerank.py`](jev/rerank.py)). A logistic regression per language group
    combines the Jev answers with train statistics (edge-affix log-odds, annotation counts,
-   lengths, competing variants). Pairs are kept in score order, dropping any that overlap a
-   kept pair on both roles. Fitted on dev and frozen: [`reports/task2/reranker.json`](reports/task2/reranker.json).
+   lengths, competing variants, each check relative to its best overlapping rival). Pairs are
+   kept in score order, dropping any that overlap a kept pair on both roles. Fitted on dev and
+   frozen: [`reports/task2_v2/reranker.json`](reports/task2_v2/reranker.json).
 5. **V/A** uses the Task 1 questions on each kept pair, then one line per corpus and dimension
    fitted on Task 2 train gold pairs ([`reports/task2/va_calibration.json`](reports/task2/va_calibration.json)).
 
@@ -177,7 +182,7 @@ flowchart TD
 | Takoyaki † | 56.20 |
 | TeleAI † | 55.66 |
 | TeamLasse | 53.43 |
-| **Jev, lattice candidates + checks + reranker** | **51.68** |
+| **Jev, lattice candidates + checks + reranker** | **52.09** |
 | kevinyu66 | 51.48 |
 | AILS-NTUA | 50.16 |
 | Habib University | 47.15 |
@@ -201,19 +206,20 @@ Baselines: [arXiv:2601.23022](https://arxiv.org/abs/2601.23022), Table 3.
 
 | Corpus | Jev dev (5-fold CV) | **Jev test** | Best official (team) | PAI | PALI |
 |---|---:|---:|---:|---:|---:|
-| eng_restaurant | 76.35 | **68.76** | 70.21 (Takoyaki) | 69.03 | 69.28 |
-| eng_laptop | 67.67 | **61.86** | 63.66 (Takoyaki) | 61.69 | 62.42 |
-| zho_restaurant | 57.89 | **48.64** | 56.38 (PAI) | 56.38 | 56.34 |
-| zho_laptop | 37.84 | **38.72** | 53.08 (PALI) | 53.06 | 53.08 |
-| jpn_hotel | 53.58 | **49.43** | 58.37 (TeleAI) | 56.82 | 56.66 |
-| rus_restaurant | 53.75 | **50.75** | 57.93 (PAI) | 57.93 | 57.24 |
-| tat_restaurant | 51.59 | **46.44** | 51.19 (nchellwig) | 49.08 | 48.28 |
-| ukr_restaurant | 53.03 | **48.87** | 57.87 (PAI) | 57.87 | 56.71 |
-| **Macro** | **56.46** | **51.68** | — | 57.73 | 57.50 |
+| eng_restaurant | 77.82 | **68.21** | 70.21 (Takoyaki) | 69.03 | 69.28 |
+| eng_laptop | 69.95 | **62.25** | 63.66 (Takoyaki) | 61.69 | 62.42 |
+| zho_restaurant | 58.80 | **50.21** | 56.38 (PAI) | 56.38 | 56.34 |
+| zho_laptop | 39.74 | **39.43** | 53.08 (PALI) | 53.06 | 53.08 |
+| jpn_hotel | 53.62 | **50.03** | 58.37 (TeleAI) | 56.82 | 56.66 |
+| rus_restaurant | 53.86 | **51.26** | 57.93 (PAI) | 57.93 | 57.24 |
+| tat_restaurant | 56.16 | **45.09** | 51.19 (nchellwig) | 49.08 | 48.28 |
+| ukr_restaurant | 53.72 | **50.24** | 57.87 (PAI) | 57.87 | 56.71 |
+| **Macro** | **57.96** | **52.09** | — | 57.73 | 57.50 |
 
-With exact V/A the same pairs would score 56.12 on test; the remaining gap to the leading
-systems is extraction, above all Chinese laptop, where only about 62% of gold pairs reach the candidate
-set. Protocol, costs and caveats: log [0007](logs/0007-st2-lattice-reranker.md).
+With exact V/A the same pairs would score 56.55 on test; the remaining gap to the leading
+systems is extraction, above all Chinese laptop (39.43 against 53.08). Protocol, costs and
+caveats: logs [0007](logs/0007-st2-lattice-reranker.md) and
+[0010](logs/0010-st2-st3-extensions-views.md).
 
 </details>
 
@@ -248,7 +254,7 @@ flowchart LR
 | nchellwig | 47.19 |
 | ALPS-Lab | 45.81 |
 | TeamLasse | 44.33 |
-| **Jev, Task 2 pairs + category Choice + train lookups** | **43.62** |
+| **Jev, Task 2 pairs + category Choice + train lookups** | **44.06** |
 | AILS-NTUA | 40.63 |
 | Llama-3.3-70B, fine-tuned | 38.62 |
 | GPT-OSS-120B, fine-tuned | 37.27 |
@@ -271,19 +277,20 @@ some corpora. Baselines: [arXiv:2601.23022](https://arxiv.org/abs/2601.23022), T
 
 | Corpus | Jev dev | **Jev test** | Category accuracy | Best official (team) | PALI | Takoyaki |
 |---|---:|---:|---:|---:|---:|---:|
-| eng_restaurant | 73.36 | **63.94** | 0.929 | 65.14 (Takoyaki) | 63.95 | 65.14 |
-| eng_laptop | 39.69 | **37.22** | 0.603 | 42.27 (Takoyaki) | 37.93 | 42.27 |
-| zho_restaurant | 54.89 | **44.99** | 0.925 | 55.21 (NYCU Speech Lab) | 53.57 | 49.66 |
-| zho_laptop | 32.03 | **31.06** | 0.802 | 48.24 (NYCU Speech Lab) | 43.19 | 37.45 |
-| jpn_hotel | 42.36 | **37.17** | 0.753 | 42.52 (PALI) | 42.52 | 40.86 |
-| rus_restaurant | 49.75 | **46.62** | 0.919 | 55.99 (PAI) | 54.96 | 51.30 |
-| tat_restaurant | 49.67 | **42.78** | 0.920 | 47.36 (Takoyaki) | 44.43 | 47.36 |
-| ukr_restaurant | 48.87 | **45.22** | 0.925 | 54.37 (PAI) | 53.07 | 50.19 |
-| **Macro** | **48.83** | **43.62** | — | — | 49.20 | 48.03 |
+| eng_restaurant | 74.86 | **63.48** | 0.930 | 65.14 (Takoyaki) | 63.95 | 65.14 |
+| eng_laptop | 41.52 | **37.38** | 0.602 | 42.27 (Takoyaki) | 37.93 | 42.27 |
+| zho_restaurant | 56.26 | **46.51** | 0.926 | 55.21 (NYCU Speech Lab) | 53.57 | 49.66 |
+| zho_laptop | 33.28 | **31.88** | 0.808 | 48.24 (NYCU Speech Lab) | 43.19 | 37.45 |
+| jpn_hotel | 41.89 | **37.59** | 0.753 | 42.52 (PALI) | 42.52 | 40.86 |
+| rus_restaurant | 50.90 | **46.80** | 0.913 | 55.99 (PAI) | 54.96 | 51.30 |
+| tat_restaurant | 52.23 | **42.03** | 0.931 | 47.36 (Takoyaki) | 44.43 | 47.36 |
+| ukr_restaurant | 49.66 | **46.84** | 0.932 | 54.37 (PAI) | 53.07 | 50.19 |
+| **Macro** | **50.07** | **44.06** | — | — | 49.20 | 48.03 |
 
 Category accuracy is over predicted pairs that match a gold pair; Task 3 cF1 is close to the
 Task 2 cF1 times this accuracy, so the remaining gap is mostly the Task 2 pairs. Protocol,
-costs and caveats: log [0008](logs/0008-st3-category-choice.md).
+costs and caveats: logs [0008](logs/0008-st3-category-choice.md) and
+[0010](logs/0010-st2-st3-extensions-views.md).
 
 </details>
 
@@ -332,7 +339,8 @@ export TYPESAFE_API_KEY=...        # the client also reads ~/.zshrc
 ```
 
 Every request and per-record stage is cached, so interrupted runs resume and `--cache-only`
-replays a finished run without API calls. A full test run is about 130M input tokens (≈ $5.4).
+replays a finished run without API calls. Metrics go to `reports/task2_v2/` (Task 3:
+`reports/task3_v2/`). A Task 2 test run from an empty cache is roughly 230M input tokens (≈ $10).
 
 </details>
 

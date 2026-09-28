@@ -1,0 +1,90 @@
+{
+  "split": "test",
+  "selection": "reranker fitted on full dev",
+  "threshold": 0.25,
+  "model": "jev-1.13.0",
+  "dataset": "bdc93be1224106ae7d3eb95739c02a76ed4ae8a1",
+  "corpora": {
+    "eng_restaurant": {
+      "TP": 1383.3795226227562,
+      "FP": 436,
+      "FN": 638,
+      "cPrecision": 0.717892850349121,
+      "cRecall": 0.6497790148533378,
+      "cF1": 0.6821398040546135,
+      "categorical_TP": 1491.0,
+      "categorical_F1": 0.735207100591716
+    },
+    "eng_laptop": {
+      "TP": 1128.5227132870673,
+      "FP": 423,
+      "FN": 745,
+      "cPrecision": 0.6831251291083943,
+      "cRecall": 0.5716933704595072,
+      "cF1": 0.62246150760456,
+      "categorical_TP": 1229.0,
+      "categorical_F1": 0.6778819635962493
+    },
+    "zho_restaurant": {
+      "TP": 1310.1347812674364,
+      "FP": 962,
+      "FN": 1465,
+      "cPrecision": 0.5556127147020511,
+      "cRecall": 0.4579289693350005,
+      "cF1": 0.5020635298974656,
+      "categorical_TP": 1396.0,
+      "categorical_F1": 0.534968384748036
+    },
+    "zho_laptop": {
+      "TP": 624.23898606503,
+      "FP": 584,
+      "FN": 1268,
+      "cPrecision": 0.5030128815995407,
+      "cRecall": 0.3242799927610545,
+      "cF1": 0.39433922050854703,
+      "categorical_TP": 657.0,
+      "categorical_F1": 0.4150347441566646
+    },
+    "jpn_hotel": {
+      "TP": 666.4220638251059,
+      "FP": 520,
+      "FN": 742,
+      "cPrecision": 0.5458002160729778,
+      "cRecall": 0.4618309520617504,
+      "cF1": 0.5003168647335628,
+      "categorical_TP": 701.0,
+      "categorical_F1": 0.5262762762762763
+    },
+    "rus_restaurant": {
+      "TP": 622.5239867459258,
+      "FP": 428,
+      "FN": 619,
+      "cPrecision": 0.556321703973124,
+      "cRecall": 0.4752091501877296,
+      "cF1": 0.5125763579628865,
+      "categorical_TP": 691.0,
+      "categorical_F1": 0.5689584191025113
+    },
+    "tat_restaurant": {
+      "TP": 516.7310754568958,
+      "FP": 401,
+      "FN": 729,
+      "cPrecision": 0.5262027244978573,
+      "cRecall": 0.3944512026388518,
+      "cF1": 0.45089971680357405,
+      "categorical_TP": 581.0,
+      "categorical_F1": 0.5069808027923212
+    },
+    "ukr_restaurant": {
+      "TP": 609.4106547893683,
+      "FP": 438,
+      "FN": 632,
+      "cPrecision": 0.5460668949725522,
+      "cRecall": 0.4651989731216552,
+      "cF1": 0.5023995505270967,
+      "categorical_TP": 678.0,
+      "categorical_F1": 0.5589447650453421
+    }
+  },
+  "macro_cF1": 0.5208995690115383
+}
