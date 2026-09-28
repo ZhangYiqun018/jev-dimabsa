@@ -28,9 +28,7 @@ unchanged official scorer.
 
 ## Method overview
 
-[![Overview of the three tasks: given-aspect V/A scoring, aspect-opinion extraction, and category enrichment.](docs/figures/dimabsa-overview-editable/overview.png)](docs/figures/dimabsa-overview-editable/overview.pdf)
-
-Click the figure to open the **[vector PDF](docs/figures/dimabsa-overview-editable/overview.pdf)**.
+[![Overview of the three tasks: given-aspect V/A scoring, aspect-opinion extraction, and category enrichment.](docs/figures/dimabsa-overview-editable/overview.png)](docs/figures/dimabsa-overview-editable/overview.pdf?raw=true)
 
 ## Results at a glance
 
