@@ -1,0 +1,68 @@
+diff --git a/jev/rerank.py b/jev/rerank.py
+index d2b1677..f4dd7a5 100644
+--- a/jev/rerank.py
++++ b/jev/rerank.py
+@@ -8,7 +8,8 @@ described by the Jev answers already collected for it and by train statistics:
+ - BIO-marginal span scores, BIO argmax / affix-normalised membership;
+ - train annotation counts, span lengths, competing boundary variants, distance;
+ - optionally: an opinion-extension flag (jev/extend.py), the checks repeated with other
+-  retrieval views (mean and min logit), and each check relative to its best overlapping rival.
++  retrieval views (mean and min logit), each check relative to its best overlapping rival,
++  and BIO-marginal span scores averaged over example-conditioned label views (jev/bioviews.py).
+ 
+ One model per language group is fitted with an L2 penalty and applied per record: pairs are kept in
+ score order, a pair overlapping a kept pair on both roles is suppressed, and the
+@@ -102,6 +103,28 @@ def span_priors(extracted, text):
+     return out
+ 
+ 
++def view_priors(extractions, text):
++    """Span scores from the per-token probabilities averaged over BIO label views, and the
++    minimum of each view's own span score."""
++    views = [marginals(x, text) for x in extractions]
++    tokens = views[0][0]
++    text_l = text.lower()
++    out = {}
++    for role in ('aspect', 'opinion'):
++        mean = [{k: sum(v[1][role][i].get(k, 0) for v in views) / len(views) for k in 'BIO'}
++                for i in range(len(tokens))]
++        own = [lattice_spans(tokens, v[1][role], 1e-6) for v in views]
++        scores = {}
++        for (s, e), value in lattice_spans(tokens, mean, 1e-6).items():
++            scores[text_l[s:e]] = max(scores.get(text_l[s:e], 0), value)
++        lowest = {}
++        for s, e in {k for spans in own for k in spans}:
++            value = min(spans.get((s, e), 0) for spans in own)
++            lowest[text_l[s:e]] = max(lowest.get(text_l[s:e], 0), value)
++        out[role] = (scores, lowest)
++    return out
++
++
+ def features(corpus, text, lattice, extracted, signals):
+     """[(feature vector, (aspect, opinion) lower-case)] for the record's candidate pairs.
+ 
+@@ -118,6 +141,8 @@ def features(corpus, text, lattice, extracted, signals):
+     counts = train_counts(corpus)
+     group = next(g for g, members in GROUPS.items() if corpus in members)
+     pool = [p for p in lattice['pairs'] if p['probability'] >= CANDIDATE_MINIMUM]
++    if 'bio_views' in signals:
++        bio_views = view_priors([extracted, *signals['bio_views']], text)
+     keys = [(p['Aspect'].lower(), p['Opinion'].lower()) for p in pool]
+     rows = []
+     for (a, o), p in zip(keys, pool):
+@@ -148,9 +173,14 @@ def features(corpus, text, lattice, extracted, signals):
+                          _logit(v['paircheck'].get((a, o), signals['paircheck'].get((a, o), .5)))]
+                         for v in signals['views']] + [main[4:7]]
+             f += [*np.mean(per_view, axis=0), *np.min(per_view, axis=0)]
++        if 'bio_views' in signals:  # BIO labels asked again with retrieved examples (jev/bioviews.py).
++            f += [0. if a == 'null' else _log(bio_views['aspect'][0].get(a, 0)),
++                  _log(bio_views['opinion'][0].get(o, 0)),
++                  0. if a == 'null' else _log(bio_views['aspect'][1].get(a, 0)),
++                  _log(bio_views['opinion'][1].get(o, 0))]
+         rows.append((f, (a, o)))
+     if signals.get('relative'):  # Each check relative to the best overlapping competitor.
+-        base = len(rows[0][0]) - 6 if rows and 'views' in signals else None
++        base = len(rows[0][0]) - 6 - 4 * ('bio_views' in signals) if rows and 'views' in signals else None
+         for k, (f, (a, o)) in enumerate(rows):
+             rivals = [g for g, (qa, qo) in rows if (qa, qo) != (a, o)
+                       and overlap(a, qa, text_l) and overlap(o, qo, text_l)]

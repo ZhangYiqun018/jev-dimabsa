@@ -22,6 +22,7 @@ of each experiment; this code documents how they were produced.
 | `jev/retrieval_variants.py`, `tools/probe_bio_bm25_50.py`, `tools/summarize_bio_bm25_50.py`, `tools/ensemble_bio_bm25_50.py`, `tests/test_retrieval_variants.py`, `tests/test_bm25_ensemble.py` | [BM25 50-shot and ensemble](../20260923-bio-bm25-50.md) |
 | `tools/probe_aspect_count.py`, `tests/test_aspect_count.py` | [Aspect count](../20260923-aspect-count.md) |
 | `jev/choose.py`, `tools/probe_pair_choice.py` | [Pair Choice among competing spans](../20260928-task2-v2.md) (scratch runner; reads a pickled candidate pool) |
+| `jev/bioviews.py`, `jev/rerank_bioviews.diff`, `tools/probe_bio_views.py`, `tools/evaluate_bio_views.py` | [BIO labels over retrieved-example views](../20260928-task2-v2.md#follow-up-bio-labels-voted-over-retrieved-example-views-dev-chinese-corpora) (scratch runners; the evaluator reads a pickled dev pool) |
 | `tools/evaluate_bio_r3_dev.py`, `tests/test_extraction.py` | Pre-cleanup versions of the maintained BIO dev entry point and extractor tests (SE tests included) |
 
 `tools/diagnose_span_choice.py:selected` defines the trial24/dev96 samples:
